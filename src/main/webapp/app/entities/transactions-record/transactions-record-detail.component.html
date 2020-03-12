@@ -1,0 +1,111 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="transactionsRecord">
+            <h2><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.detail.title">Transactions Record</span> {{ transactionsRecord.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txType">Tx Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.TransactionType.' + transactionsRecord.txType }}">{{ transactionsRecord.txType }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.description">Description</span></dt>
+                <dd>
+                    <span>{{ transactionsRecord.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txAmmount">Tx Ammount</span></dt>
+                <dd>
+                    <span>{{ transactionsRecord.txAmmount }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txRefNo">Tx Ref No</span></dt>
+                <dd>
+                    <span>{{ transactionsRecord.txRefNo }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCreatedBy">Tx Created By</span></dt>
+                <dd>
+                    <span>{{ transactionsRecord.txCreatedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCreatedDate">Tx Created Date</span></dt>
+                <dd>
+                    <span>{{ transactionsRecord.txCreatedDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCompletedBy">Tx Completed By</span></dt>
+                <dd>
+                    <span>{{ transactionsRecord.txCompletedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCompletedDate">Tx Completed Date</span></dt>
+                <dd>
+                    <span>{{ transactionsRecord.txCompletedDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.TxStatus.' + transactionsRecord.status }}">{{ transactionsRecord.status }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txDoc">Tx Doc</span></dt>
+                <dd>
+                    <div *ngIf="transactionsRecord.txDoc">
+                        <a (click)="openFile(transactionsRecord?.txDocContentType!, transactionsRecord?.txDoc)" jhiTranslate="entity.action.open">open</a>
+                        {{ transactionsRecord.txDocContentType }}, {{ byteSize(transactionsRecord.txDoc) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.currency">Currency</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.CURRENCY.' + transactionsRecord.currency }}">{{ transactionsRecord.currency }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.remarks">Remarks</span></dt>
+                <dd>
+                    <span>{{ transactionsRecord.remarks }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.createdOn">Created On</span></dt>
+                <dd>
+                    <span>{{ transactionsRecord.createdOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ transactionsRecord.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.updatedOn">Updated On</span></dt>
+                <dd>
+                    <span>{{ transactionsRecord.updatedOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.updatedBy">Updated By</span></dt>
+                <dd>
+                    <span>{{ transactionsRecord.updatedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.customer">Customer</span></dt>
+                <dd>
+                    <div *ngIf="transactionsRecord.customer">
+                        <a [routerLink]="['/customer', transactionsRecord.customer?.id, 'view']">{{ transactionsRecord.customer?.company }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.account">Account</span></dt>
+                <dd>
+                    <div *ngIf="transactionsRecord.account">
+                        <a [routerLink]="['/accounts', transactionsRecord.account?.id, 'view']">{{ transactionsRecord.account?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.invoice">Invoice</span></dt>
+                <dd>
+                    <div *ngIf="transactionsRecord.invoice">
+                        <a [routerLink]="['/invoice', transactionsRecord.invoice?.id, 'view']">{{ transactionsRecord.invoice?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/transactions-record', transactionsRecord.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

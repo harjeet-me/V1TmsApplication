@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="report">
+            <h2><span jhiTranslate="tmsV1ApplicationApp.report.detail.title">Report</span> {{ report.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tmsV1ApplicationApp.report.reportType">Report Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.ReportType.' + report.reportType }}">{{ report.reportType }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.report.description">Description</span></dt>
+                <dd>
+                    <span>{{ report.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.report.fromDate">From Date</span></dt>
+                <dd>
+                    <span>{{ report.fromDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.report.toDate">To Date</span></dt>
+                <dd>
+                    <span>{{ report.toDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.report.attachment">Attachment</span></dt>
+                <dd>
+                    <div *ngIf="report.attachment">
+                        <a (click)="openFile(report?.attachmentContentType!, report?.attachment)" jhiTranslate="entity.action.open">open</a>
+                        {{ report.attachmentContentType }}, {{ byteSize(report.attachment) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.report.emailTo">Email To</span></dt>
+                <dd>
+                    <span>{{ report.emailTo }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.report.createdOn">Created On</span></dt>
+                <dd>
+                    <span>{{ report.createdOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.report.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ report.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.report.updatedOn">Updated On</span></dt>
+                <dd>
+                    <span>{{ report.updatedOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.report.updatedBy">Updated By</span></dt>
+                <dd>
+                    <span>{{ report.updatedBy }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/report', report.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

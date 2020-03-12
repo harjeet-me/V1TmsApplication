@@ -1,0 +1,122 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="tmsV1ApplicationApp.companyProfile.home.title">Company Profiles</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-company-profile" [routerLink]="['/company-profile/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="tmsV1ApplicationApp.companyProfile.home.createLabel">
+            Create a new Company Profile
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'tmsV1ApplicationApp.companyProfile.home.search' | translate }}">
+
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon icon="search"></fa-icon>
+                    </button>
+
+                    <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+                        <fa-icon icon="trash-alt"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="companyProfiles?.length === 0">
+        <span jhiTranslate="tmsV1ApplicationApp.companyProfile.home.notFound">No companyProfiles found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="companyProfiles?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.active">Active</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.company">Company</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.address">Address</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.streetAddress">Street Address</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.city">City</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.stateProvince">State Province</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.country">Country</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.postalCode">Postal Code</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.email">Email</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.website">Website</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.phoneNumber">Phone Number</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.dot">Dot</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.mc">Mc</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.companyLogo">Company Logo</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.profileStatus">Profile Status</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.preffredCurrency">Preffred Currency</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.createdOn">Created On</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.createdBy">Created By</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.updatedOn">Updated On</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.updatedBy">Updated By</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let companyProfile of companyProfiles ;trackBy: trackId">
+                    <td><a [routerLink]="['/company-profile', companyProfile.id, 'view']">{{ companyProfile.id }}</a></td>
+                    <td>{{ companyProfile.active }}</td>
+                    <td>{{ companyProfile.company }}</td>
+                    <td>{{ companyProfile.address }}</td>
+                    <td>{{ companyProfile.streetAddress }}</td>
+                    <td>{{ companyProfile.city }}</td>
+                    <td>{{ companyProfile.stateProvince }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.CountryEnum.' + companyProfile.country }}">{{ companyProfile.country }}</td>
+                    <td>{{ companyProfile.postalCode }}</td>
+                    <td>{{ companyProfile.email }}</td>
+                    <td>{{ companyProfile.website }}</td>
+                    <td>{{ companyProfile.phoneNumber }}</td>
+                    <td>{{ companyProfile.dot }}</td>
+                    <td>{{ companyProfile.mc }}</td>
+                    <td>
+                        <a *ngIf="companyProfile.companyLogo" (click)="openFile(companyProfile.companyLogoContentType, companyProfile.companyLogo)">
+                            <img [src]="'data:' + companyProfile.companyLogoContentType + ';base64,' + companyProfile.companyLogo" style="max-height: 30px;" alt="companyProfile image"/>
+                        </a>
+                        <span *ngIf="companyProfile.companyLogo">{{ companyProfile.companyLogoContentType }}, {{ byteSize(companyProfile.companyLogo) }}</span>
+                    </td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.ToggleStatus.' + companyProfile.profileStatus }}">{{ companyProfile.profileStatus }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.CURRENCY.' + companyProfile.preffredCurrency }}">{{ companyProfile.preffredCurrency }}</td>
+                    <td>{{ companyProfile.createdOn | date:'medium' }}</td>
+                    <td>{{ companyProfile.createdBy }}</td>
+                    <td>{{ companyProfile.updatedOn | date:'medium' }}</td>
+                    <td>{{ companyProfile.updatedBy }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/company-profile', companyProfile.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/company-profile', companyProfile.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(companyProfile)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

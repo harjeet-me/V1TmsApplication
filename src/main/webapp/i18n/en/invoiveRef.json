@@ -1,0 +1,11 @@
+{
+  "tmsV1ApplicationApp": {
+    "InvoiveRef": {
+      "null": "",
+      "ORDER_NO": "ORDER_NO",
+      "SHIPMENT_NO": "SHIPMENT_NO",
+      "PO_NUMBER": "PO_NUMBER",
+      "BOOKING_NO": "BOOKING_NO"
+    }
+  }
+}

@@ -1,0 +1,163 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="tmsV1ApplicationApp.carrier.home.title">Carriers</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-carrier" [routerLink]="['/carrier/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="tmsV1ApplicationApp.carrier.home.createLabel">
+            Create a new Carrier
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'tmsV1ApplicationApp.carrier.home.search' | translate }}">
+
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon icon="search"></fa-icon>
+                    </button>
+
+                    <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+                        <fa-icon icon="trash-alt"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="carriers?.length === 0">
+        <span jhiTranslate="tmsV1ApplicationApp.carrier.home.notFound">No carriers found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="carriers?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.company">Company</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.firstName">First Name</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.lastName">Last Name</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.contactDesignation">Contact Designation</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.email">Email</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.phoneNumber">Phone Number</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.phoneNumberExtention">Phone Number Extention</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.preffredContactType">Preffred Contact Type</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.website">Website</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.alternateContactPerson">Alternate Contact Person</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.alternateContactNumber">Alternate Contact Number</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.alternatePhoneNumberExtention">Alternate Phone Number Extention</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.alternateContactEmail">Alternate Contact Email</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.preferredContactTime">Preferred Contact Time</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.fax">Fax</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.address">Address</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.streetAddress">Street Address</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.city">City</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.stateProvince">State Province</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.country">Country</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.postalCode">Postal Code</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.dot">Dot</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.mc">Mc</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.taxId">Tax Id</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.companyLogo">Company Logo</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.customerSince">Customer Since</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.notes">Notes</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.contract">Contract</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.status">Status</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.preffredCurrency">Preffred Currency</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.payterms">Payterms</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.timeZone">Time Zone</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.createdOn">Created On</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.createdBy">Created By</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.updatedOn">Updated On</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.updatedBy">Updated By</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.operInsurance">Oper Insurance</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let carrier of carriers ;trackBy: trackId">
+                    <td><a [routerLink]="['/carrier', carrier.id, 'view']">{{ carrier.id }}</a></td>
+                    <td>{{ carrier.company }}</td>
+                    <td>{{ carrier.firstName }}</td>
+                    <td>{{ carrier.lastName }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.Designation.' + carrier.contactDesignation }}">{{ carrier.contactDesignation }}</td>
+                    <td>{{ carrier.email }}</td>
+                    <td>{{ carrier.phoneNumber }}</td>
+                    <td>{{ carrier.phoneNumberExtention }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.PreffredContactType.' + carrier.preffredContactType }}">{{ carrier.preffredContactType }}</td>
+                    <td>{{ carrier.website }}</td>
+                    <td>{{ carrier.alternateContactPerson }}</td>
+                    <td>{{ carrier.alternateContactNumber }}</td>
+                    <td>{{ carrier.alternatePhoneNumberExtention }}</td>
+                    <td>{{ carrier.alternateContactEmail }}</td>
+                    <td>{{ carrier.preferredContactTime }}</td>
+                    <td>{{ carrier.fax }}</td>
+                    <td>{{ carrier.address }}</td>
+                    <td>{{ carrier.streetAddress }}</td>
+                    <td>{{ carrier.city }}</td>
+                    <td>{{ carrier.stateProvince }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.CountryEnum.' + carrier.country }}">{{ carrier.country }}</td>
+                    <td>{{ carrier.postalCode }}</td>
+                    <td>{{ carrier.dot }}</td>
+                    <td>{{ carrier.mc }}</td>
+                    <td>{{ carrier.taxId }}</td>
+                    <td>
+                        <a *ngIf="carrier.companyLogo" (click)="openFile(carrier.companyLogoContentType, carrier.companyLogo)">
+                            <img [src]="'data:' + carrier.companyLogoContentType + ';base64,' + carrier.companyLogo" style="max-height: 30px;" alt="carrier image"/>
+                        </a>
+                        <span *ngIf="carrier.companyLogo">{{ carrier.companyLogoContentType }}, {{ byteSize(carrier.companyLogo) }}</span>
+                    </td>
+                    <td>{{ carrier.customerSince | date:'mediumDate' }}</td>
+                    <td>{{ carrier.notes }}</td>
+                    <td>
+                        <a *ngIf="carrier.contract" (click)="openFile(carrier.contractContentType, carrier.contract)" jhiTranslate="entity.action.open">open</a>
+                        <span *ngIf="carrier.contract">{{ carrier.contractContentType }}, {{ byteSize(carrier.contract) }}</span>
+                    </td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.ToggleStatus.' + carrier.status }}">{{ carrier.status }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.CURRENCY.' + carrier.preffredCurrency }}">{{ carrier.preffredCurrency }}</td>
+                    <td>{{ carrier.payterms }}</td>
+                    <td>{{ carrier.timeZone | date:'medium' }}</td>
+                    <td>{{ carrier.createdOn | date:'medium' }}</td>
+                    <td>{{ carrier.createdBy }}</td>
+                    <td>{{ carrier.updatedOn | date:'medium' }}</td>
+                    <td>{{ carrier.updatedBy }}</td>
+                    <td>
+                        <div *ngIf="carrier.operInsurance">
+                            <a [routerLink]="['/insurance', carrier.operInsurance?.id, 'view']" >{{ carrier.operInsurance?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/carrier', carrier.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/carrier', carrier.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(carrier)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

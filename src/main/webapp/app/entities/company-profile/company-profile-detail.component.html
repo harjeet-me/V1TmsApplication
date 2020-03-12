@@ -1,0 +1,111 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="companyProfile">
+            <h2><span jhiTranslate="tmsV1ApplicationApp.companyProfile.detail.title">Company Profile</span> {{ companyProfile.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.active">Active</span></dt>
+                <dd>
+                    <span>{{ companyProfile.active }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.company">Company</span></dt>
+                <dd>
+                    <span>{{ companyProfile.company }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.address">Address</span></dt>
+                <dd>
+                    <span>{{ companyProfile.address }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.streetAddress">Street Address</span></dt>
+                <dd>
+                    <span>{{ companyProfile.streetAddress }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.city">City</span></dt>
+                <dd>
+                    <span>{{ companyProfile.city }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.stateProvince">State Province</span></dt>
+                <dd>
+                    <span>{{ companyProfile.stateProvince }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.country">Country</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.CountryEnum.' + companyProfile.country }}">{{ companyProfile.country }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.postalCode">Postal Code</span></dt>
+                <dd>
+                    <span>{{ companyProfile.postalCode }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.email">Email</span></dt>
+                <dd>
+                    <span>{{ companyProfile.email }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.website">Website</span></dt>
+                <dd>
+                    <span>{{ companyProfile.website }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{ companyProfile.phoneNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.dot">Dot</span></dt>
+                <dd>
+                    <span>{{ companyProfile.dot }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.mc">Mc</span></dt>
+                <dd>
+                    <span>{{ companyProfile.mc }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.companyLogo">Company Logo</span></dt>
+                <dd>
+                    <div *ngIf="companyProfile.companyLogo">
+                        <a (click)="openFile(companyProfile?.companyLogoContentType!, companyProfile?.companyLogo)">
+                            <img [src]="'data:' + companyProfile.companyLogoContentType + ';base64,' + companyProfile.companyLogo" style="max-width: 100%;" alt="companyProfile image"/>
+                        </a>
+                        {{ companyProfile.companyLogoContentType }}, {{ byteSize(companyProfile.companyLogo) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.profileStatus">Profile Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.ToggleStatus.' + companyProfile.profileStatus }}">{{ companyProfile.profileStatus }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.preffredCurrency">Preffred Currency</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.CURRENCY.' + companyProfile.preffredCurrency }}">{{ companyProfile.preffredCurrency }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.createdOn">Created On</span></dt>
+                <dd>
+                    <span>{{ companyProfile.createdOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ companyProfile.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.updatedOn">Updated On</span></dt>
+                <dd>
+                    <span>{{ companyProfile.updatedOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.companyProfile.updatedBy">Updated By</span></dt>
+                <dd>
+                    <span>{{ companyProfile.updatedBy }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/company-profile', companyProfile.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

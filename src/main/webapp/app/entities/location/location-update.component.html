@@ -1,0 +1,103 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-location-heading" jhiTranslate="tmsV1ApplicationApp.location.home.createOrEditLabel">Create or edit a Location</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.location.address" for="field_address">Address</label>
+                    <input type="text" class="form-control" name="address" id="field_address"
+                           formControlName="address"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.location.streetAddress" for="field_streetAddress">Street Address</label>
+                    <input type="text" class="form-control" name="streetAddress" id="field_streetAddress"
+                           formControlName="streetAddress"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.location.city" for="field_city">City</label>
+                    <input type="text" class="form-control" name="city" id="field_city"
+                           formControlName="city"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.location.stateProvince" for="field_stateProvince">State Province</label>
+                    <input type="text" class="form-control" name="stateProvince" id="field_stateProvince"
+                           formControlName="stateProvince"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.location.country" for="field_country">Country</label>
+                    <select class="form-control" name="country" formControlName="country" id="field_country">
+                        <option value="USA">{{ 'tmsV1ApplicationApp.CountryEnum.USA' | translate }}</option>
+                        <option value="CANADA">{{ 'tmsV1ApplicationApp.CountryEnum.CANADA' | translate }}</option>
+                        <option value="MEXICO">{{ 'tmsV1ApplicationApp.CountryEnum.MEXICO' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.location.postalCode" for="field_postalCode">Postal Code</label>
+                    <input type="text" class="form-control" name="postalCode" id="field_postalCode"
+                           formControlName="postalCode"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.location.latitude" for="field_latitude">Latitude</label>
+                    <input type="number" class="form-control" name="latitude" id="field_latitude"
+                           formControlName="latitude"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.location.longitude" for="field_longitude">Longitude</label>
+                    <input type="number" class="form-control" name="longitude" id="field_longitude"
+                           formControlName="longitude"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.location.createdOn" for="field_createdOn">Created On</label>
+                    <div class="d-flex">
+                        <input id="field_createdOn" type="datetime-local" class="form-control" name="createdOn" formControlName="createdOn" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.location.createdBy" for="field_createdBy">Created By</label>
+                    <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                           formControlName="createdBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.location.updatedOn" for="field_updatedOn">Updated On</label>
+                    <div class="d-flex">
+                        <input id="field_updatedOn" type="datetime-local" class="form-control" name="updatedOn" formControlName="updatedOn" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.location.updatedBy" for="field_updatedBy">Updated By</label>
+                    <input type="text" class="form-control" name="updatedBy" id="field_updatedBy"
+                           formControlName="updatedBy"/>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

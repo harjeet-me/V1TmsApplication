@@ -1,0 +1,101 @@
+{
+    "name": "CompanyProfile",
+    "fields": [
+        {
+            "fieldName": "active",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "company",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "streetAddress",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "city",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "stateProvince",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "country",
+            "fieldType": "CountryEnum",
+            "fieldValues": "USA,CANADA,MEXICO"
+        },
+        {
+            "fieldName": "postalCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "website",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phoneNumber",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "dot",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mc",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "companyLogo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "profileStatus",
+            "fieldType": "ToggleStatus",
+            "fieldValues": "ACTIVE,INACTIVE"
+        },
+        {
+            "fieldName": "preffredCurrency",
+            "fieldType": "CURRENCY",
+            "fieldValues": "USD,CAD,INR"
+        },
+        {
+            "fieldName": "createdOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "updatedOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "updatedBy",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200312062900",
+    "entityTableName": "company_profile",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

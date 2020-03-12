@@ -1,0 +1,96 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-invoice-item-heading" jhiTranslate="tmsV1ApplicationApp.invoiceItem.home.createOrEditLabel">Create or edit a Invoice Item</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceItem.itemName" for="field_itemName">Item Name</label>
+                    <input type="text" class="form-control" name="itemName" id="field_itemName"
+                           formControlName="itemName"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceItem.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                           formControlName="description"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceItem.qty" for="field_qty">Qty</label>
+                    <input type="number" class="form-control" name="qty" id="field_qty"
+                           formControlName="qty"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceItem.price" for="field_price">Price</label>
+                    <input type="number" class="form-control" name="price" id="field_price"
+                           formControlName="price"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceItem.discount" for="field_discount">Discount</label>
+                    <input type="number" class="form-control" name="discount" id="field_discount"
+                           formControlName="discount"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceItem.total" for="field_total">Total</label>
+                    <input type="number" class="form-control" name="total" id="field_total"
+                           formControlName="total"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceItem.createdOn" for="field_createdOn">Created On</label>
+                    <div class="d-flex">
+                        <input id="field_createdOn" type="datetime-local" class="form-control" name="createdOn" formControlName="createdOn" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceItem.createdBy" for="field_createdBy">Created By</label>
+                    <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                           formControlName="createdBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceItem.updatedOn" for="field_updatedOn">Updated On</label>
+                    <div class="d-flex">
+                        <input id="field_updatedOn" type="datetime-local" class="form-control" name="updatedOn" formControlName="updatedOn" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceItem.updatedBy" for="field_updatedBy">Updated By</label>
+                    <input type="text" class="form-control" name="updatedBy" id="field_updatedBy"
+                           formControlName="updatedBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceItem.invoice" for="field_invoice">Invoice</label>
+                    <select class="form-control" id="field_invoice" name="invoice" formControlName="invoice">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="invoiceOption.id === editForm.get('invoice')!.value?.id ? editForm.get('invoice')!.value : invoiceOption" *ngFor="let invoiceOption of invoices; trackBy: trackById">{{ invoiceOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

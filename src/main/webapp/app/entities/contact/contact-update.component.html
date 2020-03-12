@@ -1,0 +1,106 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-contact-heading" jhiTranslate="tmsV1ApplicationApp.contact.home.createOrEditLabel">Create or edit a Contact</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.contact.firstName" for="field_firstName">First Name</label>
+                    <input type="text" class="form-control" name="firstName" id="field_firstName"
+                           formControlName="firstName"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.contact.lastName" for="field_lastName">Last Name</label>
+                    <input type="text" class="form-control" name="lastName" id="field_lastName"
+                           formControlName="lastName"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.contact.contactDesignation" for="field_contactDesignation">Contact Designation</label>
+                    <select class="form-control" name="contactDesignation" formControlName="contactDesignation" id="field_contactDesignation">
+                        <option value="MANAGER">{{ 'tmsV1ApplicationApp.Designation.MANAGER' | translate }}</option>
+                        <option value="ACCOUNTANT">{{ 'tmsV1ApplicationApp.Designation.ACCOUNTANT' | translate }}</option>
+                        <option value="OWNER">{{ 'tmsV1ApplicationApp.Designation.OWNER' | translate }}</option>
+                        <option value="DISPATCHER">{{ 'tmsV1ApplicationApp.Designation.DISPATCHER' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.contact.email" for="field_email">Email</label>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                           formControlName="email"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.contact.phoneNumber" for="field_phoneNumber">Phone Number</label>
+                    <input type="number" class="form-control" name="phoneNumber" id="field_phoneNumber"
+                           formControlName="phoneNumber"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.contact.remarks" for="field_remarks">Remarks</label>
+                    <input type="text" class="form-control" name="remarks" id="field_remarks"
+                           formControlName="remarks"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.contact.preferredTime" for="field_preferredTime">Preferred Time</label>
+                    <input type="text" class="form-control" name="preferredTime" id="field_preferredTime"
+                           formControlName="preferredTime"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.contact.createdOn" for="field_createdOn">Created On</label>
+                    <div class="d-flex">
+                        <input id="field_createdOn" type="datetime-local" class="form-control" name="createdOn" formControlName="createdOn" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.contact.createdBy" for="field_createdBy">Created By</label>
+                    <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                           formControlName="createdBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.contact.updatedOn" for="field_updatedOn">Updated On</label>
+                    <div class="d-flex">
+                        <input id="field_updatedOn" type="datetime-local" class="form-control" name="updatedOn" formControlName="updatedOn" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.contact.updatedBy" for="field_updatedBy">Updated By</label>
+                    <input type="text" class="form-control" name="updatedBy" id="field_updatedBy"
+                           formControlName="updatedBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.contact.customer" for="field_customer">Customer</label>
+                    <select class="form-control" id="field_customer" name="customer" formControlName="customer">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption" *ngFor="let customerOption of customers; trackBy: trackById">{{ customerOption.company }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

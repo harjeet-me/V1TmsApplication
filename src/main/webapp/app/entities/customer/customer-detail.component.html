@@ -1,0 +1,184 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="customer">
+            <h2><span jhiTranslate="tmsV1ApplicationApp.customer.detail.title">Customer</span> {{ customer.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.company">Company</span></dt>
+                <dd>
+                    <span>{{ customer.company }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{ customer.firstName }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{ customer.lastName }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.contactDesignation">Contact Designation</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.Designation.' + customer.contactDesignation }}">{{ customer.contactDesignation }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.email">Email</span></dt>
+                <dd>
+                    <span>{{ customer.email }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{ customer.phoneNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.phoneNumberExtention">Phone Number Extention</span></dt>
+                <dd>
+                    <span>{{ customer.phoneNumberExtention }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.preffredContactType">Preffred Contact Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.PreffredContactType.' + customer.preffredContactType }}">{{ customer.preffredContactType }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.website">Website</span></dt>
+                <dd>
+                    <span>{{ customer.website }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.alternateContactPerson">Alternate Contact Person</span></dt>
+                <dd>
+                    <span>{{ customer.alternateContactPerson }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.alternateContactNumber">Alternate Contact Number</span></dt>
+                <dd>
+                    <span>{{ customer.alternateContactNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.alternatePhoneNumberExtention">Alternate Phone Number Extention</span></dt>
+                <dd>
+                    <span>{{ customer.alternatePhoneNumberExtention }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.alternateContactEmail">Alternate Contact Email</span></dt>
+                <dd>
+                    <span>{{ customer.alternateContactEmail }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.preferredContactTime">Preferred Contact Time</span></dt>
+                <dd>
+                    <span>{{ customer.preferredContactTime }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.fax">Fax</span></dt>
+                <dd>
+                    <span>{{ customer.fax }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.address">Address</span></dt>
+                <dd>
+                    <span>{{ customer.address }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.streetAddress">Street Address</span></dt>
+                <dd>
+                    <span>{{ customer.streetAddress }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.city">City</span></dt>
+                <dd>
+                    <span>{{ customer.city }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.stateProvince">State Province</span></dt>
+                <dd>
+                    <span>{{ customer.stateProvince }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.country">Country</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.CountryEnum.' + customer.country }}">{{ customer.country }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.postalCode">Postal Code</span></dt>
+                <dd>
+                    <span>{{ customer.postalCode }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.dot">Dot</span></dt>
+                <dd>
+                    <span>{{ customer.dot }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.mc">Mc</span></dt>
+                <dd>
+                    <span>{{ customer.mc }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.taxId">Tax Id</span></dt>
+                <dd>
+                    <span>{{ customer.taxId }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.companyLogo">Company Logo</span></dt>
+                <dd>
+                    <div *ngIf="customer.companyLogo">
+                        <a (click)="openFile(customer?.companyLogoContentType!, customer?.companyLogo)">
+                            <img [src]="'data:' + customer.companyLogoContentType + ';base64,' + customer.companyLogo" style="max-width: 100%;" alt="customer image"/>
+                        </a>
+                        {{ customer.companyLogoContentType }}, {{ byteSize(customer.companyLogo) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.customerSince">Customer Since</span></dt>
+                <dd>
+                    <span>{{ customer.customerSince }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.notes">Notes</span></dt>
+                <dd>
+                    <span>{{ customer.notes }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.contract">Contract</span></dt>
+                <dd>
+                    <div *ngIf="customer.contract">
+                        <a (click)="openFile(customer?.contractContentType!, customer?.contract)" jhiTranslate="entity.action.open">open</a>
+                        {{ customer.contractContentType }}, {{ byteSize(customer.contract) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.ToggleStatus.' + customer.status }}">{{ customer.status }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.preffredCurrency">Preffred Currency</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.CURRENCY.' + customer.preffredCurrency }}">{{ customer.preffredCurrency }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.payterms">Payterms</span></dt>
+                <dd>
+                    <span>{{ customer.payterms }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.timeZone">Time Zone</span></dt>
+                <dd>
+                    <span>{{ customer.timeZone }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.createdOn">Created On</span></dt>
+                <dd>
+                    <span>{{ customer.createdOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ customer.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.updatedOn">Updated On</span></dt>
+                <dd>
+                    <span>{{ customer.updatedOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.updatedBy">Updated By</span></dt>
+                <dd>
+                    <span>{{ customer.updatedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.charge">Charge</span></dt>
+                <dd>
+                    <span *ngFor="let charge of customer.charges; let last = last">
+                        <a [routerLink]="['/product-item', charge?.id, 'view']">{{ charge.itemName }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/customer', customer.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

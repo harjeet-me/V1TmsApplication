@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="contact">
+            <h2><span jhiTranslate="tmsV1ApplicationApp.contact.detail.title">Contact</span> {{ contact.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tmsV1ApplicationApp.contact.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{ contact.firstName }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.contact.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{ contact.lastName }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.contact.contactDesignation">Contact Designation</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.Designation.' + contact.contactDesignation }}">{{ contact.contactDesignation }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.contact.email">Email</span></dt>
+                <dd>
+                    <span>{{ contact.email }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.contact.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{ contact.phoneNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.contact.remarks">Remarks</span></dt>
+                <dd>
+                    <span>{{ contact.remarks }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.contact.preferredTime">Preferred Time</span></dt>
+                <dd>
+                    <span>{{ contact.preferredTime }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.contact.createdOn">Created On</span></dt>
+                <dd>
+                    <span>{{ contact.createdOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.contact.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ contact.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.contact.updatedOn">Updated On</span></dt>
+                <dd>
+                    <span>{{ contact.updatedOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.contact.updatedBy">Updated By</span></dt>
+                <dd>
+                    <span>{{ contact.updatedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.contact.customer">Customer</span></dt>
+                <dd>
+                    <div *ngIf="contact.customer">
+                        <a [routerLink]="['/customer', contact.customer?.id, 'view']">{{ contact.customer?.company }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/contact', contact.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

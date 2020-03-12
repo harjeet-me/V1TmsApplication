@@ -1,0 +1,187 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-driver-heading" jhiTranslate="tmsV1ApplicationApp.driver.home.createOrEditLabel">Create or edit a Driver</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.driver.company" for="field_company">Company</label>
+                    <input type="text" class="form-control" name="company" id="field_company"
+                           formControlName="company"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.driver.firstName" for="field_firstName">First Name</label>
+                    <input type="text" class="form-control" name="firstName" id="field_firstName"
+                           formControlName="firstName"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.driver.lastName" for="field_lastName">Last Name</label>
+                    <input type="text" class="form-control" name="lastName" id="field_lastName"
+                           formControlName="lastName"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.driver.email" for="field_email">Email</label>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                           formControlName="email"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.driver.phoneNumber" for="field_phoneNumber">Phone Number</label>
+                    <input type="number" class="form-control" name="phoneNumber" id="field_phoneNumber"
+                           formControlName="phoneNumber"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.driver.licenceNumber" for="field_licenceNumber">Licence Number</label>
+                    <input type="number" class="form-control" name="licenceNumber" id="field_licenceNumber"
+                           formControlName="licenceNumber"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.driver.dob" for="field_dob">Dob</label>
+                    <div class="input-group">
+                        <input id="field_dob" type="text" class="form-control" name="dob" ngbDatepicker #dobDp="ngbDatepicker" formControlName="dob"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dobDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.driver.companyJoinedOn" for="field_companyJoinedOn">Company Joined On</label>
+                    <div class="input-group">
+                        <input id="field_companyJoinedOn" type="text" class="form-control" name="companyJoinedOn" ngbDatepicker #companyJoinedOnDp="ngbDatepicker" formControlName="companyJoinedOn"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="companyJoinedOnDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.driver.companyLeftOn" for="field_companyLeftOn">Company Left On</label>
+                    <div class="input-group">
+                        <input id="field_companyLeftOn" type="text" class="form-control" name="companyLeftOn" ngbDatepicker #companyLeftOnDp="ngbDatepicker" formControlName="companyLeftOn"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="companyLeftOnDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.driver.image" for="field_image">Image</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('imageContentType')!.value + ';base64,' + editForm.get('image')!.value" style="max-height: 100px;" *ngIf="editForm.get('image')!.value" alt="driver image"/>
+                        <div *ngIf="editForm.get('image')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('imageContentType')!.value }}, {{ byteSize(editForm.get('image')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('image', 'imageContentType', 'file_image')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_image" (change)="setFileData($event, 'image', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="image" id="field_image"
+                           formControlName="image"/>
+                    <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                           formControlName="imageContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.driver.licenceImage" for="field_licenceImage">Licence Image</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('licenceImageContentType')!.value + ';base64,' + editForm.get('licenceImage')!.value" style="max-height: 100px;" *ngIf="editForm.get('licenceImage')!.value" alt="driver image"/>
+                        <div *ngIf="editForm.get('licenceImage')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('licenceImageContentType')!.value }}, {{ byteSize(editForm.get('licenceImage')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('licenceImage', 'licenceImageContentType', 'file_licenceImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_licenceImage" (change)="setFileData($event, 'licenceImage', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="licenceImage" id="field_licenceImage"
+                           formControlName="licenceImage"/>
+                    <input type="hidden" class="form-control" name="licenceImageContentType" id="field_licenceImageContentType"
+                           formControlName="licenceImageContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.driver.remarks" for="field_remarks">Remarks</label>
+                    <input type="text" class="form-control" name="remarks" id="field_remarks"
+                           formControlName="remarks"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.driver.contractDoc" for="field_contractDoc">Contract Doc</label>
+                    <div>
+                        <div *ngIf="editForm.get('contractDoc')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('contractDocContentType')!.value, editForm.get('contractDoc')!.value)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{ editForm.get('contractDocContentType')!.value }}, {{ byteSize(editForm.get('contractDoc')!.value) }}</span>
+                            <button type="button" (click)="editForm.patchValue({contractDoc: null});editForm.patchValue({contractDocContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_contractDoc" (change)="setFileData($event, 'contractDoc', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="contractDoc" id="field_contractDoc"
+                           formControlName="contractDoc"/>
+                    <input type="hidden" class="form-control" name="contractDocContentType" id="field_contractDocContentType"
+                           formControlName="contractDocContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.driver.status" for="field_status">Status</label>
+                    <select class="form-control" name="status" formControlName="status" id="field_status">
+                        <option value="ACTIVE">{{ 'tmsV1ApplicationApp.ToggleStatus.ACTIVE' | translate }}</option>
+                        <option value="INACTIVE">{{ 'tmsV1ApplicationApp.ToggleStatus.INACTIVE' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.driver.createdOn" for="field_createdOn">Created On</label>
+                    <div class="d-flex">
+                        <input id="field_createdOn" type="datetime-local" class="form-control" name="createdOn" formControlName="createdOn" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.driver.createdBy" for="field_createdBy">Created By</label>
+                    <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                           formControlName="createdBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.driver.updatedOn" for="field_updatedOn">Updated On</label>
+                    <div class="d-flex">
+                        <input id="field_updatedOn" type="datetime-local" class="form-control" name="updatedOn" formControlName="updatedOn" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.driver.updatedBy" for="field_updatedBy">Updated By</label>
+                    <input type="text" class="form-control" name="updatedBy" id="field_updatedBy"
+                           formControlName="updatedBy"/>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

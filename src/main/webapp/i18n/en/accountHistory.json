@@ -1,0 +1,29 @@
+{
+  "tmsV1ApplicationApp": {
+    "accountHistory": {
+      "home": {
+        "title": "Account Histories",
+        "createLabel": "Create a new Account History",
+        "createOrEditLabel": "Create or edit a Account History",
+        "search": "Search for Account History",
+        "notFound": "No Account Histories found"
+      },
+      "created": "A new Account History is created with identifier {{ param }}",
+      "updated": "A Account History is updated with identifier {{ param }}",
+      "deleted": "A Account History is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Account History {{ id }}?"
+      },
+      "detail": {
+        "title": "Account History"
+      },
+      "enityName": "Enity Name",
+      "entityLink": "Entity Link",
+      "action": "Action",
+      "createdOn": "Created On",
+      "createdBy": "Created By",
+      "updatedOn": "Updated On",
+      "updatedBy": "Updated By"
+    }
+  }
+}

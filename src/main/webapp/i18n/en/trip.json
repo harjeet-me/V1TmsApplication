@@ -1,0 +1,56 @@
+{
+  "tmsV1ApplicationApp": {
+    "trip": {
+      "home": {
+        "title": "Trips",
+        "createLabel": "Create a new Trip",
+        "createOrEditLabel": "Create or edit a Trip",
+        "search": "Search for Trip",
+        "notFound": "No Trips found"
+      },
+      "created": "A new Trip is created with identifier {{ param }}",
+      "updated": "A Trip is updated with identifier {{ param }}",
+      "deleted": "A Trip is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Trip {{ id }}?"
+      },
+      "detail": {
+        "title": "Trip"
+      },
+      "customTripNumber": "Custom Trip Number",
+      "description": "Description",
+      "tripType": "Trip Type",
+      "shipmentNumber": "Shipment Number",
+      "bol": "Bol",
+      "pickup": "Pickup",
+      "drop": "Drop",
+      "currentLocation": "Current Location",
+      "status": "Status",
+      "detention": "Detention",
+      "chasisInTime": "Chasis In Time",
+      "pod": "Pod",
+      "hazmat": "Hazmat",
+      "refrigerated": "Refrigerated",
+      "liftgate": "Liftgate",
+      "recievedBy": "Recieved By",
+      "coveredBy": "Covered By",
+      "loadType": "Load Type",
+      "containerSize": "Container Size",
+      "numbersOfContainer": "Numbers Of Container",
+      "comments": "Comments",
+      "autoGenerateInvoice": "Auto Generate Invoice",
+      "createdOn": "Created On",
+      "createdBy": "Created By",
+      "updatedOn": "Updated On",
+      "updatedBy": "Updated By",
+      "pickupLocation": "Pickup Location",
+      "dropLocation": "Drop Location",
+      "invoice": "Invoice",
+      "container": "Container",
+      "customer": "Customer",
+      "driver": "Driver",
+      "equipment": "Equipment",
+      "carrier": "Carrier"
+    }
+  }
+}

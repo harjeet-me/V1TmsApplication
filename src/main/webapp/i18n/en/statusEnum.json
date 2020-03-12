@@ -1,0 +1,13 @@
+{
+  "tmsV1ApplicationApp": {
+    "StatusEnum": {
+      "null": "",
+      "CREATED": "CREATED",
+      "PICKEDUP": "PICKEDUP",
+      "ONROAD": "ONROAD",
+      "DELIVERED": "DELIVERED",
+      "INVOICED": "INVOICED",
+      "COMPLETED": "COMPLETED"
+    }
+  }
+}

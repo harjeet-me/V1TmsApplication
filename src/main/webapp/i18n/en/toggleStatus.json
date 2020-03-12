@@ -1,0 +1,9 @@
+{
+  "tmsV1ApplicationApp": {
+    "ToggleStatus": {
+      "null": "",
+      "ACTIVE": "ACTIVE",
+      "INACTIVE": "INACTIVE"
+    }
+  }
+}

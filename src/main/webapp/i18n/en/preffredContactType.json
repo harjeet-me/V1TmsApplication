@@ -1,0 +1,11 @@
+{
+  "tmsV1ApplicationApp": {
+    "PreffredContactType": {
+      "null": "",
+      "PHONE": "PHONE",
+      "EMAIL": "EMAIL",
+      "FAX": "FAX",
+      "MAIL": "MAIL"
+    }
+  }
+}

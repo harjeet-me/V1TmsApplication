@@ -1,0 +1,38 @@
+{
+  "tmsV1ApplicationApp": {
+    "email": {
+      "home": {
+        "title": "Emails",
+        "createLabel": "Create a new Email",
+        "createOrEditLabel": "Create or edit a Email",
+        "search": "Search for Email",
+        "notFound": "No Emails found"
+      },
+      "created": "A new Email is created with identifier {{ param }}",
+      "updated": "A Email is updated with identifier {{ param }}",
+      "deleted": "A Email is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Email {{ id }}?"
+      },
+      "detail": {
+        "title": "Email"
+      },
+      "userto": "Userto",
+      "usercc": "Usercc",
+      "userbcc": "Userbcc",
+      "subject": "Subject",
+      "message": "Message",
+      "multipart": "Multipart",
+      "htmlBody": "Html Body",
+      "attachment": "Attachment",
+      "attachmentName": "Attachment Name",
+      "status": "Status",
+      "sentDateTime": "Sent Date Time",
+      "createdOn": "Created On",
+      "createdBy": "Created By",
+      "updatedOn": "Updated On",
+      "updatedBy": "Updated By",
+      "fileSystem": "File System"
+    }
+  }
+}

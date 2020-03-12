@@ -1,0 +1,184 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="carrier">
+            <h2><span jhiTranslate="tmsV1ApplicationApp.carrier.detail.title">Carrier</span> {{ carrier.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.company">Company</span></dt>
+                <dd>
+                    <span>{{ carrier.company }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{ carrier.firstName }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{ carrier.lastName }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.contactDesignation">Contact Designation</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.Designation.' + carrier.contactDesignation }}">{{ carrier.contactDesignation }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.email">Email</span></dt>
+                <dd>
+                    <span>{{ carrier.email }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{ carrier.phoneNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.phoneNumberExtention">Phone Number Extention</span></dt>
+                <dd>
+                    <span>{{ carrier.phoneNumberExtention }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.preffredContactType">Preffred Contact Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.PreffredContactType.' + carrier.preffredContactType }}">{{ carrier.preffredContactType }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.website">Website</span></dt>
+                <dd>
+                    <span>{{ carrier.website }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.alternateContactPerson">Alternate Contact Person</span></dt>
+                <dd>
+                    <span>{{ carrier.alternateContactPerson }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.alternateContactNumber">Alternate Contact Number</span></dt>
+                <dd>
+                    <span>{{ carrier.alternateContactNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.alternatePhoneNumberExtention">Alternate Phone Number Extention</span></dt>
+                <dd>
+                    <span>{{ carrier.alternatePhoneNumberExtention }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.alternateContactEmail">Alternate Contact Email</span></dt>
+                <dd>
+                    <span>{{ carrier.alternateContactEmail }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.preferredContactTime">Preferred Contact Time</span></dt>
+                <dd>
+                    <span>{{ carrier.preferredContactTime }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.fax">Fax</span></dt>
+                <dd>
+                    <span>{{ carrier.fax }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.address">Address</span></dt>
+                <dd>
+                    <span>{{ carrier.address }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.streetAddress">Street Address</span></dt>
+                <dd>
+                    <span>{{ carrier.streetAddress }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.city">City</span></dt>
+                <dd>
+                    <span>{{ carrier.city }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.stateProvince">State Province</span></dt>
+                <dd>
+                    <span>{{ carrier.stateProvince }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.country">Country</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.CountryEnum.' + carrier.country }}">{{ carrier.country }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.postalCode">Postal Code</span></dt>
+                <dd>
+                    <span>{{ carrier.postalCode }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.dot">Dot</span></dt>
+                <dd>
+                    <span>{{ carrier.dot }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.mc">Mc</span></dt>
+                <dd>
+                    <span>{{ carrier.mc }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.taxId">Tax Id</span></dt>
+                <dd>
+                    <span>{{ carrier.taxId }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.companyLogo">Company Logo</span></dt>
+                <dd>
+                    <div *ngIf="carrier.companyLogo">
+                        <a (click)="openFile(carrier?.companyLogoContentType!, carrier?.companyLogo)">
+                            <img [src]="'data:' + carrier.companyLogoContentType + ';base64,' + carrier.companyLogo" style="max-width: 100%;" alt="carrier image"/>
+                        </a>
+                        {{ carrier.companyLogoContentType }}, {{ byteSize(carrier.companyLogo) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.customerSince">Customer Since</span></dt>
+                <dd>
+                    <span>{{ carrier.customerSince }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.notes">Notes</span></dt>
+                <dd>
+                    <span>{{ carrier.notes }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.contract">Contract</span></dt>
+                <dd>
+                    <div *ngIf="carrier.contract">
+                        <a (click)="openFile(carrier?.contractContentType!, carrier?.contract)" jhiTranslate="entity.action.open">open</a>
+                        {{ carrier.contractContentType }}, {{ byteSize(carrier.contract) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.ToggleStatus.' + carrier.status }}">{{ carrier.status }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.preffredCurrency">Preffred Currency</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.CURRENCY.' + carrier.preffredCurrency }}">{{ carrier.preffredCurrency }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.payterms">Payterms</span></dt>
+                <dd>
+                    <span>{{ carrier.payterms }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.timeZone">Time Zone</span></dt>
+                <dd>
+                    <span>{{ carrier.timeZone }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.createdOn">Created On</span></dt>
+                <dd>
+                    <span>{{ carrier.createdOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ carrier.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.updatedOn">Updated On</span></dt>
+                <dd>
+                    <span>{{ carrier.updatedOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.updatedBy">Updated By</span></dt>
+                <dd>
+                    <span>{{ carrier.updatedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.carrier.operInsurance">Oper Insurance</span></dt>
+                <dd>
+                    <div *ngIf="carrier.operInsurance">
+                        <a [routerLink]="['/insurance', carrier.operInsurance?.id, 'view']">{{ carrier.operInsurance?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/carrier', carrier.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

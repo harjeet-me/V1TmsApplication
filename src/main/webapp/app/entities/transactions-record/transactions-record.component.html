@@ -1,0 +1,140 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.home.title">Transactions Records</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-transactions-record" [routerLink]="['/transactions-record/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="tmsV1ApplicationApp.transactionsRecord.home.createLabel">
+            Create a new Transactions Record
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'tmsV1ApplicationApp.transactionsRecord.home.search' | translate }}">
+
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon icon="search"></fa-icon>
+                    </button>
+
+                    <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+                        <fa-icon icon="trash-alt"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="transactionsRecords?.length === 0">
+        <span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.home.notFound">No transactionsRecords found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="transactionsRecords?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txType"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txType">Tx Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="description"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.description">Description</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txAmmount"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txAmmount">Tx Ammount</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txRefNo"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txRefNo">Tx Ref No</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txCreatedBy"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCreatedBy">Tx Created By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txCreatedDate"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCreatedDate">Tx Created Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txCompletedBy"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCompletedBy">Tx Completed By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txCompletedDate"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCompletedDate">Tx Completed Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="status"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txDoc"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txDoc">Tx Doc</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="currency"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.currency">Currency</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="remarks"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.remarks">Remarks</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdOn"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.createdOn">Created On</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdBy"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="updatedOn"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.updatedOn">Updated On</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="updatedBy"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.updatedBy">Updated By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="customer.company"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.customer">Customer</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="account.id"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.account">Account</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="invoice.id"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.invoice">Invoice</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let transactionsRecord of transactionsRecords ;trackBy: trackId">
+                    <td><a [routerLink]="['/transactions-record', transactionsRecord.id, 'view']">{{ transactionsRecord.id }}</a></td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.TransactionType.' + transactionsRecord.txType }}">{{ transactionsRecord.txType }}</td>
+                    <td>{{ transactionsRecord.description }}</td>
+                    <td>{{ transactionsRecord.txAmmount }}</td>
+                    <td>{{ transactionsRecord.txRefNo }}</td>
+                    <td>{{ transactionsRecord.txCreatedBy }}</td>
+                    <td>{{ transactionsRecord.txCreatedDate | date:'mediumDate' }}</td>
+                    <td>{{ transactionsRecord.txCompletedBy }}</td>
+                    <td>{{ transactionsRecord.txCompletedDate | date:'mediumDate' }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.TxStatus.' + transactionsRecord.status }}">{{ transactionsRecord.status }}</td>
+                    <td>
+                        <a *ngIf="transactionsRecord.txDoc" (click)="openFile(transactionsRecord.txDocContentType, transactionsRecord.txDoc)" jhiTranslate="entity.action.open">open</a>
+                        <span *ngIf="transactionsRecord.txDoc">{{ transactionsRecord.txDocContentType }}, {{ byteSize(transactionsRecord.txDoc) }}</span>
+                    </td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.CURRENCY.' + transactionsRecord.currency }}">{{ transactionsRecord.currency }}</td>
+                    <td>{{ transactionsRecord.remarks }}</td>
+                    <td>{{ transactionsRecord.createdOn | date:'medium' }}</td>
+                    <td>{{ transactionsRecord.createdBy }}</td>
+                    <td>{{ transactionsRecord.updatedOn | date:'medium' }}</td>
+                    <td>{{ transactionsRecord.updatedBy }}</td>
+                    <td>
+                        <div *ngIf="transactionsRecord.customer">
+                            <a [routerLink]="['/customer', transactionsRecord.customer?.id, 'view']" >{{ transactionsRecord.customer?.company }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="transactionsRecord.account">
+                            <a [routerLink]="['/accounts', transactionsRecord.account?.id, 'view']" >{{ transactionsRecord.account?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="transactionsRecord.invoice">
+                            <a [routerLink]="['/invoice', transactionsRecord.invoice?.id, 'view']" >{{ transactionsRecord.invoice?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/transactions-record', transactionsRecord.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/transactions-record', transactionsRecord.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(transactionsRecord)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="transactionsRecords?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

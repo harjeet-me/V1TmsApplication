@@ -1,0 +1,11 @@
+id;report_type;description;from_date;to_date;attachment;attachment_content_type;email_to;created_on;created_by;updated_on;updated_by
+1;TRIP_STMT_OF_CUSTOMER;transmitting Cambridgeshire;2020-03-11;2020-03-11;../fake-data/blob/hipster.png;image/png;redundant;2020-03-11T12:08:10;innovative open architecture;2020-03-11T16:49:49;Home Loan Account connecting
+2;TRIP_STMT_OF_CUSTOMER;Credit Card Account;2020-03-12;2020-03-11;../fake-data/blob/hipster.png;image/png;back-end payment;2020-03-11T19:08:56;hack Unbranded Plastic Car;2020-03-11T11:41:12;bluetooth Optimization 24/7
+3;INV_STMT_OF_CUSTOMER;invoice Rustic Concrete Tuna;2020-03-11;2020-03-12;../fake-data/blob/hipster.png;image/png;Fantastic Cotton Towels XML online;2020-03-12T04:33:02;primary;2020-03-11T10:47:03;Coordinator
+4;INV_STMT_OF_CUSTOMER;Associate;2020-03-11;2020-03-11;../fake-data/blob/hipster.png;image/png;invoice reintermediate architecture;2020-03-11T13:07:35;invoice matrix seize;2020-03-11T17:02:20;Product
+5;TRIP_STMT_OF_CUSTOMER;Berkshire overriding Rubber;2020-03-11;2020-03-11;../fake-data/blob/hipster.png;image/png;bottom-line;2020-03-11T22:01:12;Ouguiya Bangladesh;2020-03-12T01:15:19;Checking Account Incredible Salad
+6;TRIP_STMT_OF_CUSTOMER;Administrator leverage reboot;2020-03-12;2020-03-11;../fake-data/blob/hipster.png;image/png;incubate;2020-03-11T07:05:01;turn-key;2020-03-11T10:20:25;Liaison Auto Loan Account monetize
+7;TRIP_STMT_OF_CUSTOMER;Berkshire violet Harbor;2020-03-11;2020-03-12;../fake-data/blob/hipster.png;image/png;invoice implementation Rustic;2020-03-11T17:10:07;XML back up;2020-03-12T05:20:41;upward-trending interface Glens
+8;INV_STMT_OF_CUSTOMER;streamline;2020-03-11;2020-03-12;../fake-data/blob/hipster.png;image/png;invoice Money Market Account IB;2020-03-11T23:54:53;Unbranded;2020-03-11T21:57:48;Investment Account Specialist
+9;INV_STMT_OF_CUSTOMER;Guyana Direct Directives;2020-03-11;2020-03-12;../fake-data/blob/hipster.png;image/png;Incredible reintermediate;2020-03-12T04:42:20;array;2020-03-11T21:01:52;Automated Regional Ranch
+10;INV_STMT_OF_CUSTOMER;wireless Bridge;2020-03-11;2020-03-11;../fake-data/blob/hipster.png;image/png;Intranet website;2020-03-12T06:31:07;Fish Books;2020-03-11T18:48:39;Bedfordshire

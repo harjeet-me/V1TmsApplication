@@ -1,0 +1,89 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="email">
+            <h2><span jhiTranslate="tmsV1ApplicationApp.email.detail.title">Email</span> {{ email.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tmsV1ApplicationApp.email.userto">Userto</span></dt>
+                <dd>
+                    <span>{{ email.userto }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.email.usercc">Usercc</span></dt>
+                <dd>
+                    <span>{{ email.usercc }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.email.userbcc">Userbcc</span></dt>
+                <dd>
+                    <span>{{ email.userbcc }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.email.subject">Subject</span></dt>
+                <dd>
+                    <span>{{ email.subject }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.email.message">Message</span></dt>
+                <dd>
+                    <span>{{ email.message }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.email.multipart">Multipart</span></dt>
+                <dd>
+                    <span>{{ email.multipart }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.email.htmlBody">Html Body</span></dt>
+                <dd>
+                    <span>{{ email.htmlBody }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.email.attachment">Attachment</span></dt>
+                <dd>
+                    <div *ngIf="email.attachment">
+                        <a (click)="openFile(email?.attachmentContentType!, email?.attachment)" jhiTranslate="entity.action.open">open</a>
+                        {{ email.attachmentContentType }}, {{ byteSize(email.attachment) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.email.attachmentName">Attachment Name</span></dt>
+                <dd>
+                    <span>{{ email.attachmentName }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.email.status">Status</span></dt>
+                <dd>
+                    <span>{{ email.status }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.email.sentDateTime">Sent Date Time</span></dt>
+                <dd>
+                    <span>{{ email.sentDateTime }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.email.createdOn">Created On</span></dt>
+                <dd>
+                    <span>{{ email.createdOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.email.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ email.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.email.updatedOn">Updated On</span></dt>
+                <dd>
+                    <span>{{ email.updatedOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.email.updatedBy">Updated By</span></dt>
+                <dd>
+                    <span>{{ email.updatedBy }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/email', email.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

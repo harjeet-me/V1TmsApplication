@@ -1,0 +1,85 @@
+{
+    "name": "Email",
+    "fields": [
+        {
+            "fieldName": "userto",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "usercc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "userbcc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "subject",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "message",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "multipart",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "htmlBody",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "attachment",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "attachmentName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sentDateTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "createdOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "updatedOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "updatedBy",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "fileSystem",
+            "otherEntityRelationshipName": "email",
+            "relationshipName": "fileSystem"
+        }
+    ],
+    "changelogDate": "20200312064400",
+    "entityTableName": "email",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

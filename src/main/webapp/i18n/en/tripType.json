@@ -1,0 +1,9 @@
+{
+  "tmsV1ApplicationApp": {
+    "TripType": {
+      "null": "",
+      "PICKUP": "PICKUP",
+      "RETURN": "RETURN"
+    }
+  }
+}

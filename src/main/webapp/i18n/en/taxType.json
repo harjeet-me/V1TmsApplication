@@ -1,0 +1,9 @@
+{
+  "tmsV1ApplicationApp": {
+    "TaxType": {
+      "null": "",
+      "GST": "GST",
+      "FEDRAL": "FEDRAL"
+    }
+  }
+}

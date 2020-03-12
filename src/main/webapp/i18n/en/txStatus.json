@@ -1,0 +1,10 @@
+{
+  "tmsV1ApplicationApp": {
+    "TxStatus": {
+      "null": "",
+      "INITIATED": "INITIATED",
+      "UNDERPROCESS": "UNDERPROCESS",
+      "COMPLETED": "COMPLETED"
+    }
+  }
+}

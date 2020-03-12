@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="invoiceHistory">
+            <h2><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.detail.title">Invoice History</span> {{ invoiceHistory.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiceStatus.' + invoiceHistory.status }}">{{ invoiceHistory.status }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.comment">Comment</span></dt>
+                <dd>
+                    <span>{{ invoiceHistory.comment }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.createdOn">Created On</span></dt>
+                <dd>
+                    <span>{{ invoiceHistory.createdOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ invoiceHistory.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.updatedOn">Updated On</span></dt>
+                <dd>
+                    <span>{{ invoiceHistory.updatedOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.updatedBy">Updated By</span></dt>
+                <dd>
+                    <span>{{ invoiceHistory.updatedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.previous">Previous</span></dt>
+                <dd>
+                    <div *ngIf="invoiceHistory.previous">
+                        <a [routerLink]="['/invoice-history', invoiceHistory.previous?.id, 'view']">{{ invoiceHistory.previous?.status }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.next">Next</span></dt>
+                <dd>
+                    <div *ngIf="invoiceHistory.next">
+                        <a [routerLink]="['/invoice-history', invoiceHistory.next?.id, 'view']">{{ invoiceHistory.next?.status }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/invoice-history', invoiceHistory.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

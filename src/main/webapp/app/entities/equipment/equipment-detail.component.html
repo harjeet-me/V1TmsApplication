@@ -1,0 +1,100 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="equipment">
+            <h2><span jhiTranslate="tmsV1ApplicationApp.equipment.detail.title">Equipment</span> {{ equipment.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tmsV1ApplicationApp.equipment.enumber">Enumber</span></dt>
+                <dd>
+                    <span>{{ equipment.enumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.equipment.type">Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.EquipmentEnum.' + equipment.type }}">{{ equipment.type }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.equipment.ownershiptype">Ownershiptype</span></dt>
+                <dd>
+                    <span>{{ equipment.ownershiptype }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.equipment.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.ToggleStatus.' + equipment.status }}">{{ equipment.status }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.equipment.vin">Vin</span></dt>
+                <dd>
+                    <span>{{ equipment.vin }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.equipment.make">Make</span></dt>
+                <dd>
+                    <span>{{ equipment.make }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.equipment.model">Model</span></dt>
+                <dd>
+                    <span>{{ equipment.model }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.equipment.description">Description</span></dt>
+                <dd>
+                    <span>{{ equipment.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.equipment.year">Year</span></dt>
+                <dd>
+                    <span>{{ equipment.year }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.equipment.yearPurchased">Year Purchased</span></dt>
+                <dd>
+                    <span>{{ equipment.yearPurchased }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.equipment.licensePlateNumber">License Plate Number</span></dt>
+                <dd>
+                    <span>{{ equipment.licensePlateNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.equipment.licensePlateExpiration">License Plate Expiration</span></dt>
+                <dd>
+                    <span>{{ equipment.licensePlateExpiration }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.equipment.inspectionStickerExpiration">Inspection Sticker Expiration</span></dt>
+                <dd>
+                    <span>{{ equipment.inspectionStickerExpiration }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.equipment.createdOn">Created On</span></dt>
+                <dd>
+                    <span>{{ equipment.createdOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.equipment.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ equipment.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.equipment.updatedOn">Updated On</span></dt>
+                <dd>
+                    <span>{{ equipment.updatedOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.equipment.updatedBy">Updated By</span></dt>
+                <dd>
+                    <span>{{ equipment.updatedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.equipment.insurance">Insurance</span></dt>
+                <dd>
+                    <div *ngIf="equipment.insurance">
+                        <a [routerLink]="['/insurance', equipment.insurance?.id, 'view']">{{ equipment.insurance?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/equipment', equipment.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

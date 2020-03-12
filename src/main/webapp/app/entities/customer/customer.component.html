@@ -1,0 +1,167 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="tmsV1ApplicationApp.customer.home.title">Customers</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-customer" [routerLink]="['/customer/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="tmsV1ApplicationApp.customer.home.createLabel">
+            Create a new Customer
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'tmsV1ApplicationApp.customer.home.search' | translate }}">
+
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon icon="search"></fa-icon>
+                    </button>
+
+                    <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+                        <fa-icon icon="trash-alt"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="customers?.length === 0">
+        <span jhiTranslate="tmsV1ApplicationApp.customer.home.notFound">No customers found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="customers?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="company"><span jhiTranslate="tmsV1ApplicationApp.customer.company">Company</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="firstName"><span jhiTranslate="tmsV1ApplicationApp.customer.firstName">First Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lastName"><span jhiTranslate="tmsV1ApplicationApp.customer.lastName">Last Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="contactDesignation"><span jhiTranslate="tmsV1ApplicationApp.customer.contactDesignation">Contact Designation</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="email"><span jhiTranslate="tmsV1ApplicationApp.customer.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="phoneNumber"><span jhiTranslate="tmsV1ApplicationApp.customer.phoneNumber">Phone Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="phoneNumberExtention"><span jhiTranslate="tmsV1ApplicationApp.customer.phoneNumberExtention">Phone Number Extention</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="preffredContactType"><span jhiTranslate="tmsV1ApplicationApp.customer.preffredContactType">Preffred Contact Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="website"><span jhiTranslate="tmsV1ApplicationApp.customer.website">Website</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="alternateContactPerson"><span jhiTranslate="tmsV1ApplicationApp.customer.alternateContactPerson">Alternate Contact Person</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="alternateContactNumber"><span jhiTranslate="tmsV1ApplicationApp.customer.alternateContactNumber">Alternate Contact Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="alternatePhoneNumberExtention"><span jhiTranslate="tmsV1ApplicationApp.customer.alternatePhoneNumberExtention">Alternate Phone Number Extention</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="alternateContactEmail"><span jhiTranslate="tmsV1ApplicationApp.customer.alternateContactEmail">Alternate Contact Email</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="preferredContactTime"><span jhiTranslate="tmsV1ApplicationApp.customer.preferredContactTime">Preferred Contact Time</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="fax"><span jhiTranslate="tmsV1ApplicationApp.customer.fax">Fax</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="address"><span jhiTranslate="tmsV1ApplicationApp.customer.address">Address</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="streetAddress"><span jhiTranslate="tmsV1ApplicationApp.customer.streetAddress">Street Address</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="city"><span jhiTranslate="tmsV1ApplicationApp.customer.city">City</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="stateProvince"><span jhiTranslate="tmsV1ApplicationApp.customer.stateProvince">State Province</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="country"><span jhiTranslate="tmsV1ApplicationApp.customer.country">Country</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="postalCode"><span jhiTranslate="tmsV1ApplicationApp.customer.postalCode">Postal Code</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dot"><span jhiTranslate="tmsV1ApplicationApp.customer.dot">Dot</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="mc"><span jhiTranslate="tmsV1ApplicationApp.customer.mc">Mc</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="taxId"><span jhiTranslate="tmsV1ApplicationApp.customer.taxId">Tax Id</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="companyLogo"><span jhiTranslate="tmsV1ApplicationApp.customer.companyLogo">Company Logo</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="customerSince"><span jhiTranslate="tmsV1ApplicationApp.customer.customerSince">Customer Since</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="notes"><span jhiTranslate="tmsV1ApplicationApp.customer.notes">Notes</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="contract"><span jhiTranslate="tmsV1ApplicationApp.customer.contract">Contract</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="status"><span jhiTranslate="tmsV1ApplicationApp.customer.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="preffredCurrency"><span jhiTranslate="tmsV1ApplicationApp.customer.preffredCurrency">Preffred Currency</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="payterms"><span jhiTranslate="tmsV1ApplicationApp.customer.payterms">Payterms</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="timeZone"><span jhiTranslate="tmsV1ApplicationApp.customer.timeZone">Time Zone</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdOn"><span jhiTranslate="tmsV1ApplicationApp.customer.createdOn">Created On</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdBy"><span jhiTranslate="tmsV1ApplicationApp.customer.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="updatedOn"><span jhiTranslate="tmsV1ApplicationApp.customer.updatedOn">Updated On</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="updatedBy"><span jhiTranslate="tmsV1ApplicationApp.customer.updatedBy">Updated By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let customer of customers ;trackBy: trackId">
+                    <td><a [routerLink]="['/customer', customer.id, 'view']">{{ customer.id }}</a></td>
+                    <td>{{ customer.company }}</td>
+                    <td>{{ customer.firstName }}</td>
+                    <td>{{ customer.lastName }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.Designation.' + customer.contactDesignation }}">{{ customer.contactDesignation }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.phoneNumber }}</td>
+                    <td>{{ customer.phoneNumberExtention }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.PreffredContactType.' + customer.preffredContactType }}">{{ customer.preffredContactType }}</td>
+                    <td>{{ customer.website }}</td>
+                    <td>{{ customer.alternateContactPerson }}</td>
+                    <td>{{ customer.alternateContactNumber }}</td>
+                    <td>{{ customer.alternatePhoneNumberExtention }}</td>
+                    <td>{{ customer.alternateContactEmail }}</td>
+                    <td>{{ customer.preferredContactTime | date:'medium' }}</td>
+                    <td>{{ customer.fax }}</td>
+                    <td>{{ customer.address }}</td>
+                    <td>{{ customer.streetAddress }}</td>
+                    <td>{{ customer.city }}</td>
+                    <td>{{ customer.stateProvince }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.CountryEnum.' + customer.country }}">{{ customer.country }}</td>
+                    <td>{{ customer.postalCode }}</td>
+                    <td>{{ customer.dot }}</td>
+                    <td>{{ customer.mc }}</td>
+                    <td>{{ customer.taxId }}</td>
+                    <td>
+                        <a *ngIf="customer.companyLogo" (click)="openFile(customer.companyLogoContentType, customer.companyLogo)">
+                            <img [src]="'data:' + customer.companyLogoContentType + ';base64,' + customer.companyLogo" style="max-height: 30px;" alt="customer image"/>
+                        </a>
+                        <span *ngIf="customer.companyLogo">{{ customer.companyLogoContentType }}, {{ byteSize(customer.companyLogo) }}</span>
+                    </td>
+                    <td>{{ customer.customerSince | date:'mediumDate' }}</td>
+                    <td>{{ customer.notes }}</td>
+                    <td>
+                        <a *ngIf="customer.contract" (click)="openFile(customer.contractContentType, customer.contract)" jhiTranslate="entity.action.open">open</a>
+                        <span *ngIf="customer.contract">{{ customer.contractContentType }}, {{ byteSize(customer.contract) }}</span>
+                    </td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.ToggleStatus.' + customer.status }}">{{ customer.status }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.CURRENCY.' + customer.preffredCurrency }}">{{ customer.preffredCurrency }}</td>
+                    <td>{{ customer.payterms }}</td>
+                    <td>{{ customer.timeZone | date:'medium' }}</td>
+                    <td>{{ customer.createdOn | date:'medium' }}</td>
+                    <td>{{ customer.createdBy }}</td>
+                    <td>{{ customer.updatedOn | date:'medium' }}</td>
+                    <td>{{ customer.updatedBy }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/customer', customer.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/customer', customer.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(customer)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="customers?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

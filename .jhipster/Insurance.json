@@ -1,0 +1,62 @@
+{
+    "name": "Insurance",
+    "fields": [
+        {
+            "fieldName": "providerName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "issueDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "expiryDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "policyDocument",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "coverageStatement",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "updatedOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "updatedBy",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "carrier",
+            "otherEntityRelationshipName": "operInsurance",
+            "relationshipName": "carrier",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200312063900",
+    "entityTableName": "insurance",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,42 @@
+{
+  "tmsV1ApplicationApp": {
+    "companyProfile": {
+      "home": {
+        "title": "Company Profiles",
+        "createLabel": "Create a new Company Profile",
+        "createOrEditLabel": "Create or edit a Company Profile",
+        "search": "Search for Company Profile",
+        "notFound": "No Company Profiles found"
+      },
+      "created": "A new Company Profile is created with identifier {{ param }}",
+      "updated": "A Company Profile is updated with identifier {{ param }}",
+      "deleted": "A Company Profile is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Company Profile {{ id }}?"
+      },
+      "detail": {
+        "title": "Company Profile"
+      },
+      "active": "Active",
+      "company": "Company",
+      "address": "Address",
+      "streetAddress": "Street Address",
+      "city": "City",
+      "stateProvince": "State Province",
+      "country": "Country",
+      "postalCode": "Postal Code",
+      "email": "Email",
+      "website": "Website",
+      "phoneNumber": "Phone Number",
+      "dot": "Dot",
+      "mc": "Mc",
+      "companyLogo": "Company Logo",
+      "profileStatus": "Profile Status",
+      "preffredCurrency": "Preffred Currency",
+      "createdOn": "Created On",
+      "createdBy": "Created By",
+      "updatedOn": "Updated On",
+      "updatedBy": "Updated By"
+    }
+  }
+}

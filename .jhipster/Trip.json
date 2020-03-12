@@ -1,0 +1,184 @@
+{
+    "name": "Trip",
+    "fields": [
+        {
+            "fieldName": "customTripNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tripType",
+            "fieldType": "TripType",
+            "fieldValues": "PICKUP,RETURN"
+        },
+        {
+            "fieldName": "shipmentNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "bol",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "pickup",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "drop",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "currentLocation",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "StatusEnum",
+            "fieldValues": "CREATED,PICKEDUP,ONROAD,DELIVERED,INVOICED,COMPLETED"
+        },
+        {
+            "fieldName": "detention",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "chasisInTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "pod",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "hazmat",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "refrigerated",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "liftgate",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "recievedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "coveredBy",
+            "fieldType": "COVEREDBY",
+            "fieldValues": "CompanyDriver,OwnerOperator"
+        },
+        {
+            "fieldName": "loadType",
+            "fieldType": "LoadType",
+            "fieldValues": "REEFER,FLATBED,LTL,DRYVAN,FLAT_DECK,CONTAINER,POWERONLY"
+        },
+        {
+            "fieldName": "containerSize",
+            "fieldType": "SizeEnum",
+            "fieldValues": "C53,C43,C20"
+        },
+        {
+            "fieldName": "numbersOfContainer",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "autoGenerateInvoice",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "createdOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "updatedOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "updatedBy",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "location",
+            "otherEntityRelationshipName": "trippick",
+            "relationshipName": "pickupLocation",
+            "otherEntityField": "address",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "location",
+            "otherEntityRelationshipName": "tripdrop",
+            "relationshipName": "dropLocation",
+            "otherEntityField": "address",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "invoice",
+            "otherEntityRelationshipName": "trip",
+            "relationshipName": "invoice"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "container",
+            "otherEntityRelationshipName": "trip",
+            "relationshipName": "container"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "customer",
+            "otherEntityRelationshipName": "loadOrder",
+            "relationshipName": "customer",
+            "otherEntityField": "email"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "driver",
+            "otherEntityRelationshipName": "trip",
+            "relationshipName": "driver",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "equipment",
+            "otherEntityRelationshipName": "trip",
+            "relationshipName": "equipment",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "carrier",
+            "otherEntityRelationshipName": "loadOrder",
+            "relationshipName": "carrier",
+            "otherEntityField": "company"
+        }
+    ],
+    "changelogDate": "20200312063100",
+    "entityTableName": "trip",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

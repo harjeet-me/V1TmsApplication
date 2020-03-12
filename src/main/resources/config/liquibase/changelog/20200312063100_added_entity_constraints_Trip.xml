@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <!--
+        Added the constraints for entity Trip.
+    -->
+    <changeSet id="20200312063100-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="pickup_location_id"
+                                 baseTableName="trip"
+                                 constraintName="fk_trip_pickup_location_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="location"/>
+
+        <addForeignKeyConstraint baseColumnNames="drop_location_id"
+                                 baseTableName="trip"
+                                 constraintName="fk_trip_drop_location_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="location"/>
+
+        <addForeignKeyConstraint baseColumnNames="customer_id"
+                                 baseTableName="trip"
+                                 constraintName="fk_trip_customer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="customer"/>
+
+        <addForeignKeyConstraint baseColumnNames="driver_id"
+                                 baseTableName="trip"
+                                 constraintName="fk_trip_driver_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="driver"/>
+
+        <addForeignKeyConstraint baseColumnNames="equipment_id"
+                                 baseTableName="trip"
+                                 constraintName="fk_trip_equipment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="equipment"/>
+
+        <addForeignKeyConstraint baseColumnNames="carrier_id"
+                                 baseTableName="trip"
+                                 constraintName="fk_trip_carrier_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="carrier"/>
+
+    </changeSet>
+</databaseChangeLog>

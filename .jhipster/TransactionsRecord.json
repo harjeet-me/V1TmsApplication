@@ -1,0 +1,107 @@
+{
+    "name": "TransactionsRecord",
+    "fields": [
+        {
+            "fieldName": "txType",
+            "fieldType": "TransactionType",
+            "fieldValues": "CREDIT,PAYMENT,REFUND,ADJUSTMENT"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "txAmmount",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "txRefNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "txCreatedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "txCreatedDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "txCompletedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "txCompletedDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "TxStatus",
+            "fieldValues": "INITIATED,UNDERPROCESS,COMPLETED"
+        },
+        {
+            "fieldName": "txDoc",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "currency",
+            "fieldType": "CURRENCY",
+            "fieldValues": "USD,CAD,INR"
+        },
+        {
+            "fieldName": "remarks",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "updatedOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "updatedBy",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "customer",
+            "otherEntityRelationshipName": "transactionsRecord",
+            "relationshipName": "customer",
+            "otherEntityField": "company"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "accounts",
+            "otherEntityRelationshipName": "transactionsRecord",
+            "relationshipName": "account",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "invoice",
+            "otherEntityRelationshipName": "transactionsRecord",
+            "relationshipName": "invoice",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200312063600",
+    "entityTableName": "transactions_record",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

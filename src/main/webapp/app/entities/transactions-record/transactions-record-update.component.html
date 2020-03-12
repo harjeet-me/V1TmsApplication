@@ -1,0 +1,179 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-transactions-record-heading" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.home.createOrEditLabel">Create or edit a Transactions Record</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txType" for="field_txType">Tx Type</label>
+                    <select class="form-control" name="txType" formControlName="txType" id="field_txType">
+                        <option value="CREDIT">{{ 'tmsV1ApplicationApp.TransactionType.CREDIT' | translate }}</option>
+                        <option value="PAYMENT">{{ 'tmsV1ApplicationApp.TransactionType.PAYMENT' | translate }}</option>
+                        <option value="REFUND">{{ 'tmsV1ApplicationApp.TransactionType.REFUND' | translate }}</option>
+                        <option value="ADJUSTMENT">{{ 'tmsV1ApplicationApp.TransactionType.ADJUSTMENT' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                           formControlName="description"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txAmmount" for="field_txAmmount">Tx Ammount</label>
+                    <input type="number" class="form-control" name="txAmmount" id="field_txAmmount"
+                           formControlName="txAmmount"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txRefNo" for="field_txRefNo">Tx Ref No</label>
+                    <input type="text" class="form-control" name="txRefNo" id="field_txRefNo"
+                           formControlName="txRefNo"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCreatedBy" for="field_txCreatedBy">Tx Created By</label>
+                    <input type="text" class="form-control" name="txCreatedBy" id="field_txCreatedBy"
+                           formControlName="txCreatedBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCreatedDate" for="field_txCreatedDate">Tx Created Date</label>
+                    <div class="input-group">
+                        <input id="field_txCreatedDate" type="text" class="form-control" name="txCreatedDate" ngbDatepicker #txCreatedDateDp="ngbDatepicker" formControlName="txCreatedDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="txCreatedDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCompletedBy" for="field_txCompletedBy">Tx Completed By</label>
+                    <input type="text" class="form-control" name="txCompletedBy" id="field_txCompletedBy"
+                           formControlName="txCompletedBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCompletedDate" for="field_txCompletedDate">Tx Completed Date</label>
+                    <div class="input-group">
+                        <input id="field_txCompletedDate" type="text" class="form-control" name="txCompletedDate" ngbDatepicker #txCompletedDateDp="ngbDatepicker" formControlName="txCompletedDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="txCompletedDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.status" for="field_status">Status</label>
+                    <select class="form-control" name="status" formControlName="status" id="field_status">
+                        <option value="INITIATED">{{ 'tmsV1ApplicationApp.TxStatus.INITIATED' | translate }}</option>
+                        <option value="UNDERPROCESS">{{ 'tmsV1ApplicationApp.TxStatus.UNDERPROCESS' | translate }}</option>
+                        <option value="COMPLETED">{{ 'tmsV1ApplicationApp.TxStatus.COMPLETED' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txDoc" for="field_txDoc">Tx Doc</label>
+                    <div>
+                        <div *ngIf="editForm.get('txDoc')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('txDocContentType')!.value, editForm.get('txDoc')!.value)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{ editForm.get('txDocContentType')!.value }}, {{ byteSize(editForm.get('txDoc')!.value) }}</span>
+                            <button type="button" (click)="editForm.patchValue({txDoc: null});editForm.patchValue({txDocContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_txDoc" (change)="setFileData($event, 'txDoc', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="txDoc" id="field_txDoc"
+                           formControlName="txDoc"/>
+                    <input type="hidden" class="form-control" name="txDocContentType" id="field_txDocContentType"
+                           formControlName="txDocContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.currency" for="field_currency">Currency</label>
+                    <select class="form-control" name="currency" formControlName="currency" id="field_currency">
+                        <option value="USD">{{ 'tmsV1ApplicationApp.CURRENCY.USD' | translate }}</option>
+                        <option value="CAD">{{ 'tmsV1ApplicationApp.CURRENCY.CAD' | translate }}</option>
+                        <option value="INR">{{ 'tmsV1ApplicationApp.CURRENCY.INR' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.remarks" for="field_remarks">Remarks</label>
+                    <input type="text" class="form-control" name="remarks" id="field_remarks"
+                           formControlName="remarks"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.createdOn" for="field_createdOn">Created On</label>
+                    <div class="d-flex">
+                        <input id="field_createdOn" type="datetime-local" class="form-control" name="createdOn" formControlName="createdOn" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.createdBy" for="field_createdBy">Created By</label>
+                    <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                           formControlName="createdBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.updatedOn" for="field_updatedOn">Updated On</label>
+                    <div class="d-flex">
+                        <input id="field_updatedOn" type="datetime-local" class="form-control" name="updatedOn" formControlName="updatedOn" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.updatedBy" for="field_updatedBy">Updated By</label>
+                    <input type="text" class="form-control" name="updatedBy" id="field_updatedBy"
+                           formControlName="updatedBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.customer" for="field_customer">Customer</label>
+                    <select class="form-control" id="field_customer" name="customer" formControlName="customer">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption" *ngFor="let customerOption of customers; trackBy: trackById">{{ customerOption.company }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.account" for="field_account">Account</label>
+                    <select class="form-control" id="field_account" name="account" formControlName="account">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="accountsOption.id === editForm.get('account')!.value?.id ? editForm.get('account')!.value : accountsOption" *ngFor="let accountsOption of accounts; trackBy: trackById">{{ accountsOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.invoice" for="field_invoice">Invoice</label>
+                    <select class="form-control" id="field_invoice" name="invoice" formControlName="invoice">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="invoiceOption.id === editForm.get('invoice')!.value?.id ? editForm.get('invoice')!.value : invoiceOption" *ngFor="let invoiceOption of invoices; trackBy: trackById">{{ invoiceOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,5 @@
+export const enum TxStatus {
+  INITIATED = 'INITIATED',
+  UNDERPROCESS = 'UNDERPROCESS',
+  COMPLETED = 'COMPLETED'
+}

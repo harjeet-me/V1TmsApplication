@@ -1,0 +1,52 @@
+{
+  "tmsV1ApplicationApp": {
+    "invoice": {
+      "home": {
+        "title": "Invoices",
+        "createLabel": "Create a new Invoice",
+        "createOrEditLabel": "Create or edit a Invoice",
+        "search": "Search for Invoice",
+        "notFound": "No Invoices found"
+      },
+      "created": "A new Invoice is created with identifier {{ param }}",
+      "updated": "A Invoice is updated with identifier {{ param }}",
+      "deleted": "A Invoice is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Invoice {{ id }}?"
+      },
+      "detail": {
+        "title": "Invoice"
+      },
+      "orderNo": "Order No",
+      "invoiceNo": "Invoice No",
+      "taxRate": "Tax Rate",
+      "taxType": "Tax Type",
+      "currency": "Currency",
+      "invoiceTaxTotal": "Invoice Tax Total",
+      "invoiceSubTotal": "Invoice Sub Total",
+      "invoiceTotal": "Invoice Total",
+      "invoiceDate": "Invoice Date",
+      "invoicePaidDate": "Invoice Paid Date",
+      "refOption1": "Ref Option 1",
+      "refValue1": "Ref Value 1",
+      "refOption2": "Ref Option 2",
+      "refValue2": "Ref Value 2",
+      "refOption3": "Ref Option 3",
+      "refValue3": "Ref Value 3",
+      "payRefNo": "Pay Ref No",
+      "invoiceDueDate": "Invoice Due Date",
+      "status": "Status",
+      "invoicePdf": "Invoice Pdf",
+      "remarks": "Remarks",
+      "payterm": "Payterm",
+      "createdOn": "Created On",
+      "createdBy": "Created By",
+      "updatedOn": "Updated On",
+      "updatedBy": "Updated By",
+      "invoiceItem": "Invoice Item",
+      "transactionsRecord": "Transactions Record",
+      "trip": "Trip",
+      "customer": "Customer"
+    }
+  }
+}

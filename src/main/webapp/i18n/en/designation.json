@@ -1,0 +1,11 @@
+{
+  "tmsV1ApplicationApp": {
+    "Designation": {
+      "null": "",
+      "MANAGER": "MANAGER",
+      "ACCOUNTANT": "ACCOUNTANT",
+      "OWNER": "OWNER",
+      "DISPATCHER": "DISPATCHER"
+    }
+  }
+}

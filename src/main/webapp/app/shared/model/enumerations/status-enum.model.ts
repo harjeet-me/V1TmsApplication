@@ -1,0 +1,8 @@
+export const enum StatusEnum {
+  CREATED = 'CREATED',
+  PICKEDUP = 'PICKEDUP',
+  ONROAD = 'ONROAD',
+  DELIVERED = 'DELIVERED',
+  INVOICED = 'INVOICED',
+  COMPLETED = 'COMPLETED'
+}

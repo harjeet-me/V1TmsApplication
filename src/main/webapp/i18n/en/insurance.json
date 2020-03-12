@@ -1,0 +1,32 @@
+{
+  "tmsV1ApplicationApp": {
+    "insurance": {
+      "home": {
+        "title": "Insurances",
+        "createLabel": "Create a new Insurance",
+        "createOrEditLabel": "Create or edit a Insurance",
+        "search": "Search for Insurance",
+        "notFound": "No Insurances found"
+      },
+      "created": "A new Insurance is created with identifier {{ param }}",
+      "updated": "A Insurance is updated with identifier {{ param }}",
+      "deleted": "A Insurance is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Insurance {{ id }}?"
+      },
+      "detail": {
+        "title": "Insurance"
+      },
+      "providerName": "Provider Name",
+      "issueDate": "Issue Date",
+      "expiryDate": "Expiry Date",
+      "policyDocument": "Policy Document",
+      "coverageStatement": "Coverage Statement",
+      "createdOn": "Created On",
+      "createdBy": "Created By",
+      "updatedOn": "Updated On",
+      "updatedBy": "Updated By",
+      "carrier": "Carrier"
+    }
+  }
+}

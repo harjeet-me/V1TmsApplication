@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="accountHistory">
+            <h2><span jhiTranslate="tmsV1ApplicationApp.accountHistory.detail.title">Account History</span> {{ accountHistory.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tmsV1ApplicationApp.accountHistory.enityName">Enity Name</span></dt>
+                <dd>
+                    <span>{{ accountHistory.enityName }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.accountHistory.entityLink">Entity Link</span></dt>
+                <dd>
+                    <span>{{ accountHistory.entityLink }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.accountHistory.action">Action</span></dt>
+                <dd>
+                    <span>{{ accountHistory.action }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.accountHistory.createdOn">Created On</span></dt>
+                <dd>
+                    <span>{{ accountHistory.createdOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.accountHistory.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ accountHistory.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.accountHistory.updatedOn">Updated On</span></dt>
+                <dd>
+                    <span>{{ accountHistory.updatedOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.accountHistory.updatedBy">Updated By</span></dt>
+                <dd>
+                    <span>{{ accountHistory.updatedBy }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/account-history', accountHistory.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="tmsV1ApplicationApp.email.home.title">Emails</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-email" [routerLink]="['/email/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="tmsV1ApplicationApp.email.home.createLabel">
+            Create a new Email
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'tmsV1ApplicationApp.email.home.search' | translate }}">
+
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon icon="search"></fa-icon>
+                    </button>
+
+                    <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+                        <fa-icon icon="trash-alt"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="emails?.length === 0">
+        <span jhiTranslate="tmsV1ApplicationApp.email.home.notFound">No emails found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="emails?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userto"><span jhiTranslate="tmsV1ApplicationApp.email.userto">Userto</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="usercc"><span jhiTranslate="tmsV1ApplicationApp.email.usercc">Usercc</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userbcc"><span jhiTranslate="tmsV1ApplicationApp.email.userbcc">Userbcc</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="subject"><span jhiTranslate="tmsV1ApplicationApp.email.subject">Subject</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="message"><span jhiTranslate="tmsV1ApplicationApp.email.message">Message</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="multipart"><span jhiTranslate="tmsV1ApplicationApp.email.multipart">Multipart</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="htmlBody"><span jhiTranslate="tmsV1ApplicationApp.email.htmlBody">Html Body</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="attachment"><span jhiTranslate="tmsV1ApplicationApp.email.attachment">Attachment</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="attachmentName"><span jhiTranslate="tmsV1ApplicationApp.email.attachmentName">Attachment Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="status"><span jhiTranslate="tmsV1ApplicationApp.email.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sentDateTime"><span jhiTranslate="tmsV1ApplicationApp.email.sentDateTime">Sent Date Time</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdOn"><span jhiTranslate="tmsV1ApplicationApp.email.createdOn">Created On</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdBy"><span jhiTranslate="tmsV1ApplicationApp.email.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="updatedOn"><span jhiTranslate="tmsV1ApplicationApp.email.updatedOn">Updated On</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="updatedBy"><span jhiTranslate="tmsV1ApplicationApp.email.updatedBy">Updated By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let email of emails ;trackBy: trackId">
+                    <td><a [routerLink]="['/email', email.id, 'view']">{{ email.id }}</a></td>
+                    <td>{{ email.userto }}</td>
+                    <td>{{ email.usercc }}</td>
+                    <td>{{ email.userbcc }}</td>
+                    <td>{{ email.subject }}</td>
+                    <td>{{ email.message }}</td>
+                    <td>{{ email.multipart }}</td>
+                    <td>{{ email.htmlBody }}</td>
+                    <td>
+                        <a *ngIf="email.attachment" (click)="openFile(email.attachmentContentType, email.attachment)" jhiTranslate="entity.action.open">open</a>
+                        <span *ngIf="email.attachment">{{ email.attachmentContentType }}, {{ byteSize(email.attachment) }}</span>
+                    </td>
+                    <td>{{ email.attachmentName }}</td>
+                    <td>{{ email.status }}</td>
+                    <td>{{ email.sentDateTime | date:'medium' }}</td>
+                    <td>{{ email.createdOn | date:'medium' }}</td>
+                    <td>{{ email.createdBy }}</td>
+                    <td>{{ email.updatedOn | date:'medium' }}</td>
+                    <td>{{ email.updatedBy }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/email', email.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/email', email.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(email)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="emails?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

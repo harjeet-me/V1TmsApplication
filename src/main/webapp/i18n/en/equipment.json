@@ -1,0 +1,41 @@
+{
+  "tmsV1ApplicationApp": {
+    "equipment": {
+      "home": {
+        "title": "Equipment",
+        "createLabel": "Create a new Equipment",
+        "createOrEditLabel": "Create or edit a Equipment",
+        "search": "Search for Equipment",
+        "notFound": "No Equipment found"
+      },
+      "created": "A new Equipment is created with identifier {{ param }}",
+      "updated": "A Equipment is updated with identifier {{ param }}",
+      "deleted": "A Equipment is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Equipment {{ id }}?"
+      },
+      "detail": {
+        "title": "Equipment"
+      },
+      "enumber": "Enumber",
+      "type": "Type",
+      "ownershiptype": "Ownershiptype",
+      "status": "Status",
+      "vin": "Vin",
+      "make": "Make",
+      "model": "Model",
+      "description": "Description",
+      "year": "Year",
+      "yearPurchased": "Year Purchased",
+      "licensePlateNumber": "License Plate Number",
+      "licensePlateExpiration": "License Plate Expiration",
+      "inspectionStickerExpiration": "Inspection Sticker Expiration",
+      "createdOn": "Created On",
+      "createdBy": "Created By",
+      "updatedOn": "Updated On",
+      "updatedBy": "Updated By",
+      "insurance": "Insurance",
+      "trip": "Trip"
+    }
+  }
+}

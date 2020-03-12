@@ -1,0 +1,64 @@
+{
+    "name": "Accounts",
+    "fields": [
+        {
+            "fieldName": "balance",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "over30",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "over60",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "over90",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "createdOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "updatedOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "updatedBy",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "customer",
+            "otherEntityRelationshipName": "accounts",
+            "relationshipName": "customer",
+            "otherEntityField": "company",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "transactionsRecord",
+            "otherEntityRelationshipName": "account",
+            "relationshipName": "transactionsRecord"
+        }
+    ],
+    "changelogDate": "20200312063500",
+    "entityTableName": "accounts",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

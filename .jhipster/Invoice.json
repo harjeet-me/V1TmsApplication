@@ -1,0 +1,155 @@
+{
+    "name": "Invoice",
+    "fields": [
+        {
+            "fieldName": "orderNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "invoiceNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "taxRate",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "taxType",
+            "fieldType": "TaxType",
+            "fieldValues": "GST,FEDRAL"
+        },
+        {
+            "fieldName": "currency",
+            "fieldType": "CURRENCY",
+            "fieldValues": "USD,CAD,INR"
+        },
+        {
+            "fieldName": "invoiceTaxTotal",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "invoiceSubTotal",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "invoiceTotal",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "invoiceDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "invoicePaidDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "refOption1",
+            "fieldType": "InvoiveRef",
+            "fieldValues": "ORDER_NO,SHIPMENT_NO,PO_NUMBER,BOOKING_NO"
+        },
+        {
+            "fieldName": "refValue1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "refOption2",
+            "fieldType": "InvoiveRef",
+            "fieldValues": "ORDER_NO,SHIPMENT_NO,PO_NUMBER,BOOKING_NO"
+        },
+        {
+            "fieldName": "refValue2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "refOption3",
+            "fieldType": "InvoiveRef",
+            "fieldValues": "ORDER_NO,SHIPMENT_NO,PO_NUMBER,BOOKING_NO"
+        },
+        {
+            "fieldName": "refValue3",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "payRefNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "invoiceDueDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "InvoiceStatus",
+            "fieldValues": "DRAFT,GENERATED,SENT,PAID,OVERDRAFT,VOIDED,PARTIALLY_PAID"
+        },
+        {
+            "fieldName": "invoicePdf",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "remarks",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "payterm",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "updatedOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "updatedBy",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "invoiceItem",
+            "otherEntityRelationshipName": "invoice",
+            "relationshipName": "invoiceItem"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "transactionsRecord",
+            "otherEntityRelationshipName": "invoice",
+            "relationshipName": "transactionsRecord"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "trip",
+            "otherEntityRelationshipName": "invoice",
+            "relationshipName": "trip",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "customer",
+            "otherEntityRelationshipName": "invoice",
+            "relationshipName": "customer",
+            "otherEntityField": "company"
+        }
+    ],
+    "changelogDate": "20200312063200",
+    "entityTableName": "invoice",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
