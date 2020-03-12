@@ -1,0 +1,29 @@
+{
+  "tmsV1ApplicationApp": {
+    "fileSystem": {
+      "home": {
+        "title": "File Systems",
+        "createLabel": "Create a new File System",
+        "createOrEditLabel": "Create or edit a File System",
+        "search": "Search for File System",
+        "notFound": "No File Systems found"
+      },
+      "created": "A new File System is created with identifier {{ param }}",
+      "updated": "A File System is updated with identifier {{ param }}",
+      "deleted": "A File System is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete File System {{ id }}?"
+      },
+      "detail": {
+        "title": "File System"
+      },
+      "data": "Data",
+      "fileName": "File Name",
+      "createdOn": "Created On",
+      "createdBy": "Created By",
+      "updatedOn": "Updated On",
+      "updatedBy": "Updated By",
+      "email": "Email"
+    }
+  }
+}

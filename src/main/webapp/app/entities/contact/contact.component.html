@@ -1,0 +1,105 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="tmsV1ApplicationApp.contact.home.title">Contacts</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-contact" [routerLink]="['/contact/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="tmsV1ApplicationApp.contact.home.createLabel">
+            Create a new Contact
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'tmsV1ApplicationApp.contact.home.search' | translate }}">
+
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon icon="search"></fa-icon>
+                    </button>
+
+                    <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+                        <fa-icon icon="trash-alt"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="contacts?.length === 0">
+        <span jhiTranslate="tmsV1ApplicationApp.contact.home.notFound">No contacts found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="contacts?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.firstName">First Name</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.lastName">Last Name</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.contactDesignation">Contact Designation</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.email">Email</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.phoneNumber">Phone Number</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.remarks">Remarks</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.preferredTime">Preferred Time</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.createdOn">Created On</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.createdBy">Created By</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.updatedOn">Updated On</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.updatedBy">Updated By</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.customer">Customer</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let contact of contacts ;trackBy: trackId">
+                    <td><a [routerLink]="['/contact', contact.id, 'view']">{{ contact.id }}</a></td>
+                    <td>{{ contact.firstName }}</td>
+                    <td>{{ contact.lastName }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.Designation.' + contact.contactDesignation }}">{{ contact.contactDesignation }}</td>
+                    <td>{{ contact.email }}</td>
+                    <td>{{ contact.phoneNumber }}</td>
+                    <td>{{ contact.remarks }}</td>
+                    <td>{{ contact.preferredTime }}</td>
+                    <td>{{ contact.createdOn | date:'medium' }}</td>
+                    <td>{{ contact.createdBy }}</td>
+                    <td>{{ contact.updatedOn | date:'medium' }}</td>
+                    <td>{{ contact.updatedBy }}</td>
+                    <td>
+                        <div *ngIf="contact.customer">
+                            <a [routerLink]="['/customer', contact.customer?.id, 'view']" >{{ contact.customer?.company }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/contact', contact.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/contact', contact.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(contact)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

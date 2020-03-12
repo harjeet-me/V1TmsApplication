@@ -1,0 +1,4 @@
+export const enum ReportType {
+  INV_STMT_OF_CUSTOMER = 'INV_STMT_OF_CUSTOMER',
+  TRIP_STMT_OF_CUSTOMER = 'TRIP_STMT_OF_CUSTOMER'
+}

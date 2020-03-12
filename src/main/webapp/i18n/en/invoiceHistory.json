@@ -1,0 +1,30 @@
+{
+  "tmsV1ApplicationApp": {
+    "invoiceHistory": {
+      "home": {
+        "title": "Invoice Histories",
+        "createLabel": "Create a new Invoice History",
+        "createOrEditLabel": "Create or edit a Invoice History",
+        "search": "Search for Invoice History",
+        "notFound": "No Invoice Histories found"
+      },
+      "created": "A new Invoice History is created with identifier {{ param }}",
+      "updated": "A Invoice History is updated with identifier {{ param }}",
+      "deleted": "A Invoice History is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Invoice History {{ id }}?"
+      },
+      "detail": {
+        "title": "Invoice History"
+      },
+      "status": "Status",
+      "comment": "Comment",
+      "createdOn": "Created On",
+      "createdBy": "Created By",
+      "updatedOn": "Updated On",
+      "updatedBy": "Updated By",
+      "previous": "Previous",
+      "next": "Next"
+    }
+  }
+}

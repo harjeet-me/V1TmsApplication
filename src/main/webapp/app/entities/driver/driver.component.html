@@ -1,0 +1,126 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="tmsV1ApplicationApp.driver.home.title">Drivers</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-driver" [routerLink]="['/driver/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="tmsV1ApplicationApp.driver.home.createLabel">
+            Create a new Driver
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'tmsV1ApplicationApp.driver.home.search' | translate }}">
+
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon icon="search"></fa-icon>
+                    </button>
+
+                    <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+                        <fa-icon icon="trash-alt"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="drivers?.length === 0">
+        <span jhiTranslate="tmsV1ApplicationApp.driver.home.notFound">No drivers found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="drivers?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.company">Company</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.firstName">First Name</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.lastName">Last Name</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.email">Email</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.phoneNumber">Phone Number</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.licenceNumber">Licence Number</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.dob">Dob</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.companyJoinedOn">Company Joined On</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.companyLeftOn">Company Left On</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.image">Image</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.licenceImage">Licence Image</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.remarks">Remarks</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.contractDoc">Contract Doc</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.status">Status</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.createdOn">Created On</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.createdBy">Created By</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.updatedOn">Updated On</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.updatedBy">Updated By</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let driver of drivers ;trackBy: trackId">
+                    <td><a [routerLink]="['/driver', driver.id, 'view']">{{ driver.id }}</a></td>
+                    <td>{{ driver.company }}</td>
+                    <td>{{ driver.firstName }}</td>
+                    <td>{{ driver.lastName }}</td>
+                    <td>{{ driver.email }}</td>
+                    <td>{{ driver.phoneNumber }}</td>
+                    <td>{{ driver.licenceNumber }}</td>
+                    <td>{{ driver.dob | date:'mediumDate' }}</td>
+                    <td>{{ driver.companyJoinedOn | date:'mediumDate' }}</td>
+                    <td>{{ driver.companyLeftOn | date:'mediumDate' }}</td>
+                    <td>
+                        <a *ngIf="driver.image" (click)="openFile(driver.imageContentType, driver.image)">
+                            <img [src]="'data:' + driver.imageContentType + ';base64,' + driver.image" style="max-height: 30px;" alt="driver image"/>
+                        </a>
+                        <span *ngIf="driver.image">{{ driver.imageContentType }}, {{ byteSize(driver.image) }}</span>
+                    </td>
+                    <td>
+                        <a *ngIf="driver.licenceImage" (click)="openFile(driver.licenceImageContentType, driver.licenceImage)">
+                            <img [src]="'data:' + driver.licenceImageContentType + ';base64,' + driver.licenceImage" style="max-height: 30px;" alt="driver image"/>
+                        </a>
+                        <span *ngIf="driver.licenceImage">{{ driver.licenceImageContentType }}, {{ byteSize(driver.licenceImage) }}</span>
+                    </td>
+                    <td>{{ driver.remarks }}</td>
+                    <td>
+                        <a *ngIf="driver.contractDoc" (click)="openFile(driver.contractDocContentType, driver.contractDoc)" jhiTranslate="entity.action.open">open</a>
+                        <span *ngIf="driver.contractDoc">{{ driver.contractDocContentType }}, {{ byteSize(driver.contractDoc) }}</span>
+                    </td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.ToggleStatus.' + driver.status }}">{{ driver.status }}</td>
+                    <td>{{ driver.createdOn | date:'medium' }}</td>
+                    <td>{{ driver.createdBy }}</td>
+                    <td>{{ driver.updatedOn | date:'medium' }}</td>
+                    <td>{{ driver.updatedBy }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/driver', driver.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/driver', driver.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(driver)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

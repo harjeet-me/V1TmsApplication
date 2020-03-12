@@ -1,0 +1,10 @@
+{
+  "tmsV1ApplicationApp": {
+    "EquipmentEnum": {
+      "null": "",
+      "TRAILER": "TRAILER",
+      "CONTAINER": "CONTAINER",
+      "CHASIS": "CHASIS"
+    }
+  }
+}

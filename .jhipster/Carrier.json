@@ -1,0 +1,183 @@
+{
+    "name": "Carrier",
+    "fields": [
+        {
+            "fieldName": "company",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "firstName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "contactDesignation",
+            "fieldType": "Designation",
+            "fieldValues": "MANAGER,ACCOUNTANT,OWNER,DISPATCHER"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phoneNumber",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "phoneNumberExtention",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "preffredContactType",
+            "fieldType": "PreffredContactType",
+            "fieldValues": "PHONE,EMAIL,FAX,MAIL"
+        },
+        {
+            "fieldName": "website",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "alternateContactPerson",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "alternateContactNumber",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "alternatePhoneNumberExtention",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "alternateContactEmail",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "preferredContactTime",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fax",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "streetAddress",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "city",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "stateProvince",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "country",
+            "fieldType": "CountryEnum",
+            "fieldValues": "USA,CANADA,MEXICO"
+        },
+        {
+            "fieldName": "postalCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dot",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mc",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "taxId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "companyLogo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "customerSince",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "notes",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "contract",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "ToggleStatus",
+            "fieldValues": "ACTIVE,INACTIVE"
+        },
+        {
+            "fieldName": "preffredCurrency",
+            "fieldType": "CURRENCY",
+            "fieldValues": "USD,CAD,INR"
+        },
+        {
+            "fieldName": "payterms",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "timeZone",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "createdOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "updatedOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "updatedBy",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "insurance",
+            "otherEntityRelationshipName": "carrier",
+            "relationshipName": "operInsurance",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "trip",
+            "otherEntityRelationshipName": "carrier",
+            "relationshipName": "loadOrder"
+        }
+    ],
+    "changelogDate": "20200312064200",
+    "entityTableName": "carrier",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

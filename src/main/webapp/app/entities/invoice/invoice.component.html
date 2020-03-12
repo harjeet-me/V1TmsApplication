@@ -1,0 +1,154 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="tmsV1ApplicationApp.invoice.home.title">Invoices</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-invoice" [routerLink]="['/invoice/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="tmsV1ApplicationApp.invoice.home.createLabel">
+            Create a new Invoice
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'tmsV1ApplicationApp.invoice.home.search' | translate }}">
+
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon icon="search"></fa-icon>
+                    </button>
+
+                    <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+                        <fa-icon icon="trash-alt"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="invoices?.length === 0">
+        <span jhiTranslate="tmsV1ApplicationApp.invoice.home.notFound">No invoices found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="invoices?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="orderNo"><span jhiTranslate="tmsV1ApplicationApp.invoice.orderNo">Order No</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="invoiceNo"><span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceNo">Invoice No</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="taxRate"><span jhiTranslate="tmsV1ApplicationApp.invoice.taxRate">Tax Rate</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="taxType"><span jhiTranslate="tmsV1ApplicationApp.invoice.taxType">Tax Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="currency"><span jhiTranslate="tmsV1ApplicationApp.invoice.currency">Currency</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="invoiceTaxTotal"><span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceTaxTotal">Invoice Tax Total</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="invoiceSubTotal"><span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceSubTotal">Invoice Sub Total</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="invoiceTotal"><span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceTotal">Invoice Total</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="invoiceDate"><span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceDate">Invoice Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="invoicePaidDate"><span jhiTranslate="tmsV1ApplicationApp.invoice.invoicePaidDate">Invoice Paid Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="refOption1"><span jhiTranslate="tmsV1ApplicationApp.invoice.refOption1">Ref Option 1</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="refValue1"><span jhiTranslate="tmsV1ApplicationApp.invoice.refValue1">Ref Value 1</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="refOption2"><span jhiTranslate="tmsV1ApplicationApp.invoice.refOption2">Ref Option 2</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="refValue2"><span jhiTranslate="tmsV1ApplicationApp.invoice.refValue2">Ref Value 2</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="refOption3"><span jhiTranslate="tmsV1ApplicationApp.invoice.refOption3">Ref Option 3</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="refValue3"><span jhiTranslate="tmsV1ApplicationApp.invoice.refValue3">Ref Value 3</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="payRefNo"><span jhiTranslate="tmsV1ApplicationApp.invoice.payRefNo">Pay Ref No</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="invoiceDueDate"><span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceDueDate">Invoice Due Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="status"><span jhiTranslate="tmsV1ApplicationApp.invoice.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="invoicePdf"><span jhiTranslate="tmsV1ApplicationApp.invoice.invoicePdf">Invoice Pdf</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="remarks"><span jhiTranslate="tmsV1ApplicationApp.invoice.remarks">Remarks</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="payterm"><span jhiTranslate="tmsV1ApplicationApp.invoice.payterm">Payterm</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdOn"><span jhiTranslate="tmsV1ApplicationApp.invoice.createdOn">Created On</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdBy"><span jhiTranslate="tmsV1ApplicationApp.invoice.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="updatedOn"><span jhiTranslate="tmsV1ApplicationApp.invoice.updatedOn">Updated On</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="updatedBy"><span jhiTranslate="tmsV1ApplicationApp.invoice.updatedBy">Updated By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="trip.id"><span jhiTranslate="tmsV1ApplicationApp.invoice.trip">Trip</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="customer.company"><span jhiTranslate="tmsV1ApplicationApp.invoice.customer">Customer</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let invoice of invoices ;trackBy: trackId">
+                    <td><a [routerLink]="['/invoice', invoice.id, 'view']">{{ invoice.id }}</a></td>
+                    <td>{{ invoice.orderNo }}</td>
+                    <td>{{ invoice.invoiceNo }}</td>
+                    <td>{{ invoice.taxRate }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.TaxType.' + invoice.taxType }}">{{ invoice.taxType }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.CURRENCY.' + invoice.currency }}">{{ invoice.currency }}</td>
+                    <td>{{ invoice.invoiceTaxTotal }}</td>
+                    <td>{{ invoice.invoiceSubTotal }}</td>
+                    <td>{{ invoice.invoiceTotal }}</td>
+                    <td>{{ invoice.invoiceDate | date:'mediumDate' }}</td>
+                    <td>{{ invoice.invoicePaidDate | date:'mediumDate' }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiveRef.' + invoice.refOption1 }}">{{ invoice.refOption1 }}</td>
+                    <td>{{ invoice.refValue1 }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiveRef.' + invoice.refOption2 }}">{{ invoice.refOption2 }}</td>
+                    <td>{{ invoice.refValue2 }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiveRef.' + invoice.refOption3 }}">{{ invoice.refOption3 }}</td>
+                    <td>{{ invoice.refValue3 }}</td>
+                    <td>{{ invoice.payRefNo }}</td>
+                    <td>{{ invoice.invoiceDueDate | date:'mediumDate' }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiceStatus.' + invoice.status }}">{{ invoice.status }}</td>
+                    <td>
+                        <a *ngIf="invoice.invoicePdf" (click)="openFile(invoice.invoicePdfContentType, invoice.invoicePdf)" jhiTranslate="entity.action.open">open</a>
+                        <span *ngIf="invoice.invoicePdf">{{ invoice.invoicePdfContentType }}, {{ byteSize(invoice.invoicePdf) }}</span>
+                    </td>
+                    <td>{{ invoice.remarks }}</td>
+                    <td>{{ invoice.payterm }}</td>
+                    <td>{{ invoice.createdOn | date:'medium' }}</td>
+                    <td>{{ invoice.createdBy }}</td>
+                    <td>{{ invoice.updatedOn | date:'medium' }}</td>
+                    <td>{{ invoice.updatedBy }}</td>
+                    <td>
+                        <div *ngIf="invoice.trip">
+                            <a [routerLink]="['/trip', invoice.trip?.id, 'view']" >{{ invoice.trip?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="invoice.customer">
+                            <a [routerLink]="['/customer', invoice.customer?.id, 'view']" >{{ invoice.customer?.company }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/invoice', invoice.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/invoice', invoice.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(invoice)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="invoices?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

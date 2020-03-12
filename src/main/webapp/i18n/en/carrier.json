@@ -1,0 +1,60 @@
+{
+  "tmsV1ApplicationApp": {
+    "carrier": {
+      "home": {
+        "title": "Carriers",
+        "createLabel": "Create a new Carrier",
+        "createOrEditLabel": "Create or edit a Carrier",
+        "search": "Search for Carrier",
+        "notFound": "No Carriers found"
+      },
+      "created": "A new Carrier is created with identifier {{ param }}",
+      "updated": "A Carrier is updated with identifier {{ param }}",
+      "deleted": "A Carrier is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Carrier {{ id }}?"
+      },
+      "detail": {
+        "title": "Carrier"
+      },
+      "company": "Company",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "contactDesignation": "Contact Designation",
+      "email": "Email",
+      "phoneNumber": "Phone Number",
+      "phoneNumberExtention": "Phone Number Extention",
+      "preffredContactType": "Preffred Contact Type",
+      "website": "Website",
+      "alternateContactPerson": "Alternate Contact Person",
+      "alternateContactNumber": "Alternate Contact Number",
+      "alternatePhoneNumberExtention": "Alternate Phone Number Extention",
+      "alternateContactEmail": "Alternate Contact Email",
+      "preferredContactTime": "Preferred Contact Time",
+      "fax": "Fax",
+      "address": "Address",
+      "streetAddress": "Street Address",
+      "city": "City",
+      "stateProvince": "State Province",
+      "country": "Country",
+      "postalCode": "Postal Code",
+      "dot": "Dot",
+      "mc": "Mc",
+      "taxId": "Tax Id",
+      "companyLogo": "Company Logo",
+      "customerSince": "Customer Since",
+      "notes": "Notes",
+      "contract": "Contract",
+      "status": "Status",
+      "preffredCurrency": "Preffred Currency",
+      "payterms": "Payterms",
+      "timeZone": "Time Zone",
+      "createdOn": "Created On",
+      "createdBy": "Created By",
+      "updatedOn": "Updated On",
+      "updatedBy": "Updated By",
+      "operInsurance": "Oper Insurance",
+      "loadOrder": "Load Order"
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "tmsV1ApplicationApp": {
+    "customer": {
+      "home": {
+        "title": "Customers",
+        "createLabel": "Create a new Customer",
+        "createOrEditLabel": "Create or edit a Customer",
+        "search": "Search for Customer",
+        "notFound": "No Customers found"
+      },
+      "created": "A new Customer is created with identifier {{ param }}",
+      "updated": "A Customer is updated with identifier {{ param }}",
+      "deleted": "A Customer is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Customer {{ id }}?"
+      },
+      "detail": {
+        "title": "Customer"
+      },
+      "company": "Company",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "contactDesignation": "Contact Designation",
+      "email": "Email",
+      "phoneNumber": "Phone Number",
+      "phoneNumberExtention": "Phone Number Extention",
+      "preffredContactType": "Preffred Contact Type",
+      "website": "Website",
+      "alternateContactPerson": "Alternate Contact Person",
+      "alternateContactNumber": "Alternate Contact Number",
+      "alternatePhoneNumberExtention": "Alternate Phone Number Extention",
+      "alternateContactEmail": "Alternate Contact Email",
+      "preferredContactTime": "Preferred Contact Time",
+      "fax": "Fax",
+      "address": "Address",
+      "streetAddress": "Street Address",
+      "city": "City",
+      "stateProvince": "State Province",
+      "country": "Country",
+      "postalCode": "Postal Code",
+      "dot": "Dot",
+      "mc": "Mc",
+      "taxId": "Tax Id",
+      "companyLogo": "Company Logo",
+      "customerSince": "Customer Since",
+      "notes": "Notes",
+      "contract": "Contract",
+      "status": "Status",
+      "preffredCurrency": "Preffred Currency",
+      "payterms": "Payterms",
+      "timeZone": "Time Zone",
+      "createdOn": "Created On",
+      "createdBy": "Created By",
+      "updatedOn": "Updated On",
+      "updatedBy": "Updated By",
+      "loadOrder": "Load Order",
+      "invoice": "Invoice",
+      "morecontact": "Morecontact",
+      "transactionsRecord": "Transactions Record",
+      "charge": "Charge",
+      "accounts": "Accounts"
+    }
+  }
+}

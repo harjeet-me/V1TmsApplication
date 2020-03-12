@@ -1,0 +1,41 @@
+{
+  "tmsV1ApplicationApp": {
+    "transactionsRecord": {
+      "home": {
+        "title": "Transactions Records",
+        "createLabel": "Create a new Transactions Record",
+        "createOrEditLabel": "Create or edit a Transactions Record",
+        "search": "Search for Transactions Record",
+        "notFound": "No Transactions Records found"
+      },
+      "created": "A new Transactions Record is created with identifier {{ param }}",
+      "updated": "A Transactions Record is updated with identifier {{ param }}",
+      "deleted": "A Transactions Record is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Transactions Record {{ id }}?"
+      },
+      "detail": {
+        "title": "Transactions Record"
+      },
+      "txType": "Tx Type",
+      "description": "Description",
+      "txAmmount": "Tx Ammount",
+      "txRefNo": "Tx Ref No",
+      "txCreatedBy": "Tx Created By",
+      "txCreatedDate": "Tx Created Date",
+      "txCompletedBy": "Tx Completed By",
+      "txCompletedDate": "Tx Completed Date",
+      "status": "Status",
+      "txDoc": "Tx Doc",
+      "currency": "Currency",
+      "remarks": "Remarks",
+      "createdOn": "Created On",
+      "createdBy": "Created By",
+      "updatedOn": "Updated On",
+      "updatedBy": "Updated By",
+      "customer": "Customer",
+      "account": "Account",
+      "invoice": "Invoice"
+    }
+  }
+}

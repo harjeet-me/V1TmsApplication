@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="invoiceItem">
+            <h2><span jhiTranslate="tmsV1ApplicationApp.invoiceItem.detail.title">Invoice Item</span> {{ invoiceItem.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceItem.itemName">Item Name</span></dt>
+                <dd>
+                    <span>{{ invoiceItem.itemName }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceItem.description">Description</span></dt>
+                <dd>
+                    <span>{{ invoiceItem.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceItem.qty">Qty</span></dt>
+                <dd>
+                    <span>{{ invoiceItem.qty }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceItem.price">Price</span></dt>
+                <dd>
+                    <span>{{ invoiceItem.price }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceItem.discount">Discount</span></dt>
+                <dd>
+                    <span>{{ invoiceItem.discount }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceItem.total">Total</span></dt>
+                <dd>
+                    <span>{{ invoiceItem.total }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceItem.createdOn">Created On</span></dt>
+                <dd>
+                    <span>{{ invoiceItem.createdOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceItem.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ invoiceItem.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceItem.updatedOn">Updated On</span></dt>
+                <dd>
+                    <span>{{ invoiceItem.updatedOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceItem.updatedBy">Updated By</span></dt>
+                <dd>
+                    <span>{{ invoiceItem.updatedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceItem.invoice">Invoice</span></dt>
+                <dd>
+                    <div *ngIf="invoiceItem.invoice">
+                        <a [routerLink]="['/invoice', invoiceItem.invoice?.id, 'view']">{{ invoiceItem.invoice?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/invoice-item', invoiceItem.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

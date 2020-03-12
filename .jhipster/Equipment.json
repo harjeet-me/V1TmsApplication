@@ -1,0 +1,102 @@
+{
+    "name": "Equipment",
+    "fields": [
+        {
+            "fieldName": "enumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "EquipmentEnum",
+            "fieldValues": "TRAILER,CONTAINER,CHASIS"
+        },
+        {
+            "fieldName": "ownershiptype",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "ToggleStatus",
+            "fieldValues": "ACTIVE,INACTIVE"
+        },
+        {
+            "fieldName": "vin",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "make",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "model",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "year",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "yearPurchased",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "licensePlateNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "licensePlateExpiration",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "inspectionStickerExpiration",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "createdOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "updatedOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "updatedBy",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "insurance",
+            "otherEntityRelationshipName": "equipment",
+            "relationshipName": "insurance",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "trip",
+            "otherEntityRelationshipName": "equipment",
+            "relationshipName": "trip"
+        }
+    ],
+    "changelogDate": "20200312063800",
+    "entityTableName": "equipment",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="container">
+            <h2><span jhiTranslate="tmsV1ApplicationApp.container.detail.title">Container</span> {{ container.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tmsV1ApplicationApp.container.number">Number</span></dt>
+                <dd>
+                    <span>{{ container.number }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.container.description">Description</span></dt>
+                <dd>
+                    <span>{{ container.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.container.size">Size</span></dt>
+                <dd>
+                    <span>{{ container.size }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.container.createdOn">Created On</span></dt>
+                <dd>
+                    <span>{{ container.createdOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.container.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ container.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.container.updatedOn">Updated On</span></dt>
+                <dd>
+                    <span>{{ container.updatedOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.container.updatedBy">Updated By</span></dt>
+                <dd>
+                    <span>{{ container.updatedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.container.trip">Trip</span></dt>
+                <dd>
+                    <div *ngIf="container.trip">
+                        <a [routerLink]="['/trip', container.trip?.id, 'view']">{{ container.trip?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/container', container.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

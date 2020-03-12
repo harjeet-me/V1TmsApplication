@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="fileSystem">
+            <h2><span jhiTranslate="tmsV1ApplicationApp.fileSystem.detail.title">File System</span> {{ fileSystem.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tmsV1ApplicationApp.fileSystem.data">Data</span></dt>
+                <dd>
+                    <div *ngIf="fileSystem.data">
+                        <a (click)="openFile(fileSystem?.dataContentType!, fileSystem?.data)" jhiTranslate="entity.action.open">open</a>
+                        {{ fileSystem.dataContentType }}, {{ byteSize(fileSystem.data) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.fileSystem.fileName">File Name</span></dt>
+                <dd>
+                    <span>{{ fileSystem.fileName }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.fileSystem.createdOn">Created On</span></dt>
+                <dd>
+                    <span>{{ fileSystem.createdOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.fileSystem.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ fileSystem.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.fileSystem.updatedOn">Updated On</span></dt>
+                <dd>
+                    <span>{{ fileSystem.updatedOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.fileSystem.updatedBy">Updated By</span></dt>
+                <dd>
+                    <span>{{ fileSystem.updatedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.fileSystem.email">Email</span></dt>
+                <dd>
+                    <div *ngIf="fileSystem.email">
+                        <a [routerLink]="['/email', fileSystem.email?.id, 'view']">{{ fileSystem.email?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/file-system', fileSystem.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,151 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-equipment-heading" jhiTranslate="tmsV1ApplicationApp.equipment.home.createOrEditLabel">Create or edit a Equipment</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.equipment.enumber" for="field_enumber">Enumber</label>
+                    <input type="text" class="form-control" name="enumber" id="field_enumber"
+                           formControlName="enumber"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.equipment.type" for="field_type">Type</label>
+                    <select class="form-control" name="type" formControlName="type" id="field_type">
+                        <option value="TRAILER">{{ 'tmsV1ApplicationApp.EquipmentEnum.TRAILER' | translate }}</option>
+                        <option value="CONTAINER">{{ 'tmsV1ApplicationApp.EquipmentEnum.CONTAINER' | translate }}</option>
+                        <option value="CHASIS">{{ 'tmsV1ApplicationApp.EquipmentEnum.CHASIS' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.equipment.ownershiptype" for="field_ownershiptype">Ownershiptype</label>
+                    <input type="text" class="form-control" name="ownershiptype" id="field_ownershiptype"
+                           formControlName="ownershiptype"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.equipment.status" for="field_status">Status</label>
+                    <select class="form-control" name="status" formControlName="status" id="field_status">
+                        <option value="ACTIVE">{{ 'tmsV1ApplicationApp.ToggleStatus.ACTIVE' | translate }}</option>
+                        <option value="INACTIVE">{{ 'tmsV1ApplicationApp.ToggleStatus.INACTIVE' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.equipment.vin" for="field_vin">Vin</label>
+                    <input type="text" class="form-control" name="vin" id="field_vin"
+                           formControlName="vin"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.equipment.make" for="field_make">Make</label>
+                    <input type="text" class="form-control" name="make" id="field_make"
+                           formControlName="make"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.equipment.model" for="field_model">Model</label>
+                    <input type="text" class="form-control" name="model" id="field_model"
+                           formControlName="model"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.equipment.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                           formControlName="description"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.equipment.year" for="field_year">Year</label>
+                    <input type="text" class="form-control" name="year" id="field_year"
+                           formControlName="year"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.equipment.yearPurchased" for="field_yearPurchased">Year Purchased</label>
+                    <input type="text" class="form-control" name="yearPurchased" id="field_yearPurchased"
+                           formControlName="yearPurchased"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.equipment.licensePlateNumber" for="field_licensePlateNumber">License Plate Number</label>
+                    <input type="text" class="form-control" name="licensePlateNumber" id="field_licensePlateNumber"
+                           formControlName="licensePlateNumber"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.equipment.licensePlateExpiration" for="field_licensePlateExpiration">License Plate Expiration</label>
+                    <div class="input-group">
+                        <input id="field_licensePlateExpiration" type="text" class="form-control" name="licensePlateExpiration" ngbDatepicker #licensePlateExpirationDp="ngbDatepicker" formControlName="licensePlateExpiration"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="licensePlateExpirationDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.equipment.inspectionStickerExpiration" for="field_inspectionStickerExpiration">Inspection Sticker Expiration</label>
+                    <div class="input-group">
+                        <input id="field_inspectionStickerExpiration" type="text" class="form-control" name="inspectionStickerExpiration" ngbDatepicker #inspectionStickerExpirationDp="ngbDatepicker" formControlName="inspectionStickerExpiration"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="inspectionStickerExpirationDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.equipment.createdOn" for="field_createdOn">Created On</label>
+                    <div class="d-flex">
+                        <input id="field_createdOn" type="datetime-local" class="form-control" name="createdOn" formControlName="createdOn" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.equipment.createdBy" for="field_createdBy">Created By</label>
+                    <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                           formControlName="createdBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.equipment.updatedOn" for="field_updatedOn">Updated On</label>
+                    <div class="d-flex">
+                        <input id="field_updatedOn" type="datetime-local" class="form-control" name="updatedOn" formControlName="updatedOn" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.equipment.updatedBy" for="field_updatedBy">Updated By</label>
+                    <input type="text" class="form-control" name="updatedBy" id="field_updatedBy"
+                           formControlName="updatedBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.equipment.insurance" for="field_insurance">Insurance</label>
+                    <select class="form-control" id="field_insurance" name="insurance" formControlName="insurance">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="insuranceOption.id === editForm.get('insurance')!.value?.id ? editForm.get('insurance')!.value : insuranceOption" *ngFor="let insuranceOption of insurances; trackBy: trackById">{{ insuranceOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
