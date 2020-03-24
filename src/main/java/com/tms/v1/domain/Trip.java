@@ -52,6 +52,9 @@ public class Trip implements Serializable {
     @Column(name = "shipment_number")
     private String shipmentNumber;
 
+    @Column(name = "order_number")
+    private String orderNumber;
+
     @Column(name = "bol")
     private String bol;
 
@@ -224,6 +227,19 @@ public class Trip implements Serializable {
 
     public void setShipmentNumber(String shipmentNumber) {
         this.shipmentNumber = shipmentNumber;
+    }
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public Trip orderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+        return this;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public String getBol() {
@@ -704,6 +720,7 @@ public class Trip implements Serializable {
             ", description='" + getDescription() + "'" +
             ", tripType='" + getTripType() + "'" +
             ", shipmentNumber='" + getShipmentNumber() + "'" +
+            ", orderNumber='" + getOrderNumber() + "'" +
             ", bol='" + getBol() + "'" +
             ", pickup='" + getPickup() + "'" +
             ", drop='" + getDrop() + "'" +

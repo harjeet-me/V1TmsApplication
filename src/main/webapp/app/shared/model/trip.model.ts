@@ -18,6 +18,7 @@ export interface ITrip {
   description?: string;
   tripType?: TripType;
   shipmentNumber?: string;
+  orderNumber?: string;
   bol?: string;
   pickup?: Moment;
   drop?: Moment;
@@ -60,6 +61,7 @@ export class Trip implements ITrip {
     public description?: string,
     public tripType?: TripType,
     public shipmentNumber?: string,
+    public orderNumber?: string,
     public bol?: string,
     public pickup?: Moment,
     public drop?: Moment,
