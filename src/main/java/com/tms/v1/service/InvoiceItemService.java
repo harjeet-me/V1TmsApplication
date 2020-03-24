@@ -4,6 +4,7 @@ import com.tms.v1.domain.InvoiceItem;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service Interface for managing {@link InvoiceItem}.
@@ -48,4 +49,6 @@ public interface InvoiceItemService {
      * @return the list of entities.
      */
     List<InvoiceItem> search(String query);
+    
+    Set<InvoiceItem> findByInvoiceId(Long id);
 }

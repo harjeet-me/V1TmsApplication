@@ -1,20 +1,31 @@
 package com.tms.v1.service.impl;
 
-import com.tms.v1.service.InvoiceService;
-import com.tms.v1.domain.Invoice;
-import com.tms.v1.repository.InvoiceRepository;
-import com.tms.v1.repository.search.InvoiceSearchRepository;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+
+import java.util.Optional;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import com.tms.v1.domain.Invoice;
+import com.tms.v1.domain.InvoiceItem;
+import com.tms.v1.domain.enumeration.CURRENCY;
+import com.tms.v1.repository.InvoiceItemRepository;
+import com.tms.v1.repository.InvoiceRepository;
+import com.tms.v1.repository.search.InvoiceSearchRepository;
+import com.tms.v1.service.CompanyProfileService;
+import com.tms.v1.service.CustomerService;
+import com.tms.v1.service.InvoiceItemService;
+import com.tms.v1.service.InvoiceService;
+import com.tms.v1.service.MailService;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import liquibase.pro.packaged.in;
 
 /**
  * Service Implementation for managing {@link Invoice}.
@@ -24,6 +35,24 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class InvoiceServiceImpl implements InvoiceService {
 
     private final Logger log = LoggerFactory.getLogger(InvoiceServiceImpl.class);
+    
+    @Autowired
+   	InvoiceItemRepository invoiceItemRepository;
+    
+    @Autowired
+   	MailService mailService;
+    
+   	@Autowired
+   	InvoiceReportServiceImpl invoiceReportServiceImpl;
+
+   	@Autowired
+   	CustomerService customerService;
+   	
+	@Autowired
+   	InvoiceItemService invoiceItemServiceImpl;
+
+   	@Autowired
+   	CompanyProfileService companyProfileService;
 
     private final InvoiceRepository invoiceRepository;
 
@@ -42,9 +71,35 @@ public class InvoiceServiceImpl implements InvoiceService {
      */
     @Override
     public Invoice save(Invoice invoice) {
-        log.debug("Request to save Invoice : {}", invoice);
+    	log.debug("Request to save Invoice : {}", invoice);
+        //invoice  =  InvoiceUtil.getInvoiceWithInvoiceItem(invoice);
+    	Set<InvoiceItem> invoiceLineItem =invoice.getInvoiceItems();
+    	Set<InvoiceItem> savedLineItem =invoice.getInvoiceItems();
+    	log.debug("Request to save Invoice : {}", invoiceLineItem);
+    	if(invoice.getCurrency()==null) {
+    		invoice.setCurrency(CURRENCY.USD);
+    	}
+    	invoice = invoiceRepository.save(invoice);
+        try {
+        	for (InvoiceItem invoiceItem : invoiceLineItem) {
+        		invoiceItem.setInvoice(invoice);
+        		log.debug("save invoice item by harjeet", invoiceItem);
+        		
+        		savedLineItem.add(invoiceItemServiceImpl.save(invoiceItem));
+			}
+        	invoice.setInvoiceItems(savedLineItem);
+			invoice.setInvoicePdf(invoiceReportServiceImpl.generateReport(customerService.findOne(invoice.getCustomer().getId()).get(), invoice, companyProfileService.findOne(1L).get()));
+			invoice.setInvoiceItems(null);
+			invoice.setInvoicePdfContentType("application/pdf");
+        
+        } catch (Exception e) {
+			throw new IllegalStateException("Exception Occured Generating Invoice " , e);
+		}
+        
         Invoice result = invoiceRepository.save(invoice);
         invoiceSearchRepository.save(result);
+        
+        mailService.sendInvoiceMail(result);
         return result;
     }
 
@@ -71,6 +126,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Transactional(readOnly = true)
     public Optional<Invoice> findOne(Long id) {
         log.debug("Request to get Invoice : {}", id);
+        Optional<Invoice> inOptional=  invoiceRepository.findById(id);
+        inOptional.get().setInvoiceItems(invoiceItemRepository.findByInvoice_Id(id));
         return invoiceRepository.findById(id);
     }
 
