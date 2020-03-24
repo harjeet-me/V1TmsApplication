@@ -27,6 +27,7 @@
         "accountHistory": "Account History",
         "report": "Report",
         "fileSystem": "File System",
+        "invoiceReport": "Invoice Report",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

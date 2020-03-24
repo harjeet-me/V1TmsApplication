@@ -46,7 +46,8 @@
       "invoiceItem": "Invoice Item",
       "transactionsRecord": "Transactions Record",
       "trip": "Trip",
-      "customer": "Customer"
+      "customer": "Customer",
+      "invoiceReport": "Invoice Report"
     }
   }
 }

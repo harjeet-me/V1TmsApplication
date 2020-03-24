@@ -139,6 +139,14 @@
             "otherEntityRelationshipName": "invoice",
             "relationshipName": "customer",
             "otherEntityField": "company"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "invoiceReport",
+            "otherEntityRelationshipName": "invoice",
+            "relationshipName": "invoiceReport",
+            "otherEntityField": "id",
+            "ownerSide": false
         }
     ],
     "changelogDate": "20200312063200",
