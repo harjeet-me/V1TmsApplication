@@ -3,6 +3,7 @@ import { IInvoiceItem } from 'app/shared/model/invoice-item.model';
 import { ITransactionsRecord } from 'app/shared/model/transactions-record.model';
 import { ITrip } from 'app/shared/model/trip.model';
 import { ICustomer } from 'app/shared/model/customer.model';
+import { IInvoiceReport } from 'app/shared/model/invoice-report.model';
 import { TaxType } from 'app/shared/model/enumerations/tax-type.model';
 import { CURRENCY } from 'app/shared/model/enumerations/currency.model';
 import { InvoiveRef } from 'app/shared/model/enumerations/invoive-ref.model';
@@ -41,6 +42,7 @@ export interface IInvoice {
   transactionsRecords?: ITransactionsRecord[];
   trip?: ITrip;
   customer?: ICustomer;
+  invoiceReports?: IInvoiceReport[];
 }
 
 export class Invoice implements IInvoice {
@@ -76,6 +78,7 @@ export class Invoice implements IInvoice {
     public invoiceItems?: IInvoiceItem[],
     public transactionsRecords?: ITransactionsRecord[],
     public trip?: ITrip,
-    public customer?: ICustomer
+    public customer?: ICustomer,
+    public invoiceReports?: IInvoiceReport[]
   ) {}
 }
