@@ -95,6 +95,24 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.orderDocument" for="field_orderDocument">Order Document</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('orderDocumentContentType')!.value + ';base64,' + editForm.get('orderDocument')!.value" style="max-height: 100px;" *ngIf="editForm.get('orderDocument')!.value" alt="trip image"/>
+                        <div *ngIf="editForm.get('orderDocument')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('orderDocumentContentType')!.value }}, {{ byteSize(editForm.get('orderDocument')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('orderDocument', 'orderDocumentContentType', 'file_orderDocument')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_orderDocument" (change)="setFileData($event, 'orderDocument', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="orderDocument" id="field_orderDocument"
+                           formControlName="orderDocument"/>
+                    <input type="hidden" class="form-control" name="orderDocumentContentType" id="field_orderDocumentContentType"
+                           formControlName="orderDocumentContentType" />
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.pod" for="field_pod">Pod</label>
                     <div>
                         <img [src]="'data:' + editForm.get('podContentType')!.value + ';base64,' + editForm.get('pod')!.value" style="max-height: 100px;" *ngIf="editForm.get('pod')!.value" alt="trip image"/>

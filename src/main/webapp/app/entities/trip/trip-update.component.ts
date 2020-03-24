@@ -53,6 +53,8 @@ export class TripUpdateComponent implements OnInit {
     status: [],
     detention: [],
     chasisInTime: [],
+    orderDocument: [],
+    orderDocumentContentType: [],
     pod: [],
     podContentType: [],
     hazmat: [],
@@ -170,6 +172,8 @@ export class TripUpdateComponent implements OnInit {
       status: trip.status,
       detention: trip.detention,
       chasisInTime: trip.chasisInTime ? trip.chasisInTime.format(DATE_TIME_FORMAT) : null,
+      orderDocument: trip.orderDocument,
+      orderDocumentContentType: trip.orderDocumentContentType,
       pod: trip.pod,
       podContentType: trip.podContentType,
       hazmat: trip.hazmat,
@@ -252,6 +256,8 @@ export class TripUpdateComponent implements OnInit {
       chasisInTime: this.editForm.get(['chasisInTime'])!.value
         ? moment(this.editForm.get(['chasisInTime'])!.value, DATE_TIME_FORMAT)
         : undefined,
+      orderDocumentContentType: this.editForm.get(['orderDocumentContentType'])!.value,
+      orderDocument: this.editForm.get(['orderDocument'])!.value,
       podContentType: this.editForm.get(['podContentType'])!.value,
       pod: this.editForm.get(['pod'])!.value,
       hazmat: this.editForm.get(['hazmat'])!.value,

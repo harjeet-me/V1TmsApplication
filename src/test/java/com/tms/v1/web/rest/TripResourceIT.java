@@ -84,6 +84,11 @@ public class TripResourceIT {
     private static final Instant DEFAULT_CHASIS_IN_TIME = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_CHASIS_IN_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final byte[] DEFAULT_ORDER_DOCUMENT = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_ORDER_DOCUMENT = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_ORDER_DOCUMENT_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_ORDER_DOCUMENT_CONTENT_TYPE = "image/png";
+
     private static final byte[] DEFAULT_POD = TestUtil.createByteArray(1, "0");
     private static final byte[] UPDATED_POD = TestUtil.createByteArray(1, "1");
     private static final String DEFAULT_POD_CONTENT_TYPE = "image/jpg";
@@ -172,6 +177,8 @@ public class TripResourceIT {
             .status(DEFAULT_STATUS)
             .detention(DEFAULT_DETENTION)
             .chasisInTime(DEFAULT_CHASIS_IN_TIME)
+            .orderDocument(DEFAULT_ORDER_DOCUMENT)
+            .orderDocumentContentType(DEFAULT_ORDER_DOCUMENT_CONTENT_TYPE)
             .pod(DEFAULT_POD)
             .podContentType(DEFAULT_POD_CONTENT_TYPE)
             .hazmat(DEFAULT_HAZMAT)
@@ -209,6 +216,8 @@ public class TripResourceIT {
             .status(UPDATED_STATUS)
             .detention(UPDATED_DETENTION)
             .chasisInTime(UPDATED_CHASIS_IN_TIME)
+            .orderDocument(UPDATED_ORDER_DOCUMENT)
+            .orderDocumentContentType(UPDATED_ORDER_DOCUMENT_CONTENT_TYPE)
             .pod(UPDATED_POD)
             .podContentType(UPDATED_POD_CONTENT_TYPE)
             .hazmat(UPDATED_HAZMAT)
@@ -259,6 +268,8 @@ public class TripResourceIT {
         assertThat(testTrip.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testTrip.getDetention()).isEqualTo(DEFAULT_DETENTION);
         assertThat(testTrip.getChasisInTime()).isEqualTo(DEFAULT_CHASIS_IN_TIME);
+        assertThat(testTrip.getOrderDocument()).isEqualTo(DEFAULT_ORDER_DOCUMENT);
+        assertThat(testTrip.getOrderDocumentContentType()).isEqualTo(DEFAULT_ORDER_DOCUMENT_CONTENT_TYPE);
         assertThat(testTrip.getPod()).isEqualTo(DEFAULT_POD);
         assertThat(testTrip.getPodContentType()).isEqualTo(DEFAULT_POD_CONTENT_TYPE);
         assertThat(testTrip.isHazmat()).isEqualTo(DEFAULT_HAZMAT);
@@ -325,6 +336,8 @@ public class TripResourceIT {
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].detention").value(hasItem(DEFAULT_DETENTION.intValue())))
             .andExpect(jsonPath("$.[*].chasisInTime").value(hasItem(DEFAULT_CHASIS_IN_TIME.toString())))
+            .andExpect(jsonPath("$.[*].orderDocumentContentType").value(hasItem(DEFAULT_ORDER_DOCUMENT_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].orderDocument").value(hasItem(Base64Utils.encodeToString(DEFAULT_ORDER_DOCUMENT))))
             .andExpect(jsonPath("$.[*].podContentType").value(hasItem(DEFAULT_POD_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].pod").value(hasItem(Base64Utils.encodeToString(DEFAULT_POD))))
             .andExpect(jsonPath("$.[*].hazmat").value(hasItem(DEFAULT_HAZMAT.booleanValue())))
@@ -365,6 +378,8 @@ public class TripResourceIT {
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.detention").value(DEFAULT_DETENTION.intValue()))
             .andExpect(jsonPath("$.chasisInTime").value(DEFAULT_CHASIS_IN_TIME.toString()))
+            .andExpect(jsonPath("$.orderDocumentContentType").value(DEFAULT_ORDER_DOCUMENT_CONTENT_TYPE))
+            .andExpect(jsonPath("$.orderDocument").value(Base64Utils.encodeToString(DEFAULT_ORDER_DOCUMENT)))
             .andExpect(jsonPath("$.podContentType").value(DEFAULT_POD_CONTENT_TYPE))
             .andExpect(jsonPath("$.pod").value(Base64Utils.encodeToString(DEFAULT_POD)))
             .andExpect(jsonPath("$.hazmat").value(DEFAULT_HAZMAT.booleanValue()))
@@ -417,6 +432,8 @@ public class TripResourceIT {
             .status(UPDATED_STATUS)
             .detention(UPDATED_DETENTION)
             .chasisInTime(UPDATED_CHASIS_IN_TIME)
+            .orderDocument(UPDATED_ORDER_DOCUMENT)
+            .orderDocumentContentType(UPDATED_ORDER_DOCUMENT_CONTENT_TYPE)
             .pod(UPDATED_POD)
             .podContentType(UPDATED_POD_CONTENT_TYPE)
             .hazmat(UPDATED_HAZMAT)
@@ -454,6 +471,8 @@ public class TripResourceIT {
         assertThat(testTrip.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testTrip.getDetention()).isEqualTo(UPDATED_DETENTION);
         assertThat(testTrip.getChasisInTime()).isEqualTo(UPDATED_CHASIS_IN_TIME);
+        assertThat(testTrip.getOrderDocument()).isEqualTo(UPDATED_ORDER_DOCUMENT);
+        assertThat(testTrip.getOrderDocumentContentType()).isEqualTo(UPDATED_ORDER_DOCUMENT_CONTENT_TYPE);
         assertThat(testTrip.getPod()).isEqualTo(UPDATED_POD);
         assertThat(testTrip.getPodContentType()).isEqualTo(UPDATED_POD_CONTENT_TYPE);
         assertThat(testTrip.isHazmat()).isEqualTo(UPDATED_HAZMAT);
@@ -540,6 +559,8 @@ public class TripResourceIT {
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].detention").value(hasItem(DEFAULT_DETENTION.intValue())))
             .andExpect(jsonPath("$.[*].chasisInTime").value(hasItem(DEFAULT_CHASIS_IN_TIME.toString())))
+            .andExpect(jsonPath("$.[*].orderDocumentContentType").value(hasItem(DEFAULT_ORDER_DOCUMENT_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].orderDocument").value(hasItem(Base64Utils.encodeToString(DEFAULT_ORDER_DOCUMENT))))
             .andExpect(jsonPath("$.[*].podContentType").value(hasItem(DEFAULT_POD_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].pod").value(hasItem(Base64Utils.encodeToString(DEFAULT_POD))))
             .andExpect(jsonPath("$.[*].hazmat").value(hasItem(DEFAULT_HAZMAT.booleanValue())))
