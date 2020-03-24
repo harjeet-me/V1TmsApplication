@@ -49,6 +49,12 @@
             <column name="chasis_in_time" type="datetime">
                 <constraints nullable="true" />
             </column>
+            <column name="order_document" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="order_document_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="pod" type="longblob">
                 <constraints nullable="true" />
             </column>
@@ -152,6 +158,8 @@
             <column name="status" type="string"/>
             <column name="detention" type="numeric"/>
             <column name="chasis_in_time" type="datetime"/>
+            <column name="order_document" type="blob"/>
+            <column name="order_document_content_type" type="string"/>
             <column name="pod" type="blob"/>
             <column name="pod_content_type" type="string"/>
             <column name="hazmat" type="boolean"/>

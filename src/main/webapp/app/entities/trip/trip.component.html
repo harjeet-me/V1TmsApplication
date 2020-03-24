@@ -52,6 +52,7 @@
                     <th scope="col"  jhiSortBy="status"><span jhiTranslate="tmsV1ApplicationApp.trip.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="detention"><span jhiTranslate="tmsV1ApplicationApp.trip.detention">Detention</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="chasisInTime"><span jhiTranslate="tmsV1ApplicationApp.trip.chasisInTime">Chasis In Time</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="orderDocument"><span jhiTranslate="tmsV1ApplicationApp.trip.orderDocument">Order Document</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="pod"><span jhiTranslate="tmsV1ApplicationApp.trip.pod">Pod</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="hazmat"><span jhiTranslate="tmsV1ApplicationApp.trip.hazmat">Hazmat</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="refrigerated"><span jhiTranslate="tmsV1ApplicationApp.trip.refrigerated">Refrigerated</span> <fa-icon icon="sort"></fa-icon></th>
@@ -90,6 +91,12 @@
                     <td jhiTranslate="{{ 'tmsV1ApplicationApp.StatusEnum.' + trip.status }}">{{ trip.status }}</td>
                     <td>{{ trip.detention }}</td>
                     <td>{{ trip.chasisInTime | date:'medium' }}</td>
+                    <td>
+                        <a *ngIf="trip.orderDocument" (click)="openFile(trip.orderDocumentContentType, trip.orderDocument)">
+                            <img [src]="'data:' + trip.orderDocumentContentType + ';base64,' + trip.orderDocument" style="max-height: 30px;" alt="trip image"/>
+                        </a>
+                        <span *ngIf="trip.orderDocument">{{ trip.orderDocumentContentType }}, {{ byteSize(trip.orderDocument) }}</span>
+                    </td>
                     <td>
                         <a *ngIf="trip.pod" (click)="openFile(trip.podContentType, trip.pod)">
                             <img [src]="'data:' + trip.podContentType + ';base64,' + trip.pod" style="max-height: 30px;" alt="trip image"/>

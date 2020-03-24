@@ -48,6 +48,11 @@
             "fieldType": "Instant"
         },
         {
+            "fieldName": "orderDocument",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
             "fieldName": "pod",
             "fieldType": "byte[]",
             "fieldTypeBlobContent": "image"

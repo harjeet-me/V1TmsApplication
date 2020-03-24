@@ -25,6 +25,8 @@ export interface ITrip {
   status?: StatusEnum;
   detention?: number;
   chasisInTime?: Moment;
+  orderDocumentContentType?: string;
+  orderDocument?: any;
   podContentType?: string;
   pod?: any;
   hazmat?: boolean;
@@ -65,6 +67,8 @@ export class Trip implements ITrip {
     public status?: StatusEnum,
     public detention?: number,
     public chasisInTime?: Moment,
+    public orderDocumentContentType?: string,
+    public orderDocument?: any,
     public podContentType?: string,
     public pod?: any,
     public hazmat?: boolean,
