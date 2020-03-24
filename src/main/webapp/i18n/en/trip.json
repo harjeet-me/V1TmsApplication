@@ -21,6 +21,7 @@
       "description": "Description",
       "tripType": "Trip Type",
       "shipmentNumber": "Shipment Number",
+      "orderNumber": "Order Number",
       "bol": "Bol",
       "pickup": "Pickup",
       "drop": "Drop",

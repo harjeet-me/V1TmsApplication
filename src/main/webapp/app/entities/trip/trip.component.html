@@ -45,6 +45,7 @@
                     <th scope="col"  jhiSortBy="description"><span jhiTranslate="tmsV1ApplicationApp.trip.description">Description</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="tripType"><span jhiTranslate="tmsV1ApplicationApp.trip.tripType">Trip Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="shipmentNumber"><span jhiTranslate="tmsV1ApplicationApp.trip.shipmentNumber">Shipment Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="orderNumber"><span jhiTranslate="tmsV1ApplicationApp.trip.orderNumber">Order Number</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="bol"><span jhiTranslate="tmsV1ApplicationApp.trip.bol">Bol</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="pickup"><span jhiTranslate="tmsV1ApplicationApp.trip.pickup">Pickup</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="drop"><span jhiTranslate="tmsV1ApplicationApp.trip.drop">Drop</span> <fa-icon icon="sort"></fa-icon></th>
@@ -84,6 +85,7 @@
                     <td>{{ trip.description }}</td>
                     <td jhiTranslate="{{ 'tmsV1ApplicationApp.TripType.' + trip.tripType }}">{{ trip.tripType }}</td>
                     <td>{{ trip.shipmentNumber }}</td>
+                    <td>{{ trip.orderNumber }}</td>
                     <td>{{ trip.bol }}</td>
                     <td>{{ trip.pickup | date:'mediumDate' }}</td>
                     <td>{{ trip.drop | date:'mediumDate' }}</td>
