@@ -28,6 +28,7 @@
       "status": "Status",
       "detention": "Detention",
       "chasisInTime": "Chasis In Time",
+      "orderDocument": "Order Document",
       "pod": "Pod",
       "hazmat": "Hazmat",
       "refrigerated": "Refrigerated",

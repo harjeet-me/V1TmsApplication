@@ -75,6 +75,13 @@ public class Trip implements Serializable {
     private Instant chasisInTime;
 
     @Lob
+    @Column(name = "order_document")
+    private byte[] orderDocument;
+
+    @Column(name = "order_document_content_type")
+    private String orderDocumentContentType;
+
+    @Lob
     @Column(name = "pod")
     private byte[] pod;
 
@@ -308,6 +315,32 @@ public class Trip implements Serializable {
 
     public void setChasisInTime(Instant chasisInTime) {
         this.chasisInTime = chasisInTime;
+    }
+
+    public byte[] getOrderDocument() {
+        return orderDocument;
+    }
+
+    public Trip orderDocument(byte[] orderDocument) {
+        this.orderDocument = orderDocument;
+        return this;
+    }
+
+    public void setOrderDocument(byte[] orderDocument) {
+        this.orderDocument = orderDocument;
+    }
+
+    public String getOrderDocumentContentType() {
+        return orderDocumentContentType;
+    }
+
+    public Trip orderDocumentContentType(String orderDocumentContentType) {
+        this.orderDocumentContentType = orderDocumentContentType;
+        return this;
+    }
+
+    public void setOrderDocumentContentType(String orderDocumentContentType) {
+        this.orderDocumentContentType = orderDocumentContentType;
     }
 
     public byte[] getPod() {
@@ -678,6 +711,8 @@ public class Trip implements Serializable {
             ", status='" + getStatus() + "'" +
             ", detention=" + getDetention() +
             ", chasisInTime='" + getChasisInTime() + "'" +
+            ", orderDocument='" + getOrderDocument() + "'" +
+            ", orderDocumentContentType='" + getOrderDocumentContentType() + "'" +
             ", pod='" + getPod() + "'" +
             ", podContentType='" + getPodContentType() + "'" +
             ", hazmat='" + isHazmat() + "'" +
