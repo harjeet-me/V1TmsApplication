@@ -129,8 +129,6 @@ entity Invoice {
      invoiceDueDate LocalDate ,
      status  InvoiceStatus ,
      invoicePdf Blob ,
-     
-     
      remarks String ,
      payterm String ,
      createdOn Instant ,
@@ -144,7 +142,19 @@ entity Invoice {
     enum InvoiveRef {
      ORDER_NO , SHIPMENT_NO , PO_NUMBER , BOOKING_NO
     }
-
+entity InvoiceReport {
+     fromDate LocalDate ,
+     toDate LocalDate,
+     remarks String ,
+     invoiceReport Blob ,
+     createdOn Instant ,
+     createdBy String ,
+     updatedOn Instant ,
+     updatedBy String 
+	
+    }
+    
+    
 
 
 entity InvoiceItem {
@@ -492,7 +502,7 @@ emailTo String ,
 entity FileSystem {
 data Blob ,
 fileName String ,
-     createdOn Instant ,
+createdOn Instant ,
     createdBy String ,
     updatedOn Instant ,
     updatedBy String
@@ -530,6 +540,7 @@ relationship OneToMany {
 // }
 relationship ManyToMany {
   Customer { charge(itemName) }  to  ProductItem { customer(company) }
+  InvoiceReport { invoice (id)} to Invoice
 }
 
 
