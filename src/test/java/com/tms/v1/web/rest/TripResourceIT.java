@@ -63,6 +63,9 @@ public class TripResourceIT {
     private static final String DEFAULT_SHIPMENT_NUMBER = "AAAAAAAAAA";
     private static final String UPDATED_SHIPMENT_NUMBER = "BBBBBBBBBB";
 
+    private static final String DEFAULT_ORDER_NUMBER = "AAAAAAAAAA";
+    private static final String UPDATED_ORDER_NUMBER = "BBBBBBBBBB";
+
     private static final String DEFAULT_BOL = "AAAAAAAAAA";
     private static final String UPDATED_BOL = "BBBBBBBBBB";
 
@@ -170,6 +173,7 @@ public class TripResourceIT {
             .description(DEFAULT_DESCRIPTION)
             .tripType(DEFAULT_TRIP_TYPE)
             .shipmentNumber(DEFAULT_SHIPMENT_NUMBER)
+            .orderNumber(DEFAULT_ORDER_NUMBER)
             .bol(DEFAULT_BOL)
             .pickup(DEFAULT_PICKUP)
             .drop(DEFAULT_DROP)
@@ -209,6 +213,7 @@ public class TripResourceIT {
             .description(UPDATED_DESCRIPTION)
             .tripType(UPDATED_TRIP_TYPE)
             .shipmentNumber(UPDATED_SHIPMENT_NUMBER)
+            .orderNumber(UPDATED_ORDER_NUMBER)
             .bol(UPDATED_BOL)
             .pickup(UPDATED_PICKUP)
             .drop(UPDATED_DROP)
@@ -261,6 +266,7 @@ public class TripResourceIT {
         assertThat(testTrip.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testTrip.getTripType()).isEqualTo(DEFAULT_TRIP_TYPE);
         assertThat(testTrip.getShipmentNumber()).isEqualTo(DEFAULT_SHIPMENT_NUMBER);
+        assertThat(testTrip.getOrderNumber()).isEqualTo(DEFAULT_ORDER_NUMBER);
         assertThat(testTrip.getBol()).isEqualTo(DEFAULT_BOL);
         assertThat(testTrip.getPickup()).isEqualTo(DEFAULT_PICKUP);
         assertThat(testTrip.getDrop()).isEqualTo(DEFAULT_DROP);
@@ -329,6 +335,7 @@ public class TripResourceIT {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].tripType").value(hasItem(DEFAULT_TRIP_TYPE.toString())))
             .andExpect(jsonPath("$.[*].shipmentNumber").value(hasItem(DEFAULT_SHIPMENT_NUMBER)))
+            .andExpect(jsonPath("$.[*].orderNumber").value(hasItem(DEFAULT_ORDER_NUMBER)))
             .andExpect(jsonPath("$.[*].bol").value(hasItem(DEFAULT_BOL)))
             .andExpect(jsonPath("$.[*].pickup").value(hasItem(DEFAULT_PICKUP.toString())))
             .andExpect(jsonPath("$.[*].drop").value(hasItem(DEFAULT_DROP.toString())))
@@ -371,6 +378,7 @@ public class TripResourceIT {
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.tripType").value(DEFAULT_TRIP_TYPE.toString()))
             .andExpect(jsonPath("$.shipmentNumber").value(DEFAULT_SHIPMENT_NUMBER))
+            .andExpect(jsonPath("$.orderNumber").value(DEFAULT_ORDER_NUMBER))
             .andExpect(jsonPath("$.bol").value(DEFAULT_BOL))
             .andExpect(jsonPath("$.pickup").value(DEFAULT_PICKUP.toString()))
             .andExpect(jsonPath("$.drop").value(DEFAULT_DROP.toString()))
@@ -425,6 +433,7 @@ public class TripResourceIT {
             .description(UPDATED_DESCRIPTION)
             .tripType(UPDATED_TRIP_TYPE)
             .shipmentNumber(UPDATED_SHIPMENT_NUMBER)
+            .orderNumber(UPDATED_ORDER_NUMBER)
             .bol(UPDATED_BOL)
             .pickup(UPDATED_PICKUP)
             .drop(UPDATED_DROP)
@@ -464,6 +473,7 @@ public class TripResourceIT {
         assertThat(testTrip.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testTrip.getTripType()).isEqualTo(UPDATED_TRIP_TYPE);
         assertThat(testTrip.getShipmentNumber()).isEqualTo(UPDATED_SHIPMENT_NUMBER);
+        assertThat(testTrip.getOrderNumber()).isEqualTo(UPDATED_ORDER_NUMBER);
         assertThat(testTrip.getBol()).isEqualTo(UPDATED_BOL);
         assertThat(testTrip.getPickup()).isEqualTo(UPDATED_PICKUP);
         assertThat(testTrip.getDrop()).isEqualTo(UPDATED_DROP);
@@ -552,6 +562,7 @@ public class TripResourceIT {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].tripType").value(hasItem(DEFAULT_TRIP_TYPE.toString())))
             .andExpect(jsonPath("$.[*].shipmentNumber").value(hasItem(DEFAULT_SHIPMENT_NUMBER)))
+            .andExpect(jsonPath("$.[*].orderNumber").value(hasItem(DEFAULT_ORDER_NUMBER)))
             .andExpect(jsonPath("$.[*].bol").value(hasItem(DEFAULT_BOL)))
             .andExpect(jsonPath("$.[*].pickup").value(hasItem(DEFAULT_PICKUP.toString())))
             .andExpect(jsonPath("$.[*].drop").value(hasItem(DEFAULT_DROP.toString())))

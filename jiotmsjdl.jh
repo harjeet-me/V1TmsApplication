@@ -75,6 +75,7 @@ entity Trip  {
      description String ,
      tripType TripType ,
      shipmentNumber String,
+     orderNumber String,
      bol String,
      pickup LocalDate,
 	 drop LocalDate,

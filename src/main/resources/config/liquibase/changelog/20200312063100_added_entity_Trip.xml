@@ -28,6 +28,9 @@
             <column name="shipment_number" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="order_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="bol" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -151,6 +154,7 @@
             <column name="description" type="string"/>
             <column name="trip_type" type="string"/>
             <column name="shipment_number" type="string"/>
+            <column name="order_number" type="string"/>
             <column name="bol" type="string"/>
             <column name="pickup" type="date"/>
             <column name="jhi_drop" type="date"/>

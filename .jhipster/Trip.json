@@ -19,6 +19,10 @@
             "fieldType": "String"
         },
         {
+            "fieldName": "orderNumber",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "bol",
             "fieldType": "String"
         },
