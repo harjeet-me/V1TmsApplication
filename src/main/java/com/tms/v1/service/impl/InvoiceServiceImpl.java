@@ -2,6 +2,8 @@ package com.tms.v1.service.impl;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tms.v1.domain.Invoice;
 import com.tms.v1.domain.InvoiceItem;
 import com.tms.v1.domain.enumeration.CURRENCY;
+import com.tms.v1.domain.enumeration.InvoiceStatus;
 import com.tms.v1.repository.InvoiceItemRepository;
 import com.tms.v1.repository.InvoiceRepository;
 import com.tms.v1.repository.search.InvoiceSearchRepository;
@@ -88,9 +91,12 @@ public class InvoiceServiceImpl implements InvoiceService {
         		savedLineItem.add(invoiceItemServiceImpl.save(invoiceItem));
 			}
         	invoice.setInvoiceItems(savedLineItem);
-			invoice.setInvoicePdf(invoiceReportServiceImpl.generateReport(customerService.findOne(invoice.getCustomer().getId()).get(), invoice, companyProfileService.findOne(1L).get()));
-			invoice.setInvoiceItems(null);
-			invoice.setInvoicePdfContentType("application/pdf");
+        	if(invoice.getStatus()!=null && invoice.getStatus()==InvoiceStatus.GENERATED) {
+        		invoice.setInvoicePdf(invoiceReportServiceImpl.generateReport(customerService.findOne(invoice.getCustomer().getId()).get(), invoice, companyProfileService.findOne(1L).get()));
+        		invoice.setInvoiceItems(null);
+    			invoice.setInvoicePdfContentType("application/pdf");
+        	}
+				
         
         } catch (Exception e) {
 			throw new IllegalStateException("Exception Occured Generating Invoice " , e);
@@ -155,4 +161,15 @@ public class InvoiceServiceImpl implements InvoiceService {
     public Page<Invoice> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Invoices for query {}", query);
         return invoiceSearchRepository.search(queryStringQuery(query), pageable);    }
+
+	@Override
+	public List<Invoice> findByTrip_Id(Long tripId) {
+		return invoiceRepository.findByTrip_Id(tripId);
+	}
+
+	@Override
+	public List<Invoice> findByCustomer_IdAndInvoiceDateBetween(Long customerId, LocalDate invoiceDateStart,
+			LocalDate invoiceDateEnd) {
+		return invoiceRepository.findByCustomer_IdAndInvoiceDateBetween(customerId, invoiceDateStart, invoiceDateEnd);
+	}
 }

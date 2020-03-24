@@ -26,8 +26,11 @@ public class InvoiceItem implements Serializable {
   		// TODO Auto-generated constructor stub
   	}
 
-      public InvoiceItem(Long id2, String itemName2, String description2, Double price2, double d) {
-  		// TODO Auto-generated constructor stub
+      public InvoiceItem(Long id, String itemName, String description, Double price, double total) {
+  		this.itemName=itemName;
+  		this.description=description;
+  		this.price=price;
+  		this.total=total;
   	}
 
     @Id

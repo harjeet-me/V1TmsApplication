@@ -138,11 +138,11 @@ public class InvoiceReportServiceImpl {
 
 	}
 
-	static List<InvoiceItem> getInvoiceItemList(List<ProductItem> productItems) {
-		List<InvoiceItem> iItem = new ArrayList<InvoiceItem>();
+	static Set<InvoiceItem> getInvoiceItemList(Set<ProductItem> productItems) {
+		Set<InvoiceItem> iItem = new HashSet<InvoiceItem>();
 		for (ProductItem item : productItems) {
 
-			iItem.add(new InvoiceItem(item.getId(), item.getItemName(), item.getDescription(), item.getPrice(), 0.0));
+			iItem.add(new InvoiceItem(null, item.getItemName(), item.getDescription(), item.getPrice(), item.getPrice()));
 
 		}
 		return iItem;
