@@ -12,6 +12,12 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceReport.customer" for="field_customer">Customer</label>
+                    <input type="number" class="form-control" name="customer" id="field_customer"
+                           formControlName="customer"/>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceReport.fromDate" for="field_fromDate">From Date</label>
                     <div class="input-group">
                         <input id="field_fromDate" type="text" class="form-control" name="fromDate" ngbDatepicker #fromDateDp="ngbDatepicker" formControlName="fromDate"/>

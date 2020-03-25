@@ -41,6 +41,7 @@
             <thead>
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.invoiceReport.customer">Customer</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.invoiceReport.fromDate">From Date</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.invoiceReport.toDate">To Date</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.invoiceReport.remarks">Remarks</span></th>
@@ -56,6 +57,7 @@
             <tbody>
                 <tr *ngFor="let invoiceReport of invoiceReports ;trackBy: trackId">
                     <td><a [routerLink]="['/invoice-report', invoiceReport.id, 'view']">{{ invoiceReport.id }}</a></td>
+                    <td>{{ invoiceReport.customer }}</td>
                     <td>{{ invoiceReport.fromDate | date:'mediumDate' }}</td>
                     <td>{{ invoiceReport.toDate | date:'mediumDate' }}</td>
                     <td>{{ invoiceReport.remarks }}</td>

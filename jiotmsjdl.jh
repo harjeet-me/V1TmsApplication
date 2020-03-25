@@ -143,6 +143,7 @@ entity Invoice {
      ORDER_NO , SHIPMENT_NO , PO_NUMBER , BOOKING_NO
     }
 entity InvoiceReport {
+     customer Long,
      fromDate LocalDate ,
      toDate LocalDate,
      remarks String ,

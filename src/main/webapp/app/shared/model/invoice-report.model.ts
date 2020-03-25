@@ -3,6 +3,7 @@ import { IInvoice } from 'app/shared/model/invoice.model';
 
 export interface IInvoiceReport {
   id?: number;
+  customer?: number;
   fromDate?: Moment;
   toDate?: Moment;
   remarks?: string;
@@ -18,6 +19,7 @@ export interface IInvoiceReport {
 export class InvoiceReport implements IInvoiceReport {
   constructor(
     public id?: number,
+    public customer?: number,
     public fromDate?: Moment,
     public toDate?: Moment,
     public remarks?: string,
