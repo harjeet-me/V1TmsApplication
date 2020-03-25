@@ -28,6 +28,9 @@ public class InvoiceReport implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "customer")
+    private Long customer;
+
     @Column(name = "from_date")
     private LocalDate fromDate;
 
@@ -70,6 +73,19 @@ public class InvoiceReport implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getCustomer() {
+        return customer;
+    }
+
+    public InvoiceReport customer(Long customer) {
+        this.customer = customer;
+        return this;
+    }
+
+    public void setCustomer(Long customer) {
+        this.customer = customer;
     }
 
     public LocalDate getFromDate() {
@@ -235,6 +251,7 @@ public class InvoiceReport implements Serializable {
     public String toString() {
         return "InvoiceReport{" +
             "id=" + getId() +
+            ", customer=" + getCustomer() +
             ", fromDate='" + getFromDate() + "'" +
             ", toDate='" + getToDate() + "'" +
             ", remarks='" + getRemarks() + "'" +

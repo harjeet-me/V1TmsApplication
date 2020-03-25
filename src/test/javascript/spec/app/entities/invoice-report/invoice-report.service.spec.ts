@@ -26,6 +26,7 @@ describe('Service Tests', () => {
 
       elemDefault = new InvoiceReport(
         0,
+        0,
         currentDate,
         currentDate,
         'AAAAAAA',
@@ -89,6 +90,7 @@ describe('Service Tests', () => {
       it('should update a InvoiceReport', () => {
         const returnedFromService = Object.assign(
           {
+            customer: 1,
             fromDate: currentDate.format(DATE_FORMAT),
             toDate: currentDate.format(DATE_FORMAT),
             remarks: 'BBBBBB',
@@ -121,6 +123,7 @@ describe('Service Tests', () => {
       it('should return a list of InvoiceReport', () => {
         const returnedFromService = Object.assign(
           {
+            customer: 1,
             fromDate: currentDate.format(DATE_FORMAT),
             toDate: currentDate.format(DATE_FORMAT),
             remarks: 'BBBBBB',
