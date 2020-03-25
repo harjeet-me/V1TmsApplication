@@ -1,5 +1,6 @@
 package com.tms.v1.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -140,6 +141,11 @@ public class Invoice implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("invoices")
     private Customer customer;
+
+    @ManyToMany(mappedBy = "invoices")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<InvoiceReport> invoiceReports = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -575,6 +581,31 @@ public class Invoice implements Serializable {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Set<InvoiceReport> getInvoiceReports() {
+        return invoiceReports;
+    }
+
+    public Invoice invoiceReports(Set<InvoiceReport> invoiceReports) {
+        this.invoiceReports = invoiceReports;
+        return this;
+    }
+
+    public Invoice addInvoiceReport(InvoiceReport invoiceReport) {
+        this.invoiceReports.add(invoiceReport);
+        invoiceReport.getInvoices().add(this);
+        return this;
+    }
+
+    public Invoice removeInvoiceReport(InvoiceReport invoiceReport) {
+        this.invoiceReports.remove(invoiceReport);
+        invoiceReport.getInvoices().remove(this);
+        return this;
+    }
+
+    public void setInvoiceReports(Set<InvoiceReport> invoiceReports) {
+        this.invoiceReports = invoiceReports;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

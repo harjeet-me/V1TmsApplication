@@ -1,0 +1,31 @@
+{
+  "tmsV1ApplicationApp": {
+    "invoiceReport": {
+      "home": {
+        "title": "Invoice Reports",
+        "createLabel": "Create a new Invoice Report",
+        "createOrEditLabel": "Create or edit a Invoice Report",
+        "search": "Search for Invoice Report",
+        "notFound": "No Invoice Reports found"
+      },
+      "created": "A new Invoice Report is created with identifier {{ param }}",
+      "updated": "A Invoice Report is updated with identifier {{ param }}",
+      "deleted": "A Invoice Report is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Invoice Report {{ id }}?"
+      },
+      "detail": {
+        "title": "Invoice Report"
+      },
+      "fromDate": "From Date",
+      "toDate": "To Date",
+      "remarks": "Remarks",
+      "invoiceReport": "Invoice Report",
+      "createdOn": "Created On",
+      "createdBy": "Created By",
+      "updatedOn": "Updated On",
+      "updatedBy": "Updated By",
+      "invoice": "Invoice"
+    }
+  }
+}

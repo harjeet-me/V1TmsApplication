@@ -94,7 +94,7 @@ public class TripServiceImpl implements TripService {
         	Customer customer =customerService.findOne(trip.getCustomer().getId()).get();
         	
         	InvoiceItem item=new InvoiceItem(null, "LOAD MOVE",result.getPickupLocation().getCity()+" TO  "+result.getDropLocation().getCity() ,0.0,0.0 );
-        	HashSet<InvoiceItem> itemSet=new HashSet<>(InvoiceReportServiceImpl.getInvoiceItemList(customer.getCharges()));
+        	HashSet<InvoiceItem> itemSet=new HashSet<>(JasperInvoiceReportServiceImpl.getInvoiceItemList(customer.getCharges()));
         	itemSet.add(item);
         	invoiceDraft.setInvoiceItems(itemSet);
         	invoiceService.save(invoiceDraft);

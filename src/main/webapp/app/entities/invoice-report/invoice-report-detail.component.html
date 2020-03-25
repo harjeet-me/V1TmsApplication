@@ -1,0 +1,77 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="invoiceReport">
+            <h2><span jhiTranslate="tmsV1ApplicationApp.invoiceReport.detail.title">Invoice Report</span> {{ invoiceReport.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceReport.fromDate">From Date</span></dt>
+                <dd>
+                    <span>{{ invoiceReport.fromDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceReport.toDate">To Date</span></dt>
+                <dd>
+                    <span>{{ invoiceReport.toDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceReport.remarks">Remarks</span></dt>
+                <dd>
+                    <span>{{ invoiceReport.remarks }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceReport.invoiceReport">Invoice Report</span></dt>
+                <dd>
+                    <div *ngIf="invoiceReport.invoiceReport">
+                        <a (click)="openFile(invoiceReport?.invoiceReportContentType!, invoiceReport?.invoiceReport)" jhiTranslate="entity.action.open">open</a>
+                        {{ invoiceReport.invoiceReportContentType }}, {{ byteSize(invoiceReport.invoiceReport) }}
+                    </div>
+                </dd>
+                
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceReport.invoice">Invoice</span></dt>
+                <dd>
+                    <span *ngFor="let invoice of invoiceReport.invoices; let last = last">
+                        <a [routerLink]="['/invoice', invoice?.id, 'view']">{{ invoice.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+ <div class="alert alert-warning" id="no-result" *ngIf="invoiceReport.invoices?.length === 0">
+        <span jhiTranslate="tmsV1ApplicationApp.invoice.home.notFound">No invoices found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="invoiceReport.invoices?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+     
+            <tbody>
+                <tr *ngFor="let invoice of invoiceReport.invoices">
+                    <td><a [routerLink]="['/invoice', invoice.id, 'view']">{{ invoice.id }}</a></td>
+                    <td>{{ invoice.orderNo }}</td>
+                    <td>{{ invoice.invoiceNo }}</td>
+                   
+                    <td>{{ invoice.invoiceTotal }}</td>
+                    <td>{{ invoice.invoiceDate | date:'mediumDate' }}</td>
+                    <td>{{ invoice.invoicePaidDate | date:'mediumDate' }}</td>
+                  
+                    <td>{{ invoice.payRefNo }}</td>
+                    <td>{{ invoice.invoiceDueDate | date:'mediumDate' }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiceStatus.' + invoice.status }}">{{ invoice.status }}</td>
+                   
+                   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/invoice-report', invoiceReport.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -46,7 +46,7 @@ public class InvoiceServiceImpl implements InvoiceService {
    	MailService mailService;
     
    	@Autowired
-   	InvoiceReportServiceImpl invoiceReportServiceImpl;
+   	JasperInvoiceReportServiceImpl jasperInvoiceReportServiceImpl;
 
    	@Autowired
    	CustomerService customerService;
@@ -92,7 +92,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 			}
         	invoice.setInvoiceItems(savedLineItem);
         	if(invoice.getStatus()!=null && invoice.getStatus()==InvoiceStatus.GENERATED) {
-        		invoice.setInvoicePdf(invoiceReportServiceImpl.generateReport(customerService.findOne(invoice.getCustomer().getId()).get(), invoice, companyProfileService.findOne(1L).get()));
+        		invoice.setInvoicePdf(jasperInvoiceReportServiceImpl.generateReport(customerService.findOne(invoice.getCustomer().getId()).get(), invoice, companyProfileService.findOne(1L).get()));
         		invoice.setInvoiceItems(null);
     			invoice.setInvoicePdfContentType("application/pdf");
         	}
