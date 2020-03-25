@@ -47,6 +47,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class InvoiceReportResourceIT {
 
+    private static final Long DEFAULT_CUSTOMER = 1L;
+    private static final Long UPDATED_CUSTOMER = 2L;
+
     private static final LocalDate DEFAULT_FROM_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_FROM_DATE = LocalDate.now(ZoneId.systemDefault());
 
@@ -109,6 +112,7 @@ public class InvoiceReportResourceIT {
      */
     public static InvoiceReport createEntity(EntityManager em) {
         InvoiceReport invoiceReport = new InvoiceReport()
+            .customer(DEFAULT_CUSTOMER)
             .fromDate(DEFAULT_FROM_DATE)
             .toDate(DEFAULT_TO_DATE)
             .remarks(DEFAULT_REMARKS)
@@ -128,6 +132,7 @@ public class InvoiceReportResourceIT {
      */
     public static InvoiceReport createUpdatedEntity(EntityManager em) {
         InvoiceReport invoiceReport = new InvoiceReport()
+            .customer(UPDATED_CUSTOMER)
             .fromDate(UPDATED_FROM_DATE)
             .toDate(UPDATED_TO_DATE)
             .remarks(UPDATED_REMARKS)
@@ -160,6 +165,7 @@ public class InvoiceReportResourceIT {
         List<InvoiceReport> invoiceReportList = invoiceReportRepository.findAll();
         assertThat(invoiceReportList).hasSize(databaseSizeBeforeCreate + 1);
         InvoiceReport testInvoiceReport = invoiceReportList.get(invoiceReportList.size() - 1);
+        assertThat(testInvoiceReport.getCustomer()).isEqualTo(DEFAULT_CUSTOMER);
         assertThat(testInvoiceReport.getFromDate()).isEqualTo(DEFAULT_FROM_DATE);
         assertThat(testInvoiceReport.getToDate()).isEqualTo(DEFAULT_TO_DATE);
         assertThat(testInvoiceReport.getRemarks()).isEqualTo(DEFAULT_REMARKS);
@@ -208,6 +214,7 @@ public class InvoiceReportResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(invoiceReport.getId().intValue())))
+            .andExpect(jsonPath("$.[*].customer").value(hasItem(DEFAULT_CUSTOMER.intValue())))
             .andExpect(jsonPath("$.[*].fromDate").value(hasItem(DEFAULT_FROM_DATE.toString())))
             .andExpect(jsonPath("$.[*].toDate").value(hasItem(DEFAULT_TO_DATE.toString())))
             .andExpect(jsonPath("$.[*].remarks").value(hasItem(DEFAULT_REMARKS)))
@@ -250,6 +257,7 @@ public class InvoiceReportResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(invoiceReport.getId().intValue()))
+            .andExpect(jsonPath("$.customer").value(DEFAULT_CUSTOMER.intValue()))
             .andExpect(jsonPath("$.fromDate").value(DEFAULT_FROM_DATE.toString()))
             .andExpect(jsonPath("$.toDate").value(DEFAULT_TO_DATE.toString()))
             .andExpect(jsonPath("$.remarks").value(DEFAULT_REMARKS))
@@ -284,6 +292,7 @@ public class InvoiceReportResourceIT {
         // Disconnect from session so that the updates on updatedInvoiceReport are not directly saved in db
         em.detach(updatedInvoiceReport);
         updatedInvoiceReport
+            .customer(UPDATED_CUSTOMER)
             .fromDate(UPDATED_FROM_DATE)
             .toDate(UPDATED_TO_DATE)
             .remarks(UPDATED_REMARKS)
@@ -303,6 +312,7 @@ public class InvoiceReportResourceIT {
         List<InvoiceReport> invoiceReportList = invoiceReportRepository.findAll();
         assertThat(invoiceReportList).hasSize(databaseSizeBeforeUpdate);
         InvoiceReport testInvoiceReport = invoiceReportList.get(invoiceReportList.size() - 1);
+        assertThat(testInvoiceReport.getCustomer()).isEqualTo(UPDATED_CUSTOMER);
         assertThat(testInvoiceReport.getFromDate()).isEqualTo(UPDATED_FROM_DATE);
         assertThat(testInvoiceReport.getToDate()).isEqualTo(UPDATED_TO_DATE);
         assertThat(testInvoiceReport.getRemarks()).isEqualTo(UPDATED_REMARKS);
@@ -371,6 +381,7 @@ public class InvoiceReportResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(invoiceReport.getId().intValue())))
+            .andExpect(jsonPath("$.[*].customer").value(hasItem(DEFAULT_CUSTOMER.intValue())))
             .andExpect(jsonPath("$.[*].fromDate").value(hasItem(DEFAULT_FROM_DATE.toString())))
             .andExpect(jsonPath("$.[*].toDate").value(hasItem(DEFAULT_TO_DATE.toString())))
             .andExpect(jsonPath("$.[*].remarks").value(hasItem(DEFAULT_REMARKS)))

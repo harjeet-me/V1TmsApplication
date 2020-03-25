@@ -26,6 +26,7 @@ export class InvoiceReportUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
+    customer: [],
     fromDate: [],
     toDate: [],
     remarks: [],
@@ -64,6 +65,7 @@ export class InvoiceReportUpdateComponent implements OnInit {
   updateForm(invoiceReport: IInvoiceReport): void {
     this.editForm.patchValue({
       id: invoiceReport.id,
+      customer: invoiceReport.customer,
       fromDate: invoiceReport.fromDate,
       toDate: invoiceReport.toDate,
       remarks: invoiceReport.remarks,
@@ -111,6 +113,7 @@ export class InvoiceReportUpdateComponent implements OnInit {
     return {
       ...new InvoiceReport(),
       id: this.editForm.get(['id'])!.value,
+      customer: this.editForm.get(['customer'])!.value,
       fromDate: this.editForm.get(['fromDate'])!.value,
       toDate: this.editForm.get(['toDate'])!.value,
       remarks: this.editForm.get(['remarks'])!.value,

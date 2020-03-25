@@ -17,6 +17,7 @@
       "detail": {
         "title": "Invoice Report"
       },
+      "customer": "Customer",
       "fromDate": "From Date",
       "toDate": "To Date",
       "remarks": "Remarks",

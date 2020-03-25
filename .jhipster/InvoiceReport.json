@@ -2,6 +2,10 @@
     "name": "InvoiceReport",
     "fields": [
         {
+            "fieldName": "customer",
+            "fieldType": "Long"
+        },
+        {
             "fieldName": "fromDate",
             "fieldType": "LocalDate"
         },
