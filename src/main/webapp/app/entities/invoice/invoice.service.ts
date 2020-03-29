@@ -1,3 +1,5 @@
+import { IdEntity } from './../../shared/model/id-entity.model';
+import { IIdEntity } from './../../shared/model/id-entity.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -10,6 +12,8 @@ import { createRequestOption, SearchWithPagination } from 'app/shared/util/reque
 import { IInvoice } from 'app/shared/model/invoice.model';
 
 type EntityResponseType = HttpResponse<IInvoice>;
+type IdEntityResponseType = HttpResponse<IIdEntity>;
+
 type EntityArrayResponseType = HttpResponse<IInvoice[]>;
 
 @Injectable({ providedIn: 'root' })
@@ -36,6 +40,12 @@ export class InvoiceService {
   find(id: number): Observable<EntityResponseType> {
     return this.http
       .get<IInvoice>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
+  findMaxId(): Observable<EntityResponseType> {
+    return this.http
+      .get<IInvoice>(`${this.resourceUrl}/getEntityMaxId`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 

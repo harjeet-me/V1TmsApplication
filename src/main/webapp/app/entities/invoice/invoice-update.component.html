@@ -1,29 +1,44 @@
+<style>
+.desc {
+	height: auto;
+	overflow: auto;
+}
+</style>
+
+
 <div class="row justify-content-center">
-	<div class="col-8">
+	<div class="col-12">
 		<form name="editForm" role="form" novalidate (ngSubmit)="save()"
 			[formGroup]="editForm">
-			<h2 id="jhi-invoice-heading"
+			
+
+
+			<jhi-alert-error></jhi-alert-error>
+			<div class="container">
+			
+					<div class="row">
+					<div class="col-sm-6" style="background-color: ">
+					<h2 id="jhi-invoice-heading"
 				jhiTranslate="tmsV1ApplicationApp.invoice.home.createOrEditLabel">Create
 				or edit a Invoice</h2>
-
-			<div>
-				<jhi-alert-error></jhi-alert-error>
-
-				<div class="form-group" [hidden]="!editForm.get('id')!.value">
-					<label for="id" jhiTranslate="global.field.id">ID</label> <input
-						type="text" class="form-control" id="id" name="id"
-						formControlName="id" readonly />
-				</div>
-
-
-				<div>
 				
-				<div *ngIf="editForm.dirty">testForm diry</div>
-					<div class="form-group">
-						<label class="form-control-label"
-							jhiTranslate="tmsV1ApplicationApp.invoice.customer"
-							for="field_customer">Customer</label> 
-							<!-- <select required="required"
+					</div>
+					
+					<div class="col-sm-6" >
+					
+					</div>
+					
+					</div>
+					
+					
+					
+				<div class="row">
+					<div class="col-sm-6" style="background-color: yellow;">
+						<div class="form-group">
+					<label class="form-control-label"
+						jhiTranslate="tmsV1ApplicationApp.invoice.customer"
+						for="field_customer">Customer</label>
+					<!-- <select required="required"
 							class="form-control" id="field_customer" name="customer"
 							formControlName="customer">
 							<option [ngValue]="null"></option>
@@ -32,30 +47,71 @@
 								*ngFor="let customerOption of customers; trackBy: trackById">{{
 								customerOption.company }}</option>
 						</select> -->
-						
-						<input [(ngModel)]="customerName"
-								[ngModelOptions]="{standalone: true}" class="form-control"
-								type="input" list="customers;" 
-								temp="" onmouseover="this.temp=this.value;this.value='';" onmouseout="this.value=this.temp;"
-								 (change)="onCustomerChange(customerName)" required="required" />
-								
-								 <datalist id="customers;">
-									<select>
-										<option  *ngFor="let customerOption of customers;" [value]="customerOption.company">
-										{{customerOption.company }}</option>
-									</select>
-								</datalist>
 
+					<input size="50" [(ngModel)]="customerName"
+						[ngModelOptions]="{standalone: true}" class="form-control"
+						type="input" list="customers;" temp=""
+						onmouseover="this.temp=this.value;this.value='';"
+						onmouseout="this.value=this.temp;"
+						(change)="onCustomerChange(customerName)" required="required" />
+
+					<datalist id="customers;">
+						<select>
+							<option *ngFor="let customerOption of customers;"
+								[value]="customerOption.company">
+								{{customerOption.company }}</option>
+						</select>
+					</datalist>
+
+				</div>
+				</br>
+
+
+
+				<div class="form-group">
+					<label class="form-control-label"
+						jhiTranslate="tmsV1ApplicationApp.customer.address"
+						for="field_address">Address</label>
+
+					<textarea type="text" class="form-control"
+						[ngModelOptions]="{standalone: true}"
+						[(ngModel)]="selectedCustomerName" name="customerInfo"
+						id="customerInfo" cols="50" rows="4"> </textarea>
+
+				</div>
 					</div>
+					
+					
+				<!-- 	right box -->
+					
+					<div class="col-sm-6" style="background-color: pink;">
+						<div class="form-group">
+					<label class="form-control-label"
+						jhiTranslate="tmsV1ApplicationApp.invoice.invoiceNo"
+						for="field_invoiceNo">Invoice No</label> <input type="text"
+						class="form-control" name="invoiceNo" value="{{maxId}}"
+						id="field_invoiceNo" formControlName="invoiceNo" />
+				</div>
 
-					<div class="form-group">
-						<input type="text" class="form-control" [ngModelOptions]="{standalone: true}"  [(ngModel)]="selectedCustomerName" name="customerInfo"
-							id="customerInfo" />
 
+				<div class="form-group">
+					<label class="form-control-label"
+						jhiTranslate="tmsV1ApplicationApp.invoice.invoiceDate"
+						for="field_invoiceDate">Invoice Date</label>
+					<div class="input-group">
+						<input required="required" id="field_invoiceDate" type="text"
+							class="form-control" name="invoiceDate" ngbDatepicker
+							#invoiceDateDp="ngbDatepicker" formControlName="invoiceDate" />
+						<span class="input-group-append">
+							<button type="button" class="btn btn-secondary"
+								(click)="invoiceDateDp.toggle()">
+								<fa-icon icon="calendar-alt"></fa-icon>
+							</button>
+						</span>
 					</div>
-
-
-<div class="form-group">
+				</div>
+				
+				  <div class="form-group">
 					<label class="form-control-label"
 						jhiTranslate="tmsV1ApplicationApp.invoice.trip" for="field_trip">Trip</label>
 					<select class="form-control" id="field_trip" name="trip"
@@ -67,11 +123,6 @@
 							tripOption.id }}</option>
 					</select>
 				</div>
-
-
-				</div>
-
-
 				<div class="form-group">
 					<label class="form-control-label"
 						jhiTranslate="tmsV1ApplicationApp.invoice.orderNo"
@@ -79,90 +130,42 @@
 						class="form-control" name="orderNo" id="field_orderNo"
 						formControlName="orderNo" />
 				</div>
-
 				<div class="form-group">
 					<label class="form-control-label"
-						jhiTranslate="tmsV1ApplicationApp.invoice.invoiceNo"
-						for="field_invoiceNo">Invoice No</label> <input type="text"
-						class="form-control" name="invoiceNo" id="field_invoiceNo"
-						formControlName="invoiceNo" />
-				</div>
-
-				<div class="form-group">
-					<label class="form-control-label"
-						jhiTranslate="tmsV1ApplicationApp.invoice.taxRate"
-						for="field_taxRate">Tax Rate</label> <input type="number"
-						class="form-control" name="taxRate" id="field_taxRate"
-						formControlName="taxRate" />
-				</div>
-
-				<div class="form-group">
-					<label class="form-control-label"
-						jhiTranslate="tmsV1ApplicationApp.invoice.taxType"
-						for="field_taxType">Tax Type</label> <select
-						onchange="onSelectChange()" class="form-control" name="taxType"
-						formControlName="taxType" id="field_taxType">
-						<option value="GST">{{ 'tmsV1ApplicationApp.TaxType.GST'
-							| translate }}</option>
-						<option value="FEDRAL">{{
-							'tmsV1ApplicationApp.TaxType.FEDRAL' | translate }}</option>
+						jhiTranslate="tmsV1ApplicationApp.invoice.status"
+						for="field_status">Status</label> <select class="form-control"
+						name="status" formControlName="status" id="field_status">
+						<option value="DRAFT">{{
+							'tmsV1ApplicationApp.InvoiceStatus.DRAFT' | translate }}</option>
+						<option value="GENERATED">{{
+							'tmsV1ApplicationApp.InvoiceStatus.GENERATED' | translate }}</option>
+						<option value="SENT">{{
+							'tmsV1ApplicationApp.InvoiceStatus.SENT' | translate }}</option>
+						<option value="PAID">{{
+							'tmsV1ApplicationApp.InvoiceStatus.PAID' | translate }}</option>
+						<option value="OVERDRAFT">{{
+							'tmsV1ApplicationApp.InvoiceStatus.OVERDRAFT' | translate }}</option>
+						<option value="VOIDED">{{
+							'tmsV1ApplicationApp.InvoiceStatus.VOIDED' | translate }}</option>
+						<option value="PARTIALLY_PAID">{{
+							'tmsV1ApplicationApp.InvoiceStatus.PARTIALLY_PAID' | translate }}</option>
 					</select>
 				</div>
-
-				<div class="form-group">
-					<label class="form-control-label"
-						jhiTranslate="tmsV1ApplicationApp.invoice.currency"
-						for="field_currency">Currency</label> <select class="form-control"
-						name="currency" formControlName="currency" id="field_currency">
-						<option value="USD">{{ 'tmsV1ApplicationApp.CURRENCY.USD'
-							| translate }}</option>
-						<option value="CAD">{{ 'tmsV1ApplicationApp.CURRENCY.CAD'
-							| translate }}</option>
-						<option value="INR">{{ 'tmsV1ApplicationApp.CURRENCY.INR'
-							| translate }}</option>
-					</select>
-				</div>
-
-				<div class="form-group">
-					<label class="form-control-label"
-						jhiTranslate="tmsV1ApplicationApp.invoice.invoiceTaxTotal"
-						for="field_invoiceTaxTotal">Invoice Tax Total</label> <input
-						type="number" class="form-control" name="invoiceTaxTotal"
-						id="field_invoiceTaxTotal" formControlName="invoiceTaxTotal" />
-				</div>
-
-				<div class="form-group">
-					<label class="form-control-label"
-						jhiTranslate="tmsV1ApplicationApp.invoice.invoiceSubTotal"
-						for="field_invoiceSubTotal">Invoice Sub Total</label> <input
-						type="number" class="form-control" name="invoiceSubTotal"
-						id="field_invoiceSubTotal" formControlName="invoiceSubTotal" />
-				</div>
-
-				<div class="form-group">
-					<label class="form-control-label"
-						jhiTranslate="tmsV1ApplicationApp.invoice.invoiceTotal"
-						for="field_invoiceTotal">Invoice Total</label> <input
-						type="number" class="form-control" name="invoiceTotal"
-						id="field_invoiceTotal" formControlName="invoiceTotal" />
-				</div>
-
-				<div class="form-group">
-					<label class="form-control-label"
-						jhiTranslate="tmsV1ApplicationApp.invoice.invoiceDate"
-						for="field_invoiceDate">Invoice Date</label>
-					<div class="input-group">
-						<input id="field_invoiceDate" type="text" class="form-control"
-							name="invoiceDate" ngbDatepicker #invoiceDateDp="ngbDatepicker"
-							formControlName="invoiceDate" /> <span
-							class="input-group-append">
-							<button type="button" class="btn btn-secondary"
-								(click)="invoiceDateDp.toggle()">
-								<fa-icon icon="calendar-alt"></fa-icon>
-							</button>
-						</span>
 					</div>
 				</div>
+			</div>
+
+			<div>
+
+				
+				
+				
+
+			
+
+
+
+
 
 				<div class="form-group">
 					<label class="form-control-label"
@@ -282,28 +285,7 @@
 						</span>
 					</div>
 				</div>
-
-				<div class="form-group">
-					<label class="form-control-label"
-						jhiTranslate="tmsV1ApplicationApp.invoice.status"
-						for="field_status">Status</label> <select class="form-control"
-						name="status" formControlName="status" id="field_status">
-						<option value="DRAFT">{{
-							'tmsV1ApplicationApp.InvoiceStatus.DRAFT' | translate }}</option>
-						<option value="GENERATED">{{
-							'tmsV1ApplicationApp.InvoiceStatus.GENERATED' | translate }}</option>
-						<option value="SENT">{{
-							'tmsV1ApplicationApp.InvoiceStatus.SENT' | translate }}</option>
-						<option value="PAID">{{
-							'tmsV1ApplicationApp.InvoiceStatus.PAID' | translate }}</option>
-						<option value="OVERDRAFT">{{
-							'tmsV1ApplicationApp.InvoiceStatus.OVERDRAFT' | translate }}</option>
-						<option value="VOIDED">{{
-							'tmsV1ApplicationApp.InvoiceStatus.VOIDED' | translate }}</option>
-						<option value="PARTIALLY_PAID">{{
-							'tmsV1ApplicationApp.InvoiceStatus.PARTIALLY_PAID' | translate }}</option>
-					</select>
-				</div>
+	          
 
 				<div class="form-group">
 					<label class="form-control-label"
@@ -352,10 +334,10 @@
 				</div>
 
 
-				
+
 
 			</div>
-		<!-- 	<div class="form-group">
+			<!-- 	<div class="form-group">
 				<label jhiTranslate="tmsV1ApplicationApp.customer.charge"
 					for="field_charges">Charge</label> <select class="form-control"
 					id="field_charges" multiple name="charges"
@@ -369,14 +351,15 @@
 
 			</div> -->
 
-			<div class="form-group">
-				<table class="table table-bordered">
+			<div class="form-group" style="width: 100%">
+				<table class="table">
 					<thead class="thead-dark">
 						<tr>
 							<th>Action</th>
 							<th>Item</th>
 							<th>DESCRIPTION</th>
 							<th>AMOUNT</th>
+							<th>QTY</th>
 							<th>TOTAL</th>
 						</tr>
 					</thead>
@@ -384,25 +367,32 @@
 						<tr *ngFor="let dynamic of dynamicArray ; let j = index">
 
 							<td (click)="deleteRow(j)"><fa-icon icon="trash-alt"></fa-icon></td>
-							<td><input [(ngModel)]="dynamicArray[j].itemName"
-								[ngModelOptions]="{standalone: true}" class="form-control"
-								type="input" list="productitems" 
-								temp="" onmouseover="this.temp=this.value;this.value='';" onmouseout="this.value=this.temp;"
-								 (change)="onSelectChange(dynamicArray[j]?.itemName,j)" />
-								
-								 <datalist id="productitems">
+							<td><input (change)="calculateTotal()"
+								[(ngModel)]="dynamicArray[j].itemName"
+								[ngModelOptions]="{standalone: true}" type="input"
+								list="productitems" temp=""
+								onmouseover="this.temp=this.value;this.value='';"
+								onmouseout="this.value=this.temp;"
+								(change)="onSelectChange(dynamicArray[j]?.itemName,j)" /> <datalist
+									id="productitems">
 									<select>
 										<option *ngFor="let c of productitems" [value]="c.itemName"></option>
 									</select>
 								</datalist></td>
-							<td><input cols="70" [ngModelOptions]="{standalone: true}"
-								class="form-control" [(ngModel)]="dynamicArray[j].description" /></td>
-							<td><input [ngModelOptions]="{standalone: true}"
-								[(ngModel)]="dynamicArray[j].price" (change)="calculateTotal()"   class="form-control"
+							<td width="65%"><textarea class="desc form-control"
+									cols="100" rows="2" [ngModelOptions]="{standalone: true}"
+									[(ngModel)]="dynamicArray[j].description"> </textarea></td>
+
+							<td><input type="number" min="1"
+								[ngModelOptions]="{standalone: true}"
+								[(ngModel)]="dynamicArray[j].price" (change)="calculateTotal()"
 								type="number" /></td>
-							<td><input size="4" (change)="calculateTotal()"
+							<td><input [ngModelOptions]="{standalone: true}"
+								[(ngModel)]="dynamicArray[j].qty" min="1"
+								(change)="calculateTotal()" type="number" /></td>
+							<td><input (change)="calculateTotal()"
 								[(ngModel)]="dynamicArray[j].total"
-								[ngModelOptions]="{standalone: true}" disabled="disabled" class="form-control"
+								[ngModelOptions]="{standalone: true}" disabled="disabled"
 								type="number" /></td>
 						</tr>
 
@@ -415,6 +405,25 @@
 
 
 
+			</div>
+
+
+
+			<div class="card float-right" style="width: 30%;">
+				<div class="card-body">
+
+
+					<div class="form-group">
+						<label class="form-control-label"
+							jhiTranslate="tmsV1ApplicationApp.invoice.invoiceTotal"
+							for="field_invoiceTotal">Invoice Total</label> <input
+							type="number" class="form-control" name="invoiceTotal"
+							id="field_invoiceTotal" [(ngModel)]="grantTotal"
+							[ngModelOptions]="{standalone: true}" disabled="disabled"
+							draggable="true" />
+
+					</div>
+				</div>
 			</div>
 
 			<div>
@@ -430,7 +439,6 @@
 					&nbsp;<span jhiTranslate="entity.action.save">Save</span>
 				</button>
 			</div>
-
 		</form>
 
 

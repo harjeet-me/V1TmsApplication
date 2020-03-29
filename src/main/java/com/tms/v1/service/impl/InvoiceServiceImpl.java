@@ -82,6 +82,12 @@ public class InvoiceServiceImpl implements InvoiceService {
     	if(invoice.getCurrency()==null) {
     		invoice.setCurrency(CURRENCY.USD);
     	}
+    	if(invoice.getId()==null && ( invoice.getInvoiceNo()==null || invoice.getInvoiceNo()=="")) {
+    		invoice.setInvoiceNo("IVN-"+(this.getMaxInvoiceId().get()+1));
+    	}
+    	else if (invoice.getId()!=null && ( invoice.getInvoiceNo()==null || invoice.getInvoiceNo()=="")){
+    		invoice.setInvoiceNo("IVN-"+invoice.getId());
+    	}
     	invoice = invoiceRepository.save(invoice);
         try {
         	for (InvoiceItem invoiceItem : invoiceLineItem) {
@@ -171,5 +177,9 @@ public class InvoiceServiceImpl implements InvoiceService {
 	public List<Invoice> findByCustomer_IdAndInvoiceDateBetween(Long customerId, LocalDate invoiceDateStart,
 			LocalDate invoiceDateEnd) {
 		return invoiceRepository.findByCustomer_IdAndInvoiceDateBetween(customerId, invoiceDateStart, invoiceDateEnd);
+	}
+	@Override
+	public Optional<Long> getMaxInvoiceId() {
+		return invoiceRepository.getMaxId();
 	}
 }

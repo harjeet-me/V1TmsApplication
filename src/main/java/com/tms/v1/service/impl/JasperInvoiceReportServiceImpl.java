@@ -50,14 +50,16 @@ public class JasperInvoiceReportServiceImpl {
 	public byte[] generateReport(Customer customer, Invoice invoice, CompanyProfile companyProfile) throws Exception {
 		Set<InvoiceItem> itemList = new HashSet<>();
 
-		itemList.add(new InvoiceItem());
+		itemList.add(new InvoiceItem(null,"dummy","dummy",0.0,0.0));
 		Set<InvoiceItem> fromDbItem=   invoiceItemService.findByInvoiceId(invoice.getId());
 		if (fromDbItem.size() == 0) {
 			throw new IllegalStateException("line item are null or size zero");
 		}
-		Set<InvoiceItem> newitemList = new HashSet<>(invoice.getInvoiceItems());
+		List<InvoiceItem> newitemList = new ArrayList<>(invoice.getInvoiceItems());
+		
 		newitemList.removeIf(item -> item.getItemName() == null || item.getItemName() == "");
 		
+		itemList.addAll(newitemList);
 		/*
 		 * for (Iterator iterator = fromDbItem.iterator(); iterator.hasNext();) {
 		 * InvoiceItem invoiceItem = (InvoiceItem) iterator.next();
@@ -76,12 +78,19 @@ public class JasperInvoiceReportServiceImpl {
 		JasperReport jasperReport = JasperCompileManager.compileReport(targetStream);
 
 		// Get your data source
-		JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(newitemList);
+		JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(itemList);
 
 		// Add parameters
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("itemDataSource", jrBeanCollectionDataSource);
-		parameters.put("customerName", customer.getFirstName() + " " + customer.getLastName());
+		String customerAdd= customer.getCompany() +" \n Attn : " +customer.getFirstName() + " " + customer.getLastName()
+        +"\n"+customer.getAddress() +" "+ customer.getStreetAddress() +"\n "+"" + customer.getCity() + " , " + customer.getStateProvince() + " , " + customer.getPostalCode()
+        +" \nPh : " + customer.getPhoneNumber() + " " + customer.getPhoneNumberExtention()
+        +"\nEmail :"+ customer.getEmail() 
+        + "\nWebite : " + customer.getWebsite();
+		
+		parameters.put("customerName",customerAdd.toUpperCase()
+				);
 		parameters.put("oraganization", customer.getCompany());
 		parameters.put("customerAddress", customer.getAddress());
 		parameters.put("customerAddress2", customer.getStreetAddress());
@@ -91,7 +100,15 @@ public class JasperInvoiceReportServiceImpl {
 		parameters.put("customerWeb", customer.getEmail() + " , " + customer.getWebsite());
 
 		parameters.put("ProfileCompany", companyProfile.getCompany());
-		parameters.put("ProfileAddress", companyProfile.getAddress());
+		// parameters.put("ProfileAddress", companyProfile.getAddress());
+		
+		String profileAdd=companyProfile.getAddress() +" "+ companyProfile.getStreetAddress() +"\n"+companyProfile.getCity() + " , " + companyProfile.getStateProvince() + " , " + companyProfile.getPostalCode()
+        +" \nPhone :" + companyProfile.getPhoneNumber() 
+        +"\nEmail : "+ companyProfile.getEmail() 
+        + "\nWebsite : " + companyProfile.getWebsite();
+		
+		parameters.put("ProfileAddress", profileAdd.toUpperCase());
+		
 		parameters.put("ProfileStreetAddress", companyProfile.getStreetAddress());
 		parameters.put("ProfileCityStateZip", companyProfile.getCity() + " , " + companyProfile.getStateProvince()
 				+ " , " + companyProfile.getPostalCode());

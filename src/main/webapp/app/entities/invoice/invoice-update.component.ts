@@ -1,3 +1,4 @@
+import { IIdEntity } from './../../shared/model/id-entity.model';
 import { InvoiceItemService } from './../invoice-item/invoice-item.service';
 import { InvoiceItem } from './../../shared/model/invoice-item.model';
 import { Component, OnInit } from '@angular/core';
@@ -46,6 +47,7 @@ export class InvoiceUpdateComponent implements OnInit {
   customerName = '';
   selectedCustomerName = '';
   selectedCustomer: any;
+  maxId: any;
   editForm = this.fb.group({
     id: [],
     orderNo: [],
@@ -104,15 +106,18 @@ export class InvoiceUpdateComponent implements OnInit {
 
       this.grantTotal = 0;
 
-      this.newDynamic = { id: null, itemName: this.dynamicArray.length + 1, description: 'SFO TO DEL', price: 20, total: 40 };
+      this.newDynamic = { id: null, itemName: this.dynamicArray.length + 1, description: 'SFO TO DEL', price: 20, qty: 1, total: 0 };
       // this.newDynamic = {index:this.indexSize,title1: "SFO TO DEL", title2: "20",title3:"40"};
       this.dynamicArray.push(this.newDynamic);
+
+      this.invoiceService.findMaxId().subscribe(data => (this.maxId = data?.body?.id));
+
       this.updateForm(invoice);
 
       if (invoice.invoiceItems !== undefined) {
         this.dynamicArray = invoice.invoiceItems;
       } else {
-        this.newDynamic = { id: null, itemName: 'Load Move ', description: 'Load Move ', price: 207, total: 408 };
+        this.newDynamic = { id: null, itemName: 'Load Move ', description: 'Load Move ', price: 207, qty: 1, total: 0 };
         this.dynamicArray.push(this.newDynamic);
       }
       this.calculateTotal();
@@ -253,7 +258,7 @@ export class InvoiceUpdateComponent implements OnInit {
     this.indexSize = index + 1;
     // this.newDynamic = { id : 2 , itemName: this.dynamicArray.length + 1, description: 'SFO TO DEL', price: '20', total: '40' };
 
-    this.dynamicArray.push({ itemName: '', description: '', price: 0, total: 0 });
+    this.dynamicArray.push({ itemName: '', description: '', price: 0, qty: 1, total: 0 });
     this.calculateTotal();
     return true;
   }
@@ -280,7 +285,7 @@ export class InvoiceUpdateComponent implements OnInit {
       tt = this.dynamicArray[_i];
       if (tt !== null || tt !== undefined) {
         tt.invoice = null;
-        this.dynamicArray[_i].total = this.dynamicArray[_i].price;
+        this.dynamicArray[_i].total = Number(this.dynamicArray[_i].price) * Number(this.dynamicArray[_i].qty);
         this.grantTotal = this.grantTotal + Number(tt?.total);
       }
     }
@@ -290,15 +295,23 @@ export class InvoiceUpdateComponent implements OnInit {
     let myItem: any;
     if (lineItemValue !== null) {
       myItem = this.productitems.find(item => item.itemName === lineItemValue);
-      this.dynamicArray[index] = { itemName: myItem.itemName, description: myItem.description, price: myItem.price, total: myItem.price };
+      this.dynamicArray[index] = {
+        itemName: myItem.itemName,
+        description: myItem.description,
+        price: myItem.price,
+        qty: 1,
+        total: myItem.price
+      };
     }
+    this.calculateTotal();
   }
   onCustomerChange(customerName1: string): any {
     let myItem: any;
     if (this.customerName !== null) {
       myItem = this.customers.find(item => item.company === this.customerName);
       this.selectedCustomer = myItem;
-      // 	this.selectedCustomerName=JSON.stringify(myItem);
+      this.selectedCustomerName =
+        myItem.address + ' ' + myItem.streetAddress + ' \n ' + myItem.city + ' ' + myItem.stateProvince + ' ' + myItem.postalCode;
     }
   }
 }
