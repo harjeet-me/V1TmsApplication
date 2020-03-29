@@ -42,6 +42,7 @@
       "payterm": "Payterm",
       "balance": "Balance",
       "advance": "Advance",
+      "discount": "Discount",
       "createdOn": "Created On",
       "createdBy": "Created By",
       "updatedOn": "Updated On",

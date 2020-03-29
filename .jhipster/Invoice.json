@@ -109,6 +109,10 @@
             "fieldType": "Double"
         },
         {
+            "fieldName": "discount",
+            "fieldType": "Double"
+        },
+        {
             "fieldName": "createdOn",
             "fieldType": "Instant"
         },
