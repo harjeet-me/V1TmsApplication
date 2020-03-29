@@ -44,6 +44,12 @@
                         <a [routerLink]="['/invoice-history', invoiceHistory.next?.id, 'view']">{{ invoiceHistory.next?.status }}</a>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.invoice">Invoice</span></dt>
+                <dd>
+                    <div *ngIf="invoiceHistory.invoice">
+                        <a [routerLink]="['/invoice', invoiceHistory.invoice?.id, 'view']">{{ invoiceHistory.invoice?.id }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

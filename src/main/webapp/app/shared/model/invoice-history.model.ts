@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { IInvoice } from 'app/shared/model/invoice.model';
 import { InvoiceStatus } from 'app/shared/model/enumerations/invoice-status.model';
 
 export interface IInvoiceHistory {
@@ -11,6 +12,7 @@ export interface IInvoiceHistory {
   updatedBy?: string;
   previous?: IInvoiceHistory;
   next?: IInvoiceHistory;
+  invoice?: IInvoice;
 }
 
 export class InvoiceHistory implements IInvoiceHistory {
@@ -23,6 +25,7 @@ export class InvoiceHistory implements IInvoiceHistory {
     public updatedOn?: Moment,
     public updatedBy?: string,
     public previous?: IInvoiceHistory,
-    public next?: IInvoiceHistory
+    public next?: IInvoiceHistory,
+    public invoice?: IInvoice
   ) {}
 }

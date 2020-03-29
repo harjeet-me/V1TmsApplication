@@ -1,5 +1,6 @@
 package com.tms.v1.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -53,6 +54,10 @@ public class InvoiceHistory implements Serializable {
     @OneToOne
     @JoinColumn(unique = true)
     private InvoiceHistory next;
+
+    @ManyToOne
+    @JsonIgnoreProperties("invoiceHistories")
+    private Invoice invoice;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -165,6 +170,19 @@ public class InvoiceHistory implements Serializable {
 
     public void setNext(InvoiceHistory invoiceHistory) {
         this.next = invoiceHistory;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public InvoiceHistory invoice(Invoice invoice) {
+        this.invoice = invoice;
+        return this;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

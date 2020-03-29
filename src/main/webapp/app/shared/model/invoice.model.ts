@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
 import { IInvoiceItem } from 'app/shared/model/invoice-item.model';
 import { ITransactionsRecord } from 'app/shared/model/transactions-record.model';
+import { IInvoiceHistory } from 'app/shared/model/invoice-history.model';
 import { ITrip } from 'app/shared/model/trip.model';
 import { ICustomer } from 'app/shared/model/customer.model';
 import { IInvoiceReport } from 'app/shared/model/invoice-report.model';
@@ -44,6 +45,7 @@ export interface IInvoice {
   updatedBy?: string;
   invoiceItems?: IInvoiceItem[];
   transactionsRecords?: ITransactionsRecord[];
+  invoiceHistories?: IInvoiceHistory[];
   trip?: ITrip;
   customer?: ICustomer;
   invoiceReports?: IInvoiceReport[];
@@ -85,6 +87,7 @@ export class Invoice implements IInvoice {
     public updatedBy?: string,
     public invoiceItems?: IInvoiceItem[],
     public transactionsRecords?: ITransactionsRecord[],
+    public invoiceHistories?: IInvoiceHistory[],
     public trip?: ITrip,
     public customer?: ICustomer,
     public invoiceReports?: IInvoiceReport[]

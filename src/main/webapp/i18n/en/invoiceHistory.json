@@ -24,7 +24,8 @@
       "updatedOn": "Updated On",
       "updatedBy": "Updated By",
       "previous": "Previous",
-      "next": "Next"
+      "next": "Next",
+      "invoice": "Invoice"
     }
   }
 }
