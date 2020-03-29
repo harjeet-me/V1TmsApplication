@@ -444,7 +444,7 @@ relationship OneToOne {
     Equipment{insurance} to Insurance 
     Accounts {customer (company)} to  Customer{ accounts } 
      InvoiceHistory {previous (status)} to InvoiceHistory
-    InvoiceHistory {next (status)} to InvoiceHistory
+     InvoiceHistory {next (status)} to InvoiceHistory
    
 }
 entity Email {
@@ -540,6 +540,7 @@ relationship OneToMany {
     Email  to FileSystem 
     Trip  to Container  
     Invoice   to  TransactionsRecord { invoice  }
+	Invoice   to  InvoiceHistory { invoice  }
    }
 //relationship ManyToOne {
 

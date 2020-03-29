@@ -40,6 +40,9 @@
             <column name="next_id" type="bigint">
                 <constraints unique="true" nullable="true" uniqueConstraintName="ux_invoice_history_next_id" />
             </column>
+            <column name="invoice_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="invoice_history" columnName="created_on" columnDataType="datetime"/>
