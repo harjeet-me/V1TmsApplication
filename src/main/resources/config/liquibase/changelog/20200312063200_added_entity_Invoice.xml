@@ -82,7 +82,16 @@
             <column name="remarks" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="customer_info" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="payterm" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="balance" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="advance" type="double">
                 <constraints nullable="true" />
             </column>
             <column name="created_on" type="datetime">
@@ -150,7 +159,10 @@
             <column name="invoice_pdf" type="blob"/>
             <column name="invoice_pdf_content_type" type="string"/>
             <column name="remarks" type="string"/>
+            <column name="customer_info" type="string"/>
             <column name="payterm" type="string"/>
+            <column name="balance" type="numeric"/>
+            <column name="advance" type="numeric"/>
             <column name="created_on" type="datetime"/>
             <column name="created_by" type="string"/>
             <column name="updated_on" type="datetime"/>

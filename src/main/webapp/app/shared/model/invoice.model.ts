@@ -33,7 +33,10 @@ export interface IInvoice {
   invoicePdfContentType?: string;
   invoicePdf?: any;
   remarks?: string;
+  customerInfo?: string;
   payterm?: string;
+  balance?: number;
+  advance?: number;
   createdOn?: Moment;
   createdBy?: string;
   updatedOn?: Moment;
@@ -70,7 +73,10 @@ export class Invoice implements IInvoice {
     public invoicePdfContentType?: string,
     public invoicePdf?: any,
     public remarks?: string,
+    public customerInfo?: string,
     public payterm?: string,
+    public balance?: number,
+    public advance?: number,
     public createdOn?: Moment,
     public createdBy?: string,
     public updatedOn?: Moment,
