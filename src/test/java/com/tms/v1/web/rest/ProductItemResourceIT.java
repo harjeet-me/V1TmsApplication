@@ -47,6 +47,9 @@ public class ProductItemResourceIT {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
+    private static final Integer DEFAULT_DEFAULT_QTY = 1;
+    private static final Integer UPDATED_DEFAULT_QTY = 2;
+
     private static final Double DEFAULT_PRICE = 1D;
     private static final Double UPDATED_PRICE = 2D;
 
@@ -94,6 +97,7 @@ public class ProductItemResourceIT {
         ProductItem productItem = new ProductItem()
             .itemName(DEFAULT_ITEM_NAME)
             .description(DEFAULT_DESCRIPTION)
+            .defaultQty(DEFAULT_DEFAULT_QTY)
             .price(DEFAULT_PRICE)
             .createdOn(DEFAULT_CREATED_ON)
             .createdBy(DEFAULT_CREATED_BY)
@@ -111,6 +115,7 @@ public class ProductItemResourceIT {
         ProductItem productItem = new ProductItem()
             .itemName(UPDATED_ITEM_NAME)
             .description(UPDATED_DESCRIPTION)
+            .defaultQty(UPDATED_DEFAULT_QTY)
             .price(UPDATED_PRICE)
             .createdOn(UPDATED_CREATED_ON)
             .createdBy(UPDATED_CREATED_BY)
@@ -141,6 +146,7 @@ public class ProductItemResourceIT {
         ProductItem testProductItem = productItemList.get(productItemList.size() - 1);
         assertThat(testProductItem.getItemName()).isEqualTo(DEFAULT_ITEM_NAME);
         assertThat(testProductItem.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testProductItem.getDefaultQty()).isEqualTo(DEFAULT_DEFAULT_QTY);
         assertThat(testProductItem.getPrice()).isEqualTo(DEFAULT_PRICE);
         assertThat(testProductItem.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
         assertThat(testProductItem.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
@@ -187,6 +193,7 @@ public class ProductItemResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(productItem.getId().intValue())))
             .andExpect(jsonPath("$.[*].itemName").value(hasItem(DEFAULT_ITEM_NAME)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].defaultQty").value(hasItem(DEFAULT_DEFAULT_QTY)))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
             .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
@@ -207,6 +214,7 @@ public class ProductItemResourceIT {
             .andExpect(jsonPath("$.id").value(productItem.getId().intValue()))
             .andExpect(jsonPath("$.itemName").value(DEFAULT_ITEM_NAME))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.defaultQty").value(DEFAULT_DEFAULT_QTY))
             .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()))
             .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
@@ -239,6 +247,7 @@ public class ProductItemResourceIT {
         updatedProductItem
             .itemName(UPDATED_ITEM_NAME)
             .description(UPDATED_DESCRIPTION)
+            .defaultQty(UPDATED_DEFAULT_QTY)
             .price(UPDATED_PRICE)
             .createdOn(UPDATED_CREATED_ON)
             .createdBy(UPDATED_CREATED_BY)
@@ -256,6 +265,7 @@ public class ProductItemResourceIT {
         ProductItem testProductItem = productItemList.get(productItemList.size() - 1);
         assertThat(testProductItem.getItemName()).isEqualTo(UPDATED_ITEM_NAME);
         assertThat(testProductItem.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testProductItem.getDefaultQty()).isEqualTo(UPDATED_DEFAULT_QTY);
         assertThat(testProductItem.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testProductItem.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
         assertThat(testProductItem.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
@@ -322,6 +332,7 @@ public class ProductItemResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(productItem.getId().intValue())))
             .andExpect(jsonPath("$.[*].itemName").value(hasItem(DEFAULT_ITEM_NAME)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].defaultQty").value(hasItem(DEFAULT_DEFAULT_QTY)))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
             .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))

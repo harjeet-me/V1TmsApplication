@@ -34,6 +34,9 @@ public class ProductItem implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "default_qty")
+    private Integer defaultQty;
+
     @Column(name = "price")
     private Double price;
 
@@ -87,6 +90,19 @@ public class ProductItem implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getDefaultQty() {
+        return defaultQty;
+    }
+
+    public ProductItem defaultQty(Integer defaultQty) {
+        this.defaultQty = defaultQty;
+        return this;
+    }
+
+    public void setDefaultQty(Integer defaultQty) {
+        this.defaultQty = defaultQty;
     }
 
     public Double getPrice() {
@@ -202,6 +218,7 @@ public class ProductItem implements Serializable {
             "id=" + getId() +
             ", itemName='" + getItemName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", defaultQty=" + getDefaultQty() +
             ", price=" + getPrice() +
             ", createdOn='" + getCreatedOn() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +

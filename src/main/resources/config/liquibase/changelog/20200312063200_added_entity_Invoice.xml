@@ -94,6 +94,9 @@
             <column name="advance" type="double">
                 <constraints nullable="true" />
             </column>
+            <column name="discount" type="double">
+                <constraints nullable="true" />
+            </column>
             <column name="created_on" type="datetime">
                 <constraints nullable="true" />
             </column>
@@ -163,6 +166,7 @@
             <column name="payterm" type="string"/>
             <column name="balance" type="numeric"/>
             <column name="advance" type="numeric"/>
+            <column name="discount" type="numeric"/>
             <column name="created_on" type="datetime"/>
             <column name="created_by" type="string"/>
             <column name="updated_on" type="datetime"/>

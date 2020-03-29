@@ -8,7 +8,7 @@
 
 <div class="row justify-content-center">
 
-	<div class="col-12">
+	<div class="col-8">
 		<form name="editForm" role="form" novalidate (ngSubmit)="save()"
 			[formGroup]="editForm">
 			
@@ -34,7 +34,7 @@
 					
 					
 				<div class="row">
-					<div class="col-sm-6" style="background-color: yellow;">
+					<div class="col-sm-6" style="background-color: #add8e6;">
 						<div class="form-group">
 					<label class="form-control-label"
 						jhiTranslate="tmsV1ApplicationApp.invoice.customer"
@@ -54,7 +54,7 @@
 						type="input" list="customers;" temp=""
 						onmouseover="this.temp=this.value;this.value='';"
 						onmouseout="this.value=this.temp;"
-						(change)="onCustomerChange(customerName)" required="required" />
+						(change)="onCustomerChange()" required="required" />
 
 					<datalist id="customers;">
 						<select>
@@ -89,7 +89,7 @@
 					
 				<!-- 	right box -->
 					
-					<div class="col-sm-6" style="background-color: pink;">
+					<div class="col-sm-6" style="background-color: #add8e6;">
 						<div class="form-group">
 					<label class="form-control-label"
 						jhiTranslate="tmsV1ApplicationApp.invoice.invoiceNo"
@@ -345,6 +345,11 @@
 
 			</div> -->
            
+                              <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.discount" for="field_discount">Discount</label>
+                    <input type="number" class="form-control" name="discount" id="field_discount"
+                           formControlName="discount"/>
+                </div>
               
 
                 <div class="form-group">
@@ -454,5 +459,4 @@
 	</div>
 
 </div>
-
 

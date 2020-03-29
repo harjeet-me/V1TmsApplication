@@ -1,4 +1,3 @@
-import { IIdEntity } from './../../shared/model/id-entity.model';
 import { InvoiceItemService } from './../invoice-item/invoice-item.service';
 import { InvoiceItem } from './../../shared/model/invoice-item.model';
 import { Component, OnInit } from '@angular/core';
@@ -114,7 +113,7 @@ export class InvoiceUpdateComponent implements OnInit {
       this.dynamicArray.push(this.newDynamic);
 
       this.invoiceService.findMaxId().subscribe(data => (this.maxId = data?.body?.id));
-      alert(this.maxId);
+
       this.updateForm(invoice);
 
       if (invoice.invoiceItems !== undefined) {
@@ -314,7 +313,7 @@ export class InvoiceUpdateComponent implements OnInit {
     }
     this.calculateTotal();
   }
-  onCustomerChange(customerName1: string): any {
+  onCustomerChange(): any {
     let myItem: any;
     if (this.customerName !== null) {
       myItem = this.customers.find(item => item.company === this.customerName);

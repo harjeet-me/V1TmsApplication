@@ -5,6 +5,7 @@ export interface IProductItem {
   id?: number;
   itemName?: string;
   description?: string;
+  defaultQty?: number;
   price?: number;
   createdOn?: Moment;
   createdBy?: string;
@@ -18,6 +19,7 @@ export class ProductItem implements IProductItem {
     public id?: number,
     public itemName?: string,
     public description?: string,
+    public defaultQty?: number,
     public price?: number,
     public createdOn?: Moment,
     public createdBy?: string,

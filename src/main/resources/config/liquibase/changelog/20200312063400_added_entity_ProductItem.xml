@@ -22,6 +22,9 @@
             <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="default_qty" type="integer">
+                <constraints nullable="true" />
+            </column>
             <column name="price" type="double">
                 <constraints nullable="true" />
             </column>
@@ -64,6 +67,7 @@
             <column name="id" type="numeric"/>
             <column name="item_name" type="string"/>
             <column name="description" type="string"/>
+            <column name="default_qty" type="numeric"/>
             <column name="price" type="numeric"/>
             <column name="created_on" type="datetime"/>
             <column name="created_by" type="string"/>

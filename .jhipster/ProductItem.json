@@ -10,6 +10,10 @@
             "fieldType": "String"
         },
         {
+            "fieldName": "defaultQty",
+            "fieldType": "Integer"
+        },
+        {
             "fieldName": "price",
             "fieldType": "Double"
         },

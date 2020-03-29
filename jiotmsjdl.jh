@@ -134,10 +134,11 @@ entity Invoice {
      payterm String ,
      balance Double,
      advance Double,
-     createdOn Instant ,
-    createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+     discount Double,
+      createdOn Instant ,
+      createdBy String ,
+      updatedOn Instant ,
+      updatedBy String
    
 	
     }
@@ -179,6 +180,7 @@ entity InvoiceItem {
     entity ProductItem {
      itemName String,
      description String,
+     defaultQty Integer,
      price Double ,
      createdOn Instant ,
     createdBy String ,

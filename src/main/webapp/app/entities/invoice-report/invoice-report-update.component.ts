@@ -163,7 +163,7 @@ export class InvoiceReportUpdateComponent implements OnInit {
     }
     return option;
   }
-  onCustomerChange(customerName1: string): any {
+  onCustomerChange(): any {
     let myItem: any;
     if (this.customerName !== null) {
       myItem = this.customers.find(item => item.company === this.customerName);

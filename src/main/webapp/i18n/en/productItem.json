@@ -19,6 +19,7 @@
       },
       "itemName": "Item Name",
       "description": "Description",
+      "defaultQty": "Default Qty",
       "price": "Price",
       "createdOn": "Created On",
       "createdBy": "Created By",

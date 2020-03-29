@@ -43,6 +43,7 @@
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.productItem.itemName">Item Name</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.productItem.description">Description</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.productItem.defaultQty">Default Qty</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.productItem.price">Price</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.productItem.createdOn">Created On</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.productItem.createdBy">Created By</span></th>
@@ -56,6 +57,7 @@
                     <td><a [routerLink]="['/product-item', productItem.id, 'view']">{{ productItem.id }}</a></td>
                     <td>{{ productItem.itemName }}</td>
                     <td>{{ productItem.description }}</td>
+                    <td>{{ productItem.defaultQty }}</td>
                     <td>{{ productItem.price }}</td>
                     <td>{{ productItem.createdOn | date:'medium' }}</td>
                     <td>{{ productItem.createdBy }}</td>
