@@ -114,7 +114,7 @@ export class InvoiceUpdateComponent implements OnInit {
       this.dynamicArray.push(this.newDynamic);
 
       this.invoiceService.findMaxId().subscribe(data => (this.maxId = data?.body?.id));
-
+      alert(this.maxId);
       this.updateForm(invoice);
 
       if (invoice.invoiceItems !== undefined) {
@@ -321,6 +321,8 @@ export class InvoiceUpdateComponent implements OnInit {
       this.selectedCustomer = myItem;
       this.selectedCustomerName =
         myItem.address + ' ' + myItem.streetAddress + ' \n ' + myItem.city + ' ' + myItem.stateProvince + ' ' + myItem.postalCode;
+
+      this.editForm?.get('customerInfo')?.setValue(this.selectedCustomerName);
     }
   }
 }
