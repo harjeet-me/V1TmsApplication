@@ -143,6 +143,12 @@
             "relationshipName": "transactionsRecord"
         },
         {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "invoiceHistory",
+            "otherEntityRelationshipName": "invoice",
+            "relationshipName": "invoiceHistory"
+        },
+        {
             "relationshipType": "many-to-one",
             "otherEntityName": "trip",
             "otherEntityRelationshipName": "invoice",

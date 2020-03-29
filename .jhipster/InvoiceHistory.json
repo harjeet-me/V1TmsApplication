@@ -43,6 +43,13 @@
             "relationshipName": "next",
             "otherEntityField": "status",
             "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "invoice",
+            "otherEntityRelationshipName": "invoiceHistory",
+            "relationshipName": "invoice",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20200312064500",

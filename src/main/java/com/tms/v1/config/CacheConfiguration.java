@@ -80,6 +80,7 @@ public class CacheConfiguration {
             createCache(cm, com.tms.v1.domain.Invoice.class.getName() + ".invoiceReports");
             createCache(cm, com.tms.v1.domain.InvoiceReport.class.getName());
             createCache(cm, com.tms.v1.domain.InvoiceReport.class.getName() + ".invoices");
+            createCache(cm, com.tms.v1.domain.Invoice.class.getName() + ".invoiceHistories");
             // jhipster-needle-ehcache-add-entry
         };
     }

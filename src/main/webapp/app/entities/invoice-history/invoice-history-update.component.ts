@@ -10,6 +10,10 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IInvoiceHistory, InvoiceHistory } from 'app/shared/model/invoice-history.model';
 import { InvoiceHistoryService } from './invoice-history.service';
+import { IInvoice } from 'app/shared/model/invoice.model';
+import { InvoiceService } from 'app/entities/invoice/invoice.service';
+
+type SelectableEntity = IInvoiceHistory | IInvoice;
 
 @Component({
   selector: 'jhi-invoice-history-update',
@@ -19,6 +23,7 @@ export class InvoiceHistoryUpdateComponent implements OnInit {
   isSaving = false;
   previous: IInvoiceHistory[] = [];
   nexts: IInvoiceHistory[] = [];
+  invoices: IInvoice[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -29,10 +34,16 @@ export class InvoiceHistoryUpdateComponent implements OnInit {
     updatedOn: [],
     updatedBy: [],
     previous: [],
-    next: []
+    next: [],
+    invoice: []
   });
 
-  constructor(protected invoiceHistoryService: InvoiceHistoryService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected invoiceHistoryService: InvoiceHistoryService,
+    protected invoiceService: InvoiceService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ invoiceHistory }) => {
@@ -87,6 +98,8 @@ export class InvoiceHistoryUpdateComponent implements OnInit {
               .subscribe((concatRes: IInvoiceHistory[]) => (this.nexts = concatRes));
           }
         });
+
+      this.invoiceService.query().subscribe((res: HttpResponse<IInvoice[]>) => (this.invoices = res.body || []));
     });
   }
 
@@ -100,7 +113,8 @@ export class InvoiceHistoryUpdateComponent implements OnInit {
       updatedOn: invoiceHistory.updatedOn ? invoiceHistory.updatedOn.format(DATE_TIME_FORMAT) : null,
       updatedBy: invoiceHistory.updatedBy,
       previous: invoiceHistory.previous,
-      next: invoiceHistory.next
+      next: invoiceHistory.next,
+      invoice: invoiceHistory.invoice
     });
   }
 
@@ -129,7 +143,8 @@ export class InvoiceHistoryUpdateComponent implements OnInit {
       updatedOn: this.editForm.get(['updatedOn'])!.value ? moment(this.editForm.get(['updatedOn'])!.value, DATE_TIME_FORMAT) : undefined,
       updatedBy: this.editForm.get(['updatedBy'])!.value,
       previous: this.editForm.get(['previous'])!.value,
-      next: this.editForm.get(['next'])!.value
+      next: this.editForm.get(['next'])!.value,
+      invoice: this.editForm.get(['invoice'])!.value
     };
   }
 
@@ -149,7 +164,7 @@ export class InvoiceHistoryUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IInvoiceHistory): any {
+  trackById(index: number, item: SelectableEntity): any {
     return item.id;
   }
 }

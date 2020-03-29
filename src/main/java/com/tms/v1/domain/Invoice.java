@@ -146,6 +146,10 @@ public class Invoice implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<TransactionsRecord> transactionsRecords = new HashSet<>();
 
+    @OneToMany(mappedBy = "invoice")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<InvoiceHistory> invoiceHistories = new HashSet<>();
+
     @ManyToOne
     @JsonIgnoreProperties("invoices")
     private Trip trip;
@@ -619,6 +623,31 @@ public class Invoice implements Serializable {
 
     public void setTransactionsRecords(Set<TransactionsRecord> transactionsRecords) {
         this.transactionsRecords = transactionsRecords;
+    }
+
+    public Set<InvoiceHistory> getInvoiceHistories() {
+        return invoiceHistories;
+    }
+
+    public Invoice invoiceHistories(Set<InvoiceHistory> invoiceHistories) {
+        this.invoiceHistories = invoiceHistories;
+        return this;
+    }
+
+    public Invoice addInvoiceHistory(InvoiceHistory invoiceHistory) {
+        this.invoiceHistories.add(invoiceHistory);
+        invoiceHistory.setInvoice(this);
+        return this;
+    }
+
+    public Invoice removeInvoiceHistory(InvoiceHistory invoiceHistory) {
+        this.invoiceHistories.remove(invoiceHistory);
+        invoiceHistory.setInvoice(null);
+        return this;
+    }
+
+    public void setInvoiceHistories(Set<InvoiceHistory> invoiceHistories) {
+        this.invoiceHistories = invoiceHistories;
     }
 
     public Trip getTrip() {
