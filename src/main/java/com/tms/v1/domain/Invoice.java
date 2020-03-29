@@ -111,8 +111,17 @@ public class Invoice implements Serializable {
     @Column(name = "remarks")
     private String remarks;
 
+    @Column(name = "customer_info")
+    private String customerInfo;
+
     @Column(name = "payterm")
     private String payterm;
+
+    @Column(name = "balance")
+    private Double balance;
+
+    @Column(name = "advance")
+    private Double advance;
 
     @Column(name = "created_on")
     private Instant createdOn;
@@ -442,6 +451,19 @@ public class Invoice implements Serializable {
         this.remarks = remarks;
     }
 
+    public String getCustomerInfo() {
+        return customerInfo;
+    }
+
+    public Invoice customerInfo(String customerInfo) {
+        this.customerInfo = customerInfo;
+        return this;
+    }
+
+    public void setCustomerInfo(String customerInfo) {
+        this.customerInfo = customerInfo;
+    }
+
     public String getPayterm() {
         return payterm;
     }
@@ -453,6 +475,32 @@ public class Invoice implements Serializable {
 
     public void setPayterm(String payterm) {
         this.payterm = payterm;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public Invoice balance(Double balance) {
+        this.balance = balance;
+        return this;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
+    public Double getAdvance() {
+        return advance;
+    }
+
+    public Invoice advance(Double advance) {
+        this.advance = advance;
+        return this;
+    }
+
+    public void setAdvance(Double advance) {
+        this.advance = advance;
     }
 
     public Instant getCreatedOn() {
@@ -651,7 +699,10 @@ public class Invoice implements Serializable {
             ", invoicePdf='" + getInvoicePdf() + "'" +
             ", invoicePdfContentType='" + getInvoicePdfContentType() + "'" +
             ", remarks='" + getRemarks() + "'" +
+            ", customerInfo='" + getCustomerInfo() + "'" +
             ", payterm='" + getPayterm() + "'" +
+            ", balance=" + getBalance() +
+            ", advance=" + getAdvance() +
             ", createdOn='" + getCreatedOn() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", updatedOn='" + getUpdatedOn() + "'" +

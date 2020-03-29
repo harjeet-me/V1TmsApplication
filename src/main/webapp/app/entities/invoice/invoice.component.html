@@ -62,7 +62,10 @@
                     <th scope="col"  jhiSortBy="status"><span jhiTranslate="tmsV1ApplicationApp.invoice.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="invoicePdf"><span jhiTranslate="tmsV1ApplicationApp.invoice.invoicePdf">Invoice Pdf</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="remarks"><span jhiTranslate="tmsV1ApplicationApp.invoice.remarks">Remarks</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="customerInfo"><span jhiTranslate="tmsV1ApplicationApp.invoice.customerInfo">Customer Info</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="payterm"><span jhiTranslate="tmsV1ApplicationApp.invoice.payterm">Payterm</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="balance"><span jhiTranslate="tmsV1ApplicationApp.invoice.balance">Balance</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="advance"><span jhiTranslate="tmsV1ApplicationApp.invoice.advance">Advance</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="createdOn"><span jhiTranslate="tmsV1ApplicationApp.invoice.createdOn">Created On</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="createdBy"><span jhiTranslate="tmsV1ApplicationApp.invoice.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="updatedOn"><span jhiTranslate="tmsV1ApplicationApp.invoice.updatedOn">Updated On</span> <fa-icon icon="sort"></fa-icon></th>
@@ -99,7 +102,10 @@
                         <span *ngIf="invoice.invoicePdf">{{ invoice.invoicePdfContentType }}, {{ byteSize(invoice.invoicePdf) }}</span>
                     </td>
                     <td>{{ invoice.remarks }}</td>
+                    <td>{{ invoice.customerInfo }}</td>
                     <td>{{ invoice.payterm }}</td>
+                    <td>{{ invoice.balance }}</td>
+                    <td>{{ invoice.advance }}</td>
                     <td>{{ invoice.createdOn | date:'medium' }}</td>
                     <td>{{ invoice.createdBy }}</td>
                     <td>{{ invoice.updatedOn | date:'medium' }}</td>

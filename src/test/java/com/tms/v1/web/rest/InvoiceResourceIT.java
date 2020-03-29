@@ -117,8 +117,17 @@ public class InvoiceResourceIT {
     private static final String DEFAULT_REMARKS = "AAAAAAAAAA";
     private static final String UPDATED_REMARKS = "BBBBBBBBBB";
 
+    private static final String DEFAULT_CUSTOMER_INFO = "AAAAAAAAAA";
+    private static final String UPDATED_CUSTOMER_INFO = "BBBBBBBBBB";
+
     private static final String DEFAULT_PAYTERM = "AAAAAAAAAA";
     private static final String UPDATED_PAYTERM = "BBBBBBBBBB";
+
+    private static final Double DEFAULT_BALANCE = 1D;
+    private static final Double UPDATED_BALANCE = 2D;
+
+    private static final Double DEFAULT_ADVANCE = 1D;
+    private static final Double UPDATED_ADVANCE = 2D;
 
     private static final Instant DEFAULT_CREATED_ON = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_CREATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -184,7 +193,10 @@ public class InvoiceResourceIT {
             .invoicePdf(DEFAULT_INVOICE_PDF)
             .invoicePdfContentType(DEFAULT_INVOICE_PDF_CONTENT_TYPE)
             .remarks(DEFAULT_REMARKS)
+            .customerInfo(DEFAULT_CUSTOMER_INFO)
             .payterm(DEFAULT_PAYTERM)
+            .balance(DEFAULT_BALANCE)
+            .advance(DEFAULT_ADVANCE)
             .createdOn(DEFAULT_CREATED_ON)
             .createdBy(DEFAULT_CREATED_BY)
             .updatedOn(DEFAULT_UPDATED_ON)
@@ -221,7 +233,10 @@ public class InvoiceResourceIT {
             .invoicePdf(UPDATED_INVOICE_PDF)
             .invoicePdfContentType(UPDATED_INVOICE_PDF_CONTENT_TYPE)
             .remarks(UPDATED_REMARKS)
+            .customerInfo(UPDATED_CUSTOMER_INFO)
             .payterm(UPDATED_PAYTERM)
+            .balance(UPDATED_BALANCE)
+            .advance(UPDATED_ADVANCE)
             .createdOn(UPDATED_CREATED_ON)
             .createdBy(UPDATED_CREATED_BY)
             .updatedOn(UPDATED_UPDATED_ON)
@@ -271,7 +286,10 @@ public class InvoiceResourceIT {
         assertThat(testInvoice.getInvoicePdf()).isEqualTo(DEFAULT_INVOICE_PDF);
         assertThat(testInvoice.getInvoicePdfContentType()).isEqualTo(DEFAULT_INVOICE_PDF_CONTENT_TYPE);
         assertThat(testInvoice.getRemarks()).isEqualTo(DEFAULT_REMARKS);
+        assertThat(testInvoice.getCustomerInfo()).isEqualTo(DEFAULT_CUSTOMER_INFO);
         assertThat(testInvoice.getPayterm()).isEqualTo(DEFAULT_PAYTERM);
+        assertThat(testInvoice.getBalance()).isEqualTo(DEFAULT_BALANCE);
+        assertThat(testInvoice.getAdvance()).isEqualTo(DEFAULT_ADVANCE);
         assertThat(testInvoice.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
         assertThat(testInvoice.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testInvoice.getUpdatedOn()).isEqualTo(DEFAULT_UPDATED_ON);
@@ -337,7 +355,10 @@ public class InvoiceResourceIT {
             .andExpect(jsonPath("$.[*].invoicePdfContentType").value(hasItem(DEFAULT_INVOICE_PDF_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].invoicePdf").value(hasItem(Base64Utils.encodeToString(DEFAULT_INVOICE_PDF))))
             .andExpect(jsonPath("$.[*].remarks").value(hasItem(DEFAULT_REMARKS)))
+            .andExpect(jsonPath("$.[*].customerInfo").value(hasItem(DEFAULT_CUSTOMER_INFO)))
             .andExpect(jsonPath("$.[*].payterm").value(hasItem(DEFAULT_PAYTERM)))
+            .andExpect(jsonPath("$.[*].balance").value(hasItem(DEFAULT_BALANCE.doubleValue())))
+            .andExpect(jsonPath("$.[*].advance").value(hasItem(DEFAULT_ADVANCE.doubleValue())))
             .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
@@ -377,7 +398,10 @@ public class InvoiceResourceIT {
             .andExpect(jsonPath("$.invoicePdfContentType").value(DEFAULT_INVOICE_PDF_CONTENT_TYPE))
             .andExpect(jsonPath("$.invoicePdf").value(Base64Utils.encodeToString(DEFAULT_INVOICE_PDF)))
             .andExpect(jsonPath("$.remarks").value(DEFAULT_REMARKS))
+            .andExpect(jsonPath("$.customerInfo").value(DEFAULT_CUSTOMER_INFO))
             .andExpect(jsonPath("$.payterm").value(DEFAULT_PAYTERM))
+            .andExpect(jsonPath("$.balance").value(DEFAULT_BALANCE.doubleValue()))
+            .andExpect(jsonPath("$.advance").value(DEFAULT_ADVANCE.doubleValue()))
             .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.updatedOn").value(DEFAULT_UPDATED_ON.toString()))
@@ -429,7 +453,10 @@ public class InvoiceResourceIT {
             .invoicePdf(UPDATED_INVOICE_PDF)
             .invoicePdfContentType(UPDATED_INVOICE_PDF_CONTENT_TYPE)
             .remarks(UPDATED_REMARKS)
+            .customerInfo(UPDATED_CUSTOMER_INFO)
             .payterm(UPDATED_PAYTERM)
+            .balance(UPDATED_BALANCE)
+            .advance(UPDATED_ADVANCE)
             .createdOn(UPDATED_CREATED_ON)
             .createdBy(UPDATED_CREATED_BY)
             .updatedOn(UPDATED_UPDATED_ON)
@@ -466,7 +493,10 @@ public class InvoiceResourceIT {
         assertThat(testInvoice.getInvoicePdf()).isEqualTo(UPDATED_INVOICE_PDF);
         assertThat(testInvoice.getInvoicePdfContentType()).isEqualTo(UPDATED_INVOICE_PDF_CONTENT_TYPE);
         assertThat(testInvoice.getRemarks()).isEqualTo(UPDATED_REMARKS);
+        assertThat(testInvoice.getCustomerInfo()).isEqualTo(UPDATED_CUSTOMER_INFO);
         assertThat(testInvoice.getPayterm()).isEqualTo(UPDATED_PAYTERM);
+        assertThat(testInvoice.getBalance()).isEqualTo(UPDATED_BALANCE);
+        assertThat(testInvoice.getAdvance()).isEqualTo(UPDATED_ADVANCE);
         assertThat(testInvoice.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
         assertThat(testInvoice.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testInvoice.getUpdatedOn()).isEqualTo(UPDATED_UPDATED_ON);
@@ -552,7 +582,10 @@ public class InvoiceResourceIT {
             .andExpect(jsonPath("$.[*].invoicePdfContentType").value(hasItem(DEFAULT_INVOICE_PDF_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].invoicePdf").value(hasItem(Base64Utils.encodeToString(DEFAULT_INVOICE_PDF))))
             .andExpect(jsonPath("$.[*].remarks").value(hasItem(DEFAULT_REMARKS)))
+            .andExpect(jsonPath("$.[*].customerInfo").value(hasItem(DEFAULT_CUSTOMER_INFO)))
             .andExpect(jsonPath("$.[*].payterm").value(hasItem(DEFAULT_PAYTERM)))
+            .andExpect(jsonPath("$.[*].balance").value(hasItem(DEFAULT_BALANCE.doubleValue())))
+            .andExpect(jsonPath("$.[*].advance").value(hasItem(DEFAULT_ADVANCE.doubleValue())))
             .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))

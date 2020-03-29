@@ -93,8 +93,20 @@
             "fieldType": "String"
         },
         {
+            "fieldName": "customerInfo",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "payterm",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "balance",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "advance",
+            "fieldType": "Double"
         },
         {
             "fieldName": "createdOn",
