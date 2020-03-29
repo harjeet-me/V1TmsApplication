@@ -123,6 +123,9 @@ public class Invoice implements Serializable {
     @Column(name = "advance")
     private Double advance;
 
+    @Column(name = "discount")
+    private Double discount;
+
     @Column(name = "created_on")
     private Instant createdOn;
 
@@ -503,6 +506,19 @@ public class Invoice implements Serializable {
         this.advance = advance;
     }
 
+    public Double getDiscount() {
+        return discount;
+    }
+
+    public Invoice discount(Double discount) {
+        this.discount = discount;
+        return this;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
+
     public Instant getCreatedOn() {
         return createdOn;
     }
@@ -703,6 +719,7 @@ public class Invoice implements Serializable {
             ", payterm='" + getPayterm() + "'" +
             ", balance=" + getBalance() +
             ", advance=" + getAdvance() +
+            ", discount=" + getDiscount() +
             ", createdOn='" + getCreatedOn() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", updatedOn='" + getUpdatedOn() + "'" +

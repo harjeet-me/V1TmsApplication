@@ -37,6 +37,7 @@ export interface IInvoice {
   payterm?: string;
   balance?: number;
   advance?: number;
+  discount?: number;
   createdOn?: Moment;
   createdBy?: string;
   updatedOn?: Moment;
@@ -77,6 +78,7 @@ export class Invoice implements IInvoice {
     public payterm?: string,
     public balance?: number,
     public advance?: number,
+    public discount?: number,
     public createdOn?: Moment,
     public createdBy?: string,
     public updatedOn?: Moment,
