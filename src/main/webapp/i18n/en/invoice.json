@@ -47,6 +47,7 @@
       "createdBy": "Created By",
       "updatedOn": "Updated On",
       "updatedBy": "Updated By",
+      "notification": "Notification",
       "invoiceItem": "Invoice Item",
       "invoiceHistory": "Invoice History",
       "trip": "Trip",

@@ -8,6 +8,12 @@
     -->
     <changeSet id="20200312063200-2" author="jhipster">
         
+        <addForeignKeyConstraint baseColumnNames="notification_id"
+                                 baseTableName="invoice"
+                                 constraintName="fk_invoice_notification_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="email"/>
+
         <addForeignKeyConstraint baseColumnNames="trip_id"
                                  baseTableName="invoice"
                                  constraintName="fk_invoice_trip_id"

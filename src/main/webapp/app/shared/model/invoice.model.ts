@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { IEmail } from 'app/shared/model/email.model';
 import { IInvoiceItem } from 'app/shared/model/invoice-item.model';
 import { IInvoiceHistory } from 'app/shared/model/invoice-history.model';
 import { ITrip } from 'app/shared/model/trip.model';
@@ -42,6 +43,7 @@ export interface IInvoice {
   createdBy?: string;
   updatedOn?: Moment;
   updatedBy?: string;
+  notification?: IEmail;
   invoiceItems?: IInvoiceItem[];
   invoiceHistories?: IInvoiceHistory[];
   trip?: ITrip;
@@ -83,6 +85,7 @@ export class Invoice implements IInvoice {
     public createdBy?: string,
     public updatedOn?: Moment,
     public updatedBy?: string,
+    public notification?: IEmail,
     public invoiceItems?: IInvoiceItem[],
     public invoiceHistories?: IInvoiceHistory[],
     public trip?: ITrip,
