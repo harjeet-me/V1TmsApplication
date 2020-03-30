@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
+import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ITransactionsRecord } from 'app/shared/model/transactions-record.model';
@@ -29,7 +29,6 @@ export class TransactionsRecordComponent implements OnInit, OnDestroy {
   constructor(
     protected transactionsRecordService: TransactionsRecordService,
     protected activatedRoute: ActivatedRoute,
-    protected dataUtils: JhiDataUtils,
     protected router: Router,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal
@@ -95,14 +94,6 @@ export class TransactionsRecordComponent implements OnInit, OnDestroy {
   trackId(index: number, item: ITransactionsRecord): number {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     return item.id!;
-  }
-
-  byteSize(base64String: string): string {
-    return this.dataUtils.byteSize(base64String);
-  }
-
-  openFile(contentType: string, base64String: string): void {
-    return this.dataUtils.openFile(contentType, base64String);
   }
 
   registerChangeInTransactionsRecords(): void {

@@ -34,84 +34,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txRefNo" for="field_txRefNo">Tx Ref No</label>
-                    <input type="text" class="form-control" name="txRefNo" id="field_txRefNo"
-                           formControlName="txRefNo"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCreatedBy" for="field_txCreatedBy">Tx Created By</label>
-                    <input type="text" class="form-control" name="txCreatedBy" id="field_txCreatedBy"
-                           formControlName="txCreatedBy"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCreatedDate" for="field_txCreatedDate">Tx Created Date</label>
-                    <div class="input-group">
-                        <input id="field_txCreatedDate" type="text" class="form-control" name="txCreatedDate" ngbDatepicker #txCreatedDateDp="ngbDatepicker" formControlName="txCreatedDate"/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="txCreatedDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCompletedBy" for="field_txCompletedBy">Tx Completed By</label>
-                    <input type="text" class="form-control" name="txCompletedBy" id="field_txCompletedBy"
-                           formControlName="txCompletedBy"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCompletedDate" for="field_txCompletedDate">Tx Completed Date</label>
-                    <div class="input-group">
-                        <input id="field_txCompletedDate" type="text" class="form-control" name="txCompletedDate" ngbDatepicker #txCompletedDateDp="ngbDatepicker" formControlName="txCompletedDate"/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="txCompletedDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.status" for="field_status">Status</label>
                     <select class="form-control" name="status" formControlName="status" id="field_status">
                         <option value="INITIATED">{{ 'tmsV1ApplicationApp.TxStatus.INITIATED' | translate }}</option>
                         <option value="UNDERPROCESS">{{ 'tmsV1ApplicationApp.TxStatus.UNDERPROCESS' | translate }}</option>
                         <option value="COMPLETED">{{ 'tmsV1ApplicationApp.TxStatus.COMPLETED' | translate }}</option>
                     </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txDoc" for="field_txDoc">Tx Doc</label>
-                    <div>
-                        <div *ngIf="editForm.get('txDoc')!.value" class="form-text text-danger clearfix">
-                            <a class="pull-left" (click)="openFile(editForm.get('txDocContentType')!.value, editForm.get('txDoc')!.value)" jhiTranslate="entity.action.open">open</a><br>
-                            <span class="pull-left">{{ editForm.get('txDocContentType')!.value }}, {{ byteSize(editForm.get('txDoc')!.value) }}</span>
-                            <button type="button" (click)="editForm.patchValue({txDoc: null});editForm.patchValue({txDocContentType: null});"
-                                    class="btn btn-secondary btn-xs pull-right">
-                                <fa-icon icon="times"></fa-icon>
-                            </button>
-                        </div>
-                        <input type="file" id="file_txDoc" (change)="setFileData($event, 'txDoc', false)" jhiTranslate="entity.action.addblob"/>
-                    </div>
-                    <input type="hidden" class="form-control" name="txDoc" id="field_txDoc"
-                           formControlName="txDoc"/>
-                    <input type="hidden" class="form-control" name="txDocContentType" id="field_txDocContentType"
-                           formControlName="txDocContentType" />
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.currency" for="field_currency">Currency</label>
-                    <select class="form-control" name="currency" formControlName="currency" id="field_currency">
-                        <option value="USD">{{ 'tmsV1ApplicationApp.CURRENCY.USD' | translate }}</option>
-                        <option value="CAD">{{ 'tmsV1ApplicationApp.CURRENCY.CAD' | translate }}</option>
-                        <option value="INR">{{ 'tmsV1ApplicationApp.CURRENCY.INR' | translate }}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.remarks" for="field_remarks">Remarks</label>
-                    <input type="text" class="form-control" name="remarks" id="field_remarks"
-                           formControlName="remarks"/>
                 </div>
 
                 <div class="form-group">

@@ -10,13 +10,10 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.util.Objects;
 import java.time.Instant;
-import java.time.LocalDate;
 
 import com.tms.v1.domain.enumeration.TransactionType;
 
 import com.tms.v1.domain.enumeration.TxStatus;
-
-import com.tms.v1.domain.enumeration.CURRENCY;
 
 /**
  * A TransactionsRecord.
@@ -43,38 +40,9 @@ public class TransactionsRecord implements Serializable {
     @Column(name = "tx_ammount")
     private Double txAmmount;
 
-    @Column(name = "tx_ref_no")
-    private String txRefNo;
-
-    @Column(name = "tx_created_by")
-    private String txCreatedBy;
-
-    @Column(name = "tx_created_date")
-    private LocalDate txCreatedDate;
-
-    @Column(name = "tx_completed_by")
-    private String txCompletedBy;
-
-    @Column(name = "tx_completed_date")
-    private LocalDate txCompletedDate;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private TxStatus status;
-
-    @Lob
-    @Column(name = "tx_doc")
-    private byte[] txDoc;
-
-    @Column(name = "tx_doc_content_type")
-    private String txDocContentType;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "currency")
-    private CURRENCY currency;
-
-    @Column(name = "remarks")
-    private String remarks;
 
     @Column(name = "created_on")
     private Instant createdOn;
@@ -148,71 +116,6 @@ public class TransactionsRecord implements Serializable {
         this.txAmmount = txAmmount;
     }
 
-    public String getTxRefNo() {
-        return txRefNo;
-    }
-
-    public TransactionsRecord txRefNo(String txRefNo) {
-        this.txRefNo = txRefNo;
-        return this;
-    }
-
-    public void setTxRefNo(String txRefNo) {
-        this.txRefNo = txRefNo;
-    }
-
-    public String getTxCreatedBy() {
-        return txCreatedBy;
-    }
-
-    public TransactionsRecord txCreatedBy(String txCreatedBy) {
-        this.txCreatedBy = txCreatedBy;
-        return this;
-    }
-
-    public void setTxCreatedBy(String txCreatedBy) {
-        this.txCreatedBy = txCreatedBy;
-    }
-
-    public LocalDate getTxCreatedDate() {
-        return txCreatedDate;
-    }
-
-    public TransactionsRecord txCreatedDate(LocalDate txCreatedDate) {
-        this.txCreatedDate = txCreatedDate;
-        return this;
-    }
-
-    public void setTxCreatedDate(LocalDate txCreatedDate) {
-        this.txCreatedDate = txCreatedDate;
-    }
-
-    public String getTxCompletedBy() {
-        return txCompletedBy;
-    }
-
-    public TransactionsRecord txCompletedBy(String txCompletedBy) {
-        this.txCompletedBy = txCompletedBy;
-        return this;
-    }
-
-    public void setTxCompletedBy(String txCompletedBy) {
-        this.txCompletedBy = txCompletedBy;
-    }
-
-    public LocalDate getTxCompletedDate() {
-        return txCompletedDate;
-    }
-
-    public TransactionsRecord txCompletedDate(LocalDate txCompletedDate) {
-        this.txCompletedDate = txCompletedDate;
-        return this;
-    }
-
-    public void setTxCompletedDate(LocalDate txCompletedDate) {
-        this.txCompletedDate = txCompletedDate;
-    }
-
     public TxStatus getStatus() {
         return status;
     }
@@ -224,58 +127,6 @@ public class TransactionsRecord implements Serializable {
 
     public void setStatus(TxStatus status) {
         this.status = status;
-    }
-
-    public byte[] getTxDoc() {
-        return txDoc;
-    }
-
-    public TransactionsRecord txDoc(byte[] txDoc) {
-        this.txDoc = txDoc;
-        return this;
-    }
-
-    public void setTxDoc(byte[] txDoc) {
-        this.txDoc = txDoc;
-    }
-
-    public String getTxDocContentType() {
-        return txDocContentType;
-    }
-
-    public TransactionsRecord txDocContentType(String txDocContentType) {
-        this.txDocContentType = txDocContentType;
-        return this;
-    }
-
-    public void setTxDocContentType(String txDocContentType) {
-        this.txDocContentType = txDocContentType;
-    }
-
-    public CURRENCY getCurrency() {
-        return currency;
-    }
-
-    public TransactionsRecord currency(CURRENCY currency) {
-        this.currency = currency;
-        return this;
-    }
-
-    public void setCurrency(CURRENCY currency) {
-        this.currency = currency;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public TransactionsRecord remarks(String remarks) {
-        this.remarks = remarks;
-        return this;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
     }
 
     public Instant getCreatedOn() {
@@ -393,16 +244,7 @@ public class TransactionsRecord implements Serializable {
             ", txType='" + getTxType() + "'" +
             ", description='" + getDescription() + "'" +
             ", txAmmount=" + getTxAmmount() +
-            ", txRefNo='" + getTxRefNo() + "'" +
-            ", txCreatedBy='" + getTxCreatedBy() + "'" +
-            ", txCreatedDate='" + getTxCreatedDate() + "'" +
-            ", txCompletedBy='" + getTxCompletedBy() + "'" +
-            ", txCompletedDate='" + getTxCompletedDate() + "'" +
             ", status='" + getStatus() + "'" +
-            ", txDoc='" + getTxDoc() + "'" +
-            ", txDocContentType='" + getTxDocContentType() + "'" +
-            ", currency='" + getCurrency() + "'" +
-            ", remarks='" + getRemarks() + "'" +
             ", createdOn='" + getCreatedOn() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", updatedOn='" + getUpdatedOn() + "'" +

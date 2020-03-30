@@ -20,11 +20,8 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
 import java.time.Instant;
-import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
@@ -39,7 +36,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.tms.v1.domain.enumeration.TransactionType;
 import com.tms.v1.domain.enumeration.TxStatus;
-import com.tms.v1.domain.enumeration.CURRENCY;
 /**
  * Integration tests for the {@link TransactionsRecordResource} REST controller.
  */
@@ -58,34 +54,8 @@ public class TransactionsRecordResourceIT {
     private static final Double DEFAULT_TX_AMMOUNT = 1D;
     private static final Double UPDATED_TX_AMMOUNT = 2D;
 
-    private static final String DEFAULT_TX_REF_NO = "AAAAAAAAAA";
-    private static final String UPDATED_TX_REF_NO = "BBBBBBBBBB";
-
-    private static final String DEFAULT_TX_CREATED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_TX_CREATED_BY = "BBBBBBBBBB";
-
-    private static final LocalDate DEFAULT_TX_CREATED_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_TX_CREATED_DATE = LocalDate.now(ZoneId.systemDefault());
-
-    private static final String DEFAULT_TX_COMPLETED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_TX_COMPLETED_BY = "BBBBBBBBBB";
-
-    private static final LocalDate DEFAULT_TX_COMPLETED_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_TX_COMPLETED_DATE = LocalDate.now(ZoneId.systemDefault());
-
     private static final TxStatus DEFAULT_STATUS = TxStatus.INITIATED;
     private static final TxStatus UPDATED_STATUS = TxStatus.UNDERPROCESS;
-
-    private static final byte[] DEFAULT_TX_DOC = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_TX_DOC = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_TX_DOC_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_TX_DOC_CONTENT_TYPE = "image/png";
-
-    private static final CURRENCY DEFAULT_CURRENCY = CURRENCY.USD;
-    private static final CURRENCY UPDATED_CURRENCY = CURRENCY.CAD;
-
-    private static final String DEFAULT_REMARKS = "AAAAAAAAAA";
-    private static final String UPDATED_REMARKS = "BBBBBBBBBB";
 
     private static final Instant DEFAULT_CREATED_ON = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_CREATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -132,16 +102,7 @@ public class TransactionsRecordResourceIT {
             .txType(DEFAULT_TX_TYPE)
             .description(DEFAULT_DESCRIPTION)
             .txAmmount(DEFAULT_TX_AMMOUNT)
-            .txRefNo(DEFAULT_TX_REF_NO)
-            .txCreatedBy(DEFAULT_TX_CREATED_BY)
-            .txCreatedDate(DEFAULT_TX_CREATED_DATE)
-            .txCompletedBy(DEFAULT_TX_COMPLETED_BY)
-            .txCompletedDate(DEFAULT_TX_COMPLETED_DATE)
             .status(DEFAULT_STATUS)
-            .txDoc(DEFAULT_TX_DOC)
-            .txDocContentType(DEFAULT_TX_DOC_CONTENT_TYPE)
-            .currency(DEFAULT_CURRENCY)
-            .remarks(DEFAULT_REMARKS)
             .createdOn(DEFAULT_CREATED_ON)
             .createdBy(DEFAULT_CREATED_BY)
             .updatedOn(DEFAULT_UPDATED_ON)
@@ -159,16 +120,7 @@ public class TransactionsRecordResourceIT {
             .txType(UPDATED_TX_TYPE)
             .description(UPDATED_DESCRIPTION)
             .txAmmount(UPDATED_TX_AMMOUNT)
-            .txRefNo(UPDATED_TX_REF_NO)
-            .txCreatedBy(UPDATED_TX_CREATED_BY)
-            .txCreatedDate(UPDATED_TX_CREATED_DATE)
-            .txCompletedBy(UPDATED_TX_COMPLETED_BY)
-            .txCompletedDate(UPDATED_TX_COMPLETED_DATE)
             .status(UPDATED_STATUS)
-            .txDoc(UPDATED_TX_DOC)
-            .txDocContentType(UPDATED_TX_DOC_CONTENT_TYPE)
-            .currency(UPDATED_CURRENCY)
-            .remarks(UPDATED_REMARKS)
             .createdOn(UPDATED_CREATED_ON)
             .createdBy(UPDATED_CREATED_BY)
             .updatedOn(UPDATED_UPDATED_ON)
@@ -199,16 +151,7 @@ public class TransactionsRecordResourceIT {
         assertThat(testTransactionsRecord.getTxType()).isEqualTo(DEFAULT_TX_TYPE);
         assertThat(testTransactionsRecord.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testTransactionsRecord.getTxAmmount()).isEqualTo(DEFAULT_TX_AMMOUNT);
-        assertThat(testTransactionsRecord.getTxRefNo()).isEqualTo(DEFAULT_TX_REF_NO);
-        assertThat(testTransactionsRecord.getTxCreatedBy()).isEqualTo(DEFAULT_TX_CREATED_BY);
-        assertThat(testTransactionsRecord.getTxCreatedDate()).isEqualTo(DEFAULT_TX_CREATED_DATE);
-        assertThat(testTransactionsRecord.getTxCompletedBy()).isEqualTo(DEFAULT_TX_COMPLETED_BY);
-        assertThat(testTransactionsRecord.getTxCompletedDate()).isEqualTo(DEFAULT_TX_COMPLETED_DATE);
         assertThat(testTransactionsRecord.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testTransactionsRecord.getTxDoc()).isEqualTo(DEFAULT_TX_DOC);
-        assertThat(testTransactionsRecord.getTxDocContentType()).isEqualTo(DEFAULT_TX_DOC_CONTENT_TYPE);
-        assertThat(testTransactionsRecord.getCurrency()).isEqualTo(DEFAULT_CURRENCY);
-        assertThat(testTransactionsRecord.getRemarks()).isEqualTo(DEFAULT_REMARKS);
         assertThat(testTransactionsRecord.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
         assertThat(testTransactionsRecord.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testTransactionsRecord.getUpdatedOn()).isEqualTo(DEFAULT_UPDATED_ON);
@@ -255,16 +198,7 @@ public class TransactionsRecordResourceIT {
             .andExpect(jsonPath("$.[*].txType").value(hasItem(DEFAULT_TX_TYPE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].txAmmount").value(hasItem(DEFAULT_TX_AMMOUNT.doubleValue())))
-            .andExpect(jsonPath("$.[*].txRefNo").value(hasItem(DEFAULT_TX_REF_NO)))
-            .andExpect(jsonPath("$.[*].txCreatedBy").value(hasItem(DEFAULT_TX_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].txCreatedDate").value(hasItem(DEFAULT_TX_CREATED_DATE.toString())))
-            .andExpect(jsonPath("$.[*].txCompletedBy").value(hasItem(DEFAULT_TX_COMPLETED_BY)))
-            .andExpect(jsonPath("$.[*].txCompletedDate").value(hasItem(DEFAULT_TX_COMPLETED_DATE.toString())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
-            .andExpect(jsonPath("$.[*].txDocContentType").value(hasItem(DEFAULT_TX_DOC_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].txDoc").value(hasItem(Base64Utils.encodeToString(DEFAULT_TX_DOC))))
-            .andExpect(jsonPath("$.[*].currency").value(hasItem(DEFAULT_CURRENCY.toString())))
-            .andExpect(jsonPath("$.[*].remarks").value(hasItem(DEFAULT_REMARKS)))
             .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
@@ -285,16 +219,7 @@ public class TransactionsRecordResourceIT {
             .andExpect(jsonPath("$.txType").value(DEFAULT_TX_TYPE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.txAmmount").value(DEFAULT_TX_AMMOUNT.doubleValue()))
-            .andExpect(jsonPath("$.txRefNo").value(DEFAULT_TX_REF_NO))
-            .andExpect(jsonPath("$.txCreatedBy").value(DEFAULT_TX_CREATED_BY))
-            .andExpect(jsonPath("$.txCreatedDate").value(DEFAULT_TX_CREATED_DATE.toString()))
-            .andExpect(jsonPath("$.txCompletedBy").value(DEFAULT_TX_COMPLETED_BY))
-            .andExpect(jsonPath("$.txCompletedDate").value(DEFAULT_TX_COMPLETED_DATE.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
-            .andExpect(jsonPath("$.txDocContentType").value(DEFAULT_TX_DOC_CONTENT_TYPE))
-            .andExpect(jsonPath("$.txDoc").value(Base64Utils.encodeToString(DEFAULT_TX_DOC)))
-            .andExpect(jsonPath("$.currency").value(DEFAULT_CURRENCY.toString()))
-            .andExpect(jsonPath("$.remarks").value(DEFAULT_REMARKS))
             .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.updatedOn").value(DEFAULT_UPDATED_ON.toString()))
@@ -327,16 +252,7 @@ public class TransactionsRecordResourceIT {
             .txType(UPDATED_TX_TYPE)
             .description(UPDATED_DESCRIPTION)
             .txAmmount(UPDATED_TX_AMMOUNT)
-            .txRefNo(UPDATED_TX_REF_NO)
-            .txCreatedBy(UPDATED_TX_CREATED_BY)
-            .txCreatedDate(UPDATED_TX_CREATED_DATE)
-            .txCompletedBy(UPDATED_TX_COMPLETED_BY)
-            .txCompletedDate(UPDATED_TX_COMPLETED_DATE)
             .status(UPDATED_STATUS)
-            .txDoc(UPDATED_TX_DOC)
-            .txDocContentType(UPDATED_TX_DOC_CONTENT_TYPE)
-            .currency(UPDATED_CURRENCY)
-            .remarks(UPDATED_REMARKS)
             .createdOn(UPDATED_CREATED_ON)
             .createdBy(UPDATED_CREATED_BY)
             .updatedOn(UPDATED_UPDATED_ON)
@@ -354,16 +270,7 @@ public class TransactionsRecordResourceIT {
         assertThat(testTransactionsRecord.getTxType()).isEqualTo(UPDATED_TX_TYPE);
         assertThat(testTransactionsRecord.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testTransactionsRecord.getTxAmmount()).isEqualTo(UPDATED_TX_AMMOUNT);
-        assertThat(testTransactionsRecord.getTxRefNo()).isEqualTo(UPDATED_TX_REF_NO);
-        assertThat(testTransactionsRecord.getTxCreatedBy()).isEqualTo(UPDATED_TX_CREATED_BY);
-        assertThat(testTransactionsRecord.getTxCreatedDate()).isEqualTo(UPDATED_TX_CREATED_DATE);
-        assertThat(testTransactionsRecord.getTxCompletedBy()).isEqualTo(UPDATED_TX_COMPLETED_BY);
-        assertThat(testTransactionsRecord.getTxCompletedDate()).isEqualTo(UPDATED_TX_COMPLETED_DATE);
         assertThat(testTransactionsRecord.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testTransactionsRecord.getTxDoc()).isEqualTo(UPDATED_TX_DOC);
-        assertThat(testTransactionsRecord.getTxDocContentType()).isEqualTo(UPDATED_TX_DOC_CONTENT_TYPE);
-        assertThat(testTransactionsRecord.getCurrency()).isEqualTo(UPDATED_CURRENCY);
-        assertThat(testTransactionsRecord.getRemarks()).isEqualTo(UPDATED_REMARKS);
         assertThat(testTransactionsRecord.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
         assertThat(testTransactionsRecord.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testTransactionsRecord.getUpdatedOn()).isEqualTo(UPDATED_UPDATED_ON);
@@ -430,16 +337,7 @@ public class TransactionsRecordResourceIT {
             .andExpect(jsonPath("$.[*].txType").value(hasItem(DEFAULT_TX_TYPE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].txAmmount").value(hasItem(DEFAULT_TX_AMMOUNT.doubleValue())))
-            .andExpect(jsonPath("$.[*].txRefNo").value(hasItem(DEFAULT_TX_REF_NO)))
-            .andExpect(jsonPath("$.[*].txCreatedBy").value(hasItem(DEFAULT_TX_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].txCreatedDate").value(hasItem(DEFAULT_TX_CREATED_DATE.toString())))
-            .andExpect(jsonPath("$.[*].txCompletedBy").value(hasItem(DEFAULT_TX_COMPLETED_BY)))
-            .andExpect(jsonPath("$.[*].txCompletedDate").value(hasItem(DEFAULT_TX_COMPLETED_DATE.toString())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
-            .andExpect(jsonPath("$.[*].txDocContentType").value(hasItem(DEFAULT_TX_DOC_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].txDoc").value(hasItem(Base64Utils.encodeToString(DEFAULT_TX_DOC))))
-            .andExpect(jsonPath("$.[*].currency").value(hasItem(DEFAULT_CURRENCY.toString())))
-            .andExpect(jsonPath("$.[*].remarks").value(hasItem(DEFAULT_REMARKS)))
             .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))

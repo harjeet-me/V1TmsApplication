@@ -15,43 +15,9 @@
             "fieldType": "Double"
         },
         {
-            "fieldName": "txRefNo",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "txCreatedBy",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "txCreatedDate",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "txCompletedBy",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "txCompletedDate",
-            "fieldType": "LocalDate"
-        },
-        {
             "fieldName": "status",
             "fieldType": "TxStatus",
             "fieldValues": "INITIATED,UNDERPROCESS,COMPLETED"
-        },
-        {
-            "fieldName": "txDoc",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "any"
-        },
-        {
-            "fieldName": "currency",
-            "fieldType": "CURRENCY",
-            "fieldValues": "USD,CAD,INR"
-        },
-        {
-            "fieldName": "remarks",
-            "fieldType": "String"
         },
         {
             "fieldName": "createdOn",
