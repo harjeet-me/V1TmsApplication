@@ -25,34 +25,7 @@
             <column name="tx_ammount" type="double">
                 <constraints nullable="true" />
             </column>
-            <column name="tx_ref_no" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="tx_created_by" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="tx_created_date" type="date">
-                <constraints nullable="true" />
-            </column>
-            <column name="tx_completed_by" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="tx_completed_date" type="date">
-                <constraints nullable="true" />
-            </column>
             <column name="status" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="tx_doc" type="longblob">
-                <constraints nullable="true" />
-            </column>
-            <column name="tx_doc_content_type" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="currency" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="remarks" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="created_on" type="datetime">
@@ -71,9 +44,6 @@
                 <constraints nullable="true" />
             </column>
             <column name="account_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="invoice_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
@@ -104,16 +74,7 @@
             <column name="tx_type" type="string"/>
             <column name="description" type="string"/>
             <column name="tx_ammount" type="numeric"/>
-            <column name="tx_ref_no" type="string"/>
-            <column name="tx_created_by" type="string"/>
-            <column name="tx_created_date" type="date"/>
-            <column name="tx_completed_by" type="string"/>
-            <column name="tx_completed_date" type="date"/>
             <column name="status" type="string"/>
-            <column name="tx_doc" type="blob"/>
-            <column name="tx_doc_content_type" type="string"/>
-            <column name="currency" type="string"/>
-            <column name="remarks" type="string"/>
             <column name="created_on" type="datetime"/>
             <column name="created_by" type="string"/>
             <column name="updated_on" type="datetime"/>

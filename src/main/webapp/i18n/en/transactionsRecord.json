@@ -20,22 +20,13 @@
       "txType": "Tx Type",
       "description": "Description",
       "txAmmount": "Tx Ammount",
-      "txRefNo": "Tx Ref No",
-      "txCreatedBy": "Tx Created By",
-      "txCreatedDate": "Tx Created Date",
-      "txCompletedBy": "Tx Completed By",
-      "txCompletedDate": "Tx Completed Date",
       "status": "Status",
-      "txDoc": "Tx Doc",
-      "currency": "Currency",
-      "remarks": "Remarks",
       "createdOn": "Created On",
       "createdBy": "Created By",
       "updatedOn": "Updated On",
       "updatedBy": "Updated By",
       "customer": "Customer",
-      "account": "Account",
-      "invoice": "Invoice"
+      "account": "Account"
     }
   }
 }

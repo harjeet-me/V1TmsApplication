@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { JhiDataUtils } from 'ng-jhipster';
 
 import { ITransactionsRecord } from 'app/shared/model/transactions-record.model';
 
@@ -11,18 +10,10 @@ import { ITransactionsRecord } from 'app/shared/model/transactions-record.model'
 export class TransactionsRecordDetailComponent implements OnInit {
   transactionsRecord: ITransactionsRecord | null = null;
 
-  constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute) {}
+  constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ transactionsRecord }) => (this.transactionsRecord = transactionsRecord));
-  }
-
-  byteSize(base64String: string): string {
-    return this.dataUtils.byteSize(base64String);
-  }
-
-  openFile(contentType: string, base64String: string): void {
-    this.dataUtils.openFile(contentType, base64String);
   }
 
   previousState(): void {

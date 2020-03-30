@@ -144,10 +144,6 @@ public class Invoice implements Serializable {
 
     @OneToMany(mappedBy = "invoice")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<TransactionsRecord> transactionsRecords = new HashSet<>();
-
-    @OneToMany(mappedBy = "invoice")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<InvoiceHistory> invoiceHistories = new HashSet<>();
 
     @ManyToOne
@@ -598,31 +594,6 @@ public class Invoice implements Serializable {
 
     public void setInvoiceItems(Set<InvoiceItem> invoiceItems) {
         this.invoiceItems = invoiceItems;
-    }
-
-    public Set<TransactionsRecord> getTransactionsRecords() {
-        return transactionsRecords;
-    }
-
-    public Invoice transactionsRecords(Set<TransactionsRecord> transactionsRecords) {
-        this.transactionsRecords = transactionsRecords;
-        return this;
-    }
-
-    public Invoice addTransactionsRecord(TransactionsRecord transactionsRecord) {
-        this.transactionsRecords.add(transactionsRecord);
-        transactionsRecord.setInvoice(this);
-        return this;
-    }
-
-    public Invoice removeTransactionsRecord(TransactionsRecord transactionsRecord) {
-        this.transactionsRecords.remove(transactionsRecord);
-        transactionsRecord.setInvoice(null);
-        return this;
-    }
-
-    public void setTransactionsRecords(Set<TransactionsRecord> transactionsRecords) {
-        this.transactionsRecords = transactionsRecords;
     }
 
     public Set<InvoiceHistory> getInvoiceHistories() {

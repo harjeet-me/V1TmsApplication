@@ -20,11 +20,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="accounts"/>
 
-        <addForeignKeyConstraint baseColumnNames="invoice_id"
-                                 baseTableName="transactions_record"
-                                 constraintName="fk_transactions_record_invoice_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="invoice"/>
-
     </changeSet>
 </databaseChangeLog>

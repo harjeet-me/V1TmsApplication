@@ -211,16 +211,8 @@ entity InvoiceItem {
      txType TransactionType,        
      description String,
      txAmmount Double,
-     txRefNo String ,
-     txCreatedBy String,
-     txCreatedDate LocalDate ,
-     txCompletedBy String,
-     txCompletedDate LocalDate ,
      status  TxStatus ,
-     txDoc Blob ,
-     currency CURRENCY ,
-     remarks String ,
-     createdOn Instant ,
+    createdOn Instant ,
     createdBy String ,
     updatedOn Instant ,
     updatedBy String
@@ -539,7 +531,7 @@ relationship OneToMany {
     Accounts  to TransactionsRecord {account}
     Email  to FileSystem 
     Trip  to Container  
-    Invoice   to  TransactionsRecord { invoice  }
+   //  Invoice   to  TransactionsRecord { invoice  }
 	Invoice   to  InvoiceHistory { invoice  }
    }
 //relationship ManyToOne {
