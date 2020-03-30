@@ -15,11 +15,6 @@
             "fieldType": "Double"
         },
         {
-            "fieldName": "status",
-            "fieldType": "TxStatus",
-            "fieldValues": "INITIATED,UNDERPROCESS,COMPLETED"
-        },
-        {
             "fieldName": "createdOn",
             "fieldType": "Instant"
         },

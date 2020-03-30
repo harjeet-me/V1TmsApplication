@@ -34,15 +34,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.status" for="field_status">Status</label>
-                    <select class="form-control" name="status" formControlName="status" id="field_status">
-                        <option value="INITIATED">{{ 'tmsV1ApplicationApp.TxStatus.INITIATED' | translate }}</option>
-                        <option value="UNDERPROCESS">{{ 'tmsV1ApplicationApp.TxStatus.UNDERPROCESS' | translate }}</option>
-                        <option value="COMPLETED">{{ 'tmsV1ApplicationApp.TxStatus.COMPLETED' | translate }}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.transactionsRecord.createdOn" for="field_createdOn">Created On</label>
                     <div class="d-flex">
                         <input id="field_createdOn" type="datetime-local" class="form-control" name="createdOn" formControlName="createdOn" placeholder="YYYY-MM-DD HH:mm"/>

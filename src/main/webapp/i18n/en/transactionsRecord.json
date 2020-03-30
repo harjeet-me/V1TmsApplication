@@ -20,7 +20,6 @@
       "txType": "Tx Type",
       "description": "Description",
       "txAmmount": "Tx Ammount",
-      "status": "Status",
       "createdOn": "Created On",
       "createdBy": "Created By",
       "updatedOn": "Updated On",
