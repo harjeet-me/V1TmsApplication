@@ -211,8 +211,7 @@ entity InvoiceItem {
      txType TransactionType,        
      description String,
      txAmmount Double,
-     status  TxStatus ,
-    createdOn Instant ,
+     createdOn Instant ,
     createdBy String ,
     updatedOn Instant ,
     updatedBy String
