@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tms.v1.domain.Customer;
 import com.tms.v1.domain.Invoice;
 import com.tms.v1.domain.InvoiceItem;
 import com.tms.v1.domain.enumeration.CURRENCY;
@@ -93,12 +94,20 @@ public class InvoiceServiceImpl implements InvoiceService {
         	for (InvoiceItem invoiceItem : invoiceLineItem) {
         		invoiceItem.setInvoice(invoice);
         		log.debug("save invoice item by harjeet", invoiceItem);
-        		
         		savedLineItem.add(invoiceItemServiceImpl.save(invoiceItem));
+			  }
+        	Customer customer=	customerService.findOne(invoice.getCustomer().getId()).get();
+        	invoice.setCurrency(customer.getPreffredCurrency());
+        	if (invoice.getInvoiceDate()==null) {
+				invoice.setInvoiceDate(LocalDate.now());
 			}
+        	if (invoice.getInvoiceDueDate()==null) {
+				invoice.setInvoiceDueDate(invoice.getInvoiceDate());
+			}
+        	
         	invoice.setInvoiceItems(savedLineItem);
         	if(invoice.getStatus()!=null && invoice.getStatus()==InvoiceStatus.GENERATED) {
-        		invoice.setInvoicePdf(jasperInvoiceReportServiceImpl.generateReport(customerService.findOne(invoice.getCustomer().getId()).get(), invoice, companyProfileService.findOne(1L).get()));
+        		invoice.setInvoicePdf(jasperInvoiceReportServiceImpl.generateReport(customer, invoice, companyProfileService.findOne(1L).get()));
         		invoice.setInvoiceItems(null);
     			invoice.setInvoicePdfContentType("application/pdf");
         	}

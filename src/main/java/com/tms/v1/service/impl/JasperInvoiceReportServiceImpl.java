@@ -89,7 +89,7 @@ public class JasperInvoiceReportServiceImpl {
         +"\nEmail :"+ customer.getEmail() 
         + "\nWebite : " + customer.getWebsite();
 		
-		parameters.put("customerName",customerAdd.toUpperCase()
+		parameters.put("customerName",invoice.getCustomerInfo()
 				);
 		parameters.put("oraganization", customer.getCompany());
 		parameters.put("customerAddress", customer.getAddress());
@@ -147,6 +147,8 @@ public class JasperInvoiceReportServiceImpl {
 		// JasperExportManager.exportReportToPdfFile(jasperPrint, reportPath +
 		// "\\Emp-Rpt.pdf");
 
+		// JasperExportManager.exportReportToHtmlFile(jasperPrint,"Emp-Rpt.html");
+		
 		final ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 		
