@@ -20,44 +20,9 @@
                 <dd>
                     <span>{{ transactionsRecord.txAmmount }}</span>
                 </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txRefNo">Tx Ref No</span></dt>
-                <dd>
-                    <span>{{ transactionsRecord.txRefNo }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCreatedBy">Tx Created By</span></dt>
-                <dd>
-                    <span>{{ transactionsRecord.txCreatedBy }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCreatedDate">Tx Created Date</span></dt>
-                <dd>
-                    <span>{{ transactionsRecord.txCreatedDate }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCompletedBy">Tx Completed By</span></dt>
-                <dd>
-                    <span>{{ transactionsRecord.txCompletedBy }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txCompletedDate">Tx Completed Date</span></dt>
-                <dd>
-                    <span>{{ transactionsRecord.txCompletedDate }}</span>
-                </dd>
                 <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.status">Status</span></dt>
                 <dd>
                     <span jhiTranslate="{{ 'tmsV1ApplicationApp.TxStatus.' + transactionsRecord.status }}">{{ transactionsRecord.status }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txDoc">Tx Doc</span></dt>
-                <dd>
-                    <div *ngIf="transactionsRecord.txDoc">
-                        <a (click)="openFile(transactionsRecord?.txDocContentType!, transactionsRecord?.txDoc)" jhiTranslate="entity.action.open">open</a>
-                        {{ transactionsRecord.txDocContentType }}, {{ byteSize(transactionsRecord.txDoc) }}
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.currency">Currency</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.CURRENCY.' + transactionsRecord.currency }}">{{ transactionsRecord.currency }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.remarks">Remarks</span></dt>
-                <dd>
-                    <span>{{ transactionsRecord.remarks }}</span>
                 </dd>
                 <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.createdOn">Created On</span></dt>
                 <dd>
@@ -85,12 +50,6 @@
                 <dd>
                     <div *ngIf="transactionsRecord.account">
                         <a [routerLink]="['/accounts', transactionsRecord.account?.id, 'view']">{{ transactionsRecord.account?.id }}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.invoice">Invoice</span></dt>
-                <dd>
-                    <div *ngIf="transactionsRecord.invoice">
-                        <a [routerLink]="['/invoice', transactionsRecord.invoice?.id, 'view']">{{ transactionsRecord.invoice?.id }}</a>
                     </div>
                 </dd>
             </dl>

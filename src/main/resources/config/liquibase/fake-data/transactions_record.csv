@@ -1,11 +1,11 @@
-id;tx_type;description;tx_ammount;tx_ref_no;tx_created_by;tx_created_date;tx_completed_by;tx_completed_date;status;tx_doc;tx_doc_content_type;currency;remarks;created_on;created_by;updated_on;updated_by
-1;ADJUSTMENT;plum;44832;Keyboard Washington;Qatar Rustic Trail;2020-03-11;Unbranded navigating;2020-03-11;INITIATED;../fake-data/blob/hipster.png;image/png;INR;bypassing;2020-03-11T14:44:01;Generic Upgradable invoice;2020-03-11T07:54:18;Home Loan Account
-2;ADJUSTMENT;dedicated lavender Group;52677;Cambridgeshire;Refined Frozen Pizza Regional;2020-03-11;infrastructures;2020-03-11;COMPLETED;../fake-data/blob/hipster.png;image/png;INR;withdrawal Shoes Fish;2020-03-11T10:53:34;visionary Refined Soft Table Fish;2020-03-12T04:21:35;Orchestrator online multi-state
-3;CREDIT;Group portal;77161;multi-byte JSON hacking;tan contingency multi-tasking;2020-03-11;sticky Liaison;2020-03-11;UNDERPROCESS;../fake-data/blob/hipster.png;image/png;USD;Credit Card Account Investment Account Practical;2020-03-11T14:31:29;Cambridgeshire Steel;2020-03-11T14:58:26;Technician SSL
-4;PAYMENT;compressing;73229;Principal deposit Lock;array gold;2020-03-11;Orchestrator United Kingdom solid state;2020-03-11;INITIATED;../fake-data/blob/hipster.png;image/png;USD;tan Group FTP;2020-03-11T23:22:55;Health applications Sleek;2020-03-12T05:53:52;interface Web systems
-5;ADJUSTMENT;transmitting ability;9535;bleeding-edge Bahraini Dinar;Walk Israel;2020-03-11;red solid state;2020-03-11;COMPLETED;../fake-data/blob/hipster.png;image/png;CAD;Car;2020-03-11T16:56:06;Mouse;2020-03-12T05:16:29;XSS
-6;PAYMENT;overriding Director compressing;2593;structure Designer;Garden;2020-03-12;synthesizing;2020-03-11;UNDERPROCESS;../fake-data/blob/hipster.png;image/png;INR;Soft Associate Home Loan Account;2020-03-11T14:28:29;fault-tolerant Executive Center;2020-03-11T14:59:01;connecting
-7;REFUND;leverage implementation Legacy;55839;Direct;Gorgeous Ouguiya;2020-03-11;1080p networks;2020-03-11;COMPLETED;../fake-data/blob/hipster.png;image/png;CAD;Markets Tala;2020-03-11T15:06:36;Union;2020-03-11T10:28:10;Supervisor
-8;REFUND;Shoes;78550;Lead Branding;AGP system;2020-03-11;Ergonomic internet solution radical;2020-03-11;UNDERPROCESS;../fake-data/blob/hipster.png;image/png;USD;synthesize Gorgeous content;2020-03-11T17:05:01;salmon AGP;2020-03-11T11:33:20;Jamaica teal
-9;CREDIT;SAS Bahamian Dollar Dynamic;64106;Licensed Steel Shirt Supervisor;synthesize;2020-03-11;Vermont;2020-03-11;COMPLETED;../fake-data/blob/hipster.png;image/png;INR;Checking Account South Dakota;2020-03-12T04:41:39;Ergonomic Granite Tuna Function-based;2020-03-11T17:27:29;alarm
-10;PAYMENT;installation;87403;Home Loan Account;users Practical;2020-03-11;compressing B2C;2020-03-11;COMPLETED;../fake-data/blob/hipster.png;image/png;CAD;Berkshire Avon;2020-03-12T01:56:20;Canadian Dollar Concrete;2020-03-12T04:26:32;bluetooth
+id;tx_type;description;tx_ammount;status;created_on;created_by;updated_on;updated_by
+1;ADJUSTMENT;plum;44832;COMPLETED;2020-03-11T17:19:01;Rustic Trail logistical;2020-03-12T04:46:31;navigating Personal Loan Account Hawaii
+2;CREDIT;North Dakota Sports Handcrafted;75571;COMPLETED;2020-03-11T14:57:59;Research Home Loan Account Bermudian Dollar (customarily known as Bermuda Dollar);2020-03-11T17:29:51;global JBOD
+3;REFUND;Cambridgeshire;33467;COMPLETED;2020-03-11T08:48:47;Directives infrastructures;2020-03-11T23:07:04;Brand local area network Books
+4;REFUND;compelling bluetooth client-driven;47030;COMPLETED;2020-03-11T22:21:53;Refined Soft Table Fish Licensed;2020-03-11T07:05:46;online multi-state
+5;CREDIT;Group portal;77161;COMPLETED;2020-03-12T01:31:13;contingency multi-tasking;2020-03-11T08:02:03;sticky Liaison
+6;CREDIT;Guyana Research;81124;COMPLETED;2020-03-11T15:49:50;Practical Malaysian Ringgit;2020-03-11T18:56:10;Steel withdrawal Technician
+7;PAYMENT;reinvent compressing;73229;UNDERPROCESS;2020-03-11T13:25:36;gold Mobility;2020-03-11T07:28:34;United Kingdom solid state
+8;ADJUSTMENT;technologies;82234;COMPLETED;2020-03-12T01:45:15;Group FTP;2020-03-11T23:22:55;Health applications Sleek
+9;PAYMENT;withdrawal withdrawal Open-architected;32031;INITIATED;2020-03-12T06:26:58;virtual;2020-03-11T19:38:27;Practical Walk Israel
+10;ADJUSTMENT;Dynamic;42920;INITIATED;2020-03-11T18:16:43;Car;2020-03-11T16:56:06;Mouse

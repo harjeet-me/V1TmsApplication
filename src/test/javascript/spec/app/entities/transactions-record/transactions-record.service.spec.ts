@@ -1,12 +1,11 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import * as moment from 'moment';
-import { DATE_FORMAT, DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { TransactionsRecordService } from 'app/entities/transactions-record/transactions-record.service';
 import { ITransactionsRecord, TransactionsRecord } from 'app/shared/model/transactions-record.model';
 import { TransactionType } from 'app/shared/model/enumerations/transaction-type.model';
 import { TxStatus } from 'app/shared/model/enumerations/tx-status.model';
-import { CURRENCY } from 'app/shared/model/enumerations/currency.model';
 
 describe('Service Tests', () => {
   describe('TransactionsRecord Service', () => {
@@ -32,16 +31,7 @@ describe('Service Tests', () => {
         TransactionType.CREDIT,
         'AAAAAAA',
         0,
-        'AAAAAAA',
-        'AAAAAAA',
-        currentDate,
-        'AAAAAAA',
-        currentDate,
         TxStatus.INITIATED,
-        'image/png',
-        'AAAAAAA',
-        CURRENCY.USD,
-        'AAAAAAA',
         currentDate,
         'AAAAAAA',
         currentDate,
@@ -53,8 +43,6 @@ describe('Service Tests', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            txCreatedDate: currentDate.format(DATE_FORMAT),
-            txCompletedDate: currentDate.format(DATE_FORMAT),
             createdOn: currentDate.format(DATE_TIME_FORMAT),
             updatedOn: currentDate.format(DATE_TIME_FORMAT)
           },
@@ -72,8 +60,6 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            txCreatedDate: currentDate.format(DATE_FORMAT),
-            txCompletedDate: currentDate.format(DATE_FORMAT),
             createdOn: currentDate.format(DATE_TIME_FORMAT),
             updatedOn: currentDate.format(DATE_TIME_FORMAT)
           },
@@ -82,8 +68,6 @@ describe('Service Tests', () => {
 
         const expected = Object.assign(
           {
-            txCreatedDate: currentDate,
-            txCompletedDate: currentDate,
             createdOn: currentDate,
             updatedOn: currentDate
           },
@@ -103,15 +87,7 @@ describe('Service Tests', () => {
             txType: 'BBBBBB',
             description: 'BBBBBB',
             txAmmount: 1,
-            txRefNo: 'BBBBBB',
-            txCreatedBy: 'BBBBBB',
-            txCreatedDate: currentDate.format(DATE_FORMAT),
-            txCompletedBy: 'BBBBBB',
-            txCompletedDate: currentDate.format(DATE_FORMAT),
             status: 'BBBBBB',
-            txDoc: 'BBBBBB',
-            currency: 'BBBBBB',
-            remarks: 'BBBBBB',
             createdOn: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
             updatedOn: currentDate.format(DATE_TIME_FORMAT),
@@ -122,8 +98,6 @@ describe('Service Tests', () => {
 
         const expected = Object.assign(
           {
-            txCreatedDate: currentDate,
-            txCompletedDate: currentDate,
             createdOn: currentDate,
             updatedOn: currentDate
           },
@@ -143,15 +117,7 @@ describe('Service Tests', () => {
             txType: 'BBBBBB',
             description: 'BBBBBB',
             txAmmount: 1,
-            txRefNo: 'BBBBBB',
-            txCreatedBy: 'BBBBBB',
-            txCreatedDate: currentDate.format(DATE_FORMAT),
-            txCompletedBy: 'BBBBBB',
-            txCompletedDate: currentDate.format(DATE_FORMAT),
             status: 'BBBBBB',
-            txDoc: 'BBBBBB',
-            currency: 'BBBBBB',
-            remarks: 'BBBBBB',
             createdOn: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
             updatedOn: currentDate.format(DATE_TIME_FORMAT),
@@ -162,8 +128,6 @@ describe('Service Tests', () => {
 
         const expected = Object.assign(
           {
-            txCreatedDate: currentDate,
-            txCompletedDate: currentDate,
             createdOn: currentDate,
             updatedOn: currentDate
           },

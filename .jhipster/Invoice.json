@@ -138,12 +138,6 @@
         },
         {
             "relationshipType": "one-to-many",
-            "otherEntityName": "transactionsRecord",
-            "otherEntityRelationshipName": "invoice",
-            "relationshipName": "transactionsRecord"
-        },
-        {
-            "relationshipType": "one-to-many",
             "otherEntityName": "invoiceHistory",
             "otherEntityRelationshipName": "invoice",
             "relationshipName": "invoiceHistory"
