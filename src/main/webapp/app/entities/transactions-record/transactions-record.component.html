@@ -44,7 +44,6 @@
                     <th scope="col"  jhiSortBy="txType"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txType">Tx Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="description"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.description">Description</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="txAmmount"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txAmmount">Tx Ammount</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="status"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="createdOn"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.createdOn">Created On</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="createdBy"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="updatedOn"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.updatedOn">Updated On</span> <fa-icon icon="sort"></fa-icon></th>
@@ -60,7 +59,6 @@
                     <td jhiTranslate="{{ 'tmsV1ApplicationApp.TransactionType.' + transactionsRecord.txType }}">{{ transactionsRecord.txType }}</td>
                     <td>{{ transactionsRecord.description }}</td>
                     <td>{{ transactionsRecord.txAmmount }}</td>
-                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.TxStatus.' + transactionsRecord.status }}">{{ transactionsRecord.status }}</td>
                     <td>{{ transactionsRecord.createdOn | date:'medium' }}</td>
                     <td>{{ transactionsRecord.createdBy }}</td>
                     <td>{{ transactionsRecord.updatedOn | date:'medium' }}</td>

@@ -13,8 +13,6 @@ import java.time.Instant;
 
 import com.tms.v1.domain.enumeration.TransactionType;
 
-import com.tms.v1.domain.enumeration.TxStatus;
-
 /**
  * A TransactionsRecord.
  */
@@ -39,10 +37,6 @@ public class TransactionsRecord implements Serializable {
 
     @Column(name = "tx_ammount")
     private Double txAmmount;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    private TxStatus status;
 
     @Column(name = "created_on")
     private Instant createdOn;
@@ -110,19 +104,6 @@ public class TransactionsRecord implements Serializable {
 
     public void setTxAmmount(Double txAmmount) {
         this.txAmmount = txAmmount;
-    }
-
-    public TxStatus getStatus() {
-        return status;
-    }
-
-    public TransactionsRecord status(TxStatus status) {
-        this.status = status;
-        return this;
-    }
-
-    public void setStatus(TxStatus status) {
-        this.status = status;
     }
 
     public Instant getCreatedOn() {
@@ -227,7 +208,6 @@ public class TransactionsRecord implements Serializable {
             ", txType='" + getTxType() + "'" +
             ", description='" + getDescription() + "'" +
             ", txAmmount=" + getTxAmmount() +
-            ", status='" + getStatus() + "'" +
             ", createdOn='" + getCreatedOn() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", updatedOn='" + getUpdatedOn() + "'" +

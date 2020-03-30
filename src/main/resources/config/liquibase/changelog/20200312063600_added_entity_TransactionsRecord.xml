@@ -25,9 +25,6 @@
             <column name="tx_ammount" type="double">
                 <constraints nullable="true" />
             </column>
-            <column name="status" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="created_on" type="datetime">
                 <constraints nullable="true" />
             </column>
@@ -74,7 +71,6 @@
             <column name="tx_type" type="string"/>
             <column name="description" type="string"/>
             <column name="tx_ammount" type="numeric"/>
-            <column name="status" type="string"/>
             <column name="created_on" type="datetime"/>
             <column name="created_by" type="string"/>
             <column name="updated_on" type="datetime"/>

@@ -35,7 +35,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.tms.v1.domain.enumeration.TransactionType;
-import com.tms.v1.domain.enumeration.TxStatus;
 /**
  * Integration tests for the {@link TransactionsRecordResource} REST controller.
  */
@@ -53,9 +52,6 @@ public class TransactionsRecordResourceIT {
 
     private static final Double DEFAULT_TX_AMMOUNT = 1D;
     private static final Double UPDATED_TX_AMMOUNT = 2D;
-
-    private static final TxStatus DEFAULT_STATUS = TxStatus.INITIATED;
-    private static final TxStatus UPDATED_STATUS = TxStatus.UNDERPROCESS;
 
     private static final Instant DEFAULT_CREATED_ON = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_CREATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -102,7 +98,6 @@ public class TransactionsRecordResourceIT {
             .txType(DEFAULT_TX_TYPE)
             .description(DEFAULT_DESCRIPTION)
             .txAmmount(DEFAULT_TX_AMMOUNT)
-            .status(DEFAULT_STATUS)
             .createdOn(DEFAULT_CREATED_ON)
             .createdBy(DEFAULT_CREATED_BY)
             .updatedOn(DEFAULT_UPDATED_ON)
@@ -120,7 +115,6 @@ public class TransactionsRecordResourceIT {
             .txType(UPDATED_TX_TYPE)
             .description(UPDATED_DESCRIPTION)
             .txAmmount(UPDATED_TX_AMMOUNT)
-            .status(UPDATED_STATUS)
             .createdOn(UPDATED_CREATED_ON)
             .createdBy(UPDATED_CREATED_BY)
             .updatedOn(UPDATED_UPDATED_ON)
@@ -151,7 +145,6 @@ public class TransactionsRecordResourceIT {
         assertThat(testTransactionsRecord.getTxType()).isEqualTo(DEFAULT_TX_TYPE);
         assertThat(testTransactionsRecord.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testTransactionsRecord.getTxAmmount()).isEqualTo(DEFAULT_TX_AMMOUNT);
-        assertThat(testTransactionsRecord.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testTransactionsRecord.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
         assertThat(testTransactionsRecord.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testTransactionsRecord.getUpdatedOn()).isEqualTo(DEFAULT_UPDATED_ON);
@@ -198,7 +191,6 @@ public class TransactionsRecordResourceIT {
             .andExpect(jsonPath("$.[*].txType").value(hasItem(DEFAULT_TX_TYPE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].txAmmount").value(hasItem(DEFAULT_TX_AMMOUNT.doubleValue())))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
@@ -219,7 +211,6 @@ public class TransactionsRecordResourceIT {
             .andExpect(jsonPath("$.txType").value(DEFAULT_TX_TYPE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.txAmmount").value(DEFAULT_TX_AMMOUNT.doubleValue()))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.updatedOn").value(DEFAULT_UPDATED_ON.toString()))
@@ -252,7 +243,6 @@ public class TransactionsRecordResourceIT {
             .txType(UPDATED_TX_TYPE)
             .description(UPDATED_DESCRIPTION)
             .txAmmount(UPDATED_TX_AMMOUNT)
-            .status(UPDATED_STATUS)
             .createdOn(UPDATED_CREATED_ON)
             .createdBy(UPDATED_CREATED_BY)
             .updatedOn(UPDATED_UPDATED_ON)
@@ -270,7 +260,6 @@ public class TransactionsRecordResourceIT {
         assertThat(testTransactionsRecord.getTxType()).isEqualTo(UPDATED_TX_TYPE);
         assertThat(testTransactionsRecord.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testTransactionsRecord.getTxAmmount()).isEqualTo(UPDATED_TX_AMMOUNT);
-        assertThat(testTransactionsRecord.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testTransactionsRecord.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
         assertThat(testTransactionsRecord.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testTransactionsRecord.getUpdatedOn()).isEqualTo(UPDATED_UPDATED_ON);
@@ -337,7 +326,6 @@ public class TransactionsRecordResourceIT {
             .andExpect(jsonPath("$.[*].txType").value(hasItem(DEFAULT_TX_TYPE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].txAmmount").value(hasItem(DEFAULT_TX_AMMOUNT.doubleValue())))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
