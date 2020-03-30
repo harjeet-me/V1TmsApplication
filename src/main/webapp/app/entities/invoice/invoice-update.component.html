@@ -2,11 +2,14 @@
 .desc {
 	height: auto;
 	overflow: auto;
+	
+
 }
+
 </style>
 
 
-<div class="row justify-content-center">
+<div class="row justify-content-center page">
 
 	<div class="col-8">
 		<form name="editForm" role="form" novalidate (ngSubmit)="save()"
@@ -34,7 +37,7 @@
 					
 					
 				<div class="row">
-					<div class="col-sm-6" style="background-color: #add8e6;">
+					<div class="col-sm-6" >
 						<div class="form-group">
 					<label class="form-control-label"
 						jhiTranslate="tmsV1ApplicationApp.invoice.customer"
@@ -366,7 +369,7 @@
                 
                 
 			<div class="form-group" style="width: 100%">
-				<table class="table">
+				<table class="table bordered-table">
 					<thead class="thead-dark">
 						<tr>
 							<th>Action</th>
