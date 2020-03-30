@@ -5,7 +5,6 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { TransactionsRecordService } from 'app/entities/transactions-record/transactions-record.service';
 import { ITransactionsRecord, TransactionsRecord } from 'app/shared/model/transactions-record.model';
 import { TransactionType } from 'app/shared/model/enumerations/transaction-type.model';
-import { TxStatus } from 'app/shared/model/enumerations/tx-status.model';
 
 describe('Service Tests', () => {
   describe('TransactionsRecord Service', () => {
@@ -26,17 +25,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new TransactionsRecord(
-        0,
-        TransactionType.CREDIT,
-        'AAAAAAA',
-        0,
-        TxStatus.INITIATED,
-        currentDate,
-        'AAAAAAA',
-        currentDate,
-        'AAAAAAA'
-      );
+      elemDefault = new TransactionsRecord(0, TransactionType.CREDIT, 'AAAAAAA', 0, currentDate, 'AAAAAAA', currentDate, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -87,7 +76,6 @@ describe('Service Tests', () => {
             txType: 'BBBBBB',
             description: 'BBBBBB',
             txAmmount: 1,
-            status: 'BBBBBB',
             createdOn: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
             updatedOn: currentDate.format(DATE_TIME_FORMAT),
@@ -117,7 +105,6 @@ describe('Service Tests', () => {
             txType: 'BBBBBB',
             description: 'BBBBBB',
             txAmmount: 1,
-            status: 'BBBBBB',
             createdOn: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
             updatedOn: currentDate.format(DATE_TIME_FORMAT),
