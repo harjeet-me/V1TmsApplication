@@ -243,6 +243,14 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.notification" for="field_notification">Notification</label>
+                    <select class="form-control" id="field_notification" name="notification" formControlName="notification">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="emailOption.id === editForm.get('notification')!.value?.id ? editForm.get('notification')!.value : emailOption" *ngFor="let emailOption of notifications; trackBy: trackById">{{ emailOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.trip" for="field_trip">Trip</label>
                     <select class="form-control" id="field_trip" name="trip" formControlName="trip">
                         <option [ngValue]="null"></option>

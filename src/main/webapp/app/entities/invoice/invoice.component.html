@@ -71,6 +71,7 @@
                     <th scope="col"  jhiSortBy="createdBy"><span jhiTranslate="tmsV1ApplicationApp.invoice.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="updatedOn"><span jhiTranslate="tmsV1ApplicationApp.invoice.updatedOn">Updated On</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="updatedBy"><span jhiTranslate="tmsV1ApplicationApp.invoice.updatedBy">Updated By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="notification.id"><span jhiTranslate="tmsV1ApplicationApp.invoice.notification">Notification</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="trip.id"><span jhiTranslate="tmsV1ApplicationApp.invoice.trip">Trip</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="customer.company"><span jhiTranslate="tmsV1ApplicationApp.invoice.customer">Customer</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
@@ -112,6 +113,11 @@
                     <td>{{ invoice.createdBy }}</td>
                     <td>{{ invoice.updatedOn | date:'medium' }}</td>
                     <td>{{ invoice.updatedBy }}</td>
+                    <td>
+                        <div *ngIf="invoice.notification">
+                            <a [routerLink]="['/email', invoice.notification?.id, 'view']" >{{ invoice.notification?.id }}</a>
+                        </div>
+                    </td>
                     <td>
                         <div *ngIf="invoice.trip">
                             <a [routerLink]="['/trip', invoice.trip?.id, 'view']" >{{ invoice.trip?.id }}</a>

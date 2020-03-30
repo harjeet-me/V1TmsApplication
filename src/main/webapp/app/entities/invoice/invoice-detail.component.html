@@ -131,6 +131,12 @@
                 <dd>
                     <span>{{ invoice.updatedBy }}</span>
                 </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.notification">Notification</span></dt>
+                <dd>
+                    <div *ngIf="invoice.notification">
+                        <a [routerLink]="['/email', invoice.notification?.id, 'view']">{{ invoice.notification?.id }}</a>
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.trip">Trip</span></dt>
                 <dd>
                     <div *ngIf="invoice.trip">

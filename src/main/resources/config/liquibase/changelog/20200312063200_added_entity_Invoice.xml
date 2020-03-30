@@ -109,6 +109,9 @@
             <column name="updated_by" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="notification_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_invoice_notification_id" />
+            </column>
             <column name="trip_id" type="bigint">
                 <constraints nullable="true" />
             </column>

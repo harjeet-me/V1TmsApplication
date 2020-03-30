@@ -138,6 +138,10 @@ public class Invoice implements Serializable {
     @Column(name = "updated_by")
     private String updatedBy;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Email notification;
+
     @OneToMany(mappedBy = "invoice")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<InvoiceItem> invoiceItems = new HashSet<>();
@@ -569,6 +573,19 @@ public class Invoice implements Serializable {
 
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    public Email getNotification() {
+        return notification;
+    }
+
+    public Invoice notification(Email email) {
+        this.notification = email;
+        return this;
+    }
+
+    public void setNotification(Email email) {
+        this.notification = email;
     }
 
     public Set<InvoiceItem> getInvoiceItems() {
