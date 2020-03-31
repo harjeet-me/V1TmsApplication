@@ -94,15 +94,11 @@
                     <td>{{ trip.detention }}</td>
                     <td>{{ trip.chasisInTime | date:'medium' }}</td>
                     <td>
-                        <a *ngIf="trip.orderDocument" (click)="openFile(trip.orderDocumentContentType, trip.orderDocument)">
-                            <img [src]="'data:' + trip.orderDocumentContentType + ';base64,' + trip.orderDocument" style="max-height: 30px;" alt="trip image"/>
-                        </a>
+                        <a *ngIf="trip.orderDocument" (click)="openFile(trip.orderDocumentContentType, trip.orderDocument)" jhiTranslate="entity.action.open">open</a>
                         <span *ngIf="trip.orderDocument">{{ trip.orderDocumentContentType }}, {{ byteSize(trip.orderDocument) }}</span>
                     </td>
                     <td>
-                        <a *ngIf="trip.pod" (click)="openFile(trip.podContentType, trip.pod)">
-                            <img [src]="'data:' + trip.podContentType + ';base64,' + trip.pod" style="max-height: 30px;" alt="trip image"/>
-                        </a>
+                        <a *ngIf="trip.pod" (click)="openFile(trip.podContentType, trip.pod)" jhiTranslate="entity.action.open">open</a>
                         <span *ngIf="trip.pod">{{ trip.podContentType }}, {{ byteSize(trip.pod) }}</span>
                     </td>
                     <td>{{ trip.hazmat }}</td>

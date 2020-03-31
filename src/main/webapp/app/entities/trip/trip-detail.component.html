@@ -59,18 +59,14 @@
                 <dt><span jhiTranslate="tmsV1ApplicationApp.trip.orderDocument">Order Document</span></dt>
                 <dd>
                     <div *ngIf="trip.orderDocument">
-                        <a (click)="openFile(trip?.orderDocumentContentType!, trip?.orderDocument)">
-                            <img [src]="'data:' + trip.orderDocumentContentType + ';base64,' + trip.orderDocument" style="max-width: 100%;" alt="trip image"/>
-                        </a>
+                        <a (click)="openFile(trip?.orderDocumentContentType!, trip?.orderDocument)" jhiTranslate="entity.action.open">open</a>
                         {{ trip.orderDocumentContentType }}, {{ byteSize(trip.orderDocument) }}
                     </div>
                 </dd>
                 <dt><span jhiTranslate="tmsV1ApplicationApp.trip.pod">Pod</span></dt>
                 <dd>
                     <div *ngIf="trip.pod">
-                        <a (click)="openFile(trip?.podContentType!, trip?.pod)">
-                            <img [src]="'data:' + trip.podContentType + ';base64,' + trip.pod" style="max-width: 100%;" alt="trip image"/>
-                        </a>
+                        <a (click)="openFile(trip?.podContentType!, trip?.pod)" jhiTranslate="entity.action.open">open</a>
                         {{ trip.podContentType }}, {{ byteSize(trip.pod) }}
                     </div>
                 </dd>
