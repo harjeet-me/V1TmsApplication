@@ -54,12 +54,12 @@
         {
             "fieldName": "orderDocument",
             "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
+            "fieldTypeBlobContent": "any"
         },
         {
             "fieldName": "pod",
             "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
+            "fieldTypeBlobContent": "any"
         },
         {
             "fieldName": "hazmat",
