@@ -1,6 +1,5 @@
 package com.tms.v1.web.rest;
 
-import com.tms.v1.domain.IdEntity;
 import com.tms.v1.domain.Invoice;
 import com.tms.v1.service.InvoiceService;
 import com.tms.v1.web.rest.errors.BadRequestAlertException;
@@ -141,19 +140,5 @@ public class InvoiceResource {
         Page<Invoice> page = invoiceService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
-    
-    /**
-     * {@code GET  max Id get of  invoice entity.
-     *
-     * @param id the id of the invoice to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the invoice, or with status {@code 404 (Not Found)}.
-     */
-    @GetMapping("/invoices/getEntityMaxId")
-    public ResponseEntity<Invoice> getEntityMaxId() {
-    	Invoice invoice = new Invoice();
-    	invoice.setId(invoiceService.getMaxInvoiceId().get()+1);
-        Optional<Invoice> invoiceOpt = Optional.of(invoice);
-        return ResponseUtil.wrapOrNotFound(invoiceOpt);
     }
 }

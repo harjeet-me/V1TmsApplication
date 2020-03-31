@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -101,10 +100,4 @@ public class InvoiceItemServiceImpl implements InvoiceItemService {
             .stream(invoiceItemSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
     }
-    
-    @Override
-	public Set<InvoiceItem> findByInvoiceId(Long id) {
-		
-		return invoiceItemRepository.findByInvoice_Id(id);
-	}
 }

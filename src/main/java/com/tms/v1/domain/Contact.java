@@ -1,39 +1,25 @@
 package com.tms.v1.domain;
 
-import java.io.Serializable;
-import java.time.Instant;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.persistence.*;
+
+import org.springframework.data.elasticsearch.annotations.FieldType;
+import java.io.Serializable;
+import java.util.Objects;
+import java.time.Instant;
+
 import com.tms.v1.domain.enumeration.Designation;
 
 /**
  * A Contact.
  */
-
 @Entity
 @Table(name = "contact")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "contact")
-@EntityListeners(AuditingEntityListener.class)
 public class Contact implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,19 +49,16 @@ public class Contact implements Serializable {
 
     @Column(name = "preferred_time")
     private String preferredTime;
-    @CreatedDate
+
     @Column(name = "created_on")
-    private Instant createdOn = Instant.now();
-    
-    @CreatedBy
+    private Instant createdOn;
+
     @Column(name = "created_by")
     private String createdBy;
-    
-    @LastModifiedDate
+
     @Column(name = "updated_on")
-    private Instant updatedOn = Instant.now();
-    
-    @LastModifiedBy
+    private Instant updatedOn;
+
     @Column(name = "updated_by")
     private String updatedBy;
 

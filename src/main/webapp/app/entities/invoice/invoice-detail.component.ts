@@ -6,7 +6,7 @@ import { IInvoice } from 'app/shared/model/invoice.model';
 
 @Component({
   selector: 'jhi-invoice-detail',
-  templateUrl: './invoice-detail-new.component.html'
+  templateUrl: './invoice-detail.component.html'
 })
 export class InvoiceDetailComponent implements OnInit {
   invoice: IInvoice | null = null;

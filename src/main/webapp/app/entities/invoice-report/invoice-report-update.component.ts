@@ -1,4 +1,3 @@
-import { ICustomer } from './../../shared/model/customer.model';
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -14,7 +13,6 @@ import { InvoiceReportService } from './invoice-report.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { IInvoice } from 'app/shared/model/invoice.model';
 import { InvoiceService } from 'app/entities/invoice/invoice.service';
-import { CustomerService } from 'app/entities/customer/customer.service';
 
 @Component({
   selector: 'jhi-invoice-report-update',
@@ -25,8 +23,6 @@ export class InvoiceReportUpdateComponent implements OnInit {
   invoices: IInvoice[] = [];
   fromDateDp: any;
   toDateDp: any;
-  customers: ICustomer[] = [];
-  customerName: any;
 
   editForm = this.fb.group({
     id: [],
@@ -48,7 +44,6 @@ export class InvoiceReportUpdateComponent implements OnInit {
     protected eventManager: JhiEventManager,
     protected invoiceReportService: InvoiceReportService,
     protected invoiceService: InvoiceService,
-    protected customerService: CustomerService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -64,7 +59,6 @@ export class InvoiceReportUpdateComponent implements OnInit {
       this.updateForm(invoiceReport);
 
       this.invoiceService.query().subscribe((res: HttpResponse<IInvoice[]>) => (this.invoices = res.body || []));
-      this.customerService.query().subscribe((res: HttpResponse<ICustomer[]>) => (this.customers = res.body || []));
     });
   }
 
@@ -162,14 +156,5 @@ export class InvoiceReportUpdateComponent implements OnInit {
       }
     }
     return option;
-  }
-  onCustomerChange(): any {
-    let myItem: any;
-    if (this.customerName !== null) {
-      myItem = this.customers.find(item => item.company === this.customerName);
-      this.editForm.patchValue({
-        customer: myItem.id
-      });
-    }
   }
 }

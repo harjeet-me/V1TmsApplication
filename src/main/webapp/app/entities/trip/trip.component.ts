@@ -13,7 +13,7 @@ import { TripDeleteDialogComponent } from './trip-delete-dialog.component';
 
 @Component({
   selector: 'jhi-trip',
-  templateUrl: './trip-new.component.html'
+  templateUrl: './trip.component.html'
 })
 export class TripComponent implements OnInit, OnDestroy {
   trips?: ITrip[];
