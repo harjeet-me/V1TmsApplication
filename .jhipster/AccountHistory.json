@@ -12,22 +12,6 @@
         {
             "fieldName": "action",
             "fieldType": "String"
-        },
-        {
-            "fieldName": "createdOn",
-            "fieldType": "Instant"
-        },
-        {
-            "fieldName": "createdBy",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "updatedOn",
-            "fieldType": "Instant"
-        },
-        {
-            "fieldName": "updatedBy",
-            "fieldType": "String"
         }
     ],
     "relationships": [],

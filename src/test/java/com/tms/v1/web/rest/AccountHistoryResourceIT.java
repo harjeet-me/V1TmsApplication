@@ -19,8 +19,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 
@@ -49,18 +47,6 @@ public class AccountHistoryResourceIT {
 
     private static final String DEFAULT_ACTION = "AAAAAAAAAA";
     private static final String UPDATED_ACTION = "BBBBBBBBBB";
-
-    private static final Instant DEFAULT_CREATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
-
-    private static final Instant DEFAULT_UPDATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_UPDATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_UPDATED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_UPDATED_BY = "BBBBBBBBBB";
 
     @Autowired
     private AccountHistoryRepository accountHistoryRepository;
@@ -94,11 +80,7 @@ public class AccountHistoryResourceIT {
         AccountHistory accountHistory = new AccountHistory()
             .enityName(DEFAULT_ENITY_NAME)
             .entityLink(DEFAULT_ENTITY_LINK)
-            .action(DEFAULT_ACTION)
-            .createdOn(DEFAULT_CREATED_ON)
-            .createdBy(DEFAULT_CREATED_BY)
-            .updatedOn(DEFAULT_UPDATED_ON)
-            .updatedBy(DEFAULT_UPDATED_BY);
+            .action(DEFAULT_ACTION);
         return accountHistory;
     }
     /**
@@ -111,11 +93,7 @@ public class AccountHistoryResourceIT {
         AccountHistory accountHistory = new AccountHistory()
             .enityName(UPDATED_ENITY_NAME)
             .entityLink(UPDATED_ENTITY_LINK)
-            .action(UPDATED_ACTION)
-            .createdOn(UPDATED_CREATED_ON)
-            .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .action(UPDATED_ACTION);
         return accountHistory;
     }
 
@@ -142,10 +120,6 @@ public class AccountHistoryResourceIT {
         assertThat(testAccountHistory.getEnityName()).isEqualTo(DEFAULT_ENITY_NAME);
         assertThat(testAccountHistory.getEntityLink()).isEqualTo(DEFAULT_ENTITY_LINK);
         assertThat(testAccountHistory.getAction()).isEqualTo(DEFAULT_ACTION);
-        assertThat(testAccountHistory.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
-        assertThat(testAccountHistory.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testAccountHistory.getUpdatedOn()).isEqualTo(DEFAULT_UPDATED_ON);
-        assertThat(testAccountHistory.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
 
         // Validate the AccountHistory in Elasticsearch
         verify(mockAccountHistorySearchRepository, times(1)).save(testAccountHistory);
@@ -187,11 +161,7 @@ public class AccountHistoryResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(accountHistory.getId().intValue())))
             .andExpect(jsonPath("$.[*].enityName").value(hasItem(DEFAULT_ENITY_NAME)))
             .andExpect(jsonPath("$.[*].entityLink").value(hasItem(DEFAULT_ENTITY_LINK)))
-            .andExpect(jsonPath("$.[*].action").value(hasItem(DEFAULT_ACTION)))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].action").value(hasItem(DEFAULT_ACTION)));
     }
     
     @Test
@@ -207,11 +177,7 @@ public class AccountHistoryResourceIT {
             .andExpect(jsonPath("$.id").value(accountHistory.getId().intValue()))
             .andExpect(jsonPath("$.enityName").value(DEFAULT_ENITY_NAME))
             .andExpect(jsonPath("$.entityLink").value(DEFAULT_ENTITY_LINK))
-            .andExpect(jsonPath("$.action").value(DEFAULT_ACTION))
-            .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()))
-            .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
-            .andExpect(jsonPath("$.updatedOn").value(DEFAULT_UPDATED_ON.toString()))
-            .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY));
+            .andExpect(jsonPath("$.action").value(DEFAULT_ACTION));
     }
 
     @Test
@@ -239,11 +205,7 @@ public class AccountHistoryResourceIT {
         updatedAccountHistory
             .enityName(UPDATED_ENITY_NAME)
             .entityLink(UPDATED_ENTITY_LINK)
-            .action(UPDATED_ACTION)
-            .createdOn(UPDATED_CREATED_ON)
-            .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .action(UPDATED_ACTION);
 
         restAccountHistoryMockMvc.perform(put("/api/account-histories").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -257,10 +219,6 @@ public class AccountHistoryResourceIT {
         assertThat(testAccountHistory.getEnityName()).isEqualTo(UPDATED_ENITY_NAME);
         assertThat(testAccountHistory.getEntityLink()).isEqualTo(UPDATED_ENTITY_LINK);
         assertThat(testAccountHistory.getAction()).isEqualTo(UPDATED_ACTION);
-        assertThat(testAccountHistory.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
-        assertThat(testAccountHistory.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testAccountHistory.getUpdatedOn()).isEqualTo(UPDATED_UPDATED_ON);
-        assertThat(testAccountHistory.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
 
         // Validate the AccountHistory in Elasticsearch
         verify(mockAccountHistorySearchRepository, times(1)).save(testAccountHistory);
@@ -322,10 +280,6 @@ public class AccountHistoryResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(accountHistory.getId().intValue())))
             .andExpect(jsonPath("$.[*].enityName").value(hasItem(DEFAULT_ENITY_NAME)))
             .andExpect(jsonPath("$.[*].entityLink").value(hasItem(DEFAULT_ENTITY_LINK)))
-            .andExpect(jsonPath("$.[*].action").value(hasItem(DEFAULT_ACTION)))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].action").value(hasItem(DEFAULT_ACTION)));
     }
 }

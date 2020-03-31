@@ -472,12 +472,7 @@ comment String ,
 entity AccountHistory {
 enityName String,
 entityLink String,
-action String,
-
-     createdOn Instant ,
-    createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+action String
    
 }
 

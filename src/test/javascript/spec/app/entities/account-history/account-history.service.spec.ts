@@ -1,7 +1,5 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { AccountHistoryService } from 'app/entities/account-history/account-history.service';
 import { IAccountHistory, AccountHistory } from 'app/shared/model/account-history.model';
 
@@ -12,7 +10,6 @@ describe('Service Tests', () => {
     let httpMock: HttpTestingController;
     let elemDefault: IAccountHistory;
     let expectedResult: IAccountHistory | IAccountHistory[] | boolean | null;
-    let currentDate: moment.Moment;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -22,20 +19,13 @@ describe('Service Tests', () => {
       injector = getTestBed();
       service = injector.get(AccountHistoryService);
       httpMock = injector.get(HttpTestingController);
-      currentDate = moment();
 
-      elemDefault = new AccountHistory(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', currentDate, 'AAAAAAA', currentDate, 'AAAAAAA');
+      elemDefault = new AccountHistory(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
       it('should find an element', () => {
-        const returnedFromService = Object.assign(
-          {
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
-          },
-          elemDefault
-        );
+        const returnedFromService = Object.assign({}, elemDefault);
 
         service.find(123).subscribe(resp => (expectedResult = resp.body));
 
@@ -47,20 +37,12 @@ describe('Service Tests', () => {
       it('should create a AccountHistory', () => {
         const returnedFromService = Object.assign(
           {
-            id: 0,
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            id: 0
           },
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            createdOn: currentDate,
-            updatedOn: currentDate
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.create(new AccountHistory()).subscribe(resp => (expectedResult = resp.body));
 
@@ -74,22 +56,12 @@ describe('Service Tests', () => {
           {
             enityName: 'BBBBBB',
             entityLink: 'BBBBBB',
-            action: 'BBBBBB',
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            action: 'BBBBBB'
           },
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            createdOn: currentDate,
-            updatedOn: currentDate
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.update(expected).subscribe(resp => (expectedResult = resp.body));
 
@@ -103,22 +75,12 @@ describe('Service Tests', () => {
           {
             enityName: 'BBBBBB',
             entityLink: 'BBBBBB',
-            action: 'BBBBBB',
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            action: 'BBBBBB'
           },
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            createdOn: currentDate,
-            updatedOn: currentDate
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.query().subscribe(resp => (expectedResult = resp.body));
 

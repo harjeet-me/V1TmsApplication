@@ -4,8 +4,6 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IAccountHistory, AccountHistory } from 'app/shared/model/account-history.model';
 import { AccountHistoryService } from './account-history.service';
@@ -21,23 +19,13 @@ export class AccountHistoryUpdateComponent implements OnInit {
     id: [],
     enityName: [],
     entityLink: [],
-    action: [],
-    createdOn: [],
-    createdBy: [],
-    updatedOn: [],
-    updatedBy: []
+    action: []
   });
 
   constructor(protected accountHistoryService: AccountHistoryService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ accountHistory }) => {
-      if (!accountHistory.id) {
-        const today = moment().startOf('day');
-        accountHistory.createdOn = today;
-        accountHistory.updatedOn = today;
-      }
-
       this.updateForm(accountHistory);
     });
   }
@@ -47,11 +35,7 @@ export class AccountHistoryUpdateComponent implements OnInit {
       id: accountHistory.id,
       enityName: accountHistory.enityName,
       entityLink: accountHistory.entityLink,
-      action: accountHistory.action,
-      createdOn: accountHistory.createdOn ? accountHistory.createdOn.format(DATE_TIME_FORMAT) : null,
-      createdBy: accountHistory.createdBy,
-      updatedOn: accountHistory.updatedOn ? accountHistory.updatedOn.format(DATE_TIME_FORMAT) : null,
-      updatedBy: accountHistory.updatedBy
+      action: accountHistory.action
     });
   }
 
@@ -75,11 +59,7 @@ export class AccountHistoryUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       enityName: this.editForm.get(['enityName'])!.value,
       entityLink: this.editForm.get(['entityLink'])!.value,
-      action: this.editForm.get(['action'])!.value,
-      createdOn: this.editForm.get(['createdOn'])!.value ? moment(this.editForm.get(['createdOn'])!.value, DATE_TIME_FORMAT) : undefined,
-      createdBy: this.editForm.get(['createdBy'])!.value,
-      updatedOn: this.editForm.get(['updatedOn'])!.value ? moment(this.editForm.get(['updatedOn'])!.value, DATE_TIME_FORMAT) : undefined,
-      updatedBy: this.editForm.get(['updatedBy'])!.value
+      action: this.editForm.get(['action'])!.value
     };
   }
 

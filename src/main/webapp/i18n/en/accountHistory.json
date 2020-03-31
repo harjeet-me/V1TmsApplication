@@ -19,11 +19,7 @@
       },
       "enityName": "Enity Name",
       "entityLink": "Entity Link",
-      "action": "Action",
-      "createdOn": "Created On",
-      "createdBy": "Created By",
-      "updatedOn": "Updated On",
-      "updatedBy": "Updated By"
+      "action": "Action"
     }
   }
 }
