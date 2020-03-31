@@ -1,3 +1,5 @@
+import { InvoiceItemService } from './../invoice-item/invoice-item.service';
+import { InvoiceItem } from './../../shared/model/invoice-item.model';
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -18,6 +20,8 @@ import { ITrip } from 'app/shared/model/trip.model';
 import { TripService } from 'app/entities/trip/trip.service';
 import { ICustomer } from 'app/shared/model/customer.model';
 import { CustomerService } from 'app/entities/customer/customer.service';
+import { IProductItem } from 'app/shared/model/product-item.model';
+import { ProductItemService } from 'app/entities/product-item/product-item.service';
 
 type SelectableEntity = IEmail | ITrip | ICustomer;
 
@@ -26,6 +30,13 @@ type SelectableEntity = IEmail | ITrip | ICustomer;
   templateUrl: './invoice-update.component.html'
 })
 export class InvoiceUpdateComponent implements OnInit {
+  indexSize = 1;
+  grantTotal = 0;
+  // @ViewChild('content', {static: false}) content: ElementRef;
+  newDynamic: any = new InvoiceItem();
+  dynamicArray: Array<InvoiceItem> = [];
+  j = 1;
+  chargeList: any = [];
   isSaving = false;
   notifications: IEmail[] = [];
   trips: ITrip[] = [];
@@ -33,7 +44,12 @@ export class InvoiceUpdateComponent implements OnInit {
   invoiceDateDp: any;
   invoicePaidDateDp: any;
   invoiceDueDateDp: any;
-
+  invoiceTotal = 5000;
+  productitems: IProductItem[] = [];
+  customerName = '';
+  selectedCustomerName = '';
+  selectedCustomer: any;
+  maxId: any;
   editForm = this.fb.group({
     id: [],
     orderNo: [],
@@ -62,14 +78,15 @@ export class InvoiceUpdateComponent implements OnInit {
     payterm: [],
     balance: [],
     advance: [],
-    discount: [],
     createdOn: [],
     createdBy: [],
     updatedOn: [],
     updatedBy: [],
     notification: [],
     trip: [],
-    customer: []
+    customer: [],
+    invoiceItems: [],
+    charges: []
   });
 
   constructor(
@@ -80,7 +97,9 @@ export class InvoiceUpdateComponent implements OnInit {
     protected tripService: TripService,
     protected customerService: CustomerService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected productItemService: ProductItemService,
+    private invoiceItemService: InvoiceItemService
   ) {}
 
   ngOnInit(): void {
@@ -90,9 +109,25 @@ export class InvoiceUpdateComponent implements OnInit {
         invoice.createdOn = today;
         invoice.updatedOn = today;
       }
+      this.editForm.markAsDirty();
+
+      this.grantTotal = 0;
+
+      this.newDynamic = { id: null, itemName: this.dynamicArray.length + 1, description: 'SFO TO DEL', price: 20, qty: 1, total: 0 };
+      // this.newDynamic = {index:this.indexSize,title1: "SFO TO DEL", title2: "20",title3:"40"};
+      this.dynamicArray.push(this.newDynamic);
+
+      this.invoiceService.findMaxId().subscribe(data => (this.maxId = data?.body?.id));
 
       this.updateForm(invoice);
 
+      if (invoice.invoiceItems !== undefined) {
+        this.dynamicArray = invoice.invoiceItems;
+      } else {
+        this.newDynamic = { id: null, itemName: 'Load Move ', description: 'Load Move ', price: 207, qty: 1, total: 0 };
+        this.dynamicArray.push(this.newDynamic);
+      }
+      this.calculateTotal();
       this.emailService
         .query({ filter: 'invoice-is-null' })
         .pipe(
@@ -118,6 +153,9 @@ export class InvoiceUpdateComponent implements OnInit {
       this.tripService.query().subscribe((res: HttpResponse<ITrip[]>) => (this.trips = res.body || []));
 
       this.customerService.query().subscribe((res: HttpResponse<ICustomer[]>) => (this.customers = res.body || []));
+      this.productItemService.query().subscribe((res: HttpResponse<IProductItem[]>) => (this.productitems = res.body || []));
+      this.customerName = invoice?.customer?.company;
+      this.selectedCustomer = invoice?.customer;
     });
   }
 
@@ -150,7 +188,6 @@ export class InvoiceUpdateComponent implements OnInit {
       payterm: invoice.payterm,
       balance: invoice.balance,
       advance: invoice.advance,
-      discount: invoice.discount,
       createdOn: invoice.createdOn ? invoice.createdOn.format(DATE_TIME_FORMAT) : null,
       createdBy: invoice.createdBy,
       updatedOn: invoice.updatedOn ? invoice.updatedOn.format(DATE_TIME_FORMAT) : null,
@@ -172,7 +209,7 @@ export class InvoiceUpdateComponent implements OnInit {
   setFileData(event: Event, field: string, isImage: boolean): void {
     this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe(null, (err: JhiFileLoadError) => {
       this.eventManager.broadcast(
-        new JhiEventWithContent<AlertError>('tmsV1ApplicationApp.error', { ...err, key: 'error.file.' + err.key })
+        new JhiEventWithContent<AlertError>('jiotmsApp.error', { ...err, key: 'error.file.' + err.key })
       );
     });
   }
@@ -202,7 +239,7 @@ export class InvoiceUpdateComponent implements OnInit {
       currency: this.editForm.get(['currency'])!.value,
       invoiceTaxTotal: this.editForm.get(['invoiceTaxTotal'])!.value,
       invoiceSubTotal: this.editForm.get(['invoiceSubTotal'])!.value,
-      invoiceTotal: this.editForm.get(['invoiceTotal'])!.value,
+      invoiceTotal: this.grantTotal,
       invoiceDate: this.editForm.get(['invoiceDate'])!.value,
       invoicePaidDate: this.editForm.get(['invoicePaidDate'])!.value,
       refOption1: this.editForm.get(['refOption1'])!.value,
@@ -221,14 +258,15 @@ export class InvoiceUpdateComponent implements OnInit {
       payterm: this.editForm.get(['payterm'])!.value,
       balance: this.editForm.get(['balance'])!.value,
       advance: this.editForm.get(['advance'])!.value,
-      discount: this.editForm.get(['discount'])!.value,
       createdOn: this.editForm.get(['createdOn'])!.value ? moment(this.editForm.get(['createdOn'])!.value, DATE_TIME_FORMAT) : undefined,
       createdBy: this.editForm.get(['createdBy'])!.value,
       updatedOn: this.editForm.get(['updatedOn'])!.value ? moment(this.editForm.get(['updatedOn'])!.value, DATE_TIME_FORMAT) : undefined,
       updatedBy: this.editForm.get(['updatedBy'])!.value,
       notification: this.editForm.get(['notification'])!.value,
       trip: this.editForm.get(['trip'])!.value,
-      customer: this.editForm.get(['customer'])!.value
+      customer: this.selectedCustomer,
+
+      invoiceItems: this.dynamicArray
     };
   }
 
@@ -241,7 +279,7 @@ export class InvoiceUpdateComponent implements OnInit {
 
   protected onSaveSuccess(): void {
     this.isSaving = false;
-    this.previousState();
+    // this.previousState();
   }
 
   protected onSaveError(): void {
@@ -250,5 +288,68 @@ export class InvoiceUpdateComponent implements OnInit {
 
   trackById(index: number, item: SelectableEntity): any {
     return item.id;
+  }
+
+  addRow(index: number): any {
+    this.indexSize = index + 1;
+    // this.newDynamic = { id : 2 , itemName: this.dynamicArray.length + 1, description: 'SFO TO DEL', price: '20', total: '40' };
+
+    this.dynamicArray.push({ itemName: '', description: '', price: 0, qty: 1, total: 0 });
+    this.calculateTotal();
+    return true;
+  }
+
+  deleteRow(index: number): any {
+    if (this.dynamicArray.length === 1) {
+      this.calculateTotal();
+      return false;
+    } else {
+      const id = this.dynamicArray[index].id;
+      if (id !== undefined) {
+        this.invoiceItemService.delete(id).subscribe(() => {});
+      }
+
+      this.dynamicArray.splice(index, 1);
+      this.calculateTotal();
+      return true;
+    }
+  }
+  calculateTotal(): any {
+    this.grantTotal = 0;
+    let tt: any;
+    for (let _i = 0; _i < this.dynamicArray.length; _i++) {
+      tt = this.dynamicArray[_i];
+      if (tt !== null || tt !== undefined) {
+        tt.invoice = null;
+        this.dynamicArray[_i].total = Number(this.dynamicArray[_i].price) * Number(this.dynamicArray[_i].qty);
+        this.grantTotal = this.grantTotal + Number(tt?.total);
+      }
+    }
+  }
+
+  onSelectChange(lineItemValue: string, index: number): any {
+    let myItem: any;
+    if (lineItemValue !== null) {
+      myItem = this.productitems.find(item => item.itemName === lineItemValue);
+      this.dynamicArray[index] = {
+        itemName: myItem.itemName,
+        description: myItem.description,
+        price: myItem.price,
+        qty: 1,
+        total: myItem.price
+      };
+    }
+    this.calculateTotal();
+  }
+  onCustomerChange(): any {
+    let myItem: any;
+    if (this.customerName !== null) {
+      myItem = this.customers.find(item => item.company === this.customerName);
+      this.selectedCustomer = myItem;
+      this.selectedCustomerName =
+        myItem.address + ' ' + myItem.streetAddress + ' \n ' + myItem.city + ' ' + myItem.stateProvince + ' ' + myItem.postalCode;
+
+      this.editForm?.get('customerInfo')?.setValue(this.selectedCustomerName);
+    }
   }
 }

@@ -21,6 +21,17 @@ import java.time.Instant;
 public class InvoiceItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    public InvoiceItem() {
+  		// TODO Auto-generated constructor stub
+  	}
+
+      public InvoiceItem(Long id, String itemName, String description, Double price, double total) {
+  		this.itemName=itemName;
+  		this.description=description;
+  		this.price=price;
+  		this.total=total;
+  	}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,7 +67,7 @@ public class InvoiceItem implements Serializable {
     @Column(name = "updated_by")
     private String updatedBy;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties("invoiceItems")
     private Invoice invoice;
 

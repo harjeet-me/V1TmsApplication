@@ -5,7 +5,10 @@ import com.tms.v1.domain.Invoice;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service Interface for managing {@link Invoice}.
@@ -52,4 +55,11 @@ public interface InvoiceService {
      * @return the list of entities.
      */
     Page<Invoice> search(String query, Pageable pageable);
+    
+
+	List<Invoice> findByTrip_Id(Long tripId);
+	
+	List<Invoice> findByCustomer_IdAndInvoiceDateBetween(Long customerId,LocalDate invoiceDateStart , LocalDate invoiceDateEnd);
+
+	Optional<Long> getMaxInvoiceId();
 }

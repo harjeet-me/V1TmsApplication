@@ -84,5 +84,17 @@ export const emailRoute: Routes = [
       pageTitle: 'tmsV1ApplicationApp.email.home.title'
     },
     canActivate: [UserRouteAccessService]
+  },
+  {
+    path: ':id/sendEmail',
+    component: EmailUpdateComponent,
+    resolve: {
+      email: EmailResolve
+    },
+    data: {
+      authorities: [Authority.USER],
+      pageTitle: 'tmsV1ApplicationApp.email.home.title'
+    },
+    canActivate: [UserRouteAccessService]
   }
 ];

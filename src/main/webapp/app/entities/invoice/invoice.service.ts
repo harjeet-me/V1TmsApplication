@@ -10,6 +10,7 @@ import { createRequestOption, SearchWithPagination } from 'app/shared/util/reque
 import { IInvoice } from 'app/shared/model/invoice.model';
 
 type EntityResponseType = HttpResponse<IInvoice>;
+
 type EntityArrayResponseType = HttpResponse<IInvoice[]>;
 
 @Injectable({ providedIn: 'root' })
@@ -36,6 +37,12 @@ export class InvoiceService {
   find(id: number): Observable<EntityResponseType> {
     return this.http
       .get<IInvoice>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
+  findMaxId(): Observable<EntityResponseType> {
+    return this.http
+      .get<IInvoice>(`${this.resourceUrl}/getEntityMaxId`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
