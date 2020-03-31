@@ -1,518 +1,281 @@
-<div class="row justify-content-center page">
-
-	<div class="col-10">
-
-	<form name="editForm" role="form" novalidate (ngSubmit)="save()"
-			[formGroup]="editForm">
-
-			<jhi-alert-error></jhi-alert-error>
-			<div class="container">
-
-				<div class="row">
-					<div class="col-sm-6">
-						<h2 id="jhi-invoice-heading"
-							jhiTranslate="tmsV1ApplicationApp.invoice.home.createOrEditLabel">Create
-							or edit a Invoice</h2>
-
-					</div>
-
-					<div class="col-sm-6"> Hello   </div>
-
-				</div>
-
-
-
-				<div class="row">
-					<div class=" card col-sm-6">
-						<!-- 	<div class="card-header">Customer Info</div> -->
-						<div class="card-body text-primary">
-							<h5 class="card-title">Customer Info</h5>
-							<div class="form-group">
-								<!-- 	<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.customer"
-									for="field_customer">Customer</label> -->
-								<!-- <select required="required"
-							class="form-control" id="field_customer" name="customer"
-							formControlName="customer">
-							<option [ngValue]="null"></option>
-							<option
-								[ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption"
-								*ngFor="let customerOption of customers; trackBy: trackById">{{
-								customerOption.company }}</option>
-						</select> -->
-
-								<input size="50" [(ngModel)]="customerName"
-									[ngModelOptions]="{standalone: true}" class="form-control"
-									type="input" list="customers;" temp=""
-									onmouseover="this.temp=this.value;this.value='';"
-									onmouseout="this.value=this.temp;"
-									(change)="onCustomerChange()" required="required" />
-
-								<datalist id="customers;">
-									<select>
-										<option *ngFor="let customerOption of customers;"
-											[value]="customerOption.company">
-											{{customerOption.company }}</option>
-									</select>
-								</datalist>
-
-							</div>
-							</br>
-
-
-
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.customer.address"
-									for="field_address">Address</label>
-
-
-								<textarea type="text" class="form-control" cols="50" rows="4"
-									name="customerInfo" id="field_customerInfo"
-									formControlName="customerInfo"> </textarea>
-
-							</div>
-
-
-
-						</div>
-					</div>
-
-					<!-- 	right box -->
-
-					<div class="card col-sm-6">
-						<div class="card-body text-danger">
-							<h5 class="card-title">Invoice Info</h5>
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.invoiceNo"
-									for="field_invoiceNo">Invoice No</label> <input type="text"
-									class="form-control" name="invoiceNo" value="{{maxId}}"
-									id="field_invoiceNo" formControlName="invoiceNo" />
-							</div>
-
-
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.invoiceDate"
-									for="field_invoiceDate">Invoice Date</label>
-								<div class="input-group">
-									<input required="required" id="field_invoiceDate" type="text"
-										class="form-control" name="invoiceDate" ngbDatepicker
-										#invoiceDateDp="ngbDatepicker" formControlName="invoiceDate" />
-									<span class="input-group-append">
-										<button type="button" class="btn btn-secondary"
-											(click)="invoiceDateDp.toggle()">
-											<fa-icon icon="calendar-alt"></fa-icon>
-										</button>
-									</span>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.trip"
-									for="field_trip">Trip</label> <select class="form-control"
-									id="field_trip" name="trip" formControlName="trip">
-									<option [ngValue]="null"></option>
-									<option
-										[ngValue]="tripOption.id === editForm.get('trip')!.value?.id ? editForm.get('trip')!.value : tripOption"
-										*ngFor="let tripOption of trips; trackBy: trackById">{{
-										tripOption.id }}</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.orderNo"
-									for="field_orderNo">Order No</label> <input type="text"
-									class="form-control" name="orderNo" id="field_orderNo"
-									formControlName="orderNo" />
-							</div>
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.status"
-									for="field_status">Status</label> <select class="form-control"
-									name="status" formControlName="status" id="field_status">
-									<option value="DRAFT">{{
-										'tmsV1ApplicationApp.InvoiceStatus.DRAFT' | translate }}</option>
-									<option value="GENERATED">{{
-										'tmsV1ApplicationApp.InvoiceStatus.GENERATED' | translate }}</option>
-									<option value="SENT">{{
-										'tmsV1ApplicationApp.InvoiceStatus.SENT' | translate }}</option>
-									<option value="PAID">{{
-										'tmsV1ApplicationApp.InvoiceStatus.PAID' | translate }}</option>
-									<option value="OVERDRAFT">{{
-										'tmsV1ApplicationApp.InvoiceStatus.OVERDRAFT' | translate }}</option>
-									<option value="VOIDED">{{
-										'tmsV1ApplicationApp.InvoiceStatus.VOIDED' | translate }}</option>
-									<option value="PARTIALLY_PAID">{{
-										'tmsV1ApplicationApp.InvoiceStatus.PARTIALLY_PAID' | translate
-										}}</option>
-								</select>
-							</div>
-						</div>
-					</div>
-
-
-				</div>
-
-				<!-- Right box end 1 -->
-
-				<div class="row">
-					<div class=" card col-sm-6">
-						<div class="card-header">Refrences</div>
-
-						<div class="card-body text-primary">
-
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.refOption1"
-									for="field_refOption1">Ref Option 1</label> <select
-									class="form-control" name="refOption1"
-									formControlName="refOption1" id="field_refOption1">
-									<option value="ORDER_NO">{{
-										'tmsV1ApplicationApp.InvoiveRef.ORDER_NO' | translate }}</option>
-									<option value="SHIPMENT_NO">{{
-										'tmsV1ApplicationApp.InvoiveRef.SHIPMENT_NO' | translate }}</option>
-									<option value="PO_NUMBER">{{
-										'tmsV1ApplicationApp.InvoiveRef.PO_NUMBER' | translate }}</option>
-									<option value="BOOKING_NO">{{
-										'tmsV1ApplicationApp.InvoiveRef.BOOKING_NO' | translate }}</option>
-								</select>
-							</div>
-
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.refValue1"
-									for="field_refValue1">Ref Value 1</label> <input type="text"
-									class="form-control" name="refValue1" id="field_refValue1"
-									formControlName="refValue1" />
-							</div>
-
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.refOption2"
-									for="field_refOption2">Ref Option 2</label> <select
-									class="form-control" name="refOption2"
-									formControlName="refOption2" id="field_refOption2">
-									<option value="ORDER_NO">{{
-										'tmsV1ApplicationApp.InvoiveRef.ORDER_NO' | translate }}</option>
-									<option value="SHIPMENT_NO">{{
-										'tmsV1ApplicationApp.InvoiveRef.SHIPMENT_NO' | translate }}</option>
-									<option value="PO_NUMBER">{{
-										'tmsV1ApplicationApp.InvoiveRef.PO_NUMBER' | translate }}</option>
-									<option value="BOOKING_NO">{{
-										'tmsV1ApplicationApp.InvoiveRef.BOOKING_NO' | translate }}</option>
-								</select>
-							</div>
-
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.refValue2"
-									for="field_refValue2">Ref Value 2</label> <input type="text"
-									class="form-control" name="refValue2" id="field_refValue2"
-									formControlName="refValue2" />
-							</div>
-
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.refOption3"
-									for="field_refOption3">Ref Option 3</label> <select
-									class="form-control" name="refOption3"
-									formControlName="refOption3" id="field_refOption3">
-									<option value="ORDER_NO">{{
-										'tmsV1ApplicationApp.InvoiveRef.ORDER_NO' | translate }}</option>
-									<option value="SHIPMENT_NO">{{
-										'tmsV1ApplicationApp.InvoiveRef.SHIPMENT_NO' | translate }}</option>
-									<option value="PO_NUMBER">{{
-										'tmsV1ApplicationApp.InvoiveRef.PO_NUMBER' | translate }}</option>
-									<option value="BOOKING_NO">{{
-										'tmsV1ApplicationApp.InvoiveRef.BOOKING_NO' | translate }}</option>
-								</select>
-							</div>
-
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.refValue3"
-									for="field_refValue3">Ref Value 3</label> <input type="text"
-									class="form-control" name="refValue3" id="field_refValue3"
-									formControlName="refValue3" />
-							</div>
-
-						</div>
-					</div>
-					<div class="col-sm-6 card ">
-
-						<div class="card-header">Featured</div>
-						<div class="card-body text-primary">
-
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.invoicePaidDate"
-									for="field_invoicePaidDate">Invoice Paid Date</label>
-								<div class="input-group">
-									<input id="field_invoicePaidDate" type="text"
-										class="form-control" name="invoicePaidDate" ngbDatepicker
-										#invoicePaidDateDp="ngbDatepicker"
-										formControlName="invoicePaidDate" /> <span
-										class="input-group-append">
-										<button type="button" class="btn btn-secondary"
-											(click)="invoicePaidDateDp.toggle()">
-											<fa-icon icon="calendar-alt"></fa-icon>
-										</button>
-									</span>
-								</div>
-							</div>
-
-
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.payRefNo"
-									for="field_payRefNo">Pay Ref No</label> <input type="text"
-									class="form-control" name="payRefNo" id="field_payRefNo"
-									formControlName="payRefNo" />
-							</div>
-
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.invoiceDueDate"
-									for="field_invoiceDueDate">Invoice Due Date</label>
-								<div class="input-group">
-									<input id="field_invoiceDueDate" type="text"
-										class="form-control" name="invoiceDueDate" ngbDatepicker
-										#invoiceDueDateDp="ngbDatepicker"
-										formControlName="invoiceDueDate" /> <span
-										class="input-group-append">
-										<button type="button" class="btn btn-secondary"
-											(click)="invoiceDueDateDp.toggle()">
-											<fa-icon icon="calendar-alt"></fa-icon>
-										</button>
-									</span>
-								</div>
-							</div>
-
-
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.invoicePdf"
-									for="field_invoicePdf">Invoice Pdf</label>
-								<div>
-									<div *ngIf="editForm.get('invoicePdf')!.value"
-										class="form-text text-danger clearfix">
-										<a class="pull-left"
-											(click)="openFile(editForm.get('invoicePdfContentType')!.value, editForm.get('invoicePdf')!.value)"
-											jhiTranslate="entity.action.open">open</a><br> <span
-											class="pull-left">{{
-											editForm.get('invoicePdfContentType')!.value }}, {{
-											byteSize(editForm.get('invoicePdf')!.value) }}</span>
-										<button type="button"
-											(click)="editForm.patchValue({invoicePdf: null});editForm.patchValue({invoicePdfContentType: null});"
-											class="btn btn-secondary btn-xs pull-right">
-											<fa-icon icon="times"></fa-icon>
-										</button>
-									</div>
-									<input type="file" id="file_invoicePdf"
-										(change)="setFileData($event, 'invoicePdf', false)"
-										jhiTranslate="entity.action.addblob" />
-								</div>
-								<input type="hidden" class="form-control" name="invoicePdf"
-									id="field_invoicePdf" formControlName="invoicePdf" /> <input
-									type="hidden" class="form-control" name="invoicePdfContentType"
-									id="field_invoicePdfContentType"
-									formControlName="invoicePdfContentType" />
-							</div>
-
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.remarks"
-									for="field_remarks">Remarks</label> <input type="text"
-									class="form-control" name="remarks" id="field_remarks"
-									formControlName="remarks" />
-							</div>
-
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.payterm"
-									for="field_payterm">Payterm</label> <input type="text"
-									class="form-control" name="payterm" id="field_payterm"
-									formControlName="payterm" />
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
-
-
-
-
-			</div>
-
-			<div></div>
-			<!-- 	<div class="form-group">
-				<label jhiTranslate="tmsV1ApplicationApp.customer.charge"
-					for="field_charges">Charge</label> <select class="form-control"
-					id="field_charges" multiple name="charges"
-					formControlName="charges">
-					<option
-						*ngFor="let productItemOption of productitems; trackBy: trackById">{{
-						productItemOption.itemName }}</option>
-				</select>
-
-
-
-			</div> -->
-
-			<div class="form-group">
-				<label class="form-control-label"
-					jhiTranslate="tmsV1ApplicationApp.invoice.discount"
-					for="field_discount">Discount</label> <input type="number"
-					class="form-control" name="discount" id="field_discount"
-					formControlName="discount" />
-			</div>
-
-
-			<div class="form-group">
-				<label class="form-control-label"
-					jhiTranslate="tmsV1ApplicationApp.invoice.balance"
-					for="field_balance">Balance</label> <input type="number"
-					class="form-control" name="balance" id="field_balance"
-					formControlName="balance" />
-			</div>
-
-			<div class="form-group">
-				<label class="form-control-label"
-					jhiTranslate="tmsV1ApplicationApp.invoice.advance"
-					for="field_advance">Advance</label> <input type="number"
-					class="form-control" name="advance" id="field_advance"
-					formControlName="advance" />
-			</div>
-
-
-			<div class="form-group" style="width: 100%">
-				<table class="table bordered-table">
-					<thead class="thead-dark">
-						<tr class="row">
-							<th >Action</th>
-							<th class="col-sm-2">Item</th>
-							<th class="col-sm-4">DESCRIPTION</th>
-							<th class="col-sm-2">AMOUNT</th>
-							<th class="col-sm-1">QTY</th>
-							<th class="col-sm-2">TOTAL</th>
-						</tr>
-					</thead>
-					<tbody style="line-height: 0.5;">
-						<tr class="row" *ngFor="let dynamic of dynamicArray ; let j = index">
-
-							<td (click)="deleteRow(j)"><fa-icon icon="trash-alt"></fa-icon></td>
-							<td class="col-sm-2">
-							<input  class="form-control"  (change)="calculateTotal()"
-								[(ngModel)]="dynamicArray[j].itemName"
-								[ngModelOptions]="{standalone: true}" type="input"
-								list="productitems" temp=""
-								onmouseover="this.temp=this.value;this.value='';"
-								onmouseout="this.value=this.temp;"
-								(change)="onSelectChange(dynamicArray[j]?.itemName,j)" /> <datalist
-									id="productitems">
-									<select>
-										<option *ngFor="let c of productitems" [value]="c.itemName"></option>
-									</select>
-								</datalist></td>
-								
-								
-								
-								
-							<td  class="col-sm-4"><textarea class="form-control"
-									cols="100" rows="2" [ngModelOptions]="{standalone: true}"
-									[(ngModel)]="dynamicArray[j].description"> </textarea></td>
-									
-									
-									
-
-							<td   class="col-sm-2"> <input type="number" min="1"
-							  class="form-control"	[ngModelOptions]="{standalone: true}"
-								[(ngModel)]="dynamicArray[j].price" (change)="calculateTotal()"
-								type="number" />   </td>
-							
-							
-						<td   class="col-sm-1"><input [ngModelOptions]="{standalone: true}"
-							class="form-control"	[(ngModel)]="dynamicArray[j].qty" min="1"
-								(change)="calculateTotal()" type="number" /></td>
-								
-								
-						<td   class="col-sm-2"><input (change)="calculateTotal()"
-							class="form-control"	[(ngModel)]="dynamicArray[j].total"
-								[ngModelOptions]="{standalone: true}" disabled="disabled"
-								type="number" /></td>
-						</tr>
-
-						<tr>
-							<td (click)="addRow(j)"><fa-icon icon="plus"></fa-icon></td>
-						</tr>
-
-					</tbody>
-				</table>
-
-
-
-			</div>
-
-
-
-			<div class="card float-right">
-				<div class="card-header">Invoice Summary</div>
-
-				<div class="card-body">
-
-
-					<div class="form-group">
-						<label class="form-control-label"
-							jhiTranslate="tmsV1ApplicationApp.invoice.invoiceTotal"
-							for="field_invoiceTotal">Invoice Total</label> <input
-							type="number" class="form-control" name="invoiceTotal"
-							id="field_invoiceTotal" [(ngModel)]="grantTotal"
-							[ngModelOptions]="{standalone: true}" disabled="disabled"
-							draggable="true" />
-
-					</div>
-				</div>
-			</div>
-
-
-
-
-			<div>
-				<button type="button" id="cancel-save" class="btn btn-secondary"
-					(click)="previousState()">
-					<fa-icon icon="ban"></fa-icon>
-					&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-				</button>
-
-				<button type="submit" id="save-entity"
-					[disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-					<fa-icon icon="save"></fa-icon>
-					&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-				</button>
-				
-				<button type="button" id="save-entity"
-					[disabled]="editForm.invalid || isSaving" class="btn btn-danger">
-					<fa-icon icon="email"></fa-icon>
-					&nbsp;<span >Generate and Send Invoice</span>
-				</button>
-				
-				    <div class="form-group">
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-invoice-heading" jhiTranslate="tmsV1ApplicationApp.invoice.home.createOrEditLabel">Create or edit a Invoice</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.orderNo" for="field_orderNo">Order No</label>
+                    <input type="text" class="form-control" name="orderNo" id="field_orderNo"
+                           formControlName="orderNo"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.invoiceNo" for="field_invoiceNo">Invoice No</label>
+                    <input type="text" class="form-control" name="invoiceNo" id="field_invoiceNo"
+                           formControlName="invoiceNo"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.taxRate" for="field_taxRate">Tax Rate</label>
+                    <input type="number" class="form-control" name="taxRate" id="field_taxRate"
+                           formControlName="taxRate"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.taxType" for="field_taxType">Tax Type</label>
+                    <select class="form-control" name="taxType" formControlName="taxType" id="field_taxType">
+                        <option value="GST">{{ 'tmsV1ApplicationApp.TaxType.GST' | translate }}</option>
+                        <option value="FEDRAL">{{ 'tmsV1ApplicationApp.TaxType.FEDRAL' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.currency" for="field_currency">Currency</label>
+                    <select class="form-control" name="currency" formControlName="currency" id="field_currency">
+                        <option value="USD">{{ 'tmsV1ApplicationApp.CURRENCY.USD' | translate }}</option>
+                        <option value="CAD">{{ 'tmsV1ApplicationApp.CURRENCY.CAD' | translate }}</option>
+                        <option value="INR">{{ 'tmsV1ApplicationApp.CURRENCY.INR' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.invoiceTaxTotal" for="field_invoiceTaxTotal">Invoice Tax Total</label>
+                    <input type="number" class="form-control" name="invoiceTaxTotal" id="field_invoiceTaxTotal"
+                           formControlName="invoiceTaxTotal"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.invoiceSubTotal" for="field_invoiceSubTotal">Invoice Sub Total</label>
+                    <input type="number" class="form-control" name="invoiceSubTotal" id="field_invoiceSubTotal"
+                           formControlName="invoiceSubTotal"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.invoiceTotal" for="field_invoiceTotal">Invoice Total</label>
+                    <input type="number" class="form-control" name="invoiceTotal" id="field_invoiceTotal"
+                           formControlName="invoiceTotal"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.invoiceDate" for="field_invoiceDate">Invoice Date</label>
+                    <div class="input-group">
+                        <input id="field_invoiceDate" type="text" class="form-control" name="invoiceDate" ngbDatepicker #invoiceDateDp="ngbDatepicker" formControlName="invoiceDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="invoiceDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.invoicePaidDate" for="field_invoicePaidDate">Invoice Paid Date</label>
+                    <div class="input-group">
+                        <input id="field_invoicePaidDate" type="text" class="form-control" name="invoicePaidDate" ngbDatepicker #invoicePaidDateDp="ngbDatepicker" formControlName="invoicePaidDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="invoicePaidDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.refOption1" for="field_refOption1">Ref Option 1</label>
+                    <select class="form-control" name="refOption1" formControlName="refOption1" id="field_refOption1">
+                        <option value="ORDER_NO">{{ 'tmsV1ApplicationApp.InvoiveRef.ORDER_NO' | translate }}</option>
+                        <option value="SHIPMENT_NO">{{ 'tmsV1ApplicationApp.InvoiveRef.SHIPMENT_NO' | translate }}</option>
+                        <option value="PO_NUMBER">{{ 'tmsV1ApplicationApp.InvoiveRef.PO_NUMBER' | translate }}</option>
+                        <option value="BOOKING_NO">{{ 'tmsV1ApplicationApp.InvoiveRef.BOOKING_NO' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.refValue1" for="field_refValue1">Ref Value 1</label>
+                    <input type="text" class="form-control" name="refValue1" id="field_refValue1"
+                           formControlName="refValue1"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.refOption2" for="field_refOption2">Ref Option 2</label>
+                    <select class="form-control" name="refOption2" formControlName="refOption2" id="field_refOption2">
+                        <option value="ORDER_NO">{{ 'tmsV1ApplicationApp.InvoiveRef.ORDER_NO' | translate }}</option>
+                        <option value="SHIPMENT_NO">{{ 'tmsV1ApplicationApp.InvoiveRef.SHIPMENT_NO' | translate }}</option>
+                        <option value="PO_NUMBER">{{ 'tmsV1ApplicationApp.InvoiveRef.PO_NUMBER' | translate }}</option>
+                        <option value="BOOKING_NO">{{ 'tmsV1ApplicationApp.InvoiveRef.BOOKING_NO' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.refValue2" for="field_refValue2">Ref Value 2</label>
+                    <input type="text" class="form-control" name="refValue2" id="field_refValue2"
+                           formControlName="refValue2"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.refOption3" for="field_refOption3">Ref Option 3</label>
+                    <select class="form-control" name="refOption3" formControlName="refOption3" id="field_refOption3">
+                        <option value="ORDER_NO">{{ 'tmsV1ApplicationApp.InvoiveRef.ORDER_NO' | translate }}</option>
+                        <option value="SHIPMENT_NO">{{ 'tmsV1ApplicationApp.InvoiveRef.SHIPMENT_NO' | translate }}</option>
+                        <option value="PO_NUMBER">{{ 'tmsV1ApplicationApp.InvoiveRef.PO_NUMBER' | translate }}</option>
+                        <option value="BOOKING_NO">{{ 'tmsV1ApplicationApp.InvoiveRef.BOOKING_NO' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.refValue3" for="field_refValue3">Ref Value 3</label>
+                    <input type="text" class="form-control" name="refValue3" id="field_refValue3"
+                           formControlName="refValue3"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.payRefNo" for="field_payRefNo">Pay Ref No</label>
+                    <input type="text" class="form-control" name="payRefNo" id="field_payRefNo"
+                           formControlName="payRefNo"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.invoiceDueDate" for="field_invoiceDueDate">Invoice Due Date</label>
+                    <div class="input-group">
+                        <input id="field_invoiceDueDate" type="text" class="form-control" name="invoiceDueDate" ngbDatepicker #invoiceDueDateDp="ngbDatepicker" formControlName="invoiceDueDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="invoiceDueDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.status" for="field_status">Status</label>
+                    <select class="form-control" name="status" formControlName="status" id="field_status">
+                        <option value="DRAFT">{{ 'tmsV1ApplicationApp.InvoiceStatus.DRAFT' | translate }}</option>
+                        <option value="GENERATED">{{ 'tmsV1ApplicationApp.InvoiceStatus.GENERATED' | translate }}</option>
+                        <option value="SENT">{{ 'tmsV1ApplicationApp.InvoiceStatus.SENT' | translate }}</option>
+                        <option value="PAID">{{ 'tmsV1ApplicationApp.InvoiceStatus.PAID' | translate }}</option>
+                        <option value="OVERDRAFT">{{ 'tmsV1ApplicationApp.InvoiceStatus.OVERDRAFT' | translate }}</option>
+                        <option value="VOIDED">{{ 'tmsV1ApplicationApp.InvoiceStatus.VOIDED' | translate }}</option>
+                        <option value="PARTIALLY_PAID">{{ 'tmsV1ApplicationApp.InvoiceStatus.PARTIALLY_PAID' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.invoicePdf" for="field_invoicePdf">Invoice Pdf</label>
+                    <div>
+                        <div *ngIf="editForm.get('invoicePdf')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('invoicePdfContentType')!.value, editForm.get('invoicePdf')!.value)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{ editForm.get('invoicePdfContentType')!.value }}, {{ byteSize(editForm.get('invoicePdf')!.value) }}</span>
+                            <button type="button" (click)="editForm.patchValue({invoicePdf: null});editForm.patchValue({invoicePdfContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_invoicePdf" (change)="setFileData($event, 'invoicePdf', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="invoicePdf" id="field_invoicePdf"
+                           formControlName="invoicePdf"/>
+                    <input type="hidden" class="form-control" name="invoicePdfContentType" id="field_invoicePdfContentType"
+                           formControlName="invoicePdfContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.remarks" for="field_remarks">Remarks</label>
+                    <input type="text" class="form-control" name="remarks" id="field_remarks"
+                           formControlName="remarks"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.customerInfo" for="field_customerInfo">Customer Info</label>
+                    <input type="text" class="form-control" name="customerInfo" id="field_customerInfo"
+                           formControlName="customerInfo"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.payterm" for="field_payterm">Payterm</label>
+                    <input type="text" class="form-control" name="payterm" id="field_payterm"
+                           formControlName="payterm"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.balance" for="field_balance">Balance</label>
+                    <input type="number" class="form-control" name="balance" id="field_balance"
+                           formControlName="balance"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.advance" for="field_advance">Advance</label>
+                    <input type="number" class="form-control" name="advance" id="field_advance"
+                           formControlName="advance"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.discount" for="field_discount">Discount</label>
+                    <input type="number" class="form-control" name="discount" id="field_discount"
+                           formControlName="discount"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.createdOn" for="field_createdOn">Created On</label>
+                    <div class="d-flex">
+                        <input id="field_createdOn" type="datetime-local" class="form-control" name="createdOn" formControlName="createdOn" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.createdBy" for="field_createdBy">Created By</label>
+                    <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                           formControlName="createdBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.updatedOn" for="field_updatedOn">Updated On</label>
+                    <div class="d-flex">
+                        <input id="field_updatedOn" type="datetime-local" class="form-control" name="updatedOn" formControlName="updatedOn" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.updatedBy" for="field_updatedBy">Updated By</label>
+                    <input type="text" class="form-control" name="updatedBy" id="field_updatedBy"
+                           formControlName="updatedBy"/>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.notification" for="field_notification">Notification</label>
                     <select class="form-control" id="field_notification" name="notification" formControlName="notification">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="emailOption.id === editForm.get('notification')!.value?.id ? editForm.get('notification')!.value : emailOption" *ngFor="let emailOption of notifications; trackBy: trackById">{{ emailOption.id }}</option>
                     </select>
                 </div>
-			</div>
-		</form>
 
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.trip" for="field_trip">Trip</label>
+                    <select class="form-control" id="field_trip" name="trip" formControlName="trip">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="tripOption.id === editForm.get('trip')!.value?.id ? editForm.get('trip')!.value : tripOption" *ngFor="let tripOption of trips; trackBy: trackById">{{ tripOption.id }}</option>
+                    </select>
+                </div>
 
-	</div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.customer" for="field_customer">Customer</label>
+                    <select class="form-control" id="field_customer" name="customer" formControlName="customer">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption" *ngFor="let customerOption of customers; trackBy: trackById">{{ customerOption.company }}</option>
+                    </select>
+                </div>
+            </div>
 
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
-

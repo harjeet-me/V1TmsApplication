@@ -13,7 +13,7 @@ import { InvoiceDeleteDialogComponent } from './invoice-delete-dialog.component'
 
 @Component({
   selector: 'jhi-invoice',
-  templateUrl: './invoice-new.component.html'
+  templateUrl: './invoice.component.html'
 })
 export class InvoiceComponent implements OnInit, OnDestroy {
   invoices?: IInvoice[];
