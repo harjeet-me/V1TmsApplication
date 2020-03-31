@@ -44,10 +44,6 @@
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.accountHistory.enityName">Enity Name</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.accountHistory.entityLink">Entity Link</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.accountHistory.action">Action</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.accountHistory.createdOn">Created On</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.accountHistory.createdBy">Created By</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.accountHistory.updatedOn">Updated On</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.accountHistory.updatedBy">Updated By</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -57,10 +53,6 @@
                     <td>{{ accountHistory.enityName }}</td>
                     <td>{{ accountHistory.entityLink }}</td>
                     <td>{{ accountHistory.action }}</td>
-                    <td>{{ accountHistory.createdOn | date:'medium' }}</td>
-                    <td>{{ accountHistory.createdBy }}</td>
-                    <td>{{ accountHistory.updatedOn | date:'medium' }}</td>
-                    <td>{{ accountHistory.updatedBy }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

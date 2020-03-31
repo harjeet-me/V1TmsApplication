@@ -8,7 +8,6 @@ import javax.persistence.*;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.util.Objects;
-import java.time.Instant;
 
 /**
  * A AccountHistory.
@@ -33,18 +32,6 @@ public class AccountHistory implements Serializable {
 
     @Column(name = "action")
     private String action;
-
-    @Column(name = "created_on")
-    private Instant createdOn;
-
-    @Column(name = "created_by")
-    private String createdBy;
-
-    @Column(name = "updated_on")
-    private Instant updatedOn;
-
-    @Column(name = "updated_by")
-    private String updatedBy;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -93,58 +80,6 @@ public class AccountHistory implements Serializable {
     public void setAction(String action) {
         this.action = action;
     }
-
-    public Instant getCreatedOn() {
-        return createdOn;
-    }
-
-    public AccountHistory createdOn(Instant createdOn) {
-        this.createdOn = createdOn;
-        return this;
-    }
-
-    public void setCreatedOn(Instant createdOn) {
-        this.createdOn = createdOn;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public AccountHistory createdBy(String createdBy) {
-        this.createdBy = createdBy;
-        return this;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Instant getUpdatedOn() {
-        return updatedOn;
-    }
-
-    public AccountHistory updatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
-        return this;
-    }
-
-    public void setUpdatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
-    }
-
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public AccountHistory updatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-        return this;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -170,10 +105,6 @@ public class AccountHistory implements Serializable {
             ", enityName='" + getEnityName() + "'" +
             ", entityLink='" + getEntityLink() + "'" +
             ", action='" + getAction() + "'" +
-            ", createdOn='" + getCreatedOn() + "'" +
-            ", createdBy='" + getCreatedBy() + "'" +
-            ", updatedOn='" + getUpdatedOn() + "'" +
-            ", updatedBy='" + getUpdatedBy() + "'" +
             "}";
     }
 }
