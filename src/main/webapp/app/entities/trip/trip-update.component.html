@@ -103,14 +103,15 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.orderDocument" for="field_orderDocument">Order Document</label>
                     <div>
-                        <img [src]="'data:' + editForm.get('orderDocumentContentType')!.value + ';base64,' + editForm.get('orderDocument')!.value" style="max-height: 100px;" *ngIf="editForm.get('orderDocument')!.value" alt="trip image"/>
                         <div *ngIf="editForm.get('orderDocument')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('orderDocumentContentType')!.value, editForm.get('orderDocument')!.value)" jhiTranslate="entity.action.open">open</a><br>
                             <span class="pull-left">{{ editForm.get('orderDocumentContentType')!.value }}, {{ byteSize(editForm.get('orderDocument')!.value) }}</span>
-                            <button type="button" (click)="clearInputImage('orderDocument', 'orderDocumentContentType', 'file_orderDocument')" class="btn btn-secondary btn-xs pull-right">
+                            <button type="button" (click)="editForm.patchValue({orderDocument: null});editForm.patchValue({orderDocumentContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
                                 <fa-icon icon="times"></fa-icon>
                             </button>
                         </div>
-                        <input type="file" id="file_orderDocument" (change)="setFileData($event, 'orderDocument', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                        <input type="file" id="file_orderDocument" (change)="setFileData($event, 'orderDocument', false)" jhiTranslate="entity.action.addblob"/>
                     </div>
                     <input type="hidden" class="form-control" name="orderDocument" id="field_orderDocument"
                            formControlName="orderDocument"/>
@@ -121,14 +122,15 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.pod" for="field_pod">Pod</label>
                     <div>
-                        <img [src]="'data:' + editForm.get('podContentType')!.value + ';base64,' + editForm.get('pod')!.value" style="max-height: 100px;" *ngIf="editForm.get('pod')!.value" alt="trip image"/>
                         <div *ngIf="editForm.get('pod')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('podContentType')!.value, editForm.get('pod')!.value)" jhiTranslate="entity.action.open">open</a><br>
                             <span class="pull-left">{{ editForm.get('podContentType')!.value }}, {{ byteSize(editForm.get('pod')!.value) }}</span>
-                            <button type="button" (click)="clearInputImage('pod', 'podContentType', 'file_pod')" class="btn btn-secondary btn-xs pull-right">
+                            <button type="button" (click)="editForm.patchValue({pod: null});editForm.patchValue({podContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
                                 <fa-icon icon="times"></fa-icon>
                             </button>
                         </div>
-                        <input type="file" id="file_pod" (change)="setFileData($event, 'pod', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                        <input type="file" id="file_pod" (change)="setFileData($event, 'pod', false)" jhiTranslate="entity.action.addblob"/>
                     </div>
                     <input type="hidden" class="form-control" name="pod" id="field_pod"
                            formControlName="pod"/>
