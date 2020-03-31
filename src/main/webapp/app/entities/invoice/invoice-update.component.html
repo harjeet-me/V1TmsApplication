@@ -2,12 +2,7 @@
 
 	<div class="col-10">
 
-		<h2 id="page-heading">
-			
-
-			
-		</h2>
-		<form name="editForm" role="form" novalidate (ngSubmit)="save()"
+	<form name="editForm" role="form" novalidate (ngSubmit)="save()"
 			[formGroup]="editForm">
 
 			<jhi-alert-error></jhi-alert-error>
@@ -505,6 +500,14 @@
 					<fa-icon icon="email"></fa-icon>
 					&nbsp;<span >Generate and Send Invoice</span>
 				</button>
+				
+				    <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.notification" for="field_notification">Notification</label>
+                    <select class="form-control" id="field_notification" name="notification" formControlName="notification">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="emailOption.id === editForm.get('notification')!.value?.id ? editForm.get('notification')!.value : emailOption" *ngFor="let emailOption of notifications; trackBy: trackById">{{ emailOption.id }}</option>
+                    </select>
+                </div>
 			</div>
 		</form>
 

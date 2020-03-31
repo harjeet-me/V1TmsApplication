@@ -131,6 +131,14 @@
     ],
     "relationships": [
         {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "email",
+            "otherEntityRelationshipName": "invoice",
+            "relationshipName": "notification",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
             "relationshipType": "one-to-many",
             "otherEntityName": "invoiceItem",
             "otherEntityRelationshipName": "invoice",

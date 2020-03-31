@@ -433,6 +433,7 @@ relationship OneToOne {
      Trip {dropLocation (address)} to    Location { tripdrop }  
     Carrier{operInsurance} to Insurance {Carrier(company)}
     Equipment{insurance} to Insurance 
+    Invoice{notification} to Email
     Accounts {customer (company)} to  Customer{ accounts } 
      InvoiceHistory {previous (status)} to InvoiceHistory
      InvoiceHistory {next (status)} to InvoiceHistory

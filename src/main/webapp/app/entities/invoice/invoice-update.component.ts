@@ -6,6 +6,7 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
@@ -13,6 +14,8 @@ import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } 
 import { IInvoice, Invoice } from 'app/shared/model/invoice.model';
 import { InvoiceService } from './invoice.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
+import { IEmail } from 'app/shared/model/email.model';
+import { EmailService } from 'app/entities/email/email.service';
 import { ITrip } from 'app/shared/model/trip.model';
 import { TripService } from 'app/entities/trip/trip.service';
 import { ICustomer } from 'app/shared/model/customer.model';
@@ -20,7 +23,7 @@ import { CustomerService } from 'app/entities/customer/customer.service';
 import { IProductItem } from 'app/shared/model/product-item.model';
 import { ProductItemService } from 'app/entities/product-item/product-item.service';
 
-type SelectableEntity = ITrip | ICustomer;
+type SelectableEntity = IEmail | ITrip | ICustomer;
 
 @Component({
   selector: 'jhi-invoice-update',
@@ -35,7 +38,7 @@ export class InvoiceUpdateComponent implements OnInit {
   j = 1;
   chargeList: any = [];
   isSaving = false;
-
+  notifications: IEmail[] = [];
   trips: ITrip[] = [];
   customers: ICustomer[] = [];
   invoiceDateDp: any;
@@ -79,6 +82,7 @@ export class InvoiceUpdateComponent implements OnInit {
     createdBy: [],
     updatedOn: [],
     updatedBy: [],
+    notification: [],
     trip: [],
     customer: [],
     invoiceItems: [],
@@ -89,6 +93,7 @@ export class InvoiceUpdateComponent implements OnInit {
     protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
     protected invoiceService: InvoiceService,
+    protected emailService: EmailService,
     protected tripService: TripService,
     protected customerService: CustomerService,
     protected activatedRoute: ActivatedRoute,
@@ -123,6 +128,27 @@ export class InvoiceUpdateComponent implements OnInit {
         this.dynamicArray.push(this.newDynamic);
       }
       this.calculateTotal();
+      this.emailService
+        .query({ filter: 'invoice-is-null' })
+        .pipe(
+          map((res: HttpResponse<IEmail[]>) => {
+            return res.body || [];
+          })
+        )
+        .subscribe((resBody: IEmail[]) => {
+          if (!invoice.notification || !invoice.notification.id) {
+            this.notifications = resBody;
+          } else {
+            this.emailService
+              .find(invoice.notification.id)
+              .pipe(
+                map((subRes: HttpResponse<IEmail>) => {
+                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
+                })
+              )
+              .subscribe((concatRes: IEmail[]) => (this.notifications = concatRes));
+          }
+        });
 
       this.tripService.query().subscribe((res: HttpResponse<ITrip[]>) => (this.trips = res.body || []));
 
@@ -166,6 +192,7 @@ export class InvoiceUpdateComponent implements OnInit {
       createdBy: invoice.createdBy,
       updatedOn: invoice.updatedOn ? invoice.updatedOn.format(DATE_TIME_FORMAT) : null,
       updatedBy: invoice.updatedBy,
+      notification: invoice.notification,
       trip: invoice.trip,
       customer: invoice.customer
     });
@@ -235,6 +262,7 @@ export class InvoiceUpdateComponent implements OnInit {
       createdBy: this.editForm.get(['createdBy'])!.value,
       updatedOn: this.editForm.get(['updatedOn'])!.value ? moment(this.editForm.get(['updatedOn'])!.value, DATE_TIME_FORMAT) : undefined,
       updatedBy: this.editForm.get(['updatedBy'])!.value,
+      notification: this.editForm.get(['notification'])!.value,
       trip: this.editForm.get(['trip'])!.value,
       customer: this.selectedCustomer,
 
