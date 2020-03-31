@@ -14,7 +14,7 @@ import { AlertError } from 'app/shared/alert/alert-error.model';
 
 @Component({
   selector: 'jhi-email-update',
-  templateUrl: './email-update.component.html'
+  templateUrl: './email-updatenew.component.html'
 })
 export class EmailUpdateComponent implements OnInit {
   isSaving = false;
@@ -104,10 +104,13 @@ export class EmailUpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
+    alert('saving');
     const email = this.createFromForm();
-    if (email.id !== undefined) {
+    if (email.id !== undefined && email.id !== null) {
+      alert('saving update' + email.id);
       this.subscribeToSaveResponse(this.emailService.update(email));
     } else {
+      alert('saving save');
       this.subscribeToSaveResponse(this.emailService.create(email));
     }
   }

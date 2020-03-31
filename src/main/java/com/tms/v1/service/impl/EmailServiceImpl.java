@@ -1,12 +1,13 @@
 package com.tms.v1.service.impl;
 
 import com.tms.v1.service.EmailService;
+import com.tms.v1.service.MailService;
 import com.tms.v1.domain.Email;
 import com.tms.v1.repository.EmailRepository;
 import com.tms.v1.repository.search.EmailSearchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,9 @@ public class EmailServiceImpl implements EmailService {
     private final Logger log = LoggerFactory.getLogger(EmailServiceImpl.class);
 
     private final EmailRepository emailRepository;
+    
+    @Autowired
+    MailService mailService;
 
     private final EmailSearchRepository emailSearchRepository;
 
@@ -43,6 +47,12 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public Email save(Email email) {
         log.debug("Request to save Email : {}", email);
+        
+        if( email.getAttachment()!=null) {
+        	mailService.sendInvoiceMailFRomEmail(email);
+        	email.setStatus("SENT");
+        }
+        
         Email result = emailRepository.save(email);
         emailSearchRepository.save(result);
         return result;

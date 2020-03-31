@@ -100,7 +100,7 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<dependencies>
+	<dependencies> 
 		<dependency>
 			<groupId>io.github.jhipster</groupId>
 			<artifactId>jhipster-framework</artifactId>
@@ -109,6 +109,12 @@
 			<groupId>javax.annotation</groupId>
 			<artifactId>javax.annotation-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
@@ -391,13 +397,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-        <jvmArguments>
-            -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005
-        </jvmArguments>
-        <arguments>
-            <argument>--spring.profiles.active=dev</argument>
-        </arguments>
-    </configuration>
+					<jvmArguments>
+						-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005
+					</jvmArguments>
+					<arguments>
+						<argument>--spring.profiles.active=dev</argument>
+					</arguments>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>com.google.cloud.tools</groupId>
