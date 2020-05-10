@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="payment">
+            <h2><span jhiTranslate="tmsV1ApplicationApp.payment.detail.title">Payment</span> {{ payment.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.invoiceNo">Invoice No</span></dt>
+                <dd>
+                    <span>{{ payment.invoiceNo }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.paymentAmt">Payment Amt</span></dt>
+                <dd>
+                    <span>{{ payment.paymentAmt }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.invoicePaidDate">Invoice Paid Date</span></dt>
+                <dd>
+                    <span>{{ payment.invoicePaidDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.payRefNo">Pay Ref No</span></dt>
+                <dd>
+                    <span>{{ payment.payRefNo }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiceStatus.' + payment.status }}">{{ payment.status }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.createdOn">Created On</span></dt>
+                <dd>
+                    <span>{{ payment.createdOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ payment.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.updatedOn">Updated On</span></dt>
+                <dd>
+                    <span>{{ payment.updatedOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.updatedBy">Updated By</span></dt>
+                <dd>
+                    <span>{{ payment.updatedBy }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/payment', payment.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
