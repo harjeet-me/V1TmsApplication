@@ -143,6 +143,20 @@ entity Invoice {
 	
     }
     
+    entity Payment {
+     invoiceNo String,
+     paymentAmt Double,
+     invoicePaidDate LocalDate ,
+     payRefNo String ,
+     status  InvoiceStatus ,
+     createdOn Instant ,
+      createdBy String ,
+      updatedOn Instant ,
+      updatedBy String
+   
+	
+    }
+    
     enum InvoiveRef {
      ORDER_NO , SHIPMENT_NO , PO_NUMBER , BOOKING_NO
     }
@@ -372,7 +386,7 @@ entity Location {
     INITIATED , UNDERPROCESS , COMPLETED
     }
     enum TransactionType{
-    CREDIT , PAYMENT, REFUND , ADJUSTMENT
+    CREDIT , INVOICE , PAYMENT, REFUND , ADJUSTMENT
     
     
     }
