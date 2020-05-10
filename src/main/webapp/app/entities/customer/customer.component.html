@@ -36,8 +36,8 @@
         <span jhiTranslate="tmsV1ApplicationApp.customer.home.notFound">No customers found</span>
     </div>
 
-    <div class="table-responsive" id="entities" *ngIf="customers?.length > 0">
-        <table class="table table-striped" aria-describedby="page-heading">
+    <!--  <div class="table-responsive" id="entities" *ngIf="customers?.length > 0">  -->
+        <table datatable [dtOptions]="dtOptions" class="table table-sm" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
@@ -153,7 +153,7 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    <!--  </div> -->
 
     <div *ngIf="customers?.length > 0">
         <div class="row justify-content-center">

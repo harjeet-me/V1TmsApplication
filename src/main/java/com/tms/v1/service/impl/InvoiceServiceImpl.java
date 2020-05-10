@@ -21,8 +21,10 @@ import com.tms.v1.domain.Customer;
 import com.tms.v1.domain.Email;
 import com.tms.v1.domain.Invoice;
 import com.tms.v1.domain.InvoiceItem;
+import com.tms.v1.domain.TransactionsRecord;
 import com.tms.v1.domain.enumeration.CURRENCY;
 import com.tms.v1.domain.enumeration.InvoiceStatus;
+import com.tms.v1.domain.enumeration.TransactionType;
 import com.tms.v1.repository.InvoiceItemRepository;
 import com.tms.v1.repository.InvoiceRepository;
 import com.tms.v1.repository.search.InvoiceSearchRepository;
@@ -32,6 +34,7 @@ import com.tms.v1.service.EmailService;
 import com.tms.v1.service.InvoiceItemService;
 import com.tms.v1.service.InvoiceService;
 import com.tms.v1.service.MailService;
+import com.tms.v1.service.TransactionsRecordService;
 
 import liquibase.pro.packaged.in;
 
@@ -64,6 +67,9 @@ public class InvoiceServiceImpl implements InvoiceService {
 	
 	@Autowired
 	EmailService emailService;
+	
+	@Autowired
+	TransactionsRecordService recordService;
 
 	private final InvoiceRepository invoiceRepository;
 
@@ -95,6 +101,10 @@ public class InvoiceServiceImpl implements InvoiceService {
 		} else if (invoice.getId() != null && (invoice.getInvoiceNo() == null || invoice.getInvoiceNo() == "")) {
 			invoice.setInvoiceNo("IVN-" + invoice.getId());
 		}
+		if(invoice.getCustomer()==null) {
+			throw new IllegalStateException("Customer is not selected");
+		}
+		
 		invoice = invoiceRepository.save(invoice);
 		Customer customer = customerService.findOne(invoice.getCustomer().getId()).get();
 		try {
@@ -166,6 +176,20 @@ public class InvoiceServiceImpl implements InvoiceService {
 			email.setAttachment(invoice.getInvoicePdf());
 			emailService.save(email);
 			invoice.setNotification(email); 
+		}
+		
+		if (invoice.getStatus()!=null && invoice.getStatus()==InvoiceStatus.GENERATED) {
+			
+			TransactionsRecord transactionsRecord = new TransactionsRecord();
+			transactionsRecord.setCustomer(invoice.getCustomer());
+			transactionsRecord.setAccount(invoice.getCustomer().getAccounts());
+			transactionsRecord.setTxType(TransactionType.CREDIT);
+			transactionsRecord.description("INVOICE CREATED -"+invoice.getInvoiceNo());
+			transactionsRecord.setTxAmmount(invoice.getInvoiceTotal());
+			
+			recordService.save(transactionsRecord);
+			
+		
 		}
 		
 		Invoice result = invoiceRepository.save(invoice);

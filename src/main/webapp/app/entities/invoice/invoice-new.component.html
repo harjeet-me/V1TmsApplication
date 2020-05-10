@@ -69,7 +69,7 @@
                            <td>{{ invoice.invoiceDueDate | date:'mediumDate' }}</td>
                     <td jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiceStatus.' + invoice.status }}">{{ invoice.status }}</td>
                     <td>
-                        <a *ngIf="invoice.invoicePdf" (click)="openFile(invoice.invoicePdfContentType, invoice.invoicePdf)" jhiTranslate="entity.action.open">open</a>
+                        <a *ngIf="invoice.invoicePdf" (click)="openFile(invoice.invoicePdfContentType, invoice.invoicePdf)">download</a>
                         <span *ngIf="invoice.invoicePdf">{{ invoice.invoicePdfContentType }}, {{ byteSize(invoice.invoicePdf) }}</span>
                     </td>
                   

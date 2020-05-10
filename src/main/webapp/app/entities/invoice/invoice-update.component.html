@@ -41,7 +41,7 @@
 								customerOption.company }}</option>
 						</select> -->
 
-								<input size="50" [(ngModel)]="customerName"
+								<input size="50" [(ngModel)]="customerName" placeholder="Select Customer"
 									[ngModelOptions]="{standalone: true}" class="form-control"
 									type="input" list="customers;" temp=""
 									onmouseover="this.temp=this.value;this.value='';"
@@ -57,17 +57,16 @@
 								</datalist>
 
 							</div>
-							</br>
 
 
 
 							<div class="form-group">
 								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.customer.address"
-									for="field_address">Address</label>
+									jhiTranslate="tmsV1ApplicationApp.customer.address" 
+									for="field_address">Selected Address</label>
 
 
-								<textarea type="text" class="form-control" cols="50" rows="4"
+								<textarea placeholder="Selected Customer Address" type="text" class="form-control" cols="50" rows="4" required="required"
 									name="customerInfo" id="field_customerInfo"
 									formControlName="customerInfo"> </textarea>
 
@@ -87,7 +86,7 @@
 								<label class="form-control-label"
 									jhiTranslate="tmsV1ApplicationApp.invoice.invoiceNo"
 									for="field_invoiceNo">Invoice No</label> <input type="text"
-									class="form-control" name="invoiceNo" value="{{maxId}}"
+									class="form-control" name="invoiceNo" 
 									id="field_invoiceNo" formControlName="invoiceNo" />
 							</div>
 
@@ -99,7 +98,7 @@
 								<div class="input-group">
 									<input required="required" id="field_invoiceDate" type="text"
 										class="form-control" name="invoiceDate" ngbDatepicker
-										#invoiceDateDp="ngbDatepicker" formControlName="invoiceDate" />
+										#invoiceDateDp="ngbDatepicker"  formControlName="invoiceDate" />
 									<span class="input-group-append">
 										<button type="button" class="btn btn-secondary"
 											(click)="invoiceDateDp.toggle()">
@@ -133,7 +132,7 @@
 									jhiTranslate="tmsV1ApplicationApp.invoice.status"
 									for="field_status">Status</label> <select class="form-control"
 									name="status" formControlName="status" id="field_status">
-									<option value="DRAFT">{{
+									<option selected="selected" value="DRAFT">{{
 										'tmsV1ApplicationApp.InvoiceStatus.DRAFT' | translate }}</option>
 									<option value="GENERATED">{{
 										'tmsV1ApplicationApp.InvoiceStatus.GENERATED' | translate }}</option>
@@ -160,7 +159,7 @@
 
 				<div class="row">
 					<div class=" card col-sm-6">
-						<div class="card-header">Refrences</div>
+						<div class="card-header">References</div>
 
 						<div class="card-body text-primary">
 
@@ -241,9 +240,9 @@
 
 						</div>
 					</div>
-					<div class="col-sm-6 card ">
+					<div *ngIf="editForm.get(['status'])!.value === 'PAID' " class="col-sm-6 card ">
 
-						<div class="card-header">Featured</div>
+						<div class="card-header">Payment Info</div>
 						<div class="card-body text-primary">
 
 							<div class="form-group">
@@ -407,7 +406,7 @@
 
 							<td (click)="deleteRow(j)"><fa-icon icon="trash-alt"></fa-icon></td>
 							<td class="col-sm-2">
-							<input  class="form-control"  (change)="calculateTotal()"
+							<input required="required" class="form-control"  (change)="calculateTotal()"
 								[(ngModel)]="dynamicArray[j].itemName"
 								[ngModelOptions]="{standalone: true}" type="input"
 								list="productitems" temp=""
@@ -423,20 +422,20 @@
 								
 								
 								
-							<td  class="col-sm-4"><textarea class="form-control"
+							<td  class="col-sm-4"><textarea required="required" class="form-control"
 									cols="100" rows="2" [ngModelOptions]="{standalone: true}"
 									[(ngModel)]="dynamicArray[j].description"> </textarea></td>
 									
 									
 									
 
-							<td   class="col-sm-2"> <input type="number" min="1"
+							<td   class="col-sm-2"> <input type="number" min="1" required="required"
 							  class="form-control"	[ngModelOptions]="{standalone: true}"
 								[(ngModel)]="dynamicArray[j].price" (change)="calculateTotal()"
 								type="number" />   </td>
 							
 							
-						<td   class="col-sm-1"><input [ngModelOptions]="{standalone: true}"
+						<td   class="col-sm-1"><input [ngModelOptions]="{standalone: true}" 
 							class="form-control"	[(ngModel)]="dynamicArray[j].qty" min="1"
 								(change)="calculateTotal()" type="number" /></td>
 								
@@ -498,9 +497,9 @@
 				<button type="button" id="save-entity"
 					[disabled]="editForm.invalid || isSaving" class="btn btn-danger">
 					<fa-icon icon="email"></fa-icon>
-					&nbsp;<span >Generate and Send Invoice</span>
+					&nbsp;<span >Generate and Send Invoice</span> 
 				</button>
-				
+			
 				    <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoice.notification" for="field_notification">Notification</label>
                     <select class="form-control" id="field_notification" name="notification" formControlName="notification">

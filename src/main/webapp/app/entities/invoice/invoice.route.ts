@@ -63,7 +63,7 @@ export const invoiceRoute: Routes = [
   },
   {
     path: ':id/sendEmail',
-    component: InvoiceUpdateComponent,
+    component: InvoiceDetailComponent,
     resolve: {
       invoice: InvoiceResolve
     },
