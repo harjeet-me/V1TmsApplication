@@ -90,16 +90,6 @@ export class InvoiceUpdateComponent implements OnInit {
         invoice.createdOn = today;
         invoice.updatedOn = today;
       }
-      this.editForm.markAsDirty();
-
-      this.grantTotal = 0;
-
-      this.newDynamic = { id: null, itemName: this.dynamicArray.length + 1, description: 'SFO TO DEL', price: 20, qty: 1, total: 0 };
-      // this.newDynamic = {index:this.indexSize,title1: "SFO TO DEL", title2: "20",title3:"40"};
-      this.dynamicArray.push(this.newDynamic);
-
-      // this.invoiceService.findMaxId().subscribe(data => (this.maxId = data?.body?.id));
-
 
       this.updateForm(invoice);
 
@@ -192,9 +182,6 @@ export class InvoiceUpdateComponent implements OnInit {
   }
 
   save(): void {
-    if (this.editForm.invalid) {
-      return;
-    }
     this.isSaving = true;
     const invoice = this.createFromForm();
     if (invoice.id !== undefined) {

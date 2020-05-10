@@ -16,7 +16,6 @@ import { CustomerDeleteDialogComponent } from './customer-delete-dialog.componen
   templateUrl: './customer.component.html'
 })
 export class CustomerComponent implements OnInit, OnDestroy {
-  dtOptions: DataTables.Settings = {};
   customers?: ICustomer[];
   eventSubscriber?: Subscription;
   currentSearch: string;
@@ -85,12 +84,6 @@ export class CustomerComponent implements OnInit, OnDestroy {
       this.loadPage();
     });
     this.registerChangeInCustomers();
-
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 5,
-      processing: true
-    };
   }
 
   ngOnDestroy(): void {
