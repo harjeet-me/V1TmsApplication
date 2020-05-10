@@ -45,7 +45,7 @@ import com.tms.v1.domain.enumeration.TransactionType;
 public class TransactionsRecordResourceIT {
 
     private static final TransactionType DEFAULT_TX_TYPE = TransactionType.CREDIT;
-    private static final TransactionType UPDATED_TX_TYPE = TransactionType.PAYMENT;
+    private static final TransactionType UPDATED_TX_TYPE = TransactionType.INVOICE;
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";

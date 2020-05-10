@@ -28,6 +28,7 @@
         "report": "Report",
         "fileSystem": "File System",
         "invoiceReport": "Invoice Report",
+        "payment": "Payment",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

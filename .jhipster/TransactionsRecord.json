@@ -4,7 +4,7 @@
         {
             "fieldName": "txType",
             "fieldType": "TransactionType",
-            "fieldValues": "CREDIT,PAYMENT,REFUND,ADJUSTMENT"
+            "fieldValues": "CREDIT,INVOICE,PAYMENT,REFUND,ADJUSTMENT"
         },
         {
             "fieldName": "description",
