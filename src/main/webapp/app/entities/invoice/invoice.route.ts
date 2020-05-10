@@ -62,6 +62,7 @@ export const invoiceRoute: Routes = [
     canActivate: [UserRouteAccessService]
   },
   {
+
     path: ':id/sendEmail',
     component: InvoiceDetailComponent,
     resolve: {

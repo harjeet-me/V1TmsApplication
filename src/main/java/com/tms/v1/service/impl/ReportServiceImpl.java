@@ -1,17 +1,12 @@
 package com.tms.v1.service.impl;
 
-import com.tms.v1.service.InvoiceService;
 import com.tms.v1.service.ReportService;
-import com.tms.v1.domain.Invoice;
 import com.tms.v1.domain.Report;
-import com.tms.v1.domain.enumeration.ReportType;
 import com.tms.v1.repository.ReportRepository;
 import com.tms.v1.repository.search.ReportSearchRepository;
-
-import org.jfree.util.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,11 +25,6 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class ReportServiceImpl implements ReportService {
 
     private final Logger log = LoggerFactory.getLogger(ReportServiceImpl.class);
-    
-    @Autowired
-    public InvoiceService invoiceService;
-    @Autowired
-    InvoiceStmtByCustomerServiceImpl stmtByCustomerServiceImpl;
 
     private final ReportRepository reportRepository;
 
@@ -54,18 +44,6 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public Report save(Report report) {
         log.debug("Request to save Report : {}", report);
-        if(report.getReportType()!=null && report.getReportType()==ReportType.INV_STMT_OF_CUSTOMER) {
-        	List<Invoice>  invoices=   invoiceService.findByCustomer_IdAndInvoiceDateBetween(1l, report.getFromDate(), report.getToDate());
-        	try {
-				report.setAttachment(stmtByCustomerServiceImpl.generateReport(invoices));
-				report.setAttachmentContentType("application/pdf");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        
-        }
-     
         Report result = reportRepository.save(report);
         reportSearchRepository.save(result);
         return result;

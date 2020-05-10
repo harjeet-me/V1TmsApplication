@@ -1,21 +1,17 @@
 package com.tms.v1.service.impl;
 
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
-import org.jfree.util.Log;
+import com.tms.v1.service.InvoiceService;
+import com.tms.v1.domain.Invoice;
+import com.tms.v1.repository.InvoiceRepository;
+import com.tms.v1.repository.search.InvoiceSearchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import com.tms.v1.domain.Customer;
 import com.tms.v1.domain.Email;
@@ -35,8 +31,8 @@ import com.tms.v1.service.InvoiceItemService;
 import com.tms.v1.service.InvoiceService;
 import com.tms.v1.service.MailService;
 import com.tms.v1.service.TransactionsRecordService;
-
-import liquibase.pro.packaged.in;
+import java.util.Optional;
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing {@link Invoice}.
@@ -44,6 +40,7 @@ import liquibase.pro.packaged.in;
 @Service
 @Transactional
 public class InvoiceServiceImpl implements InvoiceService {
+
 
 	private final Logger log = LoggerFactory.getLogger(InvoiceServiceImpl.class);
 
