@@ -1,0 +1,577 @@
+entity CompanyProfile {
+    active Boolean,
+	company String,	
+    address String,
+    streetAddress String,
+    city String,
+	stateProvince String,
+    country CountryEnum,
+	postalCode String ,
+    email String, 
+    website String,
+ 	phoneNumber Long,    
+    dot String ,
+    mc Long ,
+    companyLogo ImageBlob ,
+    profileStatus ToggleStatus ,
+    preffredCurrency CURRENCY ,
+     createdOn Instant ,
+    createdBy String ,
+    updatedOn Instant ,
+    updatedBy String
+   
+   
+   }
+
+entity Customer {
+	
+    company String,
+	firstName String,
+	lastName String,
+    contactDesignation Designation ,
+	email String,    
+ 	phoneNumber Long,
+    phoneNumberExtention Long,
+    preffredContactType PreffredContactType,
+    website String,    
+    alternateContactPerson String,
+    alternateContactNumber Long,
+    alternatePhoneNumberExtention Long,
+    alternateContactEmail String,
+    preferredContactTime Instant,
+    fax Long,
+    address String,
+    streetAddress String,
+    city String,
+	stateProvince String,
+    country CountryEnum,
+	postalCode String ,
+    dot String ,
+    mc Long ,
+    taxId String,
+    companyLogo ImageBlob ,
+    customerSince LocalDate ,
+    notes String,
+    contract Blob ,
+    status ToggleStatus ,
+    preffredCurrency CURRENCY ,
+    payterms String  ,
+    timeZone ZonedDateTime    ,
+    createdOn Instant ,
+    createdBy String ,
+    updatedOn Instant ,
+    updatedBy String
+   
+   
+   }
+   
+ 
+enum TripType {
+PICKUP , RETURN
+}
+    
+entity Trip  {     
+     customTripNumber String,
+     description String ,
+     tripType TripType ,
+     shipmentNumber String,
+     orderNumber String,
+     bol String,
+     pickup LocalDate,
+	 drop LocalDate,
+     currentLocation String,
+     status  StatusEnum,
+     detention Long,
+     chasisInTime Instant,
+     orderDocument Blob,
+     pod Blob,
+     hazmat Boolean,
+     refrigerated Boolean,
+     liftgate Boolean ,
+     recievedBy String ,
+     coveredBy  COVEREDBY ,
+     loadType LoadType ,
+     containerSize  SizeEnum ,
+     numbersOfContainer Integer ,
+     comments String ,
+     autoGenerateInvoice Boolean ,
+      createdOn Instant ,
+      createdBy String ,
+      updatedOn Instant ,
+      updatedBy String
+   
+     
+	}
+    
+    
+    
+    
+    
+
+entity Invoice {
+     orderNo String,
+     invoiceNo String,
+     taxRate Double,
+     taxType TaxType,
+     currency CURRENCY ,
+     invoiceTaxTotal Double,
+     invoiceSubTotal Double,
+     invoiceTotal Double,
+     invoiceDate LocalDate ,
+     invoicePaidDate LocalDate ,
+     refOption1 InvoiveRef ,
+     refValue1 String ,
+      refOption2 InvoiveRef ,
+      refValue2 String ,
+       refOption3 InvoiveRef ,    
+     refValue3 String ,
+     payRefNo String ,
+     invoiceDueDate LocalDate ,
+     status  InvoiceStatus ,
+     invoicePdf Blob ,
+     remarks String ,
+     customerInfo String,
+     payterm String ,
+     balance Double,
+     advance Double,
+     discount Double,
+      createdOn Instant ,
+      createdBy String ,
+      updatedOn Instant ,
+      updatedBy String
+   
+	
+    }
+    
+    entity Payment {
+     invoiceNo String,
+     paymentAmt Double,
+     invoicePaidDate LocalDate ,
+     payRefNo String ,
+     status  InvoiceStatus ,
+     createdOn Instant ,
+     createdBy String ,
+     updatedOn Instant ,
+     updatedBy String
+   
+	
+    }
+    
+    enum InvoiveRef {
+     ORDER_NO , SHIPMENT_NO , PO_NUMBER , BOOKING_NO
+    }
+entity InvoiceReport {
+     customer Long,
+     fromDate LocalDate ,
+     toDate LocalDate,
+     remarks String ,
+     invoiceReport Blob ,
+     createdOn Instant ,
+     createdBy String ,
+     updatedOn Instant ,
+     updatedBy String 
+	
+    }
+    
+    
+
+
+entity InvoiceItem {
+     itemName String,
+     description String,
+     qty Integer,
+     price Double,
+     discount Double,
+     total Double ,
+     createdOn Instant ,
+    createdBy String ,
+    updatedOn Instant ,
+    updatedBy String
+   
+     
+	}
+    
+    entity ProductItem {
+     itemName String,
+     description String,
+     defaultQty Integer,
+     price Double ,
+     createdOn Instant ,
+    createdBy String ,
+    updatedOn Instant ,
+    updatedBy String
+   
+       
+	}
+    
+    
+  entity Accounts{
+     
+     balance Double,
+     over30  Double,
+     over60 Double ,
+     over90 Double ,
+     createdOn Instant ,
+    createdBy String ,
+    updatedOn Instant ,
+    updatedBy String
+   
+     
+     
+  
+  }
+  
+   entity TransactionsRecord{
+     txType TransactionType,        
+     description String,
+     txAmmount Double,
+     createdOn Instant ,
+    createdBy String ,
+    updatedOn Instant ,
+    updatedBy String
+   
+  
+    }
+    
+entity Container {
+    number String ,
+      description String,
+     size Integer ,
+     createdOn Instant ,
+    createdBy String ,
+    updatedOn Instant ,
+    updatedBy String
+   
+
+}
+ 
+entity Equipment {
+enumber String ,
+type EquipmentEnum ,
+ownershiptype String ,
+status ToggleStatus ,
+vin String ,
+make String ,
+model String ,
+description String ,
+year String ,
+yearPurchased String ,
+licensePlateNumber String ,
+licensePlateExpiration LocalDate ,
+inspectionStickerExpiration  LocalDate  ,
+     createdOn Instant ,
+    createdBy String ,
+    updatedOn Instant ,
+    updatedBy String
+   
+
+}
+
+
+
+entity Insurance { 
+  providerName String,
+  issueDate LocalDate ,
+  expiryDate LocalDate ,
+  policyDocument Blob ,
+  coverageStatement String  ,
+     createdOn Instant ,
+    createdBy String ,
+    updatedOn Instant ,
+    updatedBy String
+   
+  }
+
+entity Contact {
+	
+	firstName String,
+	lastName String,
+    contactDesignation Designation ,
+	email String,
+ 	phoneNumber Long ,
+    remarks String ,
+    preferredTime String   ,
+     createdOn Instant ,
+    createdBy String ,
+    updatedOn Instant ,
+    updatedBy String
+   
+    
+}
+
+entity Driver {
+    company String,
+	firstName String,
+	lastName String,
+	email String,
+	phoneNumber Long,
+	licenceNumber Long,
+    dob LocalDate ,
+    companyJoinedOn LocalDate ,
+    companyLeftOn LocalDate 
+    image ImageBlob ,
+    licenceImage ImageBlob ,
+    remarks String ,
+    contractDoc Blob ,
+    status ToggleStatus ,
+     createdOn Instant ,
+    createdBy String ,
+    updatedOn Instant ,
+    updatedBy String
+   
+    }
+
+entity Carrier {
+    company String,
+	firstName String,
+	lastName String,
+    contactDesignation Designation ,
+	email String,    
+ 	phoneNumber Long,
+    phoneNumberExtention Long,
+    preffredContactType PreffredContactType,
+    website String,    
+    alternateContactPerson String,
+    alternateContactNumber Long,
+    alternatePhoneNumberExtention Long,
+    alternateContactEmail String,
+    preferredContactTime String,
+    fax Long,
+    address String,
+    streetAddress String,
+    city String,
+	stateProvince String,
+    country CountryEnum,
+	postalCode String ,
+    dot String ,
+    mc Long ,
+    taxId String,
+    companyLogo ImageBlob ,
+    customerSince LocalDate ,
+    notes String,
+    contract Blob ,
+    status ToggleStatus ,
+    preffredCurrency CURRENCY ,
+    payterms String  ,
+    timeZone ZonedDateTime    ,
+    createdOn Instant ,
+    createdBy String ,
+    updatedOn Instant ,
+    updatedBy String
+   
+   }
+
+
+
+
+entity Location {
+	address String,
+    streetAddress String,
+    city String,
+	stateProvince String,
+    country CountryEnum,
+	postalCode String
+    latitude Integer,
+    longitude Integer ,
+     createdOn Instant ,
+    createdBy String ,
+    updatedOn Instant ,
+    updatedBy String
+   
+	
+}
+
+
+   enum TxStatus{
+    INITIATED , UNDERPROCESS , COMPLETED
+    }
+    enum TransactionType{
+    CREDIT , INVOICE , PAYMENT, REFUND , ADJUSTMENT
+    
+    
+    }
+     enum PreffredContactType{
+   PHONE , EMAIL, FAX, MAIL
+   
+   }
+
+enum ToggleStatus   {
+ACTIVE , INACTIVE
+
+}
+enum HAZMAT {
+YES ,  NO
+}
+enum COVEREDBY {
+CompanyDriver , OwnerOperator   
+   }
+enum CountryEnum {
+    USA, CANADA, MEXICO
+}
+enum CURRENCY {
+USD , CAD , INR
+
+}
+enum TaxType {
+    GST, FEDRAL
+}
+enum EquipmentEnum {
+    TRAILER, CONTAINER, CHASIS
+}
+enum SizeEnum {
+   C53 , C43 , C20 
+}
+
+enum LoadType {
+    REEFER , FLATBED , LTL  ,  DRYVAN, FLAT_DECK , CONTAINER , POWERONLY
+}
+enum StatusEnum {
+   CREATED , PICKEDUP, ONROAD , DELIVERED , INVOICED , COMPLETED
+}
+
+enum InvoiceStatus {
+    DRAFT, GENERATED , SENT , PAID , OVERDRAFT , VOIDED , PARTIALLY_PAID
+}
+
+enum Designation {
+    MANAGER, ACCOUNTANT , OWNER , DISPATCHER
+}
+
+
+relationship OneToOne {
+    
+	// Location{customer (company)  } to Customer{billingAddress (city) }
+    
+   //  Customer{custInsurance (providerNumber)  } to Insurance  {customer (company)  } 
+     Trip {pickupLocation (address)}   to  Location { trippick } 
+     Trip {dropLocation (address)} to    Location { tripdrop }  
+    Carrier{operInsurance} to Insurance {Carrier(company)}
+    Equipment{insurance} to Insurance 
+    Invoice{notification} to Email
+    Accounts {customer (company)} to  Customer{ accounts } 
+     InvoiceHistory {previous (status)} to InvoiceHistory
+     InvoiceHistory {next (status)} to InvoiceHistory
+   
+}
+entity Email {
+userto String,
+usercc String,
+userbcc String,
+subject String,
+message String,
+multipart Boolean,
+htmlBody Boolean ,
+attachment Blob ,
+attachmentName String ,
+status String ,
+sentDateTime Instant,
+     createdOn Instant ,
+    createdBy String ,
+    updatedOn Instant ,
+    updatedBy String
+   
+
+}
+entity InvoiceHistory {
+status InvoiceStatus,
+comment String ,
+     createdOn Instant ,
+    createdBy String ,
+    updatedOn Instant ,
+    updatedBy String
+   
+
+}
+
+entity AccountHistory {
+enityName String,
+entityLink String,
+action String
+   
+}
+
+
+entity Report {
+reportType ReportType ,
+description String,
+fromDate LocalDate,
+toDate LocalDate,
+attachment Blob ,
+emailTo String ,
+     createdOn Instant ,
+    createdBy String ,
+    updatedOn Instant ,
+    updatedBy String
+   
+
+}
+
+entity FileSystem {
+data Blob ,
+fileName String ,
+createdOn Instant ,
+    createdBy String ,
+    updatedOn Instant ,
+    updatedBy String
+   
+}
+
+enum ReportType{
+INV_STMT_OF_CUSTOMER , TRIP_STMT_OF_CUSTOMER
+}
+
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+    
+    Trip  to  Invoice {trip } 
+    
+   
+    
+	Customer{loadOrder(orderNuber)} to Trip {customer(email)}
+    Customer{invoice} to Invoice {customer(company)}
+    
+    Driver{trip} to  Trip {driver(firstName)}
+    Equipment {trip} to  Trip {equipment}
+    Carrier { loadOrder} to  Trip {carrier(company)}  
+    Customer{morecontact (email )  } to  Contact  {customer (company)  } 
+    Invoice { invoiceItem  }  to  InvoiceItem { invoice  }
+    Customer  to TransactionsRecord {customer (company)}
+    Accounts  to TransactionsRecord {account}
+    Email  to FileSystem 
+    Trip  to Container  
+   //  Invoice   to  TransactionsRecord { invoice  }
+	Invoice   to  InvoiceHistory { invoice  }
+   }
+//relationship ManyToOne {
+
+// }
+relationship ManyToMany {
+  Customer { charge(itemName) }  to  ProductItem { customer(company) }
+  InvoiceReport { invoice (id)} to Invoice {invoiceReport}
+}
+
+
+// relationship OneToMany {
+  
+  //  BookingItem {equipment(number)}   to Equipment,
+   // BookingItem {driver(firstName)}   to  Driver{bookingItem(description)}
+	
+// }
+//relationship ManyToOne {
+//  Invoice{invoiceTo} to Customer
+// }
+
+
+// Set pagination options
+//paginate JobHistory, Employee with infinite-scroll
+paginate Trip , Customer , Invoice , TransactionsRecord ,  Email , FileSystem  with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl 
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
