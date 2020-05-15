@@ -127,7 +127,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 				invoice.setInvoicePdf(jasperInvoiceReportServiceImpl.generateReport(customer, invoice,
 						companyProfileService.findOne(1L).get()));
 				invoice.setInvoiceItems(null);
-				invoice.setInvoicePdfContentType("application/pdf");
+				//invoice.setInvoicePdfContentType("text/html");
+				invoice.setInvoicePdfContentType("text/html");
 			}
 
 		} catch (Exception e) {
@@ -166,29 +167,26 @@ public class InvoiceServiceImpl implements InvoiceService {
 			email.setId(invoice.getNotification().getId());
 			
 		}
-		if(invoice.getStatus()==InvoiceStatus.GENERATED) {
-			invoice.setInvoicePdf(mailService.mergePdf(fileList));
-			
-			email.setAttachmentContentType(invoice.getInvoicePdfContentType());
-			email.setHtmlBody(true);
-			email.setMessage("<h2> PLease Find invoice  attached  </h2>");
-			email.setAttachmentName(email.getSubject());
-			email.setAttachment(invoice.getInvoicePdf());
-			emailService.save(email);
-			invoice.setNotification(email); 
-		}
+		/*
+		 * if(invoice.getStatus()==InvoiceStatus.GENERATED) {
+		 * invoice.setInvoicePdf(mailService.mergePdf(fileList));
+		 * 
+		 * email.setAttachmentContentType(invoice.getInvoicePdfContentType());
+		 * email.setHtmlBody(true);
+		 * email.setMessage("<h2> PLease Find invoice  attached  </h2>");
+		 * email.setAttachmentName(email.getSubject());
+		 * email.setAttachment(invoice.getInvoicePdf()); emailService.save(email);
+		 * invoice.setNotification(email); }
+		 */
 		
-		if (invoice.getStatus()!=null && invoice.getStatus()==InvoiceStatus.GENERATED) {
-			
+		if (invoice.getStatus()!=null && invoice.getStatus()==InvoiceStatus.GENERATED) {			
 			TransactionsRecord transactionsRecord = new TransactionsRecord();
 			transactionsRecord.setCustomer(invoice.getCustomer());
 			transactionsRecord.setAccount(invoice.getCustomer().getAccounts());
-			transactionsRecord.setTxType(TransactionType.CREDIT);
+			transactionsRecord.setTxType(TransactionType.INVOICE);
 			transactionsRecord.description("INVOICE CREATED -"+invoice.getInvoiceNo());
-			transactionsRecord.setTxAmmount(invoice.getInvoiceTotal());
-			
-			recordService.save(transactionsRecord);
-			
+			transactionsRecord.setTxAmmount(invoice.getInvoiceTotal());			
+			recordService.save(transactionsRecord);			
 		
 		}
 		

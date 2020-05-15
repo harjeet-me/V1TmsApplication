@@ -122,8 +122,6 @@ public class JasperInvoiceReportServiceImpl {
 		}
 
 		parameters.put("invoiceNo", invoiceNum);
-		parameters.put("PO", invoice.getOrderNo());
-		parameters.put("BookingNo", invoice.getOrderNo());
 		parameters.put("containerNo", customer.getStreetAddress());
 		parameters.put("refNo", getRefString(invoice.getRefOption1(), invoice.getRefValue1()));
 		parameters.put("ref2Value", getRefString(invoice.getRefOption2(), invoice.getRefValue2()));

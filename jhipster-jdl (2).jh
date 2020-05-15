@@ -145,10 +145,11 @@ entity Invoice {
     
     entity Payment {
      invoiceNo String,
-     paymentAmt Double,
-     invoicePaidDate LocalDate ,
+     payDate LocalDate ,
      payRefNo String ,
-     status  InvoiceStatus ,
+     mode PayMode ,
+     ammount Double,
+     unusedAmmount Double, 
      createdOn Instant ,
      createdBy String ,
      updatedOn Instant ,
@@ -159,6 +160,9 @@ entity Invoice {
     
     enum InvoiveRef {
      ORDER_NO , SHIPMENT_NO , PO_NUMBER , BOOKING_NO
+    }
+    enum PayMode {
+     CHECK , CASH , BANK_TRANSFER
     }
 entity InvoiceReport {
      customer Long,
@@ -530,6 +534,7 @@ relationship OneToMany {
     
 	Customer{loadOrder(orderNuber)} to Trip {customer(email)}
     Customer{invoice} to Invoice {customer(company)}
+    Customer{payment} to Payment {customer(company)}
     
     Driver{trip} to  Trip {driver(firstName)}
     Equipment {trip} to  Trip {equipment}

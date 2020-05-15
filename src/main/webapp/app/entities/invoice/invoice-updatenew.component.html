@@ -494,7 +494,7 @@
 					<fa-icon icon="save"></fa-icon>
 					&nbsp;<span jhiTranslate="entity.action.save">Save</span>
 				</button>
-				
+				<!-- 
 				<button type="button" id="save-entity"
 					[disabled]="editForm.invalid || isSaving" class="btn btn-danger">
 					<fa-icon icon="email"></fa-icon>
@@ -507,7 +507,7 @@
                         <option [ngValue]="null"></option>
                         <option [ngValue]="emailOption.id === editForm.get('notification')!.value?.id ? editForm.get('notification')!.value : emailOption" *ngFor="let emailOption of notifications; trackBy: trackById">{{ emailOption.id }}</option>
                     </select>
-                </div>
+                </div> -->
 			</div>
 		</form>
 

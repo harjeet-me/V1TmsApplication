@@ -84,19 +84,32 @@ public class TripServiceImpl implements TripService {
         	}  
         	
         	List<Invoice> invoices =invoiceService.findByTrip_Id(trip.getId());
-        	
+        	Log.debug("found invoices by trip Id"+invoices);
+        	Customer customer=null;
         	if(invoices!=null && invoices.size()==1 && invoices.get(0).getTrip().getId()==trip.getId()) {
         		invoiceDraft.setId(invoices.get(0).getId());
+        	}else {
+
+            	 customer =customerService.findOne(trip.getCustomer().getId()).get();
+            	
+            	InvoiceItem item=new InvoiceItem(null, "LOAD MOVE",result.getPickupLocation().getCity()+" TO  "+result.getDropLocation().getCity() ,0.0,0.0 );
+            	if(customer!=null) {
+            		HashSet<InvoiceItem> itemSet=new HashSet<>(JasperInvoiceReportServiceImpl.getInvoiceItemList(customer.getCharges()));
+                	itemSet.add(item); 
+                	invoiceDraft.setInvoiceItems(itemSet);
+            	}
+                	
+        	}        	
+        	
+        	if(customer!=null) {
+        	String customerAdd= customer.getCompany() +" \n Attn : " +customer.getFirstName() + " " + customer.getLastName()
+            +"\n"+customer.getAddress() +" "+ customer.getStreetAddress() +"\n "+"" + customer.getCity() + " , " + customer.getStateProvince() + " , " + customer.getPostalCode()
+            +" \nPh : " + customer.getPhoneNumber() + " " + customer.getPhoneNumberExtention()
+            +"\nEmail :"+ customer.getEmail() 
+            + "\nWebsite : " + customer.getWebsite();
+        	invoiceDraft.setCustomerInfo(customerAdd);
         	}
         	
-        	Log.debug("found invoices by trip Id"+invoices);
-        	
-        	Customer customer =customerService.findOne(trip.getCustomer().getId()).get();
-        	
-        	InvoiceItem item=new InvoiceItem(null, "LOAD MOVE",result.getPickupLocation().getCity()+" TO  "+result.getDropLocation().getCity() ,0.0,0.0 );
-        	HashSet<InvoiceItem> itemSet=new HashSet<>(JasperInvoiceReportServiceImpl.getInvoiceItemList(customer.getCharges()));
-        	itemSet.add(item);
-        	invoiceDraft.setInvoiceItems(itemSet);
         	invoiceService.save(invoiceDraft);
         	
         	

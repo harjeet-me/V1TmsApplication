@@ -16,7 +16,7 @@
 
 					</div>
 
-					<div class="col-sm-6"> Hello   </div>
+				
 
 				</div>
 
@@ -237,6 +237,22 @@
 									class="form-control" name="refValue3" id="field_refValue3"
 									formControlName="refValue3" />
 							</div>
+							
+							<div class="form-group">
+								<label class="form-control-label"
+									jhiTranslate="tmsV1ApplicationApp.invoice.remarks"
+									for="field_remarks">Remarks</label> <input type="text"
+									class="form-control" name="remarks" id="field_remarks"
+									formControlName="remarks" />
+							</div>
+
+							<div class="form-group">
+								<label class="form-control-label"
+									jhiTranslate="tmsV1ApplicationApp.invoice.payterm"
+									for="field_payterm">Payterm</label> <input type="text"
+									class="form-control" name="payterm" id="field_payterm"
+									formControlName="payterm" />
+							</div>
 
 						</div>
 					</div>
@@ -321,21 +337,7 @@
 									formControlName="invoicePdfContentType" />
 							</div>
 
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.remarks"
-									for="field_remarks">Remarks</label> <input type="text"
-									class="form-control" name="remarks" id="field_remarks"
-									formControlName="remarks" />
-							</div>
-
-							<div class="form-group">
-								<label class="form-control-label"
-									jhiTranslate="tmsV1ApplicationApp.invoice.payterm"
-									for="field_payterm">Payterm</label> <input type="text"
-									class="form-control" name="payterm" id="field_payterm"
-									formControlName="payterm" />
-							</div>
+							
 
 						</div>
 
@@ -363,7 +365,7 @@
 
 			</div> -->
 
-			<div class="form-group">
+		<!-- 	<div class="form-group">
 				<label class="form-control-label"
 					jhiTranslate="tmsV1ApplicationApp.invoice.discount"
 					for="field_discount">Discount</label> <input type="number"
@@ -386,7 +388,7 @@
 					for="field_advance">Advance</label> <input type="number"
 					class="form-control" name="advance" id="field_advance"
 					formControlName="advance" />
-			</div>
+			</div> -->
 
 
 			<div class="form-group" style="width: 100%">
@@ -436,7 +438,7 @@
 							
 							
 						<td   class="col-sm-1"><input [ngModelOptions]="{standalone: true}" 
-							class="form-control"	[(ngModel)]="dynamicArray[j].qty" min="1"
+							class="form-control"	[(ngModel)]="dynamicArray[j].qty"  min="1"
 								(change)="calculateTotal()" type="number" /></td>
 								
 								
@@ -460,22 +462,47 @@
 
 
 			<div class="card float-right">
+			
+			
+			
 				<div class="card-header">Invoice Summary</div>
-
-				<div class="card-body">
-
-
-					<div class="form-group">
-						<label class="form-control-label"
-							jhiTranslate="tmsV1ApplicationApp.invoice.invoiceTotal"
-							for="field_invoiceTotal">Invoice Total</label> <input
+  <table >
+			<!--  <tr> 
+			  <td>  <label class="form-control-label"
+					jhiTranslate="tmsV1ApplicationApp.invoice.advance"
+					for="field_advance">Advance</label>    <td>
+			  <td> <div class="form-group">
+				 <input type="number"
+					class="form-control" name="advance" id="field_advance" [(ngModel)]="grantTotal"
+							[ngModelOptions]="{standalone: true}"
+					formControlName="advance" /> 
+			</div>      </td>
+			 
+			 </tr>		
+			  -->
+			
+			 
+			  <tr> 
+			  <td>  Invoice Total <td>
+			  <td> 	<div class="form-group">
+						<input
 							type="number" class="form-control" name="invoiceTotal"
 							id="field_invoiceTotal" [(ngModel)]="grantTotal"
 							[ngModelOptions]="{standalone: true}" disabled="disabled"
-							draggable="true" />
+							 />
 
-					</div>
-				</div>
+					</div>       </td>
+			 
+			 </tr>	
+			 
+			
+			</table>
+			
+
+
+
+
+			
 			</div>
 
 
@@ -494,7 +521,7 @@
 					&nbsp;<span jhiTranslate="entity.action.save">Save</span>
 				</button>
 				
-				<button type="button" id="save-entity"
+				<!-- <button type="button" id="save-entity"
 					[disabled]="editForm.invalid || isSaving" class="btn btn-danger">
 					<fa-icon icon="email"></fa-icon>
 					&nbsp;<span >Generate and Send Invoice</span> 
@@ -506,7 +533,7 @@
                         <option [ngValue]="null"></option>
                         <option [ngValue]="emailOption.id === editForm.get('notification')!.value?.id ? editForm.get('notification')!.value : emailOption" *ngFor="let emailOption of notifications; trackBy: trackById">{{ emailOption.id }}</option>
                     </select>
-                </div>
+                </div> -->
 			</div>
 		</form>
 

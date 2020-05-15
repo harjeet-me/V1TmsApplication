@@ -59,6 +59,8 @@ public interface InvoiceService {
 
 	List<Invoice> findByTrip_Id(Long tripId);
 	
+	
+	
 	List<Invoice> findByCustomer_IdAndInvoiceDateBetween(Long customerId,LocalDate invoiceDateStart , LocalDate invoiceDateEnd);
 
 	Optional<Long> getMaxInvoiceId();

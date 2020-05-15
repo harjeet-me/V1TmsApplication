@@ -141,12 +141,6 @@
 	<parameter name="customerWeb" class="java.lang.String">
 		<defaultValueExpression><![CDATA[$P{customerWeb}]]></defaultValueExpression>
 	</parameter>
-	<parameter name="PO" class="java.lang.String">
-		<defaultValueExpression><![CDATA[$P{PO}]]></defaultValueExpression>
-	</parameter>
-	<parameter name="BookingNo" class="java.lang.String">
-		<defaultValueExpression><![CDATA[$P{BookingNo}]]></defaultValueExpression>
-	</parameter>
 	<parameter name="containerNo" class="java.lang.String">
 		<defaultValueExpression><![CDATA[$P{containerNo}]]></defaultValueExpression>
 	</parameter>
@@ -215,15 +209,11 @@
 				</reportElement>
 			</line>
 			<staticText>
-				<reportElement x="336" y="137" width="63" height="15" uuid="b62092ec-9053-4f27-b387-9b25d2909a68"/>
+				<reportElement x="350" y="104" width="63" height="15" uuid="b62092ec-9053-4f27-b387-9b25d2909a68"/>
 				<text><![CDATA[Container #]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="364" y="107" width="35" height="15" uuid="edbd74ac-0cbd-44c9-8a8e-ccf745191172"/>
-				<text><![CDATA[PO #]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="363" y="82" width="84" height="25" uuid="139ebe8d-25b0-411e-986c-270015400874">
+				<reportElement x="352" y="82" width="84" height="25" uuid="139ebe8d-25b0-411e-986c-270015400874">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -231,14 +221,6 @@
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Refrences]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="367" y="152" width="32" height="15" uuid="dd52166a-1135-4931-adef-51e7972118bc"/>
-				<text><![CDATA[ref1 #]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="343" y="122" width="56" height="15" uuid="2d2f365d-7b12-4a8f-990d-ff528a2660bc"/>
-				<text><![CDATA[Booking #]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="311" y="0" width="245" height="45" uuid="0b3f9342-da78-4cfa-9fc5-2301c4749678"/>
@@ -256,19 +238,11 @@
 				<textFieldExpression><![CDATA[$P{customerName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="399" y="122" width="120" height="15" uuid="3cdcd049-af22-4fe4-a973-8564b1772c82"/>
-				<textFieldExpression><![CDATA[$P{BookingNo}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="399" y="107" width="120" height="15" uuid="7e4fdaca-50b7-47bb-a4ef-4badb14666a3"/>
-				<textFieldExpression><![CDATA[$P{PO}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="399" y="137" width="120" height="15" uuid="411b3952-3a21-40dd-a111-d69a6fbe2547"/>
+				<reportElement x="413" y="104" width="120" height="15" uuid="411b3952-3a21-40dd-a111-d69a6fbe2547"/>
 				<textFieldExpression><![CDATA[$P{containerNo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="399" y="152" width="120" height="15" uuid="bfb678fd-f7b8-4780-8104-2fd7483c17fc"/>
+				<reportElement x="352" y="119" width="120" height="15" uuid="bfb678fd-f7b8-4780-8104-2fd7483c17fc"/>
 				<textFieldExpression><![CDATA[$P{refNo}]]></textFieldExpression>
 			</textField>
 			<frame>
@@ -295,27 +269,19 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{ProfileCompany}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="367" y="167" width="32" height="15" uuid="acbddf38-d589-4bed-a5bf-fb0193f580a0"/>
-				<text><![CDATA[ref2 #]]></text>
-			</staticText>
 			<textField>
-				<reportElement x="399" y="167" width="120" height="15" uuid="e4a209ab-b9ff-4e73-8113-528caed45bf1"/>
+				<reportElement x="352" y="134" width="120" height="15" uuid="e4a209ab-b9ff-4e73-8113-528caed45bf1"/>
 				<textFieldExpression><![CDATA[$P{ref2Value}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="367" y="180" width="32" height="15" uuid="5b6313f0-c3a9-477e-be43-4018549ef6ea"/>
-				<text><![CDATA[ref 3#]]></text>
-			</staticText>
 			<textField>
-				<reportElement x="399" y="180" width="120" height="15" uuid="b283083c-18f3-4434-968d-2e3f9a38bf51"/>
+				<reportElement x="352" y="147" width="120" height="15" uuid="b283083c-18f3-4434-968d-2e3f9a38bf51"/>
 				<textFieldExpression><![CDATA[$P{ref3Value}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement x="1" y="207" width="545" height="45" uuid="a56f580b-de57-4642-bf2b-c84a9c21e1f4"/>
+				<reportElement x="1" y="170" width="545" height="45" uuid="a56f580b-de57-4642-bf2b-c84a9c21e1f4"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="308" y="216" width="80" height="20" uuid="308bb36b-49cc-4bbb-96f4-6ad828f15ac0"/>
+				<reportElement x="308" y="178" width="80" height="20" uuid="308bb36b-49cc-4bbb-96f4-6ad828f15ac0"/>
 				<box rightPadding="4"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
@@ -323,7 +289,7 @@
 				<text><![CDATA[TERMS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="177" y="215" width="90" height="20" uuid="8bed3970-5414-453e-92c0-387839c309fe"/>
+				<reportElement x="177" y="177" width="90" height="20" uuid="8bed3970-5414-453e-92c0-387839c309fe"/>
 				<box rightPadding="4"/>
 				<textElement textAlignment="Left">
 					<font size="12"/>
@@ -331,16 +297,17 @@
 				<text><![CDATA[INVOICE DUE]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="174" y="231" width="90" height="22" uuid="0e9862dd-ba7e-4fa4-9f56-2f063924d4fa"/>
+				<reportElement x="177" y="193" width="103" height="22" uuid="0e9862dd-ba7e-4fa4-9f56-2f063924d4fa"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$P{invoiceDueDate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="38" y="232" width="90" height="20" uuid="445b620b-efdd-4c82-8b1b-68546854a5ee"/>
+				<reportElement x="38" y="194" width="90" height="20" uuid="445b620b-efdd-4c82-8b1b-68546854a5ee"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$P{invoiceDate}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="431" y="217" width="90" height="20" uuid="1a856d32-09f3-4ea3-801b-d15816d619d9"/>
+				<reportElement x="431" y="179" width="90" height="20" uuid="1a856d32-09f3-4ea3-801b-d15816d619d9"/>
 				<box rightPadding="4"/>
 				<textElement textAlignment="Right">
 					<font size="12"/>
@@ -348,7 +315,7 @@
 				<text><![CDATA[TOTAL DUE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="41" y="215" width="90" height="20" uuid="e60e3c6a-4380-4c2a-9c38-9d29d19731da"/>
+				<reportElement x="41" y="177" width="90" height="20" uuid="e60e3c6a-4380-4c2a-9c38-9d29d19731da"/>
 				<box rightPadding="4"/>
 				<textElement textAlignment="Right">
 					<font size="12"/>
@@ -356,7 +323,7 @@
 				<text><![CDATA[INVOICE DATE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="309" y="235" width="80" height="20" uuid="9f51bffb-3537-4197-bb47-f1988f9da6a2"/>
+				<reportElement x="309" y="197" width="80" height="20" uuid="9f51bffb-3537-4197-bb47-f1988f9da6a2"/>
 				<box rightPadding="4"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
@@ -364,7 +331,7 @@
 				<text><![CDATA[30 DAYS]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="415" y="234" width="116" height="23" uuid="b07c369f-d915-4c9d-bdfa-bcc2fe69dfed"/>
+				<reportElement x="415" y="196" width="116" height="23" uuid="b07c369f-d915-4c9d-bdfa-bcc2fe69dfed"/>
 				<textElement textAlignment="Right">
 					<font fontName="Aharoni" size="14"/>
 				</textElement>
@@ -373,9 +340,9 @@
 		</band>
 	</title>
 	<detail>
-		<band height="127" splitType="Stretch">
+		<band height="119" splitType="Stretch">
 			<componentElement>
-				<reportElement stretchType="ElementGroupHeight" x="2" y="0" width="544" height="70" uuid="52ba9075-cd69-42d1-bb94-50a5a6e01bc2">
+				<reportElement stretchType="ElementGroupHeight" x="3" y="-38" width="544" height="70" uuid="52ba9075-cd69-42d1-bb94-50a5a6e01bc2">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
@@ -477,30 +444,30 @@
 		</band>
 	</detail>
 	<lastPageFooter>
-		<band height="174">
+		<band height="160">
 			<staticText>
-				<reportElement positionType="Float" mode="Opaque" x="-10" y="142" width="556" height="30" backcolor="#E6E8E9" uuid="b0bf6afd-7d17-42f6-83b2-8b2805cfc356"/>
+				<reportElement positionType="Float" mode="Opaque" x="-10" y="130" width="556" height="30" backcolor="#E6E8E9" uuid="b0bf6afd-7d17-42f6-83b2-8b2805cfc356"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Serif" size="9" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[THANKYOU FOR YOUR BUSINESS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="344" y="103" width="92" height="24" uuid="849a2687-eb1e-4cf8-8874-234866d6f40b"/>
+				<reportElement x="281" y="44" width="92" height="24" uuid="849a2687-eb1e-4cf8-8874-234866d6f40b"/>
 				<textElement textAlignment="Right" markup="none">
 					<font fontName="Aharoni" size="14"/>
 				</textElement>
 				<text><![CDATA[Total Due :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="450" y="103" width="116" height="23" uuid="2192a5ad-370e-4492-b0c7-772bb3a1001d"/>
+				<reportElement x="387" y="44" width="116" height="23" uuid="2192a5ad-370e-4492-b0c7-772bb3a1001d"/>
 				<textElement textAlignment="Right">
 					<font fontName="Aharoni" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{invoiceTotal}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="65" width="260" height="70" uuid="f3df9e91-638e-4b4b-bcb8-0753e71cfc2a"/>
+				<reportElement x="0" y="40" width="260" height="70" uuid="f3df9e91-638e-4b4b-bcb8-0753e71cfc2a"/>
 				<textFieldExpression><![CDATA[$P{payterms}]]></textFieldExpression>
 			</textField>
 		</band>

@@ -32,6 +32,7 @@ type SelectableEntity = IEmail | ITrip | ICustomer;
 export class InvoiceUpdateComponent implements OnInit {
   indexSize = 1;
   grantTotal = 0;
+  advanceTotal = 0;
   // @ViewChild('content', {static: false}) content: ElementRef;
   newDynamic: any = new InvoiceItem();
   dynamicArray: Array<InvoiceItem> = [];

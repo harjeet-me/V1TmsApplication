@@ -53,10 +53,7 @@
                     <th scope="col"  jhiSortBy="pickupLocation.address"><span jhiTranslate="tmsV1ApplicationApp.trip.pickupLocation">Pickup Location</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="dropLocation.address"><span jhiTranslate="tmsV1ApplicationApp.trip.dropLocation">Drop Location</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="customer.email"><span jhiTranslate="tmsV1ApplicationApp.trip.customer">Customer</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="driver.firstName"><span jhiTranslate="tmsV1ApplicationApp.trip.driver">Driver</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="equipment.id"><span jhiTranslate="tmsV1ApplicationApp.trip.equipment">Equipment</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="carrier.company"><span jhiTranslate="tmsV1ApplicationApp.trip.carrier">Carrier</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"></th>
+                 <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -70,15 +67,16 @@
                  
                     <td>{{ trip.pickup | date:'mediumDate' }}</td>
                     <td>{{ trip.drop | date:'mediumDate' }}</td>
+                 <td jhiTranslate="{{ 'tmsV1ApplicationApp.StatusEnum.' + trip.status }}">{{ trip.status }}</td>
                 
                     <td>
                         <div *ngIf="trip.pickupLocation">
-                            <a [routerLink]="['/location', trip.pickupLocation?.id, 'view']" >{{ trip.pickupLocation?.address }}</a>
+                            <a [routerLink]="['/location', trip.pickupLocation?.id, 'view']" >{{ trip.pickupLocation?.city }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="trip.dropLocation">
-                            <a [routerLink]="['/location', trip.dropLocation?.id, 'view']" >{{ trip.dropLocation?.address }}</a>
+                            <a [routerLink]="['/location', trip.dropLocation?.id, 'view']" >{{ trip.dropLocation?.city }}</a>
                         </div>
                     </td>
                     <td>
@@ -93,7 +91,7 @@
                     </td>
                     <td>
                         <div *ngIf="trip.equipment">
-                            <a [routerLink]="['/equipment', trip.equipment?.id, 'view']" >{{ trip.equipment?.id }}</a>
+                            <a [routerLink]="['/equipment', trip.equipment?.id, 'view']" >{{ trip.equipment?.enumber }}</a>
                         </div>
                     </td>
                     <td>
