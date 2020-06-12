@@ -67,8 +67,8 @@ export class EquipmentService {
         equipment.inspectionStickerExpiration && equipment.inspectionStickerExpiration.isValid()
           ? equipment.inspectionStickerExpiration.format(DATE_FORMAT)
           : undefined,
-      createdOn: equipment.createdOn && equipment.createdOn.isValid() ? equipment.createdOn.toJSON() : undefined,
-      updatedOn: equipment.updatedOn && equipment.updatedOn.isValid() ? equipment.updatedOn.toJSON() : undefined
+      createdDate: equipment.createdDate && equipment.createdDate.isValid() ? equipment.createdDate.toJSON() : undefined,
+      lastModifiedDate: equipment.lastModifiedDate && equipment.lastModifiedDate.isValid() ? equipment.lastModifiedDate.toJSON() : undefined
     });
     return copy;
   }
@@ -79,8 +79,8 @@ export class EquipmentService {
       res.body.inspectionStickerExpiration = res.body.inspectionStickerExpiration
         ? moment(res.body.inspectionStickerExpiration)
         : undefined;
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -92,8 +92,8 @@ export class EquipmentService {
         equipment.inspectionStickerExpiration = equipment.inspectionStickerExpiration
           ? moment(equipment.inspectionStickerExpiration)
           : undefined;
-        equipment.createdOn = equipment.createdOn ? moment(equipment.createdOn) : undefined;
-        equipment.updatedOn = equipment.updatedOn ? moment(equipment.updatedOn) : undefined;
+        equipment.createdDate = equipment.createdDate ? moment(equipment.createdDate) : undefined;
+        equipment.lastModifiedDate = equipment.lastModifiedDate ? moment(equipment.lastModifiedDate) : undefined;
       });
     }
     return res;

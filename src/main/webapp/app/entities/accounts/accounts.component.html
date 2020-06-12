@@ -45,10 +45,10 @@
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.accounts.over30">Over 30</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.accounts.over60">Over 60</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.accounts.over90">Over 90</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.accounts.createdOn">Created On</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.accounts.createdDate">Created Date</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.accounts.createdBy">Created By</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.accounts.updatedOn">Updated On</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.accounts.updatedBy">Updated By</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.accounts.lastModifiedDate">Last Modified Date</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.accounts.lastModifiedBy">Last Modified By</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.accounts.customer">Customer</span></th>
                     <th scope="col"></th>
                 </tr>
@@ -60,10 +60,10 @@
                     <td>{{ accounts.over30 }}</td>
                     <td>{{ accounts.over60 }}</td>
                     <td>{{ accounts.over90 }}</td>
-                    <td>{{ accounts.createdOn | date:'medium' }}</td>
+                    <td>{{ accounts.createdDate | date:'medium' }}</td>
                     <td>{{ accounts.createdBy }}</td>
-                    <td>{{ accounts.updatedOn | date:'medium' }}</td>
-                    <td>{{ accounts.updatedBy }}</td>
+                    <td>{{ accounts.lastModifiedDate | date:'medium' }}</td>
+                    <td>{{ accounts.lastModifiedBy }}</td>
                     <td>
                         <div *ngIf="accounts.customer">
                             <a [routerLink]="['/customer', accounts.customer?.id, 'view']" >{{ accounts.customer?.company }}</a>

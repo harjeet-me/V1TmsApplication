@@ -58,16 +58,17 @@ export class ProductItemService {
 
   protected convertDateFromClient(productItem: IProductItem): IProductItem {
     const copy: IProductItem = Object.assign({}, productItem, {
-      createdOn: productItem.createdOn && productItem.createdOn.isValid() ? productItem.createdOn.toJSON() : undefined,
-      updatedOn: productItem.updatedOn && productItem.updatedOn.isValid() ? productItem.updatedOn.toJSON() : undefined
+      createdDate: productItem.createdDate && productItem.createdDate.isValid() ? productItem.createdDate.toJSON() : undefined,
+      lastModifiedDate:
+        productItem.lastModifiedDate && productItem.lastModifiedDate.isValid() ? productItem.lastModifiedDate.toJSON() : undefined
     });
     return copy;
   }
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -75,8 +76,8 @@ export class ProductItemService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((productItem: IProductItem) => {
-        productItem.createdOn = productItem.createdOn ? moment(productItem.createdOn) : undefined;
-        productItem.updatedOn = productItem.updatedOn ? moment(productItem.updatedOn) : undefined;
+        productItem.createdDate = productItem.createdDate ? moment(productItem.createdDate) : undefined;
+        productItem.lastModifiedDate = productItem.lastModifiedDate ? moment(productItem.lastModifiedDate) : undefined;
       });
     }
     return res;

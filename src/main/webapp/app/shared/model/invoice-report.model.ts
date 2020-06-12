@@ -9,10 +9,10 @@ export interface IInvoiceReport {
   remarks?: string;
   invoiceReportContentType?: string;
   invoiceReport?: any;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
   invoices?: IInvoice[];
 }
 
@@ -25,10 +25,10 @@ export class InvoiceReport implements IInvoiceReport {
     public remarks?: string,
     public invoiceReportContentType?: string,
     public invoiceReport?: any,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string,
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
     public invoices?: IInvoice[]
   ) {}
 }

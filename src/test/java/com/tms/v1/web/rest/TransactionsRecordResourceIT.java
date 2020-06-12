@@ -53,17 +53,17 @@ public class TransactionsRecordResourceIT {
     private static final Double DEFAULT_TX_AMMOUNT = 1D;
     private static final Double UPDATED_TX_AMMOUNT = 2D;
 
-    private static final Instant DEFAULT_CREATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_UPDATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_UPDATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_UPDATED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_UPDATED_BY = "BBBBBBBBBB";
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     @Autowired
     private TransactionsRecordRepository transactionsRecordRepository;
@@ -98,10 +98,10 @@ public class TransactionsRecordResourceIT {
             .txType(DEFAULT_TX_TYPE)
             .description(DEFAULT_DESCRIPTION)
             .txAmmount(DEFAULT_TX_AMMOUNT)
-            .createdOn(DEFAULT_CREATED_ON)
+            .createdDate(DEFAULT_CREATED_DATE)
             .createdBy(DEFAULT_CREATED_BY)
-            .updatedOn(DEFAULT_UPDATED_ON)
-            .updatedBy(DEFAULT_UPDATED_BY);
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return transactionsRecord;
     }
     /**
@@ -115,10 +115,10 @@ public class TransactionsRecordResourceIT {
             .txType(UPDATED_TX_TYPE)
             .description(UPDATED_DESCRIPTION)
             .txAmmount(UPDATED_TX_AMMOUNT)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return transactionsRecord;
     }
 
@@ -145,10 +145,10 @@ public class TransactionsRecordResourceIT {
         assertThat(testTransactionsRecord.getTxType()).isEqualTo(DEFAULT_TX_TYPE);
         assertThat(testTransactionsRecord.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testTransactionsRecord.getTxAmmount()).isEqualTo(DEFAULT_TX_AMMOUNT);
-        assertThat(testTransactionsRecord.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
+        assertThat(testTransactionsRecord.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testTransactionsRecord.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testTransactionsRecord.getUpdatedOn()).isEqualTo(DEFAULT_UPDATED_ON);
-        assertThat(testTransactionsRecord.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
+        assertThat(testTransactionsRecord.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testTransactionsRecord.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
 
         // Validate the TransactionsRecord in Elasticsearch
         verify(mockTransactionsRecordSearchRepository, times(1)).save(testTransactionsRecord);
@@ -191,10 +191,10 @@ public class TransactionsRecordResourceIT {
             .andExpect(jsonPath("$.[*].txType").value(hasItem(DEFAULT_TX_TYPE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].txAmmount").value(hasItem(DEFAULT_TX_AMMOUNT.doubleValue())))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
     
     @Test
@@ -211,10 +211,10 @@ public class TransactionsRecordResourceIT {
             .andExpect(jsonPath("$.txType").value(DEFAULT_TX_TYPE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.txAmmount").value(DEFAULT_TX_AMMOUNT.doubleValue()))
-            .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
-            .andExpect(jsonPath("$.updatedOn").value(DEFAULT_UPDATED_ON.toString()))
-            .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY));
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -243,10 +243,10 @@ public class TransactionsRecordResourceIT {
             .txType(UPDATED_TX_TYPE)
             .description(UPDATED_DESCRIPTION)
             .txAmmount(UPDATED_TX_AMMOUNT)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restTransactionsRecordMockMvc.perform(put("/api/transactions-records").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -260,10 +260,10 @@ public class TransactionsRecordResourceIT {
         assertThat(testTransactionsRecord.getTxType()).isEqualTo(UPDATED_TX_TYPE);
         assertThat(testTransactionsRecord.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testTransactionsRecord.getTxAmmount()).isEqualTo(UPDATED_TX_AMMOUNT);
-        assertThat(testTransactionsRecord.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
+        assertThat(testTransactionsRecord.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testTransactionsRecord.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testTransactionsRecord.getUpdatedOn()).isEqualTo(UPDATED_UPDATED_ON);
-        assertThat(testTransactionsRecord.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
+        assertThat(testTransactionsRecord.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testTransactionsRecord.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
 
         // Validate the TransactionsRecord in Elasticsearch
         verify(mockTransactionsRecordSearchRepository, times(1)).save(testTransactionsRecord);
@@ -326,9 +326,9 @@ public class TransactionsRecordResourceIT {
             .andExpect(jsonPath("$.[*].txType").value(hasItem(DEFAULT_TX_TYPE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].txAmmount").value(hasItem(DEFAULT_TX_AMMOUNT.doubleValue())))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 }

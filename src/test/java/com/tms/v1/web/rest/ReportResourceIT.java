@@ -65,17 +65,17 @@ public class ReportResourceIT {
     private static final String DEFAULT_EMAIL_TO = "AAAAAAAAAA";
     private static final String UPDATED_EMAIL_TO = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_CREATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_UPDATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_UPDATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_UPDATED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_UPDATED_BY = "BBBBBBBBBB";
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     @Autowired
     private ReportRepository reportRepository;
@@ -114,10 +114,10 @@ public class ReportResourceIT {
             .attachment(DEFAULT_ATTACHMENT)
             .attachmentContentType(DEFAULT_ATTACHMENT_CONTENT_TYPE)
             .emailTo(DEFAULT_EMAIL_TO)
-            .createdOn(DEFAULT_CREATED_ON)
+            .createdDate(DEFAULT_CREATED_DATE)
             .createdBy(DEFAULT_CREATED_BY)
-            .updatedOn(DEFAULT_UPDATED_ON)
-            .updatedBy(DEFAULT_UPDATED_BY);
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return report;
     }
     /**
@@ -135,10 +135,10 @@ public class ReportResourceIT {
             .attachment(UPDATED_ATTACHMENT)
             .attachmentContentType(UPDATED_ATTACHMENT_CONTENT_TYPE)
             .emailTo(UPDATED_EMAIL_TO)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return report;
     }
 
@@ -169,10 +169,10 @@ public class ReportResourceIT {
         assertThat(testReport.getAttachment()).isEqualTo(DEFAULT_ATTACHMENT);
         assertThat(testReport.getAttachmentContentType()).isEqualTo(DEFAULT_ATTACHMENT_CONTENT_TYPE);
         assertThat(testReport.getEmailTo()).isEqualTo(DEFAULT_EMAIL_TO);
-        assertThat(testReport.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
+        assertThat(testReport.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testReport.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testReport.getUpdatedOn()).isEqualTo(DEFAULT_UPDATED_ON);
-        assertThat(testReport.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
+        assertThat(testReport.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testReport.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
 
         // Validate the Report in Elasticsearch
         verify(mockReportSearchRepository, times(1)).save(testReport);
@@ -219,10 +219,10 @@ public class ReportResourceIT {
             .andExpect(jsonPath("$.[*].attachmentContentType").value(hasItem(DEFAULT_ATTACHMENT_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].attachment").value(hasItem(Base64Utils.encodeToString(DEFAULT_ATTACHMENT))))
             .andExpect(jsonPath("$.[*].emailTo").value(hasItem(DEFAULT_EMAIL_TO)))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
     
     @Test
@@ -243,10 +243,10 @@ public class ReportResourceIT {
             .andExpect(jsonPath("$.attachmentContentType").value(DEFAULT_ATTACHMENT_CONTENT_TYPE))
             .andExpect(jsonPath("$.attachment").value(Base64Utils.encodeToString(DEFAULT_ATTACHMENT)))
             .andExpect(jsonPath("$.emailTo").value(DEFAULT_EMAIL_TO))
-            .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
-            .andExpect(jsonPath("$.updatedOn").value(DEFAULT_UPDATED_ON.toString()))
-            .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY));
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -279,10 +279,10 @@ public class ReportResourceIT {
             .attachment(UPDATED_ATTACHMENT)
             .attachmentContentType(UPDATED_ATTACHMENT_CONTENT_TYPE)
             .emailTo(UPDATED_EMAIL_TO)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restReportMockMvc.perform(put("/api/reports").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -300,10 +300,10 @@ public class ReportResourceIT {
         assertThat(testReport.getAttachment()).isEqualTo(UPDATED_ATTACHMENT);
         assertThat(testReport.getAttachmentContentType()).isEqualTo(UPDATED_ATTACHMENT_CONTENT_TYPE);
         assertThat(testReport.getEmailTo()).isEqualTo(UPDATED_EMAIL_TO);
-        assertThat(testReport.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
+        assertThat(testReport.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testReport.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testReport.getUpdatedOn()).isEqualTo(UPDATED_UPDATED_ON);
-        assertThat(testReport.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
+        assertThat(testReport.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testReport.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
 
         // Validate the Report in Elasticsearch
         verify(mockReportSearchRepository, times(1)).save(testReport);
@@ -370,9 +370,9 @@ public class ReportResourceIT {
             .andExpect(jsonPath("$.[*].attachmentContentType").value(hasItem(DEFAULT_ATTACHMENT_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].attachment").value(hasItem(Base64Utils.encodeToString(DEFAULT_ATTACHMENT))))
             .andExpect(jsonPath("$.[*].emailTo").value(hasItem(DEFAULT_EMAIL_TO)))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 }

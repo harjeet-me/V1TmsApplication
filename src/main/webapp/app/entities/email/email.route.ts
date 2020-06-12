@@ -31,6 +31,7 @@ export class EmailResolve implements Resolve<IEmail> {
         })
       );
     }
+
     return of(new Email());
   }
 }
@@ -86,7 +87,7 @@ export const emailRoute: Routes = [
     canActivate: [UserRouteAccessService]
   },
   {
-    path: ':id/sendEmail',
+    path: ':id/edit/:iid/send',
     component: EmailUpdateComponent,
     resolve: {
       email: EmailResolve

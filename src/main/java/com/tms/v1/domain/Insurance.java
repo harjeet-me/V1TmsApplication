@@ -1,16 +1,22 @@
 package com.tms.v1.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
+import java.time.Instant;
+import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
-import java.io.Serializable;
-import java.util.Objects;
-import java.time.Instant;
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * A Insurance.
@@ -19,7 +25,7 @@ import java.time.LocalDate;
 @Table(name = "insurance")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "insurance")
-public class Insurance implements Serializable {
+public class Insurance extends AbstractAuditingEntity  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -46,17 +52,17 @@ public class Insurance implements Serializable {
     @Column(name = "coverage_statement")
     private String coverageStatement;
 
-    @Column(name = "created_on")
-    private Instant createdOn;
+    @Column(name = "created_date")
+    private Instant createdDate;
 
     @Column(name = "created_by")
     private String createdBy;
 
-    @Column(name = "updated_on")
-    private Instant updatedOn;
+    @Column(name = "last_modified_date")
+    private Instant lastModifiedDate;
 
-    @Column(name = "updated_by")
-    private String updatedBy;
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
 
     @OneToOne(mappedBy = "operInsurance")
     @JsonIgnore
@@ -149,17 +155,17 @@ public class Insurance implements Serializable {
         this.coverageStatement = coverageStatement;
     }
 
-    public Instant getCreatedOn() {
-        return createdOn;
+    public Instant getCreatedDate() {
+        return createdDate;
     }
 
-    public Insurance createdOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public Insurance createdDate(Instant createdDate) {
+        this.createdDate = createdDate;
         return this;
     }
 
-    public void setCreatedOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getCreatedBy() {
@@ -175,30 +181,30 @@ public class Insurance implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public Instant getUpdatedOn() {
-        return updatedOn;
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
     }
 
-    public Insurance updatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public Insurance lastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
         return this;
     }
 
-    public void setUpdatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
-    public String getUpdatedBy() {
-        return updatedBy;
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
     }
 
-    public Insurance updatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public Insurance lastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
         return this;
     }
 
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     public Carrier getCarrier() {
@@ -241,10 +247,10 @@ public class Insurance implements Serializable {
             ", policyDocument='" + getPolicyDocument() + "'" +
             ", policyDocumentContentType='" + getPolicyDocumentContentType() + "'" +
             ", coverageStatement='" + getCoverageStatement() + "'" +
-            ", createdOn='" + getCreatedOn() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
-            ", updatedOn='" + getUpdatedOn() + "'" +
-            ", updatedBy='" + getUpdatedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

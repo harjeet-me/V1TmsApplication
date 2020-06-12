@@ -137,7 +137,7 @@
             "fieldType": "ZonedDateTime"
         },
         {
-            "fieldName": "createdOn",
+            "fieldName": "createdDate",
             "fieldType": "Instant"
         },
         {
@@ -145,11 +145,11 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "updatedOn",
+            "fieldName": "lastModifiedDate",
             "fieldType": "Instant"
         },
         {
-            "fieldName": "updatedBy",
+            "fieldName": "lastModifiedBy",
             "fieldType": "String"
         }
     ],

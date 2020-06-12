@@ -11,6 +11,8 @@ import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } 
 import { IEmail, Email } from 'app/shared/model/email.model';
 import { EmailService } from './email.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
+import { ICustomer } from 'app/shared/model/customer.model';
+import { CustomerService } from 'app/entities/customer/customer.service';
 
 @Component({
   selector: 'jhi-email-update',
@@ -18,6 +20,8 @@ import { AlertError } from 'app/shared/alert/alert-error.model';
 })
 export class EmailUpdateComponent implements OnInit {
   isSaving = false;
+  sendStatus = '';
+  customers: ICustomer[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -33,16 +37,18 @@ export class EmailUpdateComponent implements OnInit {
     attachmentName: [],
     status: [],
     sentDateTime: [],
-    createdOn: [],
+    createdDate: [],
     createdBy: [],
-    updatedOn: [],
-    updatedBy: []
+    lastModifiedDate: [],
+    lastModifiedBy: [],
+    customer: []
   });
 
   constructor(
     protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
     protected emailService: EmailService,
+    protected customerService: CustomerService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -52,11 +58,13 @@ export class EmailUpdateComponent implements OnInit {
       if (!email.id) {
         const today = moment().startOf('day');
         email.sentDateTime = today;
-        email.createdOn = today;
-        email.updatedOn = today;
+        email.createdDate = today;
+        email.lastModifiedDate = today;
       }
 
       this.updateForm(email);
+
+      this.customerService.query().subscribe((res: HttpResponse<ICustomer[]>) => (this.customers = res.body || []));
     });
   }
 
@@ -73,12 +81,13 @@ export class EmailUpdateComponent implements OnInit {
       attachment: email.attachment,
       attachmentContentType: email.attachmentContentType,
       attachmentName: email.attachmentName,
-      status: email.status,
+      status: this.sendStatus,
       sentDateTime: email.sentDateTime ? email.sentDateTime.format(DATE_TIME_FORMAT) : null,
-      createdOn: email.createdOn ? email.createdOn.format(DATE_TIME_FORMAT) : null,
+      createdDate: email.createdDate ? email.createdDate.format(DATE_TIME_FORMAT) : null,
       createdBy: email.createdBy,
-      updatedOn: email.updatedOn ? email.updatedOn.format(DATE_TIME_FORMAT) : null,
-      updatedBy: email.updatedBy
+      lastModifiedDate: email.lastModifiedDate ? email.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
+      lastModifiedBy: email.lastModifiedBy,
+      customer: email.customer
     });
   }
 
@@ -101,16 +110,18 @@ export class EmailUpdateComponent implements OnInit {
   previousState(): void {
     window.history.back();
   }
+  sendState(): void {
+    this.editForm.patchValue({ status: 'SENT' });
+    this.save();
+  }
 
   save(): void {
+    //  this.editForm.patchValue ({status : "DRAFT"});
     this.isSaving = true;
-    alert('saving');
     const email = this.createFromForm();
-    if (email.id !== undefined && email.id !== null) {
-      alert('saving update' + email.id);
+    if (email.id !== undefined) {
       this.subscribeToSaveResponse(this.emailService.update(email));
     } else {
-      alert('saving save');
       this.subscribeToSaveResponse(this.emailService.create(email));
     }
   }
@@ -133,10 +144,15 @@ export class EmailUpdateComponent implements OnInit {
       sentDateTime: this.editForm.get(['sentDateTime'])!.value
         ? moment(this.editForm.get(['sentDateTime'])!.value, DATE_TIME_FORMAT)
         : undefined,
-      createdOn: this.editForm.get(['createdOn'])!.value ? moment(this.editForm.get(['createdOn'])!.value, DATE_TIME_FORMAT) : undefined,
+      createdDate: this.editForm.get(['createdDate'])!.value
+        ? moment(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
       createdBy: this.editForm.get(['createdBy'])!.value,
-      updatedOn: this.editForm.get(['updatedOn'])!.value ? moment(this.editForm.get(['updatedOn'])!.value, DATE_TIME_FORMAT) : undefined,
-      updatedBy: this.editForm.get(['updatedBy'])!.value
+      lastModifiedDate: this.editForm.get(['lastModifiedDate'])!.value
+        ? moment(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      lastModifiedBy: this.editForm.get(['lastModifiedBy'])!.value,
+      customer: this.editForm.get(['customer'])!.value
     };
   }
 
@@ -154,5 +170,9 @@ export class EmailUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  trackById(index: number, item: ICustomer): any {
+    return item.id;
   }
 }

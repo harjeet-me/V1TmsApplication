@@ -22,10 +22,10 @@ export interface ICompanyProfile {
   companyLogo?: any;
   profileStatus?: ToggleStatus;
   preffredCurrency?: CURRENCY;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
 }
 
 export class CompanyProfile implements ICompanyProfile {
@@ -48,10 +48,10 @@ export class CompanyProfile implements ICompanyProfile {
     public companyLogo?: any,
     public profileStatus?: ToggleStatus,
     public preffredCurrency?: CURRENCY,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string
   ) {
     this.active = this.active || false;
   }

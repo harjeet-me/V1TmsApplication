@@ -49,10 +49,10 @@
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.location.postalCode">Postal Code</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.location.latitude">Latitude</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.location.longitude">Longitude</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.location.createdOn">Created On</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.location.createdDate">Created Date</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.location.createdBy">Created By</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.location.updatedOn">Updated On</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.location.updatedBy">Updated By</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.location.lastModifiedDate">Last Modified Date</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.location.lastModifiedBy">Last Modified By</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -67,10 +67,10 @@
                     <td>{{ location.postalCode }}</td>
                     <td>{{ location.latitude }}</td>
                     <td>{{ location.longitude }}</td>
-                    <td>{{ location.createdOn | date:'medium' }}</td>
+                    <td>{{ location.createdDate | date:'medium' }}</td>
                     <td>{{ location.createdBy }}</td>
-                    <td>{{ location.updatedOn | date:'medium' }}</td>
-                    <td>{{ location.updatedBy }}</td>
+                    <td>{{ location.lastModifiedDate | date:'medium' }}</td>
+                    <td>{{ location.lastModifiedBy }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

@@ -1,15 +1,24 @@
 package com.tms.v1.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
+import java.time.Instant;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
-import java.io.Serializable;
-import java.util.Objects;
-import java.time.Instant;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * A Container.
@@ -18,7 +27,7 @@ import java.time.Instant;
 @Table(name = "container")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "container")
-public class Container implements Serializable {
+public class Container extends AbstractAuditingEntity  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -35,17 +44,18 @@ public class Container implements Serializable {
     @Column(name = "size")
     private Integer size;
 
-    @Column(name = "created_on")
-    private Instant createdOn;
-
+    @CreatedDate
+    @Column(name = "created_date")
+    private Instant createdDate;
+    @CreatedBy
     @Column(name = "created_by")
     private String createdBy;
-
-    @Column(name = "updated_on")
-    private Instant updatedOn;
-
-    @Column(name = "updated_by")
-    private String updatedBy;
+    @LastModifiedDate
+    @Column(name = "last_modified_date")
+    private Instant lastModifiedDate;
+    @LastModifiedBy
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
 
     @ManyToOne
     @JsonIgnoreProperties("containers")
@@ -99,17 +109,17 @@ public class Container implements Serializable {
         this.size = size;
     }
 
-    public Instant getCreatedOn() {
-        return createdOn;
+    public Instant getCreatedDate() {
+        return createdDate;
     }
 
-    public Container createdOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public Container createdDate(Instant createdDate) {
+        this.createdDate = createdDate;
         return this;
     }
 
-    public void setCreatedOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getCreatedBy() {
@@ -125,30 +135,30 @@ public class Container implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public Instant getUpdatedOn() {
-        return updatedOn;
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
     }
 
-    public Container updatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public Container lastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
         return this;
     }
 
-    public void setUpdatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
-    public String getUpdatedBy() {
-        return updatedBy;
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
     }
 
-    public Container updatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public Container lastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
         return this;
     }
 
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     public Trip getTrip() {
@@ -188,10 +198,10 @@ public class Container implements Serializable {
             ", number='" + getNumber() + "'" +
             ", description='" + getDescription() + "'" +
             ", size=" + getSize() +
-            ", createdOn='" + getCreatedOn() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
-            ", updatedOn='" + getUpdatedOn() + "'" +
-            ", updatedBy='" + getUpdatedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

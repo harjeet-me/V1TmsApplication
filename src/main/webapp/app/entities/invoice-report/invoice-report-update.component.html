@@ -1,144 +1,110 @@
 <div class="row justify-content-center">
-	<div class="col-8">
-		<form name="editForm" role="form" novalidate (ngSubmit)="save()"
-			[formGroup]="editForm">
-			<h2 id="jhi-invoice-report-heading"
-				jhiTranslate="tmsV1ApplicationApp.invoiceReport.home.createOrEditLabel">Create
-				or edit a Invoice Report</h2>
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-invoice-report-heading" jhiTranslate="tmsV1ApplicationApp.invoiceReport.home.createOrEditLabel">Create or edit a Invoice Report</h2>
 
-			<div>
-				<jhi-alert-error></jhi-alert-error>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
 
-				<div class="form-group" [hidden]="!editForm.get('id')!.value">
-					<label for="id" jhiTranslate="global.field.id">ID</label> <input
-						type="text" class="form-control" id="id" name="id"
-						formControlName="id" readonly />
-				</div>
-				<div class="form-group">
-					<label class="form-control-label"
-						jhiTranslate="tmsV1ApplicationApp.invoice.customer"
-						for="field_customer">Customer</label>
-					<!-- <select required="required"
-							class="form-control" id="field_customer" name="customer"
-							formControlName="customer">
-							<option [ngValue]="null"></option>
-							<option
-								[ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption"
-								*ngFor="let customerOption of customers; trackBy: trackById">{{
-								customerOption.company }}</option>
-						</select> -->
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
 
-					<input [(ngModel)]="customerName"
-						[ngModelOptions]="{standalone: true}" class="form-control"
-						type="input" list="customers;" temp=""
-						onmouseover="this.temp=this.value;this.value='';"
-						onmouseout="this.value=this.temp;"
-						(change)="onCustomerChange()" required="required" />
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceReport.customer" for="field_customer">Customer</label>
+                    <input type="number" class="form-control" name="customer" id="field_customer"
+                           formControlName="customer"/>
+                </div>
 
-					<datalist id="customers;">
-						<select>
-							<option *ngFor="let customerOption of customers;"
-								[value]="customerOption.company">
-								{{customerOption.company }}</option>
-						</select>
-					</datalist>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceReport.fromDate" for="field_fromDate">From Date</label>
+                    <div class="input-group">
+                        <input id="field_fromDate" type="text" class="form-control" name="fromDate" ngbDatepicker #fromDateDp="ngbDatepicker" formControlName="fromDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="fromDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
 
-				</div>
-				<div class="form-group">
-					<label class="form-control-label"
-						jhiTranslate="tmsV1ApplicationApp.invoiceReport.customer"
-						for="field_customer">Customer</label> <input type="number"
-						class="form-control" name="customer" id="field_customer"
-						formControlName="customer" />
-				</div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceReport.toDate" for="field_toDate">To Date</label>
+                    <div class="input-group">
+                        <input id="field_toDate" type="text" class="form-control" name="toDate" ngbDatepicker #toDateDp="ngbDatepicker" formControlName="toDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="toDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
 
-				<div class="form-group">
-					<label class="form-control-label"
-						jhiTranslate="tmsV1ApplicationApp.invoiceReport.fromDate"
-						for="field_fromDate">From Date</label>
-					<div class="input-group">
-						<input id="field_fromDate" type="text" class="form-control"
-							name="fromDate" ngbDatepicker #fromDateDp="ngbDatepicker"
-							formControlName="fromDate" /> <span class="input-group-append">
-							<button type="button" class="btn btn-secondary"
-								(click)="fromDateDp.toggle()">
-								<fa-icon icon="calendar-alt"></fa-icon>
-							</button>
-						</span>
-					</div>
-				</div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceReport.remarks" for="field_remarks">Remarks</label>
+                    <input type="text" class="form-control" name="remarks" id="field_remarks"
+                           formControlName="remarks"/>
+                </div>
 
-				<div class="form-group">
-					<label class="form-control-label"
-						jhiTranslate="tmsV1ApplicationApp.invoiceReport.toDate"
-						for="field_toDate">To Date</label>
-					<div class="input-group">
-						<input id="field_toDate" type="text" class="form-control"
-							name="toDate" ngbDatepicker #toDateDp="ngbDatepicker"
-							formControlName="toDate" /> <span class="input-group-append">
-							<button type="button" class="btn btn-secondary"
-								(click)="toDateDp.toggle()">
-								<fa-icon icon="calendar-alt"></fa-icon>
-							</button>
-						</span>
-					</div>
-				</div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceReport.invoiceReport" for="field_invoiceReport">Invoice Report</label>
+                    <div>
+                        <div *ngIf="editForm.get('invoiceReport')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('invoiceReportContentType')!.value, editForm.get('invoiceReport')!.value)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{ editForm.get('invoiceReportContentType')!.value }}, {{ byteSize(editForm.get('invoiceReport')!.value) }}</span>
+                            <button type="button" (click)="editForm.patchValue({invoiceReport: null});editForm.patchValue({invoiceReportContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_invoiceReport" (change)="setFileData($event, 'invoiceReport', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="invoiceReport" id="field_invoiceReport"
+                           formControlName="invoiceReport"/>
+                    <input type="hidden" class="form-control" name="invoiceReportContentType" id="field_invoiceReportContentType"
+                           formControlName="invoiceReportContentType" />
+                </div>
 
-				<div class="form-group">
-					<label class="form-control-label"
-						jhiTranslate="tmsV1ApplicationApp.invoiceReport.remarks"
-						for="field_remarks">Remarks</label> <input type="text"
-						class="form-control" name="remarks" id="field_remarks"
-						formControlName="remarks" />
-				</div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceReport.createdDate" for="field_createdDate">Created Date</label>
+                    <div class="d-flex">
+                        <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" formControlName="createdDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
 
-				<div class="form-group">
-					<label class="form-control-label"
-						jhiTranslate="tmsV1ApplicationApp.invoiceReport.invoiceReport"
-						for="field_invoiceReport">Invoice Report</label>
-					<div>
-						<div *ngIf="editForm.get('invoiceReport')!.value"
-							class="form-text text-danger clearfix">
-							<a class="pull-left"
-								(click)="openFile(editForm.get('invoiceReportContentType')!.value, editForm.get('invoiceReport')!.value)"
-								jhiTranslate="entity.action.open">open</a><br> <span
-								class="pull-left">{{
-								editForm.get('invoiceReportContentType')!.value }}, {{
-								byteSize(editForm.get('invoiceReport')!.value) }}</span>
-							<button type="button"
-								(click)="editForm.patchValue({invoiceReport: null});editForm.patchValue({invoiceReportContentType: null});"
-								class="btn btn-secondary btn-xs pull-right">
-								<fa-icon icon="times"></fa-icon>
-							</button>
-						</div>
-						<input type="file" id="file_invoiceReport"
-							(change)="setFileData($event, 'invoiceReport', false)"
-							jhiTranslate="entity.action.addblob" />
-					</div>
-					<input type="hidden" class="form-control" name="invoiceReport"
-						id="field_invoiceReport" formControlName="invoiceReport" /> <input
-						type="hidden" class="form-control" name="invoiceReportContentType"
-						id="field_invoiceReportContentType"
-						formControlName="invoiceReportContentType" />
-				</div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceReport.createdBy" for="field_createdBy">Created By</label>
+                    <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                           formControlName="createdBy"/>
+                </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceReport.lastModifiedDate" for="field_lastModifiedDate">Last Modified Date</label>
+                    <div class="d-flex">
+                        <input id="field_lastModifiedDate" type="datetime-local" class="form-control" name="lastModifiedDate" formControlName="lastModifiedDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.invoiceReport.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
+                    <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
+                           formControlName="lastModifiedBy"/>
+                </div>
 
-			</div>
+                <div class="form-group">
+                    <label jhiTranslate="tmsV1ApplicationApp.invoiceReport.invoice" for="field_invoices">Invoice</label>
+                    <select class="form-control" id="field_invoices" multiple name="invoices" formControlName="invoices">
+                        <option [ngValue]="getSelected(editForm.get('invoices')!.value, invoiceOption)" *ngFor="let invoiceOption of invoices; trackBy: trackById">{{ invoiceOption.id }}</option>
+                    </select>
+                </div>
+            </div>
 
-			<div>
-				<button type="button" id="cancel-save" class="btn btn-secondary"
-					(click)="previousState()">
-					<fa-icon icon="ban"></fa-icon>
-					&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-				</button>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
 
-				<button type="submit" id="save-entity"
-					[disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-					<fa-icon icon="save"></fa-icon>
-					&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-				</button>
-			</div>
-		</form>
-	</div>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

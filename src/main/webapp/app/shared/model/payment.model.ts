@@ -1,30 +1,35 @@
 import { Moment } from 'moment';
-import { InvoiceStatus } from 'app/shared/model/enumerations/invoice-status.model';
+import { ICustomer } from 'app/shared/model/customer.model';
+import { PayMode } from 'app/shared/model/enumerations/pay-mode.model';
 
 export interface IPayment {
   id?: number;
   invoiceNo?: string;
-  paymentAmt?: number;
-  invoicePaidDate?: Moment;
+  payDate?: Moment;
   payRefNo?: string;
-  status?: InvoiceStatus;
-  createdOn?: Moment;
+  mode?: PayMode;
+  ammount?: number;
+  unusedAmmount?: number;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
+  customer?: ICustomer;
 }
 
 export class Payment implements IPayment {
   constructor(
     public id?: number,
     public invoiceNo?: string,
-    public paymentAmt?: number,
-    public invoicePaidDate?: Moment,
+    public payDate?: Moment,
     public payRefNo?: string,
-    public status?: InvoiceStatus,
-    public createdOn?: Moment,
+    public mode?: PayMode,
+    public ammount?: number,
+    public unusedAmmount?: number,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
+    public customer?: ICustomer
   ) {}
 }

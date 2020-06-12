@@ -15,10 +15,10 @@ entity CompanyProfile {
     companyLogo ImageBlob ,
     profileStatus ToggleStatus ,
     preffredCurrency CURRENCY ,
-     createdOn Instant ,
+     createdDate Instant ,
     createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+    lastModifiedDate Instant ,
+    lastModifiedBy String
    
    
    }
@@ -57,10 +57,10 @@ entity Customer {
     preffredCurrency CURRENCY ,
     payterms String  ,
     timeZone ZonedDateTime    ,
-    createdOn Instant ,
+    createdDate Instant ,
     createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+    lastModifiedDate Instant ,
+    lastModifiedBy String
    
    
    }
@@ -95,10 +95,10 @@ entity Trip  {
      numbersOfContainer Integer ,
      comments String ,
      autoGenerateInvoice Boolean ,
-      createdOn Instant ,
+      createdDate Instant ,
       createdBy String ,
-      updatedOn Instant ,
-      updatedBy String
+      lastModifiedDate Instant ,
+      lastModifiedBy String
    
      
 	}
@@ -135,10 +135,25 @@ entity Invoice {
      balance Double,
      advance Double,
      discount Double,
-      createdOn Instant ,
+      createdDate Instant ,
       createdBy String ,
-      updatedOn Instant ,
-      updatedBy String
+      lastModifiedDate Instant ,
+      lastModifiedBy String
+   
+	
+    }
+    
+    entity Payment {
+     invoiceNo String,
+     payDate LocalDate ,
+     payRefNo String ,
+     mode PayMode ,
+     ammount Double,
+     unusedAmmount Double, 
+     createdDate Instant ,
+     createdBy String ,
+     lastModifiedDate Instant ,
+     lastModifiedBy String
    
 	
     }
@@ -146,16 +161,19 @@ entity Invoice {
     enum InvoiveRef {
      ORDER_NO , SHIPMENT_NO , PO_NUMBER , BOOKING_NO
     }
+    enum PayMode {
+     CHECK , CASH , BANK_TRANSFER
+    }
 entity InvoiceReport {
      customer Long,
      fromDate LocalDate ,
      toDate LocalDate,
      remarks String ,
      invoiceReport Blob ,
-     createdOn Instant ,
+     createdDate Instant ,
      createdBy String ,
-     updatedOn Instant ,
-     updatedBy String 
+     lastModifiedDate Instant ,
+     lastModifiedBy String 
 	
     }
     
@@ -169,10 +187,10 @@ entity InvoiceItem {
      price Double,
      discount Double,
      total Double ,
-     createdOn Instant ,
+     createdDate Instant ,
     createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+    lastModifiedDate Instant ,
+    lastModifiedBy String
    
      
 	}
@@ -182,10 +200,10 @@ entity InvoiceItem {
      description String,
      defaultQty Integer,
      price Double ,
-     createdOn Instant ,
+     createdDate Instant ,
     createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+    lastModifiedDate Instant ,
+    lastModifiedBy String
    
        
 	}
@@ -197,10 +215,10 @@ entity InvoiceItem {
      over30  Double,
      over60 Double ,
      over90 Double ,
-     createdOn Instant ,
+     createdDate Instant ,
     createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+    lastModifiedDate Instant ,
+    lastModifiedBy String
    
      
      
@@ -211,10 +229,10 @@ entity InvoiceItem {
      txType TransactionType,        
      description String,
      txAmmount Double,
-     createdOn Instant ,
+     createdDate Instant ,
     createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+    lastModifiedDate Instant ,
+    lastModifiedBy String
    
   
     }
@@ -223,10 +241,10 @@ entity Container {
     number String ,
       description String,
      size Integer ,
-     createdOn Instant ,
+     createdDate Instant ,
     createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+    lastModifiedDate Instant ,
+    lastModifiedBy String
    
 
 }
@@ -245,10 +263,10 @@ yearPurchased String ,
 licensePlateNumber String ,
 licensePlateExpiration LocalDate ,
 inspectionStickerExpiration  LocalDate  ,
-     createdOn Instant ,
+     createdDate Instant ,
     createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+    lastModifiedDate Instant ,
+    lastModifiedBy String
    
 
 }
@@ -261,10 +279,10 @@ entity Insurance {
   expiryDate LocalDate ,
   policyDocument Blob ,
   coverageStatement String  ,
-     createdOn Instant ,
+     createdDate Instant ,
     createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+    lastModifiedDate Instant ,
+    lastModifiedBy String
    
   }
 
@@ -277,10 +295,10 @@ entity Contact {
  	phoneNumber Long ,
     remarks String ,
     preferredTime String   ,
-     createdOn Instant ,
+     createdDate Instant ,
     createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+    lastModifiedDate Instant ,
+    lastModifiedBy String
    
     
 }
@@ -300,10 +318,10 @@ entity Driver {
     remarks String ,
     contractDoc Blob ,
     status ToggleStatus ,
-     createdOn Instant ,
+     createdDate Instant ,
     createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+    lastModifiedDate Instant ,
+    lastModifiedBy String
    
     }
 
@@ -340,10 +358,10 @@ entity Carrier {
     preffredCurrency CURRENCY ,
     payterms String  ,
     timeZone ZonedDateTime    ,
-    createdOn Instant ,
+    createdDate Instant ,
     createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+    lastModifiedDate Instant ,
+    lastModifiedBy String
    
    }
 
@@ -359,10 +377,10 @@ entity Location {
 	postalCode String
     latitude Integer,
     longitude Integer ,
-     createdOn Instant ,
+     createdDate Instant ,
     createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+    lastModifiedDate Instant ,
+    lastModifiedBy String
    
 	
 }
@@ -372,7 +390,7 @@ entity Location {
     INITIATED , UNDERPROCESS , COMPLETED
     }
     enum TransactionType{
-    CREDIT , PAYMENT, REFUND , ADJUSTMENT
+    CREDIT , INVOICE , PAYMENT, REFUND , ADJUSTMENT
     
     
     }
@@ -429,12 +447,12 @@ relationship OneToOne {
 	// Location{customer (company)  } to Customer{billingAddress (city) }
     
    //  Customer{custInsurance (providerNumber)  } to Insurance  {customer (company)  } 
-     Trip {pickupLocation (address)}   to  Location { trippick } 
-     Trip {dropLocation (address)} to    Location { tripdrop }  
-    Carrier{operInsurance} to Insurance {Carrier(company)}
-    Equipment{insurance} to Insurance 
-    Invoice{notification} to Email
-    Accounts {customer (company)} to  Customer{ accounts } 
+     //Trip {pickupLocation (address)}   to  Location { trippick } 
+     //Trip {dropLocation (address)} to    Location { tripdrop }  
+     Carrier{operInsurance} to Insurance {Carrier(company)}
+     Equipment{insurance} to Insurance 
+     Invoice{notification} to Email
+     Accounts {customer (company)} to  Customer{ accounts } 
      InvoiceHistory {previous (status)} to InvoiceHistory
      InvoiceHistory {next (status)} to InvoiceHistory
    
@@ -451,20 +469,20 @@ attachment Blob ,
 attachmentName String ,
 status String ,
 sentDateTime Instant,
-     createdOn Instant ,
+     createdDate Instant ,
     createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+    lastModifiedDate Instant ,
+    lastModifiedBy String
    
 
 }
 entity InvoiceHistory {
 status InvoiceStatus,
 comment String ,
-     createdOn Instant ,
+     createdDate Instant ,
     createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+    lastModifiedDate Instant ,
+    lastModifiedBy String
    
 
 }
@@ -484,10 +502,10 @@ fromDate LocalDate,
 toDate LocalDate,
 attachment Blob ,
 emailTo String ,
-     createdOn Instant ,
+     createdDate Instant ,
     createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+    lastModifiedDate Instant ,
+    lastModifiedBy String
    
 
 }
@@ -495,10 +513,10 @@ emailTo String ,
 entity FileSystem {
 data Blob ,
 fileName String ,
-createdOn Instant ,
+createdDate Instant ,
     createdBy String ,
-    updatedOn Instant ,
-    updatedBy String
+    lastModifiedDate Instant ,
+    lastModifiedBy String
    
 }
 
@@ -511,19 +529,19 @@ INV_STMT_OF_CUSTOMER , TRIP_STMT_OF_CUSTOMER
 relationship OneToMany {
     
     Trip  to  Invoice {trip } 
-    
-   
-    
-	Customer{loadOrder(orderNuber)} to Trip {customer(email)}
+      Location { trippick }  to  Trip {pickupLocation (address)}
+        Location { tripdrop }  to  Trip {dropLocation (address)} 
+    Customer{loadOrder(orderNuber)} to Trip {customer(email)}
     Customer{invoice} to Invoice {customer(company)}
-    
+    Customer{payment} to Payment {customer(company)}
+    Customer{email} to Email {customer(company)}
     Driver{trip} to  Trip {driver(firstName)}
     Equipment {trip} to  Trip {equipment}
     Carrier { loadOrder} to  Trip {carrier(company)}  
     Customer{morecontact (email )  } to  Contact  {customer (company)  } 
     Invoice { invoiceItem  }  to  InvoiceItem { invoice  }
     Customer  to TransactionsRecord {customer (company)}
-    Accounts  to TransactionsRecord {account}
+   // Accounts  to TransactionsRecord {account}
     Email  to FileSystem 
     Trip  to Container  
    //  Invoice   to  TransactionsRecord { invoice  }

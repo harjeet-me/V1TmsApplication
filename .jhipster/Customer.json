@@ -137,7 +137,7 @@
             "fieldType": "ZonedDateTime"
         },
         {
-            "fieldName": "createdOn",
+            "fieldName": "createdDate",
             "fieldType": "Instant"
         },
         {
@@ -145,11 +145,11 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "updatedOn",
+            "fieldName": "lastModifiedDate",
             "fieldType": "Instant"
         },
         {
-            "fieldName": "updatedBy",
+            "fieldName": "lastModifiedBy",
             "fieldType": "String"
         }
     ],
@@ -165,6 +165,18 @@
             "otherEntityName": "invoice",
             "otherEntityRelationshipName": "customer",
             "relationshipName": "invoice"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "payment",
+            "otherEntityRelationshipName": "customer",
+            "relationshipName": "payment"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "email",
+            "otherEntityRelationshipName": "customer",
+            "relationshipName": "email"
         },
         {
             "relationshipType": "one-to-many",

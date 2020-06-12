@@ -58,16 +58,20 @@ export class TransactionsRecordService {
 
   protected convertDateFromClient(transactionsRecord: ITransactionsRecord): ITransactionsRecord {
     const copy: ITransactionsRecord = Object.assign({}, transactionsRecord, {
-      createdOn: transactionsRecord.createdOn && transactionsRecord.createdOn.isValid() ? transactionsRecord.createdOn.toJSON() : undefined,
-      updatedOn: transactionsRecord.updatedOn && transactionsRecord.updatedOn.isValid() ? transactionsRecord.updatedOn.toJSON() : undefined
+      createdDate:
+        transactionsRecord.createdDate && transactionsRecord.createdDate.isValid() ? transactionsRecord.createdDate.toJSON() : undefined,
+      lastModifiedDate:
+        transactionsRecord.lastModifiedDate && transactionsRecord.lastModifiedDate.isValid()
+          ? transactionsRecord.lastModifiedDate.toJSON()
+          : undefined
     });
     return copy;
   }
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -75,8 +79,8 @@ export class TransactionsRecordService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((transactionsRecord: ITransactionsRecord) => {
-        transactionsRecord.createdOn = transactionsRecord.createdOn ? moment(transactionsRecord.createdOn) : undefined;
-        transactionsRecord.updatedOn = transactionsRecord.updatedOn ? moment(transactionsRecord.updatedOn) : undefined;
+        transactionsRecord.createdDate = transactionsRecord.createdDate ? moment(transactionsRecord.createdDate) : undefined;
+        transactionsRecord.lastModifiedDate = transactionsRecord.lastModifiedDate ? moment(transactionsRecord.lastModifiedDate) : undefined;
       });
     }
     return res;

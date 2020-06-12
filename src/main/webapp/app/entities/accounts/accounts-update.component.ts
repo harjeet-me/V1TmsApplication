@@ -27,10 +27,10 @@ export class AccountsUpdateComponent implements OnInit {
     over30: [],
     over60: [],
     over90: [],
-    createdOn: [],
+    createdDate: [],
     createdBy: [],
-    updatedOn: [],
-    updatedBy: [],
+    lastModifiedDate: [],
+    lastModifiedBy: [],
     customer: []
   });
 
@@ -45,8 +45,8 @@ export class AccountsUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ accounts }) => {
       if (!accounts.id) {
         const today = moment().startOf('day');
-        accounts.createdOn = today;
-        accounts.updatedOn = today;
+        accounts.createdDate = today;
+        accounts.lastModifiedDate = today;
       }
 
       this.updateForm(accounts);
@@ -82,10 +82,10 @@ export class AccountsUpdateComponent implements OnInit {
       over30: accounts.over30,
       over60: accounts.over60,
       over90: accounts.over90,
-      createdOn: accounts.createdOn ? accounts.createdOn.format(DATE_TIME_FORMAT) : null,
+      createdDate: accounts.createdDate ? accounts.createdDate.format(DATE_TIME_FORMAT) : null,
       createdBy: accounts.createdBy,
-      updatedOn: accounts.updatedOn ? accounts.updatedOn.format(DATE_TIME_FORMAT) : null,
-      updatedBy: accounts.updatedBy,
+      lastModifiedDate: accounts.lastModifiedDate ? accounts.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
+      lastModifiedBy: accounts.lastModifiedBy,
       customer: accounts.customer
     });
   }
@@ -112,10 +112,14 @@ export class AccountsUpdateComponent implements OnInit {
       over30: this.editForm.get(['over30'])!.value,
       over60: this.editForm.get(['over60'])!.value,
       over90: this.editForm.get(['over90'])!.value,
-      createdOn: this.editForm.get(['createdOn'])!.value ? moment(this.editForm.get(['createdOn'])!.value, DATE_TIME_FORMAT) : undefined,
+      createdDate: this.editForm.get(['createdDate'])!.value
+        ? moment(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
       createdBy: this.editForm.get(['createdBy'])!.value,
-      updatedOn: this.editForm.get(['updatedOn'])!.value ? moment(this.editForm.get(['updatedOn'])!.value, DATE_TIME_FORMAT) : undefined,
-      updatedBy: this.editForm.get(['updatedBy'])!.value,
+      lastModifiedDate: this.editForm.get(['lastModifiedDate'])!.value
+        ? moment(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      lastModifiedBy: this.editForm.get(['lastModifiedBy'])!.value,
       customer: this.editForm.get(['customer'])!.value
     };
   }

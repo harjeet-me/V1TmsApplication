@@ -1,15 +1,26 @@
 package com.tms.v1.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
-import java.io.Serializable;
-import java.util.Objects;
-import java.time.Instant;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import com.tms.v1.domain.enumeration.CountryEnum;
 
@@ -20,7 +31,7 @@ import com.tms.v1.domain.enumeration.CountryEnum;
 @Table(name = "location")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "location")
-public class Location implements Serializable {
+public class Location extends AbstractAuditingEntity  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -53,25 +64,26 @@ public class Location implements Serializable {
     @Column(name = "longitude")
     private Integer longitude;
 
-    @Column(name = "created_on")
-    private Instant createdOn;
-
+    @CreatedDate
+    @Column(name = "created_date")
+    private Instant createdDate;
+    @CreatedBy
     @Column(name = "created_by")
     private String createdBy;
+    @LastModifiedDate
+    @Column(name = "last_modified_date")
+    private Instant lastModifiedDate;
+    @LastModifiedBy
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
 
-    @Column(name = "updated_on")
-    private Instant updatedOn;
+    @OneToMany(mappedBy = "pickupLocation")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Trip> trippicks = new HashSet<>();
 
-    @Column(name = "updated_by")
-    private String updatedBy;
-
-    @OneToOne(mappedBy = "pickupLocation")
-    @JsonIgnore
-    private Trip trippick;
-
-    @OneToOne(mappedBy = "dropLocation")
-    @JsonIgnore
-    private Trip tripdrop;
+    @OneToMany(mappedBy = "dropLocation")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Trip> tripdrops = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -186,17 +198,17 @@ public class Location implements Serializable {
         this.longitude = longitude;
     }
 
-    public Instant getCreatedOn() {
-        return createdOn;
+    public Instant getCreatedDate() {
+        return createdDate;
     }
 
-    public Location createdOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public Location createdDate(Instant createdDate) {
+        this.createdDate = createdDate;
         return this;
     }
 
-    public void setCreatedOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getCreatedBy() {
@@ -212,56 +224,80 @@ public class Location implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public Instant getUpdatedOn() {
-        return updatedOn;
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
     }
 
-    public Location updatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public Location lastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
         return this;
     }
 
-    public void setUpdatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
-    public String getUpdatedBy() {
-        return updatedBy;
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
     }
 
-    public Location updatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public Location lastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
         return this;
     }
 
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
-    public Trip getTrippick() {
-        return trippick;
+    public Set<Trip> getTrippicks() {
+        return trippicks;
     }
 
-    public Location trippick(Trip trip) {
-        this.trippick = trip;
+    public Location trippicks(Set<Trip> trips) {
+        this.trippicks = trips;
         return this;
     }
 
-    public void setTrippick(Trip trip) {
-        this.trippick = trip;
-    }
-
-    public Trip getTripdrop() {
-        return tripdrop;
-    }
-
-    public Location tripdrop(Trip trip) {
-        this.tripdrop = trip;
+    public Location addTrippick(Trip trip) {
+        this.trippicks.add(trip);
+        trip.setPickupLocation(this);
         return this;
     }
 
-    public void setTripdrop(Trip trip) {
-        this.tripdrop = trip;
+    public Location removeTrippick(Trip trip) {
+        this.trippicks.remove(trip);
+        trip.setPickupLocation(null);
+        return this;
+    }
+
+    public void setTrippicks(Set<Trip> trips) {
+        this.trippicks = trips;
+    }
+
+    public Set<Trip> getTripdrops() {
+        return tripdrops;
+    }
+
+    public Location tripdrops(Set<Trip> trips) {
+        this.tripdrops = trips;
+        return this;
+    }
+
+    public Location addTripdrop(Trip trip) {
+        this.tripdrops.add(trip);
+        trip.setDropLocation(this);
+        return this;
+    }
+
+    public Location removeTripdrop(Trip trip) {
+        this.tripdrops.remove(trip);
+        trip.setDropLocation(null);
+        return this;
+    }
+
+    public void setTripdrops(Set<Trip> trips) {
+        this.tripdrops = trips;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -293,10 +329,10 @@ public class Location implements Serializable {
             ", postalCode='" + getPostalCode() + "'" +
             ", latitude=" + getLatitude() +
             ", longitude=" + getLongitude() +
-            ", createdOn='" + getCreatedOn() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
-            ", updatedOn='" + getUpdatedOn() + "'" +
-            ", updatedBy='" + getUpdatedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

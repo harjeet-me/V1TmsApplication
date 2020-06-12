@@ -34,7 +34,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.tms.v1.domain.enumeration.InvoiceStatus;
+import com.tms.v1.domain.enumeration.PayMode;
 /**
  * Integration tests for the {@link PaymentResource} REST controller.
  */
@@ -47,29 +47,32 @@ public class PaymentResourceIT {
     private static final String DEFAULT_INVOICE_NO = "AAAAAAAAAA";
     private static final String UPDATED_INVOICE_NO = "BBBBBBBBBB";
 
-    private static final Double DEFAULT_PAYMENT_AMT = 1D;
-    private static final Double UPDATED_PAYMENT_AMT = 2D;
-
-    private static final LocalDate DEFAULT_INVOICE_PAID_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_INVOICE_PAID_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate DEFAULT_PAY_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_PAY_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final String DEFAULT_PAY_REF_NO = "AAAAAAAAAA";
     private static final String UPDATED_PAY_REF_NO = "BBBBBBBBBB";
 
-    private static final InvoiceStatus DEFAULT_STATUS = InvoiceStatus.DRAFT;
-    private static final InvoiceStatus UPDATED_STATUS = InvoiceStatus.GENERATED;
+    private static final PayMode DEFAULT_MODE = PayMode.CHECK;
+    private static final PayMode UPDATED_MODE = PayMode.CASH;
 
-    private static final Instant DEFAULT_CREATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Double DEFAULT_AMMOUNT = 1D;
+    private static final Double UPDATED_AMMOUNT = 2D;
+
+    private static final Double DEFAULT_UNUSED_AMMOUNT = 1D;
+    private static final Double UPDATED_UNUSED_AMMOUNT = 2D;
+
+    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_UPDATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_UPDATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_UPDATED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_UPDATED_BY = "BBBBBBBBBB";
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     @Autowired
     private PaymentRepository paymentRepository;
@@ -102,14 +105,15 @@ public class PaymentResourceIT {
     public static Payment createEntity(EntityManager em) {
         Payment payment = new Payment()
             .invoiceNo(DEFAULT_INVOICE_NO)
-            .paymentAmt(DEFAULT_PAYMENT_AMT)
-            .invoicePaidDate(DEFAULT_INVOICE_PAID_DATE)
+            .payDate(DEFAULT_PAY_DATE)
             .payRefNo(DEFAULT_PAY_REF_NO)
-            .status(DEFAULT_STATUS)
-            .createdOn(DEFAULT_CREATED_ON)
+            .mode(DEFAULT_MODE)
+            .ammount(DEFAULT_AMMOUNT)
+            .unusedAmmount(DEFAULT_UNUSED_AMMOUNT)
+            .createdDate(DEFAULT_CREATED_DATE)
             .createdBy(DEFAULT_CREATED_BY)
-            .updatedOn(DEFAULT_UPDATED_ON)
-            .updatedBy(DEFAULT_UPDATED_BY);
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return payment;
     }
     /**
@@ -121,14 +125,15 @@ public class PaymentResourceIT {
     public static Payment createUpdatedEntity(EntityManager em) {
         Payment payment = new Payment()
             .invoiceNo(UPDATED_INVOICE_NO)
-            .paymentAmt(UPDATED_PAYMENT_AMT)
-            .invoicePaidDate(UPDATED_INVOICE_PAID_DATE)
+            .payDate(UPDATED_PAY_DATE)
             .payRefNo(UPDATED_PAY_REF_NO)
-            .status(UPDATED_STATUS)
-            .createdOn(UPDATED_CREATED_ON)
+            .mode(UPDATED_MODE)
+            .ammount(UPDATED_AMMOUNT)
+            .unusedAmmount(UPDATED_UNUSED_AMMOUNT)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return payment;
     }
 
@@ -153,14 +158,15 @@ public class PaymentResourceIT {
         assertThat(paymentList).hasSize(databaseSizeBeforeCreate + 1);
         Payment testPayment = paymentList.get(paymentList.size() - 1);
         assertThat(testPayment.getInvoiceNo()).isEqualTo(DEFAULT_INVOICE_NO);
-        assertThat(testPayment.getPaymentAmt()).isEqualTo(DEFAULT_PAYMENT_AMT);
-        assertThat(testPayment.getInvoicePaidDate()).isEqualTo(DEFAULT_INVOICE_PAID_DATE);
+        assertThat(testPayment.getPayDate()).isEqualTo(DEFAULT_PAY_DATE);
         assertThat(testPayment.getPayRefNo()).isEqualTo(DEFAULT_PAY_REF_NO);
-        assertThat(testPayment.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testPayment.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
+        assertThat(testPayment.getMode()).isEqualTo(DEFAULT_MODE);
+        assertThat(testPayment.getAmmount()).isEqualTo(DEFAULT_AMMOUNT);
+        assertThat(testPayment.getUnusedAmmount()).isEqualTo(DEFAULT_UNUSED_AMMOUNT);
+        assertThat(testPayment.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testPayment.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testPayment.getUpdatedOn()).isEqualTo(DEFAULT_UPDATED_ON);
-        assertThat(testPayment.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
+        assertThat(testPayment.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testPayment.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
 
         // Validate the Payment in Elasticsearch
         verify(mockPaymentSearchRepository, times(1)).save(testPayment);
@@ -201,14 +207,15 @@ public class PaymentResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(payment.getId().intValue())))
             .andExpect(jsonPath("$.[*].invoiceNo").value(hasItem(DEFAULT_INVOICE_NO)))
-            .andExpect(jsonPath("$.[*].paymentAmt").value(hasItem(DEFAULT_PAYMENT_AMT.doubleValue())))
-            .andExpect(jsonPath("$.[*].invoicePaidDate").value(hasItem(DEFAULT_INVOICE_PAID_DATE.toString())))
+            .andExpect(jsonPath("$.[*].payDate").value(hasItem(DEFAULT_PAY_DATE.toString())))
             .andExpect(jsonPath("$.[*].payRefNo").value(hasItem(DEFAULT_PAY_REF_NO)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].mode").value(hasItem(DEFAULT_MODE.toString())))
+            .andExpect(jsonPath("$.[*].ammount").value(hasItem(DEFAULT_AMMOUNT.doubleValue())))
+            .andExpect(jsonPath("$.[*].unusedAmmount").value(hasItem(DEFAULT_UNUSED_AMMOUNT.doubleValue())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
     
     @Test
@@ -223,14 +230,15 @@ public class PaymentResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(payment.getId().intValue()))
             .andExpect(jsonPath("$.invoiceNo").value(DEFAULT_INVOICE_NO))
-            .andExpect(jsonPath("$.paymentAmt").value(DEFAULT_PAYMENT_AMT.doubleValue()))
-            .andExpect(jsonPath("$.invoicePaidDate").value(DEFAULT_INVOICE_PAID_DATE.toString()))
+            .andExpect(jsonPath("$.payDate").value(DEFAULT_PAY_DATE.toString()))
             .andExpect(jsonPath("$.payRefNo").value(DEFAULT_PAY_REF_NO))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
-            .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()))
+            .andExpect(jsonPath("$.mode").value(DEFAULT_MODE.toString()))
+            .andExpect(jsonPath("$.ammount").value(DEFAULT_AMMOUNT.doubleValue()))
+            .andExpect(jsonPath("$.unusedAmmount").value(DEFAULT_UNUSED_AMMOUNT.doubleValue()))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
-            .andExpect(jsonPath("$.updatedOn").value(DEFAULT_UPDATED_ON.toString()))
-            .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY));
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -257,14 +265,15 @@ public class PaymentResourceIT {
         em.detach(updatedPayment);
         updatedPayment
             .invoiceNo(UPDATED_INVOICE_NO)
-            .paymentAmt(UPDATED_PAYMENT_AMT)
-            .invoicePaidDate(UPDATED_INVOICE_PAID_DATE)
+            .payDate(UPDATED_PAY_DATE)
             .payRefNo(UPDATED_PAY_REF_NO)
-            .status(UPDATED_STATUS)
-            .createdOn(UPDATED_CREATED_ON)
+            .mode(UPDATED_MODE)
+            .ammount(UPDATED_AMMOUNT)
+            .unusedAmmount(UPDATED_UNUSED_AMMOUNT)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restPaymentMockMvc.perform(put("/api/payments").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -276,14 +285,15 @@ public class PaymentResourceIT {
         assertThat(paymentList).hasSize(databaseSizeBeforeUpdate);
         Payment testPayment = paymentList.get(paymentList.size() - 1);
         assertThat(testPayment.getInvoiceNo()).isEqualTo(UPDATED_INVOICE_NO);
-        assertThat(testPayment.getPaymentAmt()).isEqualTo(UPDATED_PAYMENT_AMT);
-        assertThat(testPayment.getInvoicePaidDate()).isEqualTo(UPDATED_INVOICE_PAID_DATE);
+        assertThat(testPayment.getPayDate()).isEqualTo(UPDATED_PAY_DATE);
         assertThat(testPayment.getPayRefNo()).isEqualTo(UPDATED_PAY_REF_NO);
-        assertThat(testPayment.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testPayment.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
+        assertThat(testPayment.getMode()).isEqualTo(UPDATED_MODE);
+        assertThat(testPayment.getAmmount()).isEqualTo(UPDATED_AMMOUNT);
+        assertThat(testPayment.getUnusedAmmount()).isEqualTo(UPDATED_UNUSED_AMMOUNT);
+        assertThat(testPayment.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testPayment.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testPayment.getUpdatedOn()).isEqualTo(UPDATED_UPDATED_ON);
-        assertThat(testPayment.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
+        assertThat(testPayment.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testPayment.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
 
         // Validate the Payment in Elasticsearch
         verify(mockPaymentSearchRepository, times(1)).save(testPayment);
@@ -344,13 +354,14 @@ public class PaymentResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(payment.getId().intValue())))
             .andExpect(jsonPath("$.[*].invoiceNo").value(hasItem(DEFAULT_INVOICE_NO)))
-            .andExpect(jsonPath("$.[*].paymentAmt").value(hasItem(DEFAULT_PAYMENT_AMT.doubleValue())))
-            .andExpect(jsonPath("$.[*].invoicePaidDate").value(hasItem(DEFAULT_INVOICE_PAID_DATE.toString())))
+            .andExpect(jsonPath("$.[*].payDate").value(hasItem(DEFAULT_PAY_DATE.toString())))
             .andExpect(jsonPath("$.[*].payRefNo").value(hasItem(DEFAULT_PAY_REF_NO)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].mode").value(hasItem(DEFAULT_MODE.toString())))
+            .andExpect(jsonPath("$.[*].ammount").value(hasItem(DEFAULT_AMMOUNT.doubleValue())))
+            .andExpect(jsonPath("$.[*].unusedAmmount").value(hasItem(DEFAULT_UNUSED_AMMOUNT.doubleValue())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 }

@@ -4,7 +4,6 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
@@ -31,8 +30,7 @@ type SelectableEntity = ILocation | ICustomer | IDriver | IEquipment | ICarrier;
 })
 export class TripUpdateComponent implements OnInit {
   isSaving = false;
-  pickuplocations: ILocation[] = [];
-  droplocations: ILocation[] = [];
+  locations: ILocation[] = [];
   customers: ICustomer[] = [];
   drivers: IDriver[] = [];
   equipment: IEquipment[] = [];
@@ -68,10 +66,10 @@ export class TripUpdateComponent implements OnInit {
     numbersOfContainer: [],
     comments: [],
     autoGenerateInvoice: [],
-    createdOn: [],
+    createdDate: [],
     createdBy: [],
-    updatedOn: [],
-    updatedBy: [],
+    lastModifiedDate: [],
+    lastModifiedBy: [],
     pickupLocation: [],
     dropLocation: [],
     customer: [],
@@ -98,55 +96,13 @@ export class TripUpdateComponent implements OnInit {
       if (!trip.id) {
         const today = moment().startOf('day');
         trip.chasisInTime = today;
-        trip.createdOn = today;
-        trip.updatedOn = today;
+        trip.createdDate = today;
+        trip.lastModifiedDate = today;
       }
 
       this.updateForm(trip);
 
-      this.locationService
-        .query({ filter: 'trippick-is-null' })
-        .pipe(
-          map((res: HttpResponse<ILocation[]>) => {
-            return res.body || [];
-          })
-        )
-        .subscribe((resBody: ILocation[]) => {
-          if (!trip.pickupLocation || !trip.pickupLocation.id) {
-            this.pickuplocations = resBody;
-          } else {
-            this.locationService
-              .find(trip.pickupLocation.id)
-              .pipe(
-                map((subRes: HttpResponse<ILocation>) => {
-                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
-                })
-              )
-              .subscribe((concatRes: ILocation[]) => (this.pickuplocations = concatRes));
-          }
-        });
-
-      this.locationService
-        .query({ filter: 'tripdrop-is-null' })
-        .pipe(
-          map((res: HttpResponse<ILocation[]>) => {
-            return res.body || [];
-          })
-        )
-        .subscribe((resBody: ILocation[]) => {
-          if (!trip.dropLocation || !trip.dropLocation.id) {
-            this.droplocations = resBody;
-          } else {
-            this.locationService
-              .find(trip.dropLocation.id)
-              .pipe(
-                map((subRes: HttpResponse<ILocation>) => {
-                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
-                })
-              )
-              .subscribe((concatRes: ILocation[]) => (this.droplocations = concatRes));
-          }
-        });
+      this.locationService.query().subscribe((res: HttpResponse<ILocation[]>) => (this.locations = res.body || []));
 
       this.customerService.query().subscribe((res: HttpResponse<ICustomer[]>) => (this.customers = res.body || []));
 
@@ -187,10 +143,10 @@ export class TripUpdateComponent implements OnInit {
       numbersOfContainer: trip.numbersOfContainer,
       comments: trip.comments,
       autoGenerateInvoice: trip.autoGenerateInvoice,
-      createdOn: trip.createdOn ? trip.createdOn.format(DATE_TIME_FORMAT) : null,
+      createdDate: trip.createdDate ? trip.createdDate.format(DATE_TIME_FORMAT) : null,
       createdBy: trip.createdBy,
-      updatedOn: trip.updatedOn ? trip.updatedOn.format(DATE_TIME_FORMAT) : null,
-      updatedBy: trip.updatedBy,
+      lastModifiedDate: trip.lastModifiedDate ? trip.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
+      lastModifiedBy: trip.lastModifiedBy,
       pickupLocation: trip.pickupLocation,
       dropLocation: trip.dropLocation,
       customer: trip.customer,
@@ -262,10 +218,14 @@ export class TripUpdateComponent implements OnInit {
       numbersOfContainer: this.editForm.get(['numbersOfContainer'])!.value,
       comments: this.editForm.get(['comments'])!.value,
       autoGenerateInvoice: this.editForm.get(['autoGenerateInvoice'])!.value,
-      createdOn: this.editForm.get(['createdOn'])!.value ? moment(this.editForm.get(['createdOn'])!.value, DATE_TIME_FORMAT) : undefined,
+      createdDate: this.editForm.get(['createdDate'])!.value
+        ? moment(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
       createdBy: this.editForm.get(['createdBy'])!.value,
-      updatedOn: this.editForm.get(['updatedOn'])!.value ? moment(this.editForm.get(['updatedOn'])!.value, DATE_TIME_FORMAT) : undefined,
-      updatedBy: this.editForm.get(['updatedBy'])!.value,
+      lastModifiedDate: this.editForm.get(['lastModifiedDate'])!.value
+        ? moment(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      lastModifiedBy: this.editForm.get(['lastModifiedBy'])!.value,
       pickupLocation: this.editForm.get(['pickupLocation'])!.value,
       dropLocation: this.editForm.get(['dropLocation'])!.value,
       customer: this.editForm.get(['customer'])!.value,

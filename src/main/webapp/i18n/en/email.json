@@ -28,11 +28,12 @@
       "attachmentName": "Attachment Name",
       "status": "Status",
       "sentDateTime": "Sent Date Time",
-      "createdOn": "Created On",
+      "createdDate": "Created Date",
       "createdBy": "Created By",
-      "updatedOn": "Updated On",
-      "updatedBy": "Updated By",
-      "fileSystem": "File System"
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By",
+      "fileSystem": "File System",
+      "customer": "Customer"
     }
   }
 }

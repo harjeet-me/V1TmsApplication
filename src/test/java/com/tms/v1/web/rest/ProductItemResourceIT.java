@@ -53,17 +53,17 @@ public class ProductItemResourceIT {
     private static final Double DEFAULT_PRICE = 1D;
     private static final Double UPDATED_PRICE = 2D;
 
-    private static final Instant DEFAULT_CREATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_UPDATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_UPDATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_UPDATED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_UPDATED_BY = "BBBBBBBBBB";
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     @Autowired
     private ProductItemRepository productItemRepository;
@@ -99,10 +99,10 @@ public class ProductItemResourceIT {
             .description(DEFAULT_DESCRIPTION)
             .defaultQty(DEFAULT_DEFAULT_QTY)
             .price(DEFAULT_PRICE)
-            .createdOn(DEFAULT_CREATED_ON)
+            .createdDate(DEFAULT_CREATED_DATE)
             .createdBy(DEFAULT_CREATED_BY)
-            .updatedOn(DEFAULT_UPDATED_ON)
-            .updatedBy(DEFAULT_UPDATED_BY);
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return productItem;
     }
     /**
@@ -117,10 +117,10 @@ public class ProductItemResourceIT {
             .description(UPDATED_DESCRIPTION)
             .defaultQty(UPDATED_DEFAULT_QTY)
             .price(UPDATED_PRICE)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return productItem;
     }
 
@@ -148,10 +148,10 @@ public class ProductItemResourceIT {
         assertThat(testProductItem.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testProductItem.getDefaultQty()).isEqualTo(DEFAULT_DEFAULT_QTY);
         assertThat(testProductItem.getPrice()).isEqualTo(DEFAULT_PRICE);
-        assertThat(testProductItem.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
+        assertThat(testProductItem.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testProductItem.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testProductItem.getUpdatedOn()).isEqualTo(DEFAULT_UPDATED_ON);
-        assertThat(testProductItem.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
+        assertThat(testProductItem.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testProductItem.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
 
         // Validate the ProductItem in Elasticsearch
         verify(mockProductItemSearchRepository, times(1)).save(testProductItem);
@@ -195,10 +195,10 @@ public class ProductItemResourceIT {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].defaultQty").value(hasItem(DEFAULT_DEFAULT_QTY)))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
     
     @Test
@@ -216,10 +216,10 @@ public class ProductItemResourceIT {
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.defaultQty").value(DEFAULT_DEFAULT_QTY))
             .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()))
-            .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
-            .andExpect(jsonPath("$.updatedOn").value(DEFAULT_UPDATED_ON.toString()))
-            .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY));
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -249,10 +249,10 @@ public class ProductItemResourceIT {
             .description(UPDATED_DESCRIPTION)
             .defaultQty(UPDATED_DEFAULT_QTY)
             .price(UPDATED_PRICE)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restProductItemMockMvc.perform(put("/api/product-items").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -267,10 +267,10 @@ public class ProductItemResourceIT {
         assertThat(testProductItem.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testProductItem.getDefaultQty()).isEqualTo(UPDATED_DEFAULT_QTY);
         assertThat(testProductItem.getPrice()).isEqualTo(UPDATED_PRICE);
-        assertThat(testProductItem.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
+        assertThat(testProductItem.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testProductItem.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testProductItem.getUpdatedOn()).isEqualTo(UPDATED_UPDATED_ON);
-        assertThat(testProductItem.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
+        assertThat(testProductItem.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testProductItem.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
 
         // Validate the ProductItem in Elasticsearch
         verify(mockProductItemSearchRepository, times(1)).save(testProductItem);
@@ -334,9 +334,9 @@ public class ProductItemResourceIT {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].defaultQty").value(hasItem(DEFAULT_DEFAULT_QTY)))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 }

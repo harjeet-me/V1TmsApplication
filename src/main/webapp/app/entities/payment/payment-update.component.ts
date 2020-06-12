@@ -9,6 +9,8 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IPayment, Payment } from 'app/shared/model/payment.model';
 import { PaymentService } from './payment.service';
+import { ICustomer } from 'app/shared/model/customer.model';
+import { CustomerService } from 'app/entities/customer/customer.service';
 
 @Component({
   selector: 'jhi-payment-update',
@@ -16,32 +18,42 @@ import { PaymentService } from './payment.service';
 })
 export class PaymentUpdateComponent implements OnInit {
   isSaving = false;
-  invoicePaidDateDp: any;
+  customers: ICustomer[] = [];
+  payDateDp: any;
 
   editForm = this.fb.group({
     id: [],
     invoiceNo: [],
-    paymentAmt: [],
-    invoicePaidDate: [],
+    payDate: [],
     payRefNo: [],
-    status: [],
-    createdOn: [],
+    mode: [],
+    ammount: [],
+    unusedAmmount: [],
+    createdDate: [],
     createdBy: [],
-    updatedOn: [],
-    updatedBy: []
+    lastModifiedDate: [],
+    lastModifiedBy: [],
+    customer: []
   });
 
-  constructor(protected paymentService: PaymentService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected paymentService: PaymentService,
+    protected customerService: CustomerService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ payment }) => {
       if (!payment.id) {
         const today = moment().startOf('day');
-        payment.createdOn = today;
-        payment.updatedOn = today;
+        payment.createdDate = today;
+        payment.lastModifiedDate = today;
       }
 
       this.updateForm(payment);
+
+      this.customerService.query().subscribe((res: HttpResponse<ICustomer[]>) => (this.customers = res.body || []));
     });
   }
 
@@ -49,14 +61,16 @@ export class PaymentUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: payment.id,
       invoiceNo: payment.invoiceNo,
-      paymentAmt: payment.paymentAmt,
-      invoicePaidDate: payment.invoicePaidDate,
+      payDate: payment.payDate,
       payRefNo: payment.payRefNo,
-      status: payment.status,
-      createdOn: payment.createdOn ? payment.createdOn.format(DATE_TIME_FORMAT) : null,
+      mode: payment.mode,
+      ammount: payment.ammount,
+      unusedAmmount: payment.unusedAmmount,
+      createdDate: payment.createdDate ? payment.createdDate.format(DATE_TIME_FORMAT) : null,
       createdBy: payment.createdBy,
-      updatedOn: payment.updatedOn ? payment.updatedOn.format(DATE_TIME_FORMAT) : null,
-      updatedBy: payment.updatedBy
+      lastModifiedDate: payment.lastModifiedDate ? payment.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
+      lastModifiedBy: payment.lastModifiedBy,
+      customer: payment.customer
     });
   }
 
@@ -79,14 +93,20 @@ export class PaymentUpdateComponent implements OnInit {
       ...new Payment(),
       id: this.editForm.get(['id'])!.value,
       invoiceNo: this.editForm.get(['invoiceNo'])!.value,
-      paymentAmt: this.editForm.get(['paymentAmt'])!.value,
-      invoicePaidDate: this.editForm.get(['invoicePaidDate'])!.value,
+      payDate: this.editForm.get(['payDate'])!.value,
       payRefNo: this.editForm.get(['payRefNo'])!.value,
-      status: this.editForm.get(['status'])!.value,
-      createdOn: this.editForm.get(['createdOn'])!.value ? moment(this.editForm.get(['createdOn'])!.value, DATE_TIME_FORMAT) : undefined,
+      mode: this.editForm.get(['mode'])!.value,
+      ammount: this.editForm.get(['ammount'])!.value,
+      unusedAmmount: this.editForm.get(['unusedAmmount'])!.value,
+      createdDate: this.editForm.get(['createdDate'])!.value
+        ? moment(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
       createdBy: this.editForm.get(['createdBy'])!.value,
-      updatedOn: this.editForm.get(['updatedOn'])!.value ? moment(this.editForm.get(['updatedOn'])!.value, DATE_TIME_FORMAT) : undefined,
-      updatedBy: this.editForm.get(['updatedBy'])!.value
+      lastModifiedDate: this.editForm.get(['lastModifiedDate'])!.value
+        ? moment(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      lastModifiedBy: this.editForm.get(['lastModifiedBy'])!.value,
+      customer: this.editForm.get(['customer'])!.value
     };
   }
 
@@ -104,5 +124,9 @@ export class PaymentUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  trackById(index: number, item: ICustomer): any {
+    return item.id;
   }
 }

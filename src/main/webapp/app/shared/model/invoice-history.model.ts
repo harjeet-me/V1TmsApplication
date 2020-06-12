@@ -6,10 +6,10 @@ export interface IInvoiceHistory {
   id?: number;
   status?: InvoiceStatus;
   comment?: string;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
   previous?: IInvoiceHistory;
   next?: IInvoiceHistory;
   invoice?: IInvoice;
@@ -20,10 +20,10 @@ export class InvoiceHistory implements IInvoiceHistory {
     public id?: number,
     public status?: InvoiceStatus,
     public comment?: string,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string,
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
     public previous?: IInvoiceHistory,
     public next?: IInvoiceHistory,
     public invoice?: IInvoice

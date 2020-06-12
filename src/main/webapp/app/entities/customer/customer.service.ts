@@ -63,8 +63,8 @@ export class CustomerService {
         customer.preferredContactTime && customer.preferredContactTime.isValid() ? customer.preferredContactTime.toJSON() : undefined,
       customerSince: customer.customerSince && customer.customerSince.isValid() ? customer.customerSince.format(DATE_FORMAT) : undefined,
       timeZone: customer.timeZone && customer.timeZone.isValid() ? customer.timeZone.toJSON() : undefined,
-      createdOn: customer.createdOn && customer.createdOn.isValid() ? customer.createdOn.toJSON() : undefined,
-      updatedOn: customer.updatedOn && customer.updatedOn.isValid() ? customer.updatedOn.toJSON() : undefined
+      createdDate: customer.createdDate && customer.createdDate.isValid() ? customer.createdDate.toJSON() : undefined,
+      lastModifiedDate: customer.lastModifiedDate && customer.lastModifiedDate.isValid() ? customer.lastModifiedDate.toJSON() : undefined
     });
     return copy;
   }
@@ -74,8 +74,8 @@ export class CustomerService {
       res.body.preferredContactTime = res.body.preferredContactTime ? moment(res.body.preferredContactTime) : undefined;
       res.body.customerSince = res.body.customerSince ? moment(res.body.customerSince) : undefined;
       res.body.timeZone = res.body.timeZone ? moment(res.body.timeZone) : undefined;
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -86,8 +86,8 @@ export class CustomerService {
         customer.preferredContactTime = customer.preferredContactTime ? moment(customer.preferredContactTime) : undefined;
         customer.customerSince = customer.customerSince ? moment(customer.customerSince) : undefined;
         customer.timeZone = customer.timeZone ? moment(customer.timeZone) : undefined;
-        customer.createdOn = customer.createdOn ? moment(customer.createdOn) : undefined;
-        customer.updatedOn = customer.updatedOn ? moment(customer.updatedOn) : undefined;
+        customer.createdDate = customer.createdDate ? moment(customer.createdDate) : undefined;
+        customer.lastModifiedDate = customer.lastModifiedDate ? moment(customer.lastModifiedDate) : undefined;
       });
     }
     return res;

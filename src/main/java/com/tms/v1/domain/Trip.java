@@ -1,28 +1,36 @@
 package com.tms.v1.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.tms.v1.domain.enumeration.TripType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-import com.tms.v1.domain.enumeration.StatusEnum;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tms.v1.domain.enumeration.COVEREDBY;
-
 import com.tms.v1.domain.enumeration.LoadType;
-
 import com.tms.v1.domain.enumeration.SizeEnum;
+import com.tms.v1.domain.enumeration.StatusEnum;
+import com.tms.v1.domain.enumeration.TripType;
 
 /**
  * A Trip.
@@ -31,7 +39,7 @@ import com.tms.v1.domain.enumeration.SizeEnum;
 @Table(name = "trip")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "trip")
-public class Trip implements Serializable {
+public class Trip extends AbstractAuditingEntity  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -124,25 +132,18 @@ public class Trip implements Serializable {
     @Column(name = "auto_generate_invoice")
     private Boolean autoGenerateInvoice;
 
-    @Column(name = "created_on")
-    private Instant createdOn;
-
+    @CreatedDate
+    @Column(name = "created_date")
+    private Instant createdDate;
+    @CreatedBy
     @Column(name = "created_by")
     private String createdBy;
-
-    @Column(name = "updated_on")
-    private Instant updatedOn;
-
-    @Column(name = "updated_by")
-    private String updatedBy;
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Location pickupLocation;
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Location dropLocation;
+    @LastModifiedDate
+    @Column(name = "last_modified_date")
+    private Instant lastModifiedDate;
+    @LastModifiedBy
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
 
     @OneToMany(mappedBy = "trip")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -151,6 +152,14 @@ public class Trip implements Serializable {
     @OneToMany(mappedBy = "trip")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Container> containers = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties("trippicks")
+    private Location pickupLocation;
+
+    @ManyToOne
+    @JsonIgnoreProperties("tripdrops")
+    private Location dropLocation;
 
     @ManyToOne
     @JsonIgnoreProperties("loadOrders")
@@ -515,17 +524,17 @@ public class Trip implements Serializable {
         this.autoGenerateInvoice = autoGenerateInvoice;
     }
 
-    public Instant getCreatedOn() {
-        return createdOn;
+    public Instant getCreatedDate() {
+        return createdDate;
     }
 
-    public Trip createdOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public Trip createdDate(Instant createdDate) {
+        this.createdDate = createdDate;
         return this;
     }
 
-    public void setCreatedOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getCreatedBy() {
@@ -541,56 +550,30 @@ public class Trip implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public Instant getUpdatedOn() {
-        return updatedOn;
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
     }
 
-    public Trip updatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public Trip lastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
         return this;
     }
 
-    public void setUpdatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
-    public String getUpdatedBy() {
-        return updatedBy;
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
     }
 
-    public Trip updatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public Trip lastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
         return this;
     }
 
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public Location getPickupLocation() {
-        return pickupLocation;
-    }
-
-    public Trip pickupLocation(Location location) {
-        this.pickupLocation = location;
-        return this;
-    }
-
-    public void setPickupLocation(Location location) {
-        this.pickupLocation = location;
-    }
-
-    public Location getDropLocation() {
-        return dropLocation;
-    }
-
-    public Trip dropLocation(Location location) {
-        this.dropLocation = location;
-        return this;
-    }
-
-    public void setDropLocation(Location location) {
-        this.dropLocation = location;
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     public Set<Invoice> getInvoices() {
@@ -641,6 +624,32 @@ public class Trip implements Serializable {
 
     public void setContainers(Set<Container> containers) {
         this.containers = containers;
+    }
+
+    public Location getPickupLocation() {
+        return pickupLocation;
+    }
+
+    public Trip pickupLocation(Location location) {
+        this.pickupLocation = location;
+        return this;
+    }
+
+    public void setPickupLocation(Location location) {
+        this.pickupLocation = location;
+    }
+
+    public Location getDropLocation() {
+        return dropLocation;
+    }
+
+    public Trip dropLocation(Location location) {
+        this.dropLocation = location;
+        return this;
+    }
+
+    public void setDropLocation(Location location) {
+        this.dropLocation = location;
     }
 
     public Customer getCustomer() {
@@ -742,10 +751,10 @@ public class Trip implements Serializable {
             ", numbersOfContainer=" + getNumbersOfContainer() +
             ", comments='" + getComments() + "'" +
             ", autoGenerateInvoice='" + isAutoGenerateInvoice() + "'" +
-            ", createdOn='" + getCreatedOn() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
-            ", updatedOn='" + getUpdatedOn() + "'" +
-            ", updatedBy='" + getUpdatedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

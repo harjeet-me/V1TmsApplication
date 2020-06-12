@@ -46,10 +46,10 @@
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.insurance.expiryDate">Expiry Date</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.insurance.policyDocument">Policy Document</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.insurance.coverageStatement">Coverage Statement</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.insurance.createdOn">Created On</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.insurance.createdDate">Created Date</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.insurance.createdBy">Created By</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.insurance.updatedOn">Updated On</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.insurance.updatedBy">Updated By</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.insurance.lastModifiedDate">Last Modified Date</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.insurance.lastModifiedBy">Last Modified By</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -64,10 +64,10 @@
                         <span *ngIf="insurance.policyDocument">{{ insurance.policyDocumentContentType }}, {{ byteSize(insurance.policyDocument) }}</span>
                     </td>
                     <td>{{ insurance.coverageStatement }}</td>
-                    <td>{{ insurance.createdOn | date:'medium' }}</td>
+                    <td>{{ insurance.createdDate | date:'medium' }}</td>
                     <td>{{ insurance.createdBy }}</td>
-                    <td>{{ insurance.updatedOn | date:'medium' }}</td>
-                    <td>{{ insurance.updatedBy }}</td>
+                    <td>{{ insurance.lastModifiedDate | date:'medium' }}</td>
+                    <td>{{ insurance.lastModifiedBy }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

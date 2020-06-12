@@ -24,18 +24,6 @@ public interface LocationService {
      * @return the list of entities.
      */
     List<Location> findAll();
-    /**
-     * Get all the LocationDTO where Trippick is {@code null}.
-     *
-     * @return the list of entities.
-     */
-    List<Location> findAllWhereTrippickIsNull();
-    /**
-     * Get all the LocationDTO where Tripdrop is {@code null}.
-     *
-     * @return the list of entities.
-     */
-    List<Location> findAllWhereTripdropIsNull();
 
     /**
      * Get the "id" location.

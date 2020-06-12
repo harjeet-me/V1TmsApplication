@@ -1,3 +1,24 @@
+dl {
+  display: grid;
+  grid-template-columns: max-content auto;
+}
+
+dt {
+  grid-column-start: 1;
+}
+
+dd {
+  grid-column-start: 2;
+}
+
+dt {
+  float: left;
+  width: 100px;
+}
+dd {
+  margin-left: 100px;
+}
+
 .form-group {
   display: inline-block;
 }

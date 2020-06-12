@@ -53,17 +53,17 @@ public class AccountsResourceIT {
     private static final Double DEFAULT_OVER_90 = 1D;
     private static final Double UPDATED_OVER_90 = 2D;
 
-    private static final Instant DEFAULT_CREATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_UPDATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_UPDATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_UPDATED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_UPDATED_BY = "BBBBBBBBBB";
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     @Autowired
     private AccountsRepository accountsRepository;
@@ -99,10 +99,10 @@ public class AccountsResourceIT {
             .over30(DEFAULT_OVER_30)
             .over60(DEFAULT_OVER_60)
             .over90(DEFAULT_OVER_90)
-            .createdOn(DEFAULT_CREATED_ON)
+            .createdDate(DEFAULT_CREATED_DATE)
             .createdBy(DEFAULT_CREATED_BY)
-            .updatedOn(DEFAULT_UPDATED_ON)
-            .updatedBy(DEFAULT_UPDATED_BY);
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return accounts;
     }
     /**
@@ -117,10 +117,10 @@ public class AccountsResourceIT {
             .over30(UPDATED_OVER_30)
             .over60(UPDATED_OVER_60)
             .over90(UPDATED_OVER_90)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return accounts;
     }
 
@@ -148,10 +148,10 @@ public class AccountsResourceIT {
         assertThat(testAccounts.getOver30()).isEqualTo(DEFAULT_OVER_30);
         assertThat(testAccounts.getOver60()).isEqualTo(DEFAULT_OVER_60);
         assertThat(testAccounts.getOver90()).isEqualTo(DEFAULT_OVER_90);
-        assertThat(testAccounts.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
+        assertThat(testAccounts.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testAccounts.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testAccounts.getUpdatedOn()).isEqualTo(DEFAULT_UPDATED_ON);
-        assertThat(testAccounts.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
+        assertThat(testAccounts.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testAccounts.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
 
         // Validate the Accounts in Elasticsearch
         verify(mockAccountsSearchRepository, times(1)).save(testAccounts);
@@ -195,10 +195,10 @@ public class AccountsResourceIT {
             .andExpect(jsonPath("$.[*].over30").value(hasItem(DEFAULT_OVER_30.doubleValue())))
             .andExpect(jsonPath("$.[*].over60").value(hasItem(DEFAULT_OVER_60.doubleValue())))
             .andExpect(jsonPath("$.[*].over90").value(hasItem(DEFAULT_OVER_90.doubleValue())))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
     
     @Test
@@ -216,10 +216,10 @@ public class AccountsResourceIT {
             .andExpect(jsonPath("$.over30").value(DEFAULT_OVER_30.doubleValue()))
             .andExpect(jsonPath("$.over60").value(DEFAULT_OVER_60.doubleValue()))
             .andExpect(jsonPath("$.over90").value(DEFAULT_OVER_90.doubleValue()))
-            .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
-            .andExpect(jsonPath("$.updatedOn").value(DEFAULT_UPDATED_ON.toString()))
-            .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY));
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -249,10 +249,10 @@ public class AccountsResourceIT {
             .over30(UPDATED_OVER_30)
             .over60(UPDATED_OVER_60)
             .over90(UPDATED_OVER_90)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restAccountsMockMvc.perform(put("/api/accounts").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -267,10 +267,10 @@ public class AccountsResourceIT {
         assertThat(testAccounts.getOver30()).isEqualTo(UPDATED_OVER_30);
         assertThat(testAccounts.getOver60()).isEqualTo(UPDATED_OVER_60);
         assertThat(testAccounts.getOver90()).isEqualTo(UPDATED_OVER_90);
-        assertThat(testAccounts.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
+        assertThat(testAccounts.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testAccounts.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testAccounts.getUpdatedOn()).isEqualTo(UPDATED_UPDATED_ON);
-        assertThat(testAccounts.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
+        assertThat(testAccounts.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testAccounts.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
 
         // Validate the Accounts in Elasticsearch
         verify(mockAccountsSearchRepository, times(1)).save(testAccounts);
@@ -334,9 +334,9 @@ public class AccountsResourceIT {
             .andExpect(jsonPath("$.[*].over30").value(hasItem(DEFAULT_OVER_30.doubleValue())))
             .andExpect(jsonPath("$.[*].over60").value(hasItem(DEFAULT_OVER_60.doubleValue())))
             .andExpect(jsonPath("$.[*].over90").value(hasItem(DEFAULT_OVER_90.doubleValue())))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 }

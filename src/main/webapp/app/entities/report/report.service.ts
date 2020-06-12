@@ -61,8 +61,8 @@ export class ReportService {
     const copy: IReport = Object.assign({}, report, {
       fromDate: report.fromDate && report.fromDate.isValid() ? report.fromDate.format(DATE_FORMAT) : undefined,
       toDate: report.toDate && report.toDate.isValid() ? report.toDate.format(DATE_FORMAT) : undefined,
-      createdOn: report.createdOn && report.createdOn.isValid() ? report.createdOn.toJSON() : undefined,
-      updatedOn: report.updatedOn && report.updatedOn.isValid() ? report.updatedOn.toJSON() : undefined
+      createdDate: report.createdDate && report.createdDate.isValid() ? report.createdDate.toJSON() : undefined,
+      lastModifiedDate: report.lastModifiedDate && report.lastModifiedDate.isValid() ? report.lastModifiedDate.toJSON() : undefined
     });
     return copy;
   }
@@ -71,8 +71,8 @@ export class ReportService {
     if (res.body) {
       res.body.fromDate = res.body.fromDate ? moment(res.body.fromDate) : undefined;
       res.body.toDate = res.body.toDate ? moment(res.body.toDate) : undefined;
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -82,8 +82,8 @@ export class ReportService {
       res.body.forEach((report: IReport) => {
         report.fromDate = report.fromDate ? moment(report.fromDate) : undefined;
         report.toDate = report.toDate ? moment(report.toDate) : undefined;
-        report.createdOn = report.createdOn ? moment(report.createdOn) : undefined;
-        report.updatedOn = report.updatedOn ? moment(report.updatedOn) : undefined;
+        report.createdDate = report.createdDate ? moment(report.createdDate) : undefined;
+        report.lastModifiedDate = report.lastModifiedDate ? moment(report.lastModifiedDate) : undefined;
       });
     }
     return res;

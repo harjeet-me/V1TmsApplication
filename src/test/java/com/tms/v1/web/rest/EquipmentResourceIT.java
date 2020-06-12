@@ -84,17 +84,17 @@ public class EquipmentResourceIT {
     private static final LocalDate DEFAULT_INSPECTION_STICKER_EXPIRATION = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_INSPECTION_STICKER_EXPIRATION = LocalDate.now(ZoneId.systemDefault());
 
-    private static final Instant DEFAULT_CREATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_UPDATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_UPDATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_UPDATED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_UPDATED_BY = "BBBBBBBBBB";
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     @Autowired
     private EquipmentRepository equipmentRepository;
@@ -139,10 +139,10 @@ public class EquipmentResourceIT {
             .licensePlateNumber(DEFAULT_LICENSE_PLATE_NUMBER)
             .licensePlateExpiration(DEFAULT_LICENSE_PLATE_EXPIRATION)
             .inspectionStickerExpiration(DEFAULT_INSPECTION_STICKER_EXPIRATION)
-            .createdOn(DEFAULT_CREATED_ON)
+            .createdDate(DEFAULT_CREATED_DATE)
             .createdBy(DEFAULT_CREATED_BY)
-            .updatedOn(DEFAULT_UPDATED_ON)
-            .updatedBy(DEFAULT_UPDATED_BY);
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return equipment;
     }
     /**
@@ -166,10 +166,10 @@ public class EquipmentResourceIT {
             .licensePlateNumber(UPDATED_LICENSE_PLATE_NUMBER)
             .licensePlateExpiration(UPDATED_LICENSE_PLATE_EXPIRATION)
             .inspectionStickerExpiration(UPDATED_INSPECTION_STICKER_EXPIRATION)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return equipment;
     }
 
@@ -206,10 +206,10 @@ public class EquipmentResourceIT {
         assertThat(testEquipment.getLicensePlateNumber()).isEqualTo(DEFAULT_LICENSE_PLATE_NUMBER);
         assertThat(testEquipment.getLicensePlateExpiration()).isEqualTo(DEFAULT_LICENSE_PLATE_EXPIRATION);
         assertThat(testEquipment.getInspectionStickerExpiration()).isEqualTo(DEFAULT_INSPECTION_STICKER_EXPIRATION);
-        assertThat(testEquipment.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
+        assertThat(testEquipment.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testEquipment.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testEquipment.getUpdatedOn()).isEqualTo(DEFAULT_UPDATED_ON);
-        assertThat(testEquipment.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
+        assertThat(testEquipment.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testEquipment.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
 
         // Validate the Equipment in Elasticsearch
         verify(mockEquipmentSearchRepository, times(1)).save(testEquipment);
@@ -262,10 +262,10 @@ public class EquipmentResourceIT {
             .andExpect(jsonPath("$.[*].licensePlateNumber").value(hasItem(DEFAULT_LICENSE_PLATE_NUMBER)))
             .andExpect(jsonPath("$.[*].licensePlateExpiration").value(hasItem(DEFAULT_LICENSE_PLATE_EXPIRATION.toString())))
             .andExpect(jsonPath("$.[*].inspectionStickerExpiration").value(hasItem(DEFAULT_INSPECTION_STICKER_EXPIRATION.toString())))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
     
     @Test
@@ -292,10 +292,10 @@ public class EquipmentResourceIT {
             .andExpect(jsonPath("$.licensePlateNumber").value(DEFAULT_LICENSE_PLATE_NUMBER))
             .andExpect(jsonPath("$.licensePlateExpiration").value(DEFAULT_LICENSE_PLATE_EXPIRATION.toString()))
             .andExpect(jsonPath("$.inspectionStickerExpiration").value(DEFAULT_INSPECTION_STICKER_EXPIRATION.toString()))
-            .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
-            .andExpect(jsonPath("$.updatedOn").value(DEFAULT_UPDATED_ON.toString()))
-            .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY));
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -334,10 +334,10 @@ public class EquipmentResourceIT {
             .licensePlateNumber(UPDATED_LICENSE_PLATE_NUMBER)
             .licensePlateExpiration(UPDATED_LICENSE_PLATE_EXPIRATION)
             .inspectionStickerExpiration(UPDATED_INSPECTION_STICKER_EXPIRATION)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restEquipmentMockMvc.perform(put("/api/equipment").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -361,10 +361,10 @@ public class EquipmentResourceIT {
         assertThat(testEquipment.getLicensePlateNumber()).isEqualTo(UPDATED_LICENSE_PLATE_NUMBER);
         assertThat(testEquipment.getLicensePlateExpiration()).isEqualTo(UPDATED_LICENSE_PLATE_EXPIRATION);
         assertThat(testEquipment.getInspectionStickerExpiration()).isEqualTo(UPDATED_INSPECTION_STICKER_EXPIRATION);
-        assertThat(testEquipment.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
+        assertThat(testEquipment.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testEquipment.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testEquipment.getUpdatedOn()).isEqualTo(UPDATED_UPDATED_ON);
-        assertThat(testEquipment.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
+        assertThat(testEquipment.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testEquipment.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
 
         // Validate the Equipment in Elasticsearch
         verify(mockEquipmentSearchRepository, times(1)).save(testEquipment);
@@ -437,9 +437,9 @@ public class EquipmentResourceIT {
             .andExpect(jsonPath("$.[*].licensePlateNumber").value(hasItem(DEFAULT_LICENSE_PLATE_NUMBER)))
             .andExpect(jsonPath("$.[*].licensePlateExpiration").value(hasItem(DEFAULT_LICENSE_PLATE_EXPIRATION.toString())))
             .andExpect(jsonPath("$.[*].inspectionStickerExpiration").value(hasItem(DEFAULT_INSPECTION_STICKER_EXPIRATION.toString())))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 }

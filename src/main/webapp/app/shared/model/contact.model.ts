@@ -11,10 +11,10 @@ export interface IContact {
   phoneNumber?: number;
   remarks?: string;
   preferredTime?: string;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
   customer?: ICustomer;
 }
 
@@ -28,10 +28,10 @@ export class Contact implements IContact {
     public phoneNumber?: number,
     public remarks?: string,
     public preferredTime?: string,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string,
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
     public customer?: ICustomer
   ) {}
 }

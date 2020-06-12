@@ -58,8 +58,8 @@ describe('Service Tests', () => {
             dob: currentDate.format(DATE_FORMAT),
             companyJoinedOn: currentDate.format(DATE_FORMAT),
             companyLeftOn: currentDate.format(DATE_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -78,8 +78,8 @@ describe('Service Tests', () => {
             dob: currentDate.format(DATE_FORMAT),
             companyJoinedOn: currentDate.format(DATE_FORMAT),
             companyLeftOn: currentDate.format(DATE_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -89,8 +89,8 @@ describe('Service Tests', () => {
             dob: currentDate,
             companyJoinedOn: currentDate,
             companyLeftOn: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -119,10 +119,10 @@ describe('Service Tests', () => {
             remarks: 'BBBBBB',
             contractDoc: 'BBBBBB',
             status: 'BBBBBB',
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
@@ -132,8 +132,8 @@ describe('Service Tests', () => {
             dob: currentDate,
             companyJoinedOn: currentDate,
             companyLeftOn: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -162,10 +162,10 @@ describe('Service Tests', () => {
             remarks: 'BBBBBB',
             contractDoc: 'BBBBBB',
             status: 'BBBBBB',
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
@@ -175,8 +175,8 @@ describe('Service Tests', () => {
             dob: currentDate,
             companyJoinedOn: currentDate,
             companyLeftOn: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );

@@ -155,17 +155,17 @@ public class CustomerResourceIT {
     private static final ZonedDateTime DEFAULT_TIME_ZONE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_TIME_ZONE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
-    private static final Instant DEFAULT_CREATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_UPDATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_UPDATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_UPDATED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_UPDATED_BY = "BBBBBBBBBB";
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -237,10 +237,10 @@ public class CustomerResourceIT {
             .preffredCurrency(DEFAULT_PREFFRED_CURRENCY)
             .payterms(DEFAULT_PAYTERMS)
             .timeZone(DEFAULT_TIME_ZONE)
-            .createdOn(DEFAULT_CREATED_ON)
+            .createdDate(DEFAULT_CREATED_DATE)
             .createdBy(DEFAULT_CREATED_BY)
-            .updatedOn(DEFAULT_UPDATED_ON)
-            .updatedBy(DEFAULT_UPDATED_BY);
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return customer;
     }
     /**
@@ -285,10 +285,10 @@ public class CustomerResourceIT {
             .preffredCurrency(UPDATED_PREFFRED_CURRENCY)
             .payterms(UPDATED_PAYTERMS)
             .timeZone(UPDATED_TIME_ZONE)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return customer;
     }
 
@@ -346,10 +346,10 @@ public class CustomerResourceIT {
         assertThat(testCustomer.getPreffredCurrency()).isEqualTo(DEFAULT_PREFFRED_CURRENCY);
         assertThat(testCustomer.getPayterms()).isEqualTo(DEFAULT_PAYTERMS);
         assertThat(testCustomer.getTimeZone()).isEqualTo(DEFAULT_TIME_ZONE);
-        assertThat(testCustomer.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
+        assertThat(testCustomer.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testCustomer.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testCustomer.getUpdatedOn()).isEqualTo(DEFAULT_UPDATED_ON);
-        assertThat(testCustomer.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
+        assertThat(testCustomer.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testCustomer.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
 
         // Validate the Customer in Elasticsearch
         verify(mockCustomerSearchRepository, times(1)).save(testCustomer);
@@ -423,10 +423,10 @@ public class CustomerResourceIT {
             .andExpect(jsonPath("$.[*].preffredCurrency").value(hasItem(DEFAULT_PREFFRED_CURRENCY.toString())))
             .andExpect(jsonPath("$.[*].payterms").value(hasItem(DEFAULT_PAYTERMS)))
             .andExpect(jsonPath("$.[*].timeZone").value(hasItem(sameInstant(DEFAULT_TIME_ZONE))))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -494,10 +494,10 @@ public class CustomerResourceIT {
             .andExpect(jsonPath("$.preffredCurrency").value(DEFAULT_PREFFRED_CURRENCY.toString()))
             .andExpect(jsonPath("$.payterms").value(DEFAULT_PAYTERMS))
             .andExpect(jsonPath("$.timeZone").value(sameInstant(DEFAULT_TIME_ZONE)))
-            .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
-            .andExpect(jsonPath("$.updatedOn").value(DEFAULT_UPDATED_ON.toString()))
-            .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY));
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -557,10 +557,10 @@ public class CustomerResourceIT {
             .preffredCurrency(UPDATED_PREFFRED_CURRENCY)
             .payterms(UPDATED_PAYTERMS)
             .timeZone(UPDATED_TIME_ZONE)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restCustomerMockMvc.perform(put("/api/customers").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -605,10 +605,10 @@ public class CustomerResourceIT {
         assertThat(testCustomer.getPreffredCurrency()).isEqualTo(UPDATED_PREFFRED_CURRENCY);
         assertThat(testCustomer.getPayterms()).isEqualTo(UPDATED_PAYTERMS);
         assertThat(testCustomer.getTimeZone()).isEqualTo(UPDATED_TIME_ZONE);
-        assertThat(testCustomer.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
+        assertThat(testCustomer.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testCustomer.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testCustomer.getUpdatedOn()).isEqualTo(UPDATED_UPDATED_ON);
-        assertThat(testCustomer.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
+        assertThat(testCustomer.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testCustomer.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
 
         // Validate the Customer in Elasticsearch
         verify(mockCustomerSearchRepository, times(1)).save(testCustomer);
@@ -702,9 +702,9 @@ public class CustomerResourceIT {
             .andExpect(jsonPath("$.[*].preffredCurrency").value(hasItem(DEFAULT_PREFFRED_CURRENCY.toString())))
             .andExpect(jsonPath("$.[*].payterms").value(hasItem(DEFAULT_PAYTERMS)))
             .andExpect(jsonPath("$.[*].timeZone").value(hasItem(sameInstant(DEFAULT_TIME_ZONE))))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 }

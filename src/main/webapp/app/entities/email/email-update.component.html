@@ -92,9 +92,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.email.createdOn" for="field_createdOn">Created On</label>
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.email.createdDate" for="field_createdDate">Created Date</label>
                     <div class="d-flex">
-                        <input id="field_createdOn" type="datetime-local" class="form-control" name="createdOn" formControlName="createdOn" placeholder="YYYY-MM-DD HH:mm"/>
+                        <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" formControlName="createdDate" placeholder="YYYY-MM-DD HH:mm"/>
                     </div>
                 </div>
 
@@ -105,16 +105,24 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.email.updatedOn" for="field_updatedOn">Updated On</label>
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.email.lastModifiedDate" for="field_lastModifiedDate">Last Modified Date</label>
                     <div class="d-flex">
-                        <input id="field_updatedOn" type="datetime-local" class="form-control" name="updatedOn" formControlName="updatedOn" placeholder="YYYY-MM-DD HH:mm"/>
+                        <input id="field_lastModifiedDate" type="datetime-local" class="form-control" name="lastModifiedDate" formControlName="lastModifiedDate" placeholder="YYYY-MM-DD HH:mm"/>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.email.updatedBy" for="field_updatedBy">Updated By</label>
-                    <input type="text" class="form-control" name="updatedBy" id="field_updatedBy"
-                           formControlName="updatedBy"/>
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.email.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
+                    <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
+                           formControlName="lastModifiedBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.email.customer" for="field_customer">Customer</label>
+                    <select class="form-control" id="field_customer" name="customer" formControlName="customer">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption" *ngFor="let customerOption of customers; trackBy: trackById">{{ customerOption.company }}</option>
+                    </select>
                 </div>
             </div>
 

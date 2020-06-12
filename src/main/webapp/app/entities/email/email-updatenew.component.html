@@ -1,15 +1,15 @@
 <div class="row justify-content-center">
-    <div class="col-12">
+    <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-
-            <div  style="margin-left: 20px" >
+ <h2 id="jhi-email-heading" jhiTranslate="tmsV1ApplicationApp.email.home.createOrEditLabel">Create or edit a Email</h2>
+            <div >
                 <jhi-alert-error></jhi-alert-error>
                <div class=" card col-sm-10">
                
              
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.email.userto" for="field_userto">Userto</label>
-                    <input type="text" class="form-control" name="userto" id="field_userto"
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.email.userto"  for="field_userto">Userto</label>
+                    <input type="text" class="form-control" required="required" name="userto" id="field_userto"
                            formControlName="userto"/>
                 </div>
 
@@ -71,6 +71,10 @@
 
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
                     <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+                
+                 <button type="button" id="save-entity" [disabled]="editForm.invalid || isSaving" (click)="sendState()" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp; Send</span>
                 </button>
             </div>
         </form>

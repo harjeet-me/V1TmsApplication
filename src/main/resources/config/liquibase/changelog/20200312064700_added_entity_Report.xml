@@ -37,22 +37,22 @@
             <column name="email_to" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="created_on" type="datetime">
+            <column name="created_date" type="datetime">
                 <constraints nullable="true" />
             </column>
             <column name="created_by" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="updated_on" type="datetime">
+            <column name="last_modified_date" type="datetime">
                 <constraints nullable="true" />
             </column>
-            <column name="updated_by" type="varchar(255)">
+            <column name="last_modified_by" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="report" columnName="created_on" columnDataType="datetime"/>
-        <dropDefaultValue tableName="report" columnName="updated_on" columnDataType="datetime"/>
+        <dropDefaultValue tableName="report" columnName="created_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="report" columnName="last_modified_date" columnDataType="datetime"/>
     </changeSet>
 
     <changeSet id="20200312064700-1-relations" author="jhipster">
@@ -81,10 +81,10 @@
             <column name="attachment" type="blob"/>
             <column name="attachment_content_type" type="string"/>
             <column name="email_to" type="string"/>
-            <column name="created_on" type="datetime"/>
+            <column name="created_date" type="datetime"/>
             <column name="created_by" type="string"/>
-            <column name="updated_on" type="datetime"/>
-            <column name="updated_by" type="string"/>
+            <column name="last_modified_date" type="datetime"/>
+            <column name="last_modified_by" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

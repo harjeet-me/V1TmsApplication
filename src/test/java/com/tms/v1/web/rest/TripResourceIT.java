@@ -127,17 +127,17 @@ public class TripResourceIT {
     private static final Boolean DEFAULT_AUTO_GENERATE_INVOICE = false;
     private static final Boolean UPDATED_AUTO_GENERATE_INVOICE = true;
 
-    private static final Instant DEFAULT_CREATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_UPDATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_UPDATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_UPDATED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_UPDATED_BY = "BBBBBBBBBB";
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     @Autowired
     private TripRepository tripRepository;
@@ -195,10 +195,10 @@ public class TripResourceIT {
             .numbersOfContainer(DEFAULT_NUMBERS_OF_CONTAINER)
             .comments(DEFAULT_COMMENTS)
             .autoGenerateInvoice(DEFAULT_AUTO_GENERATE_INVOICE)
-            .createdOn(DEFAULT_CREATED_ON)
+            .createdDate(DEFAULT_CREATED_DATE)
             .createdBy(DEFAULT_CREATED_BY)
-            .updatedOn(DEFAULT_UPDATED_ON)
-            .updatedBy(DEFAULT_UPDATED_BY);
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return trip;
     }
     /**
@@ -235,10 +235,10 @@ public class TripResourceIT {
             .numbersOfContainer(UPDATED_NUMBERS_OF_CONTAINER)
             .comments(UPDATED_COMMENTS)
             .autoGenerateInvoice(UPDATED_AUTO_GENERATE_INVOICE)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return trip;
     }
 
@@ -288,10 +288,10 @@ public class TripResourceIT {
         assertThat(testTrip.getNumbersOfContainer()).isEqualTo(DEFAULT_NUMBERS_OF_CONTAINER);
         assertThat(testTrip.getComments()).isEqualTo(DEFAULT_COMMENTS);
         assertThat(testTrip.isAutoGenerateInvoice()).isEqualTo(DEFAULT_AUTO_GENERATE_INVOICE);
-        assertThat(testTrip.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
+        assertThat(testTrip.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testTrip.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testTrip.getUpdatedOn()).isEqualTo(DEFAULT_UPDATED_ON);
-        assertThat(testTrip.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
+        assertThat(testTrip.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testTrip.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
 
         // Validate the Trip in Elasticsearch
         verify(mockTripSearchRepository, times(1)).save(testTrip);
@@ -357,10 +357,10 @@ public class TripResourceIT {
             .andExpect(jsonPath("$.[*].numbersOfContainer").value(hasItem(DEFAULT_NUMBERS_OF_CONTAINER)))
             .andExpect(jsonPath("$.[*].comments").value(hasItem(DEFAULT_COMMENTS)))
             .andExpect(jsonPath("$.[*].autoGenerateInvoice").value(hasItem(DEFAULT_AUTO_GENERATE_INVOICE.booleanValue())))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
     
     @Test
@@ -400,10 +400,10 @@ public class TripResourceIT {
             .andExpect(jsonPath("$.numbersOfContainer").value(DEFAULT_NUMBERS_OF_CONTAINER))
             .andExpect(jsonPath("$.comments").value(DEFAULT_COMMENTS))
             .andExpect(jsonPath("$.autoGenerateInvoice").value(DEFAULT_AUTO_GENERATE_INVOICE.booleanValue()))
-            .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
-            .andExpect(jsonPath("$.updatedOn").value(DEFAULT_UPDATED_ON.toString()))
-            .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY));
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -455,10 +455,10 @@ public class TripResourceIT {
             .numbersOfContainer(UPDATED_NUMBERS_OF_CONTAINER)
             .comments(UPDATED_COMMENTS)
             .autoGenerateInvoice(UPDATED_AUTO_GENERATE_INVOICE)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restTripMockMvc.perform(put("/api/trips").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -495,10 +495,10 @@ public class TripResourceIT {
         assertThat(testTrip.getNumbersOfContainer()).isEqualTo(UPDATED_NUMBERS_OF_CONTAINER);
         assertThat(testTrip.getComments()).isEqualTo(UPDATED_COMMENTS);
         assertThat(testTrip.isAutoGenerateInvoice()).isEqualTo(UPDATED_AUTO_GENERATE_INVOICE);
-        assertThat(testTrip.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
+        assertThat(testTrip.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testTrip.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testTrip.getUpdatedOn()).isEqualTo(UPDATED_UPDATED_ON);
-        assertThat(testTrip.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
+        assertThat(testTrip.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testTrip.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
 
         // Validate the Trip in Elasticsearch
         verify(mockTripSearchRepository, times(1)).save(testTrip);
@@ -584,9 +584,9 @@ public class TripResourceIT {
             .andExpect(jsonPath("$.[*].numbersOfContainer").value(hasItem(DEFAULT_NUMBERS_OF_CONTAINER)))
             .andExpect(jsonPath("$.[*].comments").value(hasItem(DEFAULT_COMMENTS)))
             .andExpect(jsonPath("$.[*].autoGenerateInvoice").value(hasItem(DEFAULT_AUTO_GENERATE_INVOICE.booleanValue())))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 }

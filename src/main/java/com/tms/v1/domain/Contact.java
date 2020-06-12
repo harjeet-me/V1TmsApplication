@@ -5,7 +5,6 @@ import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -20,7 +19,6 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tms.v1.domain.enumeration.Designation;
@@ -28,13 +26,11 @@ import com.tms.v1.domain.enumeration.Designation;
 /**
  * A Contact.
  */
-
 @Entity
 @Table(name = "contact")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "contact")
-@EntityListeners(AuditingEntityListener.class)
-public class Contact implements Serializable {
+public class Contact extends AbstractAuditingEntity  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -63,21 +59,19 @@ public class Contact implements Serializable {
 
     @Column(name = "preferred_time")
     private String preferredTime;
+
     @CreatedDate
-    @Column(name = "created_on")
-    private Instant createdOn = Instant.now();
-    
+    @Column(name = "created_date")
+    private Instant createdDate;
     @CreatedBy
     @Column(name = "created_by")
     private String createdBy;
-    
     @LastModifiedDate
-    @Column(name = "updated_on")
-    private Instant updatedOn = Instant.now();
-    
+    @Column(name = "last_modified_date")
+    private Instant lastModifiedDate;
     @LastModifiedBy
-    @Column(name = "updated_by")
-    private String updatedBy;
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
 
     @ManyToOne
     @JsonIgnoreProperties("morecontacts")
@@ -183,17 +177,17 @@ public class Contact implements Serializable {
         this.preferredTime = preferredTime;
     }
 
-    public Instant getCreatedOn() {
-        return createdOn;
+    public Instant getCreatedDate() {
+        return createdDate;
     }
 
-    public Contact createdOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public Contact createdDate(Instant createdDate) {
+        this.createdDate = createdDate;
         return this;
     }
 
-    public void setCreatedOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getCreatedBy() {
@@ -209,30 +203,30 @@ public class Contact implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public Instant getUpdatedOn() {
-        return updatedOn;
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
     }
 
-    public Contact updatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public Contact lastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
         return this;
     }
 
-    public void setUpdatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
-    public String getUpdatedBy() {
-        return updatedBy;
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
     }
 
-    public Contact updatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public Contact lastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
         return this;
     }
 
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     public Customer getCustomer() {
@@ -276,10 +270,10 @@ public class Contact implements Serializable {
             ", phoneNumber=" + getPhoneNumber() +
             ", remarks='" + getRemarks() + "'" +
             ", preferredTime='" + getPreferredTime() + "'" +
-            ", createdOn='" + getCreatedOn() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
-            ", updatedOn='" + getUpdatedOn() + "'" +
-            ", updatedBy='" + getUpdatedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

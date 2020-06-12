@@ -1,15 +1,20 @@
 package com.tms.v1.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
+import java.time.Instant;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
-import java.io.Serializable;
-import java.util.Objects;
-import java.time.Instant;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * A InvoiceItem.
@@ -18,10 +23,9 @@ import java.time.Instant;
 @Table(name = "invoice_item")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "invoiceitem")
-public class InvoiceItem implements Serializable {
+public class InvoiceItem extends AbstractAuditingEntity  implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
     public InvoiceItem() {
   		// TODO Auto-generated constructor stub
   	}
@@ -32,7 +36,6 @@ public class InvoiceItem implements Serializable {
   		this.price=price;
   		this.total=total;
   	}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -55,19 +58,19 @@ public class InvoiceItem implements Serializable {
     @Column(name = "total")
     private Double total;
 
-    @Column(name = "created_on")
-    private Instant createdOn;
+    @Column(name = "created_date")
+    private Instant createdDate;
 
     @Column(name = "created_by")
     private String createdBy;
 
-    @Column(name = "updated_on")
-    private Instant updatedOn;
+    @Column(name = "last_modified_date")
+    private Instant lastModifiedDate;
 
-    @Column(name = "updated_by")
-    private String updatedBy;
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JsonIgnoreProperties("invoiceItems")
     private Invoice invoice;
 
@@ -158,17 +161,17 @@ public class InvoiceItem implements Serializable {
         this.total = total;
     }
 
-    public Instant getCreatedOn() {
-        return createdOn;
+    public Instant getCreatedDate() {
+        return createdDate;
     }
 
-    public InvoiceItem createdOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public InvoiceItem createdDate(Instant createdDate) {
+        this.createdDate = createdDate;
         return this;
     }
 
-    public void setCreatedOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getCreatedBy() {
@@ -184,30 +187,30 @@ public class InvoiceItem implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public Instant getUpdatedOn() {
-        return updatedOn;
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
     }
 
-    public InvoiceItem updatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public InvoiceItem lastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
         return this;
     }
 
-    public void setUpdatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
-    public String getUpdatedBy() {
-        return updatedBy;
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
     }
 
-    public InvoiceItem updatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public InvoiceItem lastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
         return this;
     }
 
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     public Invoice getInvoice() {
@@ -250,10 +253,10 @@ public class InvoiceItem implements Serializable {
             ", price=" + getPrice() +
             ", discount=" + getDiscount() +
             ", total=" + getTotal() +
-            ", createdOn='" + getCreatedOn() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
-            ", updatedOn='" + getUpdatedOn() + "'" +
-            ", updatedBy='" + getUpdatedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

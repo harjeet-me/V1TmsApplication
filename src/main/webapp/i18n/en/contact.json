@@ -24,10 +24,10 @@
       "phoneNumber": "Phone Number",
       "remarks": "Remarks",
       "preferredTime": "Preferred Time",
-      "createdOn": "Created On",
+      "createdDate": "Created Date",
       "createdBy": "Created By",
-      "updatedOn": "Updated On",
-      "updatedBy": "Updated By",
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By",
       "customer": "Customer"
     }
   }

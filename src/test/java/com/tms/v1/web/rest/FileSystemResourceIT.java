@@ -52,17 +52,17 @@ public class FileSystemResourceIT {
     private static final String DEFAULT_FILE_NAME = "AAAAAAAAAA";
     private static final String UPDATED_FILE_NAME = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_CREATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_UPDATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_UPDATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_UPDATED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_UPDATED_BY = "BBBBBBBBBB";
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     @Autowired
     private FileSystemRepository fileSystemRepository;
@@ -97,10 +97,10 @@ public class FileSystemResourceIT {
             .data(DEFAULT_DATA)
             .dataContentType(DEFAULT_DATA_CONTENT_TYPE)
             .fileName(DEFAULT_FILE_NAME)
-            .createdOn(DEFAULT_CREATED_ON)
+            .createdDate(DEFAULT_CREATED_DATE)
             .createdBy(DEFAULT_CREATED_BY)
-            .updatedOn(DEFAULT_UPDATED_ON)
-            .updatedBy(DEFAULT_UPDATED_BY);
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return fileSystem;
     }
     /**
@@ -114,10 +114,10 @@ public class FileSystemResourceIT {
             .data(UPDATED_DATA)
             .dataContentType(UPDATED_DATA_CONTENT_TYPE)
             .fileName(UPDATED_FILE_NAME)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return fileSystem;
     }
 
@@ -144,10 +144,10 @@ public class FileSystemResourceIT {
         assertThat(testFileSystem.getData()).isEqualTo(DEFAULT_DATA);
         assertThat(testFileSystem.getDataContentType()).isEqualTo(DEFAULT_DATA_CONTENT_TYPE);
         assertThat(testFileSystem.getFileName()).isEqualTo(DEFAULT_FILE_NAME);
-        assertThat(testFileSystem.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
+        assertThat(testFileSystem.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testFileSystem.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testFileSystem.getUpdatedOn()).isEqualTo(DEFAULT_UPDATED_ON);
-        assertThat(testFileSystem.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
+        assertThat(testFileSystem.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testFileSystem.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
 
         // Validate the FileSystem in Elasticsearch
         verify(mockFileSystemSearchRepository, times(1)).save(testFileSystem);
@@ -190,10 +190,10 @@ public class FileSystemResourceIT {
             .andExpect(jsonPath("$.[*].dataContentType").value(hasItem(DEFAULT_DATA_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].data").value(hasItem(Base64Utils.encodeToString(DEFAULT_DATA))))
             .andExpect(jsonPath("$.[*].fileName").value(hasItem(DEFAULT_FILE_NAME)))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
     
     @Test
@@ -210,10 +210,10 @@ public class FileSystemResourceIT {
             .andExpect(jsonPath("$.dataContentType").value(DEFAULT_DATA_CONTENT_TYPE))
             .andExpect(jsonPath("$.data").value(Base64Utils.encodeToString(DEFAULT_DATA)))
             .andExpect(jsonPath("$.fileName").value(DEFAULT_FILE_NAME))
-            .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
-            .andExpect(jsonPath("$.updatedOn").value(DEFAULT_UPDATED_ON.toString()))
-            .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY));
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -242,10 +242,10 @@ public class FileSystemResourceIT {
             .data(UPDATED_DATA)
             .dataContentType(UPDATED_DATA_CONTENT_TYPE)
             .fileName(UPDATED_FILE_NAME)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restFileSystemMockMvc.perform(put("/api/file-systems").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -259,10 +259,10 @@ public class FileSystemResourceIT {
         assertThat(testFileSystem.getData()).isEqualTo(UPDATED_DATA);
         assertThat(testFileSystem.getDataContentType()).isEqualTo(UPDATED_DATA_CONTENT_TYPE);
         assertThat(testFileSystem.getFileName()).isEqualTo(UPDATED_FILE_NAME);
-        assertThat(testFileSystem.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
+        assertThat(testFileSystem.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testFileSystem.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testFileSystem.getUpdatedOn()).isEqualTo(UPDATED_UPDATED_ON);
-        assertThat(testFileSystem.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
+        assertThat(testFileSystem.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testFileSystem.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
 
         // Validate the FileSystem in Elasticsearch
         verify(mockFileSystemSearchRepository, times(1)).save(testFileSystem);
@@ -325,9 +325,9 @@ public class FileSystemResourceIT {
             .andExpect(jsonPath("$.[*].dataContentType").value(hasItem(DEFAULT_DATA_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].data").value(hasItem(Base64Utils.encodeToString(DEFAULT_DATA))))
             .andExpect(jsonPath("$.[*].fileName").value(hasItem(DEFAULT_FILE_NAME)))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 }

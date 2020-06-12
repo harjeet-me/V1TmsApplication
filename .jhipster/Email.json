@@ -47,7 +47,7 @@
             "fieldType": "Instant"
         },
         {
-            "fieldName": "createdOn",
+            "fieldName": "createdDate",
             "fieldType": "Instant"
         },
         {
@@ -55,11 +55,11 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "updatedOn",
+            "fieldName": "lastModifiedDate",
             "fieldType": "Instant"
         },
         {
-            "fieldName": "updatedBy",
+            "fieldName": "lastModifiedBy",
             "fieldType": "String"
         }
     ],
@@ -69,6 +69,13 @@
             "otherEntityName": "fileSystem",
             "otherEntityRelationshipName": "email",
             "relationshipName": "fileSystem"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "customer",
+            "otherEntityRelationshipName": "email",
+            "relationshipName": "customer",
+            "otherEntityField": "company"
         }
     ],
     "changelogDate": "20200312064400",

@@ -83,19 +83,10 @@ public class LocationResource {
     /**
      * {@code GET  /locations} : get all the locations.
      *
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of locations in body.
      */
     @GetMapping("/locations")
-    public List<Location> getAllLocations(@RequestParam(required = false) String filter) {
-        if ("trippick-is-null".equals(filter)) {
-            log.debug("REST request to get all Locations where trippick is null");
-            return locationService.findAllWhereTrippickIsNull();
-        }
-        if ("tripdrop-is-null".equals(filter)) {
-            log.debug("REST request to get all Locations where tripdrop is null");
-            return locationService.findAllWhereTripdropIsNull();
-        }
+    public List<Location> getAllLocations() {
         log.debug("REST request to get all Locations");
         return locationService.findAll();
     }

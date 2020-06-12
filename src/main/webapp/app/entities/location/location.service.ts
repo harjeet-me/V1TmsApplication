@@ -58,16 +58,16 @@ export class LocationService {
 
   protected convertDateFromClient(location: ILocation): ILocation {
     const copy: ILocation = Object.assign({}, location, {
-      createdOn: location.createdOn && location.createdOn.isValid() ? location.createdOn.toJSON() : undefined,
-      updatedOn: location.updatedOn && location.updatedOn.isValid() ? location.updatedOn.toJSON() : undefined
+      createdDate: location.createdDate && location.createdDate.isValid() ? location.createdDate.toJSON() : undefined,
+      lastModifiedDate: location.lastModifiedDate && location.lastModifiedDate.isValid() ? location.lastModifiedDate.toJSON() : undefined
     });
     return copy;
   }
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -75,8 +75,8 @@ export class LocationService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((location: ILocation) => {
-        location.createdOn = location.createdOn ? moment(location.createdOn) : undefined;
-        location.updatedOn = location.updatedOn ? moment(location.updatedOn) : undefined;
+        location.createdDate = location.createdDate ? moment(location.createdDate) : undefined;
+        location.lastModifiedDate = location.lastModifiedDate ? moment(location.lastModifiedDate) : undefined;
       });
     }
     return res;

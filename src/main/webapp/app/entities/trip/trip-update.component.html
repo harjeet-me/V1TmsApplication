@@ -211,9 +211,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.createdOn" for="field_createdOn">Created On</label>
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.createdDate" for="field_createdDate">Created Date</label>
                     <div class="d-flex">
-                        <input id="field_createdOn" type="datetime-local" class="form-control" name="createdOn" formControlName="createdOn" placeholder="YYYY-MM-DD HH:mm"/>
+                        <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" formControlName="createdDate" placeholder="YYYY-MM-DD HH:mm"/>
                     </div>
                 </div>
 
@@ -224,23 +224,23 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.updatedOn" for="field_updatedOn">Updated On</label>
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.lastModifiedDate" for="field_lastModifiedDate">Last Modified Date</label>
                     <div class="d-flex">
-                        <input id="field_updatedOn" type="datetime-local" class="form-control" name="updatedOn" formControlName="updatedOn" placeholder="YYYY-MM-DD HH:mm"/>
+                        <input id="field_lastModifiedDate" type="datetime-local" class="form-control" name="lastModifiedDate" formControlName="lastModifiedDate" placeholder="YYYY-MM-DD HH:mm"/>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.updatedBy" for="field_updatedBy">Updated By</label>
-                    <input type="text" class="form-control" name="updatedBy" id="field_updatedBy"
-                           formControlName="updatedBy"/>
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
+                    <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
+                           formControlName="lastModifiedBy"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.pickupLocation" for="field_pickupLocation">Pickup Location</label>
                     <select class="form-control" id="field_pickupLocation" name="pickupLocation" formControlName="pickupLocation">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="locationOption.id === editForm.get('pickupLocation')!.value?.id ? editForm.get('pickupLocation')!.value : locationOption" *ngFor="let locationOption of pickuplocations; trackBy: trackById">{{ locationOption.address }}</option>
+                        <option [ngValue]="locationOption.id === editForm.get('pickupLocation')!.value?.id ? editForm.get('pickupLocation')!.value : locationOption" *ngFor="let locationOption of locations; trackBy: trackById">{{ locationOption.address }}</option>
                     </select>
                 </div>
 
@@ -248,7 +248,7 @@
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.dropLocation" for="field_dropLocation">Drop Location</label>
                     <select class="form-control" id="field_dropLocation" name="dropLocation" formControlName="dropLocation">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="locationOption.id === editForm.get('dropLocation')!.value?.id ? editForm.get('dropLocation')!.value : locationOption" *ngFor="let locationOption of droplocations; trackBy: trackById">{{ locationOption.address }}</option>
+                        <option [ngValue]="locationOption.id === editForm.get('dropLocation')!.value?.id ? editForm.get('dropLocation')!.value : locationOption" *ngFor="let locationOption of locations; trackBy: trackById">{{ locationOption.address }}</option>
                     </select>
                 </div>
 

@@ -49,10 +49,10 @@
       "preffredCurrency": "Preffred Currency",
       "payterms": "Payterms",
       "timeZone": "Time Zone",
-      "createdOn": "Created On",
+      "createdDate": "Created Date",
       "createdBy": "Created By",
-      "updatedOn": "Updated On",
-      "updatedBy": "Updated By",
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By",
       "operInsurance": "Oper Insurance",
       "loadOrder": "Load Order"
     }

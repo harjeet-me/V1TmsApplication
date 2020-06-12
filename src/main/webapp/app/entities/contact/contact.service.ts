@@ -58,16 +58,16 @@ export class ContactService {
 
   protected convertDateFromClient(contact: IContact): IContact {
     const copy: IContact = Object.assign({}, contact, {
-      createdOn: contact.createdOn && contact.createdOn.isValid() ? contact.createdOn.toJSON() : undefined,
-      updatedOn: contact.updatedOn && contact.updatedOn.isValid() ? contact.updatedOn.toJSON() : undefined
+      createdDate: contact.createdDate && contact.createdDate.isValid() ? contact.createdDate.toJSON() : undefined,
+      lastModifiedDate: contact.lastModifiedDate && contact.lastModifiedDate.isValid() ? contact.lastModifiedDate.toJSON() : undefined
     });
     return copy;
   }
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -75,8 +75,8 @@ export class ContactService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((contact: IContact) => {
-        contact.createdOn = contact.createdOn ? moment(contact.createdOn) : undefined;
-        contact.updatedOn = contact.updatedOn ? moment(contact.updatedOn) : undefined;
+        contact.createdDate = contact.createdDate ? moment(contact.createdDate) : undefined;
+        contact.lastModifiedDate = contact.lastModifiedDate ? moment(contact.lastModifiedDate) : undefined;
       });
     }
     return res;

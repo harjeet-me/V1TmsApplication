@@ -10,10 +10,10 @@ export interface IReport {
   attachmentContentType?: string;
   attachment?: any;
   emailTo?: string;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
 }
 
 export class Report implements IReport {
@@ -26,9 +26,9 @@ export class Report implements IReport {
     public attachmentContentType?: string,
     public attachment?: any,
     public emailTo?: string,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string
   ) {}
 }

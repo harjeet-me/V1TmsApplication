@@ -25,10 +25,10 @@
       "postalCode": "Postal Code",
       "latitude": "Latitude",
       "longitude": "Longitude",
-      "createdOn": "Created On",
+      "createdDate": "Created Date",
       "createdBy": "Created By",
-      "updatedOn": "Updated On",
-      "updatedBy": "Updated By",
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By",
       "trippick": "Trippick",
       "tripdrop": "Tripdrop"
     }

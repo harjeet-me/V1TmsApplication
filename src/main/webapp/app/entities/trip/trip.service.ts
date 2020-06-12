@@ -62,8 +62,8 @@ export class TripService {
       pickup: trip.pickup && trip.pickup.isValid() ? trip.pickup.format(DATE_FORMAT) : undefined,
       drop: trip.drop && trip.drop.isValid() ? trip.drop.format(DATE_FORMAT) : undefined,
       chasisInTime: trip.chasisInTime && trip.chasisInTime.isValid() ? trip.chasisInTime.toJSON() : undefined,
-      createdOn: trip.createdOn && trip.createdOn.isValid() ? trip.createdOn.toJSON() : undefined,
-      updatedOn: trip.updatedOn && trip.updatedOn.isValid() ? trip.updatedOn.toJSON() : undefined
+      createdDate: trip.createdDate && trip.createdDate.isValid() ? trip.createdDate.toJSON() : undefined,
+      lastModifiedDate: trip.lastModifiedDate && trip.lastModifiedDate.isValid() ? trip.lastModifiedDate.toJSON() : undefined
     });
     return copy;
   }
@@ -73,8 +73,8 @@ export class TripService {
       res.body.pickup = res.body.pickup ? moment(res.body.pickup) : undefined;
       res.body.drop = res.body.drop ? moment(res.body.drop) : undefined;
       res.body.chasisInTime = res.body.chasisInTime ? moment(res.body.chasisInTime) : undefined;
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -85,8 +85,8 @@ export class TripService {
         trip.pickup = trip.pickup ? moment(trip.pickup) : undefined;
         trip.drop = trip.drop ? moment(trip.drop) : undefined;
         trip.chasisInTime = trip.chasisInTime ? moment(trip.chasisInTime) : undefined;
-        trip.createdOn = trip.createdOn ? moment(trip.createdOn) : undefined;
-        trip.updatedOn = trip.updatedOn ? moment(trip.updatedOn) : undefined;
+        trip.createdDate = trip.createdDate ? moment(trip.createdDate) : undefined;
+        trip.lastModifiedDate = trip.lastModifiedDate ? moment(trip.lastModifiedDate) : undefined;
       });
     }
     return res;

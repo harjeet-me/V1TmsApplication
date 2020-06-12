@@ -50,17 +50,17 @@ public class ContainerResourceIT {
     private static final Integer DEFAULT_SIZE = 1;
     private static final Integer UPDATED_SIZE = 2;
 
-    private static final Instant DEFAULT_CREATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_UPDATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_UPDATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_UPDATED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_UPDATED_BY = "BBBBBBBBBB";
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     @Autowired
     private ContainerRepository containerRepository;
@@ -95,10 +95,10 @@ public class ContainerResourceIT {
             .number(DEFAULT_NUMBER)
             .description(DEFAULT_DESCRIPTION)
             .size(DEFAULT_SIZE)
-            .createdOn(DEFAULT_CREATED_ON)
+            .createdDate(DEFAULT_CREATED_DATE)
             .createdBy(DEFAULT_CREATED_BY)
-            .updatedOn(DEFAULT_UPDATED_ON)
-            .updatedBy(DEFAULT_UPDATED_BY);
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return container;
     }
     /**
@@ -112,10 +112,10 @@ public class ContainerResourceIT {
             .number(UPDATED_NUMBER)
             .description(UPDATED_DESCRIPTION)
             .size(UPDATED_SIZE)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return container;
     }
 
@@ -142,10 +142,10 @@ public class ContainerResourceIT {
         assertThat(testContainer.getNumber()).isEqualTo(DEFAULT_NUMBER);
         assertThat(testContainer.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testContainer.getSize()).isEqualTo(DEFAULT_SIZE);
-        assertThat(testContainer.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
+        assertThat(testContainer.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testContainer.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testContainer.getUpdatedOn()).isEqualTo(DEFAULT_UPDATED_ON);
-        assertThat(testContainer.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
+        assertThat(testContainer.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testContainer.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
 
         // Validate the Container in Elasticsearch
         verify(mockContainerSearchRepository, times(1)).save(testContainer);
@@ -188,10 +188,10 @@ public class ContainerResourceIT {
             .andExpect(jsonPath("$.[*].number").value(hasItem(DEFAULT_NUMBER)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].size").value(hasItem(DEFAULT_SIZE)))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
     
     @Test
@@ -208,10 +208,10 @@ public class ContainerResourceIT {
             .andExpect(jsonPath("$.number").value(DEFAULT_NUMBER))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.size").value(DEFAULT_SIZE))
-            .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
-            .andExpect(jsonPath("$.updatedOn").value(DEFAULT_UPDATED_ON.toString()))
-            .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY));
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -240,10 +240,10 @@ public class ContainerResourceIT {
             .number(UPDATED_NUMBER)
             .description(UPDATED_DESCRIPTION)
             .size(UPDATED_SIZE)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restContainerMockMvc.perform(put("/api/containers").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -257,10 +257,10 @@ public class ContainerResourceIT {
         assertThat(testContainer.getNumber()).isEqualTo(UPDATED_NUMBER);
         assertThat(testContainer.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testContainer.getSize()).isEqualTo(UPDATED_SIZE);
-        assertThat(testContainer.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
+        assertThat(testContainer.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testContainer.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testContainer.getUpdatedOn()).isEqualTo(UPDATED_UPDATED_ON);
-        assertThat(testContainer.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
+        assertThat(testContainer.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testContainer.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
 
         // Validate the Container in Elasticsearch
         verify(mockContainerSearchRepository, times(1)).save(testContainer);
@@ -323,9 +323,9 @@ public class ContainerResourceIT {
             .andExpect(jsonPath("$.[*].number").value(hasItem(DEFAULT_NUMBER)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].size").value(hasItem(DEFAULT_SIZE)))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 }

@@ -59,10 +59,10 @@ export class CustomerUpdateComponent implements OnInit {
     preffredCurrency: [],
     payterms: [],
     timeZone: [],
-    createdOn: [],
+    createdDate: [],
     createdBy: [],
-    updatedOn: [],
-    updatedBy: [],
+    lastModifiedDate: [],
+    lastModifiedBy: [],
     charges: []
   });
 
@@ -82,8 +82,8 @@ export class CustomerUpdateComponent implements OnInit {
         const today = moment().startOf('day');
         customer.preferredContactTime = today;
         customer.timeZone = today;
-        customer.createdOn = today;
-        customer.updatedOn = today;
+        customer.createdDate = today;
+        customer.lastModifiedDate = today;
       }
 
       this.updateForm(customer);
@@ -129,10 +129,10 @@ export class CustomerUpdateComponent implements OnInit {
       preffredCurrency: customer.preffredCurrency,
       payterms: customer.payterms,
       timeZone: customer.timeZone ? customer.timeZone.format(DATE_TIME_FORMAT) : null,
-      createdOn: customer.createdOn ? customer.createdOn.format(DATE_TIME_FORMAT) : null,
+      createdDate: customer.createdDate ? customer.createdDate.format(DATE_TIME_FORMAT) : null,
       createdBy: customer.createdBy,
-      updatedOn: customer.updatedOn ? customer.updatedOn.format(DATE_TIME_FORMAT) : null,
-      updatedBy: customer.updatedBy,
+      lastModifiedDate: customer.lastModifiedDate ? customer.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
+      lastModifiedBy: customer.lastModifiedBy,
       charges: customer.charges
     });
   }
@@ -217,10 +217,14 @@ export class CustomerUpdateComponent implements OnInit {
       preffredCurrency: this.editForm.get(['preffredCurrency'])!.value,
       payterms: this.editForm.get(['payterms'])!.value,
       timeZone: this.editForm.get(['timeZone'])!.value ? moment(this.editForm.get(['timeZone'])!.value, DATE_TIME_FORMAT) : undefined,
-      createdOn: this.editForm.get(['createdOn'])!.value ? moment(this.editForm.get(['createdOn'])!.value, DATE_TIME_FORMAT) : undefined,
+      createdDate: this.editForm.get(['createdDate'])!.value
+        ? moment(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
       createdBy: this.editForm.get(['createdBy'])!.value,
-      updatedOn: this.editForm.get(['updatedOn'])!.value ? moment(this.editForm.get(['updatedOn'])!.value, DATE_TIME_FORMAT) : undefined,
-      updatedBy: this.editForm.get(['updatedBy'])!.value,
+      lastModifiedDate: this.editForm.get(['lastModifiedDate'])!.value
+        ? moment(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      lastModifiedBy: this.editForm.get(['lastModifiedBy'])!.value,
       charges: this.editForm.get(['charges'])!.value
     };
   }

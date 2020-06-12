@@ -50,5 +50,7 @@
     <include file="config/liquibase/changelog/20200312064500_added_entity_constraints_InvoiceHistory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200312064800_added_entity_constraints_FileSystem.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200324225000_added_entity_constraints_InvoiceReport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200511170300_added_entity_constraints_Payment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200312064400_added_entity_constraints_Email.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

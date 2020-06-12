@@ -9,10 +9,10 @@ export interface IInvoiceItem {
   price?: number;
   discount?: number;
   total?: number;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
   invoice?: IInvoice;
 }
 
@@ -25,10 +25,10 @@ export class InvoiceItem implements IInvoiceItem {
     public price?: number,
     public discount?: number,
     public total?: number,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string,
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
     public invoice?: IInvoice
   ) {}
 }

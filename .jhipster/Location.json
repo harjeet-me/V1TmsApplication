@@ -35,7 +35,7 @@
             "fieldType": "Integer"
         },
         {
-            "fieldName": "createdOn",
+            "fieldName": "createdDate",
             "fieldType": "Instant"
         },
         {
@@ -43,28 +43,26 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "updatedOn",
+            "fieldName": "lastModifiedDate",
             "fieldType": "Instant"
         },
         {
-            "fieldName": "updatedBy",
+            "fieldName": "lastModifiedBy",
             "fieldType": "String"
         }
     ],
     "relationships": [
         {
-            "relationshipType": "one-to-one",
+            "relationshipType": "one-to-many",
             "otherEntityName": "trip",
             "otherEntityRelationshipName": "pickupLocation",
-            "relationshipName": "trippick",
-            "ownerSide": false
+            "relationshipName": "trippick"
         },
         {
-            "relationshipType": "one-to-one",
+            "relationshipType": "one-to-many",
             "otherEntityName": "trip",
             "otherEntityRelationshipName": "dropLocation",
-            "relationshipName": "tripdrop",
-            "ownerSide": false
+            "relationshipName": "tripdrop"
         }
     ],
     "changelogDate": "20200312064300",

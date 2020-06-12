@@ -59,19 +59,18 @@ export class PaymentService {
 
   protected convertDateFromClient(payment: IPayment): IPayment {
     const copy: IPayment = Object.assign({}, payment, {
-      invoicePaidDate:
-        payment.invoicePaidDate && payment.invoicePaidDate.isValid() ? payment.invoicePaidDate.format(DATE_FORMAT) : undefined,
-      createdOn: payment.createdOn && payment.createdOn.isValid() ? payment.createdOn.toJSON() : undefined,
-      updatedOn: payment.updatedOn && payment.updatedOn.isValid() ? payment.updatedOn.toJSON() : undefined
+      payDate: payment.payDate && payment.payDate.isValid() ? payment.payDate.format(DATE_FORMAT) : undefined,
+      createdDate: payment.createdDate && payment.createdDate.isValid() ? payment.createdDate.toJSON() : undefined,
+      lastModifiedDate: payment.lastModifiedDate && payment.lastModifiedDate.isValid() ? payment.lastModifiedDate.toJSON() : undefined
     });
     return copy;
   }
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.invoicePaidDate = res.body.invoicePaidDate ? moment(res.body.invoicePaidDate) : undefined;
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.payDate = res.body.payDate ? moment(res.body.payDate) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -79,9 +78,9 @@ export class PaymentService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((payment: IPayment) => {
-        payment.invoicePaidDate = payment.invoicePaidDate ? moment(payment.invoicePaidDate) : undefined;
-        payment.createdOn = payment.createdOn ? moment(payment.createdOn) : undefined;
-        payment.updatedOn = payment.updatedOn ? moment(payment.updatedOn) : undefined;
+        payment.payDate = payment.payDate ? moment(payment.payDate) : undefined;
+        payment.createdDate = payment.createdDate ? moment(payment.createdDate) : undefined;
+        payment.lastModifiedDate = payment.lastModifiedDate ? moment(payment.lastModifiedDate) : undefined;
       });
     }
     return res;

@@ -12,37 +12,47 @@
                 <dd>
                     <span>{{ payment.invoiceNo }}</span>
                 </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.paymentAmt">Payment Amt</span></dt>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.payDate">Pay Date</span></dt>
                 <dd>
-                    <span>{{ payment.paymentAmt }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.invoicePaidDate">Invoice Paid Date</span></dt>
-                <dd>
-                    <span>{{ payment.invoicePaidDate }}</span>
+                    <span>{{ payment.payDate }}</span>
                 </dd>
                 <dt><span jhiTranslate="tmsV1ApplicationApp.payment.payRefNo">Pay Ref No</span></dt>
                 <dd>
                     <span>{{ payment.payRefNo }}</span>
                 </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.status">Status</span></dt>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.mode">Mode</span></dt>
                 <dd>
-                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiceStatus.' + payment.status }}">{{ payment.status }}</span>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.PayMode.' + payment.mode }}">{{ payment.mode }}</span>
                 </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.createdOn">Created On</span></dt>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.ammount">Ammount</span></dt>
                 <dd>
-                    <span>{{ payment.createdOn }}</span>
+                    <span>{{ payment.ammount }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.unusedAmmount">Unused Ammount</span></dt>
+                <dd>
+                    <span>{{ payment.unusedAmmount }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{ payment.createdDate }}</span>
                 </dd>
                 <dt><span jhiTranslate="tmsV1ApplicationApp.payment.createdBy">Created By</span></dt>
                 <dd>
                     <span>{{ payment.createdBy }}</span>
                 </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.updatedOn">Updated On</span></dt>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.lastModifiedDate">Last Modified Date</span></dt>
                 <dd>
-                    <span>{{ payment.updatedOn }}</span>
+                    <span>{{ payment.lastModifiedDate }}</span>
                 </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.updatedBy">Updated By</span></dt>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.lastModifiedBy">Last Modified By</span></dt>
                 <dd>
-                    <span>{{ payment.updatedBy }}</span>
+                    <span>{{ payment.lastModifiedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.payment.customer">Customer</span></dt>
+                <dd>
+                    <div *ngIf="payment.customer">
+                        <a [routerLink]="['/customer', payment.customer?.id, 'view']">{{ payment.customer?.company }}</a>
+                    </div>
                 </dd>
             </dl>
 

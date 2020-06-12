@@ -1,16 +1,26 @@
 package com.tms.v1.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 import java.time.Instant;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tms.v1.domain.enumeration.TransactionType;
 
 /**
@@ -20,7 +30,7 @@ import com.tms.v1.domain.enumeration.TransactionType;
 @Table(name = "transactions_record")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "transactionsrecord")
-public class TransactionsRecord implements Serializable {
+public class TransactionsRecord extends AbstractAuditingEntity  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,26 +47,23 @@ public class TransactionsRecord implements Serializable {
 
     @Column(name = "tx_ammount")
     private Double txAmmount;
-
-    @Column(name = "created_on")
-    private Instant createdOn;
-
+   
+    @CreatedDate
+    @Column(name = "created_date")
+    private Instant createdDate;
+    @CreatedBy
     @Column(name = "created_by")
     private String createdBy;
-
-    @Column(name = "updated_on")
-    private Instant updatedOn;
-
-    @Column(name = "updated_by")
-    private String updatedBy;
+    @LastModifiedDate
+    @Column(name = "last_modified_date")
+    private Instant lastModifiedDate;
+    @LastModifiedBy
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
 
     @ManyToOne
     @JsonIgnoreProperties("transactionsRecords")
     private Customer customer;
-
-    @ManyToOne
-    @JsonIgnoreProperties("transactionsRecords")
-    private Accounts account;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -106,17 +113,17 @@ public class TransactionsRecord implements Serializable {
         this.txAmmount = txAmmount;
     }
 
-    public Instant getCreatedOn() {
-        return createdOn;
+    public Instant getCreatedDate() {
+        return createdDate;
     }
 
-    public TransactionsRecord createdOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public TransactionsRecord createdDate(Instant createdDate) {
+        this.createdDate = createdDate;
         return this;
     }
 
-    public void setCreatedOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getCreatedBy() {
@@ -132,30 +139,30 @@ public class TransactionsRecord implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public Instant getUpdatedOn() {
-        return updatedOn;
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
     }
 
-    public TransactionsRecord updatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public TransactionsRecord lastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
         return this;
     }
 
-    public void setUpdatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
-    public String getUpdatedBy() {
-        return updatedBy;
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
     }
 
-    public TransactionsRecord updatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public TransactionsRecord lastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
         return this;
     }
 
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     public Customer getCustomer() {
@@ -169,19 +176,6 @@ public class TransactionsRecord implements Serializable {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public Accounts getAccount() {
-        return account;
-    }
-
-    public TransactionsRecord account(Accounts accounts) {
-        this.account = accounts;
-        return this;
-    }
-
-    public void setAccount(Accounts accounts) {
-        this.account = accounts;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -208,10 +202,10 @@ public class TransactionsRecord implements Serializable {
             ", txType='" + getTxType() + "'" +
             ", description='" + getDescription() + "'" +
             ", txAmmount=" + getTxAmmount() +
-            ", createdOn='" + getCreatedOn() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
-            ", updatedOn='" + getUpdatedOn() + "'" +
-            ", updatedBy='" + getUpdatedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

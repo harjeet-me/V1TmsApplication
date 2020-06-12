@@ -11,10 +11,6 @@ import { ITransactionsRecord, TransactionsRecord } from 'app/shared/model/transa
 import { TransactionsRecordService } from './transactions-record.service';
 import { ICustomer } from 'app/shared/model/customer.model';
 import { CustomerService } from 'app/entities/customer/customer.service';
-import { IAccounts } from 'app/shared/model/accounts.model';
-import { AccountsService } from 'app/entities/accounts/accounts.service';
-
-type SelectableEntity = ICustomer | IAccounts;
 
 @Component({
   selector: 'jhi-transactions-record-update',
@@ -23,25 +19,22 @@ type SelectableEntity = ICustomer | IAccounts;
 export class TransactionsRecordUpdateComponent implements OnInit {
   isSaving = false;
   customers: ICustomer[] = [];
-  accounts: IAccounts[] = [];
 
   editForm = this.fb.group({
     id: [],
     txType: [],
     description: [],
     txAmmount: [],
-    createdOn: [],
+    createdDate: [],
     createdBy: [],
-    updatedOn: [],
-    updatedBy: [],
-    customer: [],
-    account: []
+    lastModifiedDate: [],
+    lastModifiedBy: [],
+    customer: []
   });
 
   constructor(
     protected transactionsRecordService: TransactionsRecordService,
     protected customerService: CustomerService,
-    protected accountsService: AccountsService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -50,15 +43,13 @@ export class TransactionsRecordUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ transactionsRecord }) => {
       if (!transactionsRecord.id) {
         const today = moment().startOf('day');
-        transactionsRecord.createdOn = today;
-        transactionsRecord.updatedOn = today;
+        transactionsRecord.createdDate = today;
+        transactionsRecord.lastModifiedDate = today;
       }
 
       this.updateForm(transactionsRecord);
 
       this.customerService.query().subscribe((res: HttpResponse<ICustomer[]>) => (this.customers = res.body || []));
-
-      this.accountsService.query().subscribe((res: HttpResponse<IAccounts[]>) => (this.accounts = res.body || []));
     });
   }
 
@@ -68,12 +59,11 @@ export class TransactionsRecordUpdateComponent implements OnInit {
       txType: transactionsRecord.txType,
       description: transactionsRecord.description,
       txAmmount: transactionsRecord.txAmmount,
-      createdOn: transactionsRecord.createdOn ? transactionsRecord.createdOn.format(DATE_TIME_FORMAT) : null,
+      createdDate: transactionsRecord.createdDate ? transactionsRecord.createdDate.format(DATE_TIME_FORMAT) : null,
       createdBy: transactionsRecord.createdBy,
-      updatedOn: transactionsRecord.updatedOn ? transactionsRecord.updatedOn.format(DATE_TIME_FORMAT) : null,
-      updatedBy: transactionsRecord.updatedBy,
-      customer: transactionsRecord.customer,
-      account: transactionsRecord.account
+      lastModifiedDate: transactionsRecord.lastModifiedDate ? transactionsRecord.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
+      lastModifiedBy: transactionsRecord.lastModifiedBy,
+      customer: transactionsRecord.customer
     });
   }
 
@@ -98,12 +88,15 @@ export class TransactionsRecordUpdateComponent implements OnInit {
       txType: this.editForm.get(['txType'])!.value,
       description: this.editForm.get(['description'])!.value,
       txAmmount: this.editForm.get(['txAmmount'])!.value,
-      createdOn: this.editForm.get(['createdOn'])!.value ? moment(this.editForm.get(['createdOn'])!.value, DATE_TIME_FORMAT) : undefined,
+      createdDate: this.editForm.get(['createdDate'])!.value
+        ? moment(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
       createdBy: this.editForm.get(['createdBy'])!.value,
-      updatedOn: this.editForm.get(['updatedOn'])!.value ? moment(this.editForm.get(['updatedOn'])!.value, DATE_TIME_FORMAT) : undefined,
-      updatedBy: this.editForm.get(['updatedBy'])!.value,
-      customer: this.editForm.get(['customer'])!.value,
-      account: this.editForm.get(['account'])!.value
+      lastModifiedDate: this.editForm.get(['lastModifiedDate'])!.value
+        ? moment(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      lastModifiedBy: this.editForm.get(['lastModifiedBy'])!.value,
+      customer: this.editForm.get(['customer'])!.value
     };
   }
 
@@ -123,7 +116,7 @@ export class TransactionsRecordUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: SelectableEntity): any {
+  trackById(index: number, item: ICustomer): any {
     return item.id;
   }
 }

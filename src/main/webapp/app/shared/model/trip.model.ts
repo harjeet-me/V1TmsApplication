@@ -1,7 +1,7 @@
 import { Moment } from 'moment';
-import { ILocation } from 'app/shared/model/location.model';
 import { IInvoice } from 'app/shared/model/invoice.model';
 import { IContainer } from 'app/shared/model/container.model';
+import { ILocation } from 'app/shared/model/location.model';
 import { ICustomer } from 'app/shared/model/customer.model';
 import { IDriver } from 'app/shared/model/driver.model';
 import { IEquipment } from 'app/shared/model/equipment.model';
@@ -40,14 +40,14 @@ export interface ITrip {
   numbersOfContainer?: number;
   comments?: string;
   autoGenerateInvoice?: boolean;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
-  pickupLocation?: ILocation;
-  dropLocation?: ILocation;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
   invoices?: IInvoice[];
   containers?: IContainer[];
+  pickupLocation?: ILocation;
+  dropLocation?: ILocation;
   customer?: ICustomer;
   driver?: IDriver;
   equipment?: IEquipment;
@@ -83,14 +83,14 @@ export class Trip implements ITrip {
     public numbersOfContainer?: number,
     public comments?: string,
     public autoGenerateInvoice?: boolean,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string,
-    public pickupLocation?: ILocation,
-    public dropLocation?: ILocation,
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
     public invoices?: IInvoice[],
     public containers?: IContainer[],
+    public pickupLocation?: ILocation,
+    public dropLocation?: ILocation,
     public customer?: ICustomer,
     public driver?: IDriver,
     public equipment?: IEquipment,

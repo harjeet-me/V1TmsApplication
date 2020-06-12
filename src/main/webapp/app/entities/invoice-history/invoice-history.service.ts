@@ -58,16 +58,17 @@ export class InvoiceHistoryService {
 
   protected convertDateFromClient(invoiceHistory: IInvoiceHistory): IInvoiceHistory {
     const copy: IInvoiceHistory = Object.assign({}, invoiceHistory, {
-      createdOn: invoiceHistory.createdOn && invoiceHistory.createdOn.isValid() ? invoiceHistory.createdOn.toJSON() : undefined,
-      updatedOn: invoiceHistory.updatedOn && invoiceHistory.updatedOn.isValid() ? invoiceHistory.updatedOn.toJSON() : undefined
+      createdDate: invoiceHistory.createdDate && invoiceHistory.createdDate.isValid() ? invoiceHistory.createdDate.toJSON() : undefined,
+      lastModifiedDate:
+        invoiceHistory.lastModifiedDate && invoiceHistory.lastModifiedDate.isValid() ? invoiceHistory.lastModifiedDate.toJSON() : undefined
     });
     return copy;
   }
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -75,8 +76,8 @@ export class InvoiceHistoryService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((invoiceHistory: IInvoiceHistory) => {
-        invoiceHistory.createdOn = invoiceHistory.createdOn ? moment(invoiceHistory.createdOn) : undefined;
-        invoiceHistory.updatedOn = invoiceHistory.updatedOn ? moment(invoiceHistory.updatedOn) : undefined;
+        invoiceHistory.createdDate = invoiceHistory.createdDate ? moment(invoiceHistory.createdDate) : undefined;
+        invoiceHistory.lastModifiedDate = invoiceHistory.lastModifiedDate ? moment(invoiceHistory.lastModifiedDate) : undefined;
       });
     }
     return res;

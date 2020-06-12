@@ -1,4 +1,4 @@
-id;tx_type;description;tx_ammount;created_on;created_by;updated_on;updated_by
+id;tx_type;description;tx_ammount;created_date;created_by;last_modified_date;last_modified_by
 1;REFUND;plum;44832;2020-03-11T17:50:46;Rubber;2020-03-11T08:13:06;Qatar Rustic Trail
 2;ADJUSTMENT;e-markets Customer salmon;59674;2020-03-11T15:23:28;Concrete generating UAE Dirham;2020-03-11T10:41:57;invoice
 3;ADJUSTMENT;Factors Rubber;55406;2020-03-11T13:53:52;Norway;2020-03-11T22:33:44;JBOD

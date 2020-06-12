@@ -58,16 +58,17 @@ export class FileSystemService {
 
   protected convertDateFromClient(fileSystem: IFileSystem): IFileSystem {
     const copy: IFileSystem = Object.assign({}, fileSystem, {
-      createdOn: fileSystem.createdOn && fileSystem.createdOn.isValid() ? fileSystem.createdOn.toJSON() : undefined,
-      updatedOn: fileSystem.updatedOn && fileSystem.updatedOn.isValid() ? fileSystem.updatedOn.toJSON() : undefined
+      createdDate: fileSystem.createdDate && fileSystem.createdDate.isValid() ? fileSystem.createdDate.toJSON() : undefined,
+      lastModifiedDate:
+        fileSystem.lastModifiedDate && fileSystem.lastModifiedDate.isValid() ? fileSystem.lastModifiedDate.toJSON() : undefined
     });
     return copy;
   }
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -75,8 +76,8 @@ export class FileSystemService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((fileSystem: IFileSystem) => {
-        fileSystem.createdOn = fileSystem.createdOn ? moment(fileSystem.createdOn) : undefined;
-        fileSystem.updatedOn = fileSystem.updatedOn ? moment(fileSystem.updatedOn) : undefined;
+        fileSystem.createdDate = fileSystem.createdDate ? moment(fileSystem.createdDate) : undefined;
+        fileSystem.lastModifiedDate = fileSystem.lastModifiedDate ? moment(fileSystem.lastModifiedDate) : undefined;
       });
     }
     return res;

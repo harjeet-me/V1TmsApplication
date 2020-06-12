@@ -54,8 +54,8 @@ describe('Service Tests', () => {
           {
             licensePlateExpiration: currentDate.format(DATE_FORMAT),
             inspectionStickerExpiration: currentDate.format(DATE_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -73,8 +73,8 @@ describe('Service Tests', () => {
             id: 0,
             licensePlateExpiration: currentDate.format(DATE_FORMAT),
             inspectionStickerExpiration: currentDate.format(DATE_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -83,8 +83,8 @@ describe('Service Tests', () => {
           {
             licensePlateExpiration: currentDate,
             inspectionStickerExpiration: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -112,10 +112,10 @@ describe('Service Tests', () => {
             licensePlateNumber: 'BBBBBB',
             licensePlateExpiration: currentDate.format(DATE_FORMAT),
             inspectionStickerExpiration: currentDate.format(DATE_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
@@ -124,8 +124,8 @@ describe('Service Tests', () => {
           {
             licensePlateExpiration: currentDate,
             inspectionStickerExpiration: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -153,10 +153,10 @@ describe('Service Tests', () => {
             licensePlateNumber: 'BBBBBB',
             licensePlateExpiration: currentDate.format(DATE_FORMAT),
             inspectionStickerExpiration: currentDate.format(DATE_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
@@ -165,8 +165,8 @@ describe('Service Tests', () => {
           {
             licensePlateExpiration: currentDate,
             inspectionStickerExpiration: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );

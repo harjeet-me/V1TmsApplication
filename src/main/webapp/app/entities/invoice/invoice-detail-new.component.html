@@ -1,191 +1,280 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-    
-    
-    
-        <div *ngIf="invoice">
-            <h2><span jhiTranslate="tmsV1ApplicationApp.invoice.detail.title">Invoice</span> {{ invoice.id }}</h2>
+	<div class="col-8">
+		<div *ngIf="invoice">
+			<h2>
+				<span jhiTranslate="tmsV1ApplicationApp.invoice.detail.title">Invoice</span>
+				{{ invoice.id }}
+			</h2>
+			<hr>
+			<jhi-alert-error></jhi-alert-error>
+			<div class="row">
+				<div class=" card col-sm-6">
+					<div class="card-body text-primary">
+						<h5 class="card-title">Customer Info</h5>
 
-            <hr>
+						<dl class="row-md jh-entity-details">
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.orderNo">Order
+									No</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.orderNo }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceNo">Invoice
+									No</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.invoiceNo }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.taxRate">Tax
+									Rate</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.taxRate }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.taxType">Tax
+									Type</span>
+							</dt>
+							<dd>
+								<span
+									jhiTranslate="{{ 'tmsV1ApplicationApp.TaxType.' + invoice.taxType }}">{{
+									invoice.taxType }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.currency">Currency</span>
+							</dt>
+							<dd>
+								<span
+									jhiTranslate="{{ 'tmsV1ApplicationApp.CURRENCY.' + invoice.currency }}">{{
+									invoice.currency }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceTaxTotal">Invoice
+									Tax Total</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.invoiceTaxTotal }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceSubTotal">Invoice
+									Sub Total</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.invoiceSubTotal }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceTotal">Invoice
+									Total</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.invoiceTotal }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceDate">Invoice
+									Date</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.invoiceDate }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.invoicePaidDate">Invoice
+									Paid Date</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.invoicePaidDate }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.refOption1">Ref
+									Option 1</span>
+							</dt>
+							<dd>
+								<span
+									jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiveRef.' + invoice.refOption1 }}">{{
+									invoice.refOption1 }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.refValue1">Ref
+									Value 1</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.refValue1 }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.refOption2">Ref
+									Option 2</span>
+							</dt>
+							<dd>
+								<span
+									jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiveRef.' + invoice.refOption2 }}">{{
+									invoice.refOption2 }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.refValue2">Ref
+									Value 2</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.refValue2 }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.refOption3">Ref
+									Option 3</span>
+							</dt>
+							<dd>
+								<span
+									jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiveRef.' + invoice.refOption3 }}">{{
+									invoice.refOption3 }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.refValue3">Ref
+									Value 3</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.refValue3 }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.payRefNo">Pay
+									Ref No</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.payRefNo }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceDueDate">Invoice
+									Due Date</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.invoiceDueDate }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.status">Status</span>
+							</dt>
+							<dd>
+								<span
+									jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiceStatus.' + invoice.status }}">{{
+									invoice.status }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.invoicePdf">Invoice
+									Pdf</span>
+							</dt>
+							<dd>
+								<div *ngIf="invoice.invoicePdf">
+									<a
+										(click)="openFile(invoice?.invoicePdfContentType!, invoice?.invoicePdf)"
+										jhiTranslate="entity.action.open">open</a> {{
+									invoice.invoicePdfContentType }}, {{
+									byteSize(invoice.invoicePdf) }}
+								</div>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.remarks">Remarks</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.remarks }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.customerInfo">Customer
+									Info</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.customerInfo }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.payterm">Payterm</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.payterm }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.balance">Balance</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.balance }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.advance">Advance</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.advance }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.discount">Discount</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.discount }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.createdDate">Created
+									On</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.createdDate }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.createdBy">Created
+									By</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.createdBy }}</span>
+							</dd>
+							<dt>
+								<span
+									jhiTranslate="tmsV1ApplicationApp.invoice.lastModifiedDate">Updated
+									On</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.lastModifiedDate }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.lastModifiedBy">Updated
+									By</span>
+							</dt>
+							<dd>
+								<span>{{ invoice.lastModifiedBy }}</span>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.trip">Trip</span>
+							</dt>
+							<dd>
+								<div *ngIf="invoice.trip">
+									<a [routerLink]="['/trip', invoice.trip?.id, 'view']">{{
+										invoice.trip?.id }}</a>
+								</div>
+							</dd>
+							<dt>
+								<span jhiTranslate="tmsV1ApplicationApp.invoice.customer">Customer</span>
+							</dt>
+							<dd>
+								<div *ngIf="invoice.customer">
+									<a [routerLink]="['/customer', invoice.customer?.id, 'view']">{{
+										invoice.customer?.company }}</a>
+								</div>
+							</dd>
+						</dl>
 
-            <jhi-alert-error></jhi-alert-error>
-            
-            
-              
-				<div class="row">
-					<div class=" card col-sm-6">
-						<div class="card-body text-primary">
-							<h5 class="card-title">Customer Info</h5>
-							
-							
-						
-							
-							
-							
+					</div>
 
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.orderNo">Order No</span></dt>
-                <dd>
-                    <span>{{ invoice.orderNo }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceNo">Invoice No</span></dt>
-                <dd>
-                    <span>{{ invoice.invoiceNo }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.taxRate">Tax Rate</span></dt>
-                <dd>
-                    <span>{{ invoice.taxRate }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.taxType">Tax Type</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.TaxType.' + invoice.taxType }}">{{ invoice.taxType }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.currency">Currency</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.CURRENCY.' + invoice.currency }}">{{ invoice.currency }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceTaxTotal">Invoice Tax Total</span></dt>
-                <dd>
-                    <span>{{ invoice.invoiceTaxTotal }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceSubTotal">Invoice Sub Total</span></dt>
-                <dd>
-                    <span>{{ invoice.invoiceSubTotal }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceTotal">Invoice Total</span></dt>
-                <dd>
-                    <span>{{ invoice.invoiceTotal }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceDate">Invoice Date</span></dt>
-                <dd>
-                    <span>{{ invoice.invoiceDate }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.invoicePaidDate">Invoice Paid Date</span></dt>
-                <dd>
-                    <span>{{ invoice.invoicePaidDate }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.refOption1">Ref Option 1</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiveRef.' + invoice.refOption1 }}">{{ invoice.refOption1 }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.refValue1">Ref Value 1</span></dt>
-                <dd>
-                    <span>{{ invoice.refValue1 }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.refOption2">Ref Option 2</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiveRef.' + invoice.refOption2 }}">{{ invoice.refOption2 }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.refValue2">Ref Value 2</span></dt>
-                <dd>
-                    <span>{{ invoice.refValue2 }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.refOption3">Ref Option 3</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiveRef.' + invoice.refOption3 }}">{{ invoice.refOption3 }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.refValue3">Ref Value 3</span></dt>
-                <dd>
-                    <span>{{ invoice.refValue3 }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.payRefNo">Pay Ref No</span></dt>
-                <dd>
-                    <span>{{ invoice.payRefNo }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceDueDate">Invoice Due Date</span></dt>
-                <dd>
-                    <span>{{ invoice.invoiceDueDate }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.status">Status</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiceStatus.' + invoice.status }}">{{ invoice.status }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.invoicePdf">Invoice Pdf</span></dt>
-                <dd>
-                    <div *ngIf="invoice.invoicePdf">
-                        <a (click)="openFile(invoice?.invoicePdfContentType!, invoice?.invoicePdf)" jhiTranslate="entity.action.open">open</a>
-                        {{ invoice.invoicePdfContentType }}, {{ byteSize(invoice.invoicePdf) }}
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.remarks">Remarks</span></dt>
-                <dd>
-                    <span>{{ invoice.remarks }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.customerInfo">Customer Info</span></dt>
-                <dd>
-                    <span>{{ invoice.customerInfo }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.payterm">Payterm</span></dt>
-                <dd>
-                    <span>{{ invoice.payterm }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.balance">Balance</span></dt>
-                <dd>
-                    <span>{{ invoice.balance }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.advance">Advance</span></dt>
-                <dd>
-                    <span>{{ invoice.advance }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.discount">Discount</span></dt>
-                <dd>
-                    <span>{{ invoice.discount }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.createdOn">Created On</span></dt>
-                <dd>
-                    <span>{{ invoice.createdOn }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.createdBy">Created By</span></dt>
-                <dd>
-                    <span>{{ invoice.createdBy }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.updatedOn">Updated On</span></dt>
-                <dd>
-                    <span>{{ invoice.updatedOn }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.updatedBy">Updated By</span></dt>
-                <dd>
-                    <span>{{ invoice.updatedBy }}</span>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.trip">Trip</span></dt>
-                <dd>
-                    <div *ngIf="invoice.trip">
-                        <a [routerLink]="['/trip', invoice.trip?.id, 'view']">{{ invoice.trip?.id }}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.invoice.customer">Customer</span></dt>
-                <dd>
-                    <div *ngIf="invoice.customer">
-                        <a [routerLink]="['/customer', invoice.customer?.id, 'view']">{{ invoice.customer?.company }}</a>
-                    </div>
-                </dd>
-            </dl>
+				</div>
+
+			</div>
 
 
+			<button type="submit" (click)="previousState()" class="btn btn-info">
+				<fa-icon icon="arrow-left"></fa-icon>
+				&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+			</button>
 
-          	
-							</div>
-							
-							</div>  
-							
-							
-							
-							
-							
-							</div>
-							
-							
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/invoice', invoice.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-        </div>
-    </div>
+			<button type="button" [routerLink]="['/invoice', invoice.id, 'edit']"
+				class="btn btn-primary">
+				<fa-icon icon="pencil-alt"></fa-icon>
+				&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+			</button>
+			<a href="email/1/edit">  Send</a>
+			
+			
+		</div>
+	</div>
 </div>

@@ -20,12 +20,11 @@
       "txType": "Tx Type",
       "description": "Description",
       "txAmmount": "Tx Ammount",
-      "createdOn": "Created On",
+      "createdDate": "Created Date",
       "createdBy": "Created By",
-      "updatedOn": "Updated On",
-      "updatedBy": "Updated By",
-      "customer": "Customer",
-      "account": "Account"
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By",
+      "customer": "Customer"
     }
   }
 }

@@ -27,10 +27,10 @@ export class FileSystemUpdateComponent implements OnInit {
     data: [],
     dataContentType: [],
     fileName: [],
-    createdOn: [],
+    createdDate: [],
     createdBy: [],
-    updatedOn: [],
-    updatedBy: [],
+    lastModifiedDate: [],
+    lastModifiedBy: [],
     email: []
   });
 
@@ -47,8 +47,8 @@ export class FileSystemUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ fileSystem }) => {
       if (!fileSystem.id) {
         const today = moment().startOf('day');
-        fileSystem.createdOn = today;
-        fileSystem.updatedOn = today;
+        fileSystem.createdDate = today;
+        fileSystem.lastModifiedDate = today;
       }
 
       this.updateForm(fileSystem);
@@ -63,10 +63,10 @@ export class FileSystemUpdateComponent implements OnInit {
       data: fileSystem.data,
       dataContentType: fileSystem.dataContentType,
       fileName: fileSystem.fileName,
-      createdOn: fileSystem.createdOn ? fileSystem.createdOn.format(DATE_TIME_FORMAT) : null,
+      createdDate: fileSystem.createdDate ? fileSystem.createdDate.format(DATE_TIME_FORMAT) : null,
       createdBy: fileSystem.createdBy,
-      updatedOn: fileSystem.updatedOn ? fileSystem.updatedOn.format(DATE_TIME_FORMAT) : null,
-      updatedBy: fileSystem.updatedBy,
+      lastModifiedDate: fileSystem.lastModifiedDate ? fileSystem.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
+      lastModifiedBy: fileSystem.lastModifiedBy,
       email: fileSystem.email
     });
   }
@@ -108,10 +108,14 @@ export class FileSystemUpdateComponent implements OnInit {
       dataContentType: this.editForm.get(['dataContentType'])!.value,
       data: this.editForm.get(['data'])!.value,
       fileName: this.editForm.get(['fileName'])!.value,
-      createdOn: this.editForm.get(['createdOn'])!.value ? moment(this.editForm.get(['createdOn'])!.value, DATE_TIME_FORMAT) : undefined,
+      createdDate: this.editForm.get(['createdDate'])!.value
+        ? moment(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
       createdBy: this.editForm.get(['createdBy'])!.value,
-      updatedOn: this.editForm.get(['updatedOn'])!.value ? moment(this.editForm.get(['updatedOn'])!.value, DATE_TIME_FORMAT) : undefined,
-      updatedBy: this.editForm.get(['updatedBy'])!.value,
+      lastModifiedDate: this.editForm.get(['lastModifiedDate'])!.value
+        ? moment(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      lastModifiedBy: this.editForm.get(['lastModifiedBy'])!.value,
       email: this.editForm.get(['email'])!.value
     };
   }

@@ -61,8 +61,9 @@ export class InvoiceReportService {
     const copy: IInvoiceReport = Object.assign({}, invoiceReport, {
       fromDate: invoiceReport.fromDate && invoiceReport.fromDate.isValid() ? invoiceReport.fromDate.format(DATE_FORMAT) : undefined,
       toDate: invoiceReport.toDate && invoiceReport.toDate.isValid() ? invoiceReport.toDate.format(DATE_FORMAT) : undefined,
-      createdOn: invoiceReport.createdOn && invoiceReport.createdOn.isValid() ? invoiceReport.createdOn.toJSON() : undefined,
-      updatedOn: invoiceReport.updatedOn && invoiceReport.updatedOn.isValid() ? invoiceReport.updatedOn.toJSON() : undefined
+      createdDate: invoiceReport.createdDate && invoiceReport.createdDate.isValid() ? invoiceReport.createdDate.toJSON() : undefined,
+      lastModifiedDate:
+        invoiceReport.lastModifiedDate && invoiceReport.lastModifiedDate.isValid() ? invoiceReport.lastModifiedDate.toJSON() : undefined
     });
     return copy;
   }
@@ -71,8 +72,8 @@ export class InvoiceReportService {
     if (res.body) {
       res.body.fromDate = res.body.fromDate ? moment(res.body.fromDate) : undefined;
       res.body.toDate = res.body.toDate ? moment(res.body.toDate) : undefined;
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -82,8 +83,8 @@ export class InvoiceReportService {
       res.body.forEach((invoiceReport: IInvoiceReport) => {
         invoiceReport.fromDate = invoiceReport.fromDate ? moment(invoiceReport.fromDate) : undefined;
         invoiceReport.toDate = invoiceReport.toDate ? moment(invoiceReport.toDate) : undefined;
-        invoiceReport.createdOn = invoiceReport.createdOn ? moment(invoiceReport.createdOn) : undefined;
-        invoiceReport.updatedOn = invoiceReport.updatedOn ? moment(invoiceReport.updatedOn) : undefined;
+        invoiceReport.createdDate = invoiceReport.createdDate ? moment(invoiceReport.createdDate) : undefined;
+        invoiceReport.lastModifiedDate = invoiceReport.lastModifiedDate ? moment(invoiceReport.lastModifiedDate) : undefined;
       });
     }
     return res;

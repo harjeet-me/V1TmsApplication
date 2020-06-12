@@ -59,8 +59,8 @@ export class EmailService {
   protected convertDateFromClient(email: IEmail): IEmail {
     const copy: IEmail = Object.assign({}, email, {
       sentDateTime: email.sentDateTime && email.sentDateTime.isValid() ? email.sentDateTime.toJSON() : undefined,
-      createdOn: email.createdOn && email.createdOn.isValid() ? email.createdOn.toJSON() : undefined,
-      updatedOn: email.updatedOn && email.updatedOn.isValid() ? email.updatedOn.toJSON() : undefined
+      createdDate: email.createdDate && email.createdDate.isValid() ? email.createdDate.toJSON() : undefined,
+      lastModifiedDate: email.lastModifiedDate && email.lastModifiedDate.isValid() ? email.lastModifiedDate.toJSON() : undefined
     });
     return copy;
   }
@@ -68,8 +68,8 @@ export class EmailService {
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
       res.body.sentDateTime = res.body.sentDateTime ? moment(res.body.sentDateTime) : undefined;
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -78,8 +78,8 @@ export class EmailService {
     if (res.body) {
       res.body.forEach((email: IEmail) => {
         email.sentDateTime = email.sentDateTime ? moment(email.sentDateTime) : undefined;
-        email.createdOn = email.createdOn ? moment(email.createdOn) : undefined;
-        email.updatedOn = email.updatedOn ? moment(email.updatedOn) : undefined;
+        email.createdDate = email.createdDate ? moment(email.createdDate) : undefined;
+        email.lastModifiedDate = email.lastModifiedDate ? moment(email.lastModifiedDate) : undefined;
       });
     }
     return res;

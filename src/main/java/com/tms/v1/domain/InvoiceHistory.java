@@ -1,16 +1,24 @@
 package com.tms.v1.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
+import java.time.Instant;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
-import java.io.Serializable;
-import java.util.Objects;
-import java.time.Instant;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tms.v1.domain.enumeration.InvoiceStatus;
 
 /**
@@ -20,7 +28,7 @@ import com.tms.v1.domain.enumeration.InvoiceStatus;
 @Table(name = "invoice_history")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "invoicehistory")
-public class InvoiceHistory implements Serializable {
+public class InvoiceHistory extends AbstractAuditingEntity  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -35,17 +43,17 @@ public class InvoiceHistory implements Serializable {
     @Column(name = "comment")
     private String comment;
 
-    @Column(name = "created_on")
-    private Instant createdOn;
+    @Column(name = "created_date")
+    private Instant createdDate;
 
     @Column(name = "created_by")
     private String createdBy;
 
-    @Column(name = "updated_on")
-    private Instant updatedOn;
+    @Column(name = "last_modified_date")
+    private Instant lastModifiedDate;
 
-    @Column(name = "updated_by")
-    private String updatedBy;
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -94,17 +102,17 @@ public class InvoiceHistory implements Serializable {
         this.comment = comment;
     }
 
-    public Instant getCreatedOn() {
-        return createdOn;
+    public Instant getCreatedDate() {
+        return createdDate;
     }
 
-    public InvoiceHistory createdOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public InvoiceHistory createdDate(Instant createdDate) {
+        this.createdDate = createdDate;
         return this;
     }
 
-    public void setCreatedOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getCreatedBy() {
@@ -120,30 +128,30 @@ public class InvoiceHistory implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public Instant getUpdatedOn() {
-        return updatedOn;
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
     }
 
-    public InvoiceHistory updatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public InvoiceHistory lastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
         return this;
     }
 
-    public void setUpdatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
-    public String getUpdatedBy() {
-        return updatedBy;
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
     }
 
-    public InvoiceHistory updatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public InvoiceHistory lastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
         return this;
     }
 
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     public InvoiceHistory getPrevious() {
@@ -208,10 +216,10 @@ public class InvoiceHistory implements Serializable {
             "id=" + getId() +
             ", status='" + getStatus() + "'" +
             ", comment='" + getComment() + "'" +
-            ", createdOn='" + getCreatedOn() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
-            ", updatedOn='" + getUpdatedOn() + "'" +
-            ", updatedBy='" + getUpdatedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

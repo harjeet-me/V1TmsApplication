@@ -57,8 +57,8 @@ describe('Service Tests', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -74,16 +74,16 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -114,18 +114,18 @@ describe('Service Tests', () => {
             companyLogo: 'BBBBBB',
             profileStatus: 'BBBBBB',
             preffredCurrency: 'BBBBBB',
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -156,18 +156,18 @@ describe('Service Tests', () => {
             companyLogo: 'BBBBBB',
             profileStatus: 'BBBBBB',
             preffredCurrency: 'BBBBBB',
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );

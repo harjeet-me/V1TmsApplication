@@ -13,10 +13,10 @@ public class InvoiceUtil {
 
 		Invoice invoice = new Invoice();
 
-		invoice.setCreatedBy("SYSTEM");
-		invoice.setCreatedOn(Instant.now());
-		invoice.setUpdatedBy("SYSTEM");
-		invoice.setUpdatedOn(Instant.now());
+		/*
+		 * invoice.setCreatedBy("SYSTEM"); invoice.setCreatedOn(Instant.now());
+		 * invoice.setUpdatedBy("SYSTEM"); invoice.setUpdatedOn(Instant.now());
+		 */
 
 		invoice.setPayterm(customer.getPayterms());
 		invoice.setStatus(InvoiceStatus.DRAFT);

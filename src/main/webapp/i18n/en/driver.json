@@ -31,10 +31,10 @@
       "remarks": "Remarks",
       "contractDoc": "Contract Doc",
       "status": "Status",
-      "createdOn": "Created On",
+      "createdDate": "Created Date",
       "createdBy": "Created By",
-      "updatedOn": "Updated On",
-      "updatedBy": "Updated By",
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By",
       "trip": "Trip"
     }
   }

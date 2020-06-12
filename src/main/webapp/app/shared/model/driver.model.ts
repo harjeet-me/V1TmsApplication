@@ -21,10 +21,10 @@ export interface IDriver {
   contractDocContentType?: string;
   contractDoc?: any;
   status?: ToggleStatus;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
   trips?: ITrip[];
 }
 
@@ -48,10 +48,10 @@ export class Driver implements IDriver {
     public contractDocContentType?: string,
     public contractDoc?: any,
     public status?: ToggleStatus,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string,
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
     public trips?: ITrip[]
   ) {}
 }

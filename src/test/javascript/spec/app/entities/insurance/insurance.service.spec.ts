@@ -45,8 +45,8 @@ describe('Service Tests', () => {
           {
             issueDate: currentDate.format(DATE_FORMAT),
             expiryDate: currentDate.format(DATE_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -64,8 +64,8 @@ describe('Service Tests', () => {
             id: 0,
             issueDate: currentDate.format(DATE_FORMAT),
             expiryDate: currentDate.format(DATE_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -74,8 +74,8 @@ describe('Service Tests', () => {
           {
             issueDate: currentDate,
             expiryDate: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -95,10 +95,10 @@ describe('Service Tests', () => {
             expiryDate: currentDate.format(DATE_FORMAT),
             policyDocument: 'BBBBBB',
             coverageStatement: 'BBBBBB',
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
@@ -107,8 +107,8 @@ describe('Service Tests', () => {
           {
             issueDate: currentDate,
             expiryDate: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -128,10 +128,10 @@ describe('Service Tests', () => {
             expiryDate: currentDate.format(DATE_FORMAT),
             policyDocument: 'BBBBBB',
             coverageStatement: 'BBBBBB',
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
@@ -140,8 +140,8 @@ describe('Service Tests', () => {
           {
             issueDate: currentDate,
             expiryDate: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );

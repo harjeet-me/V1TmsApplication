@@ -29,10 +29,10 @@ export class InvoiceHistoryUpdateComponent implements OnInit {
     id: [],
     status: [],
     comment: [],
-    createdOn: [],
+    createdDate: [],
     createdBy: [],
-    updatedOn: [],
-    updatedBy: [],
+    lastModifiedDate: [],
+    lastModifiedBy: [],
     previous: [],
     next: [],
     invoice: []
@@ -49,8 +49,8 @@ export class InvoiceHistoryUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ invoiceHistory }) => {
       if (!invoiceHistory.id) {
         const today = moment().startOf('day');
-        invoiceHistory.createdOn = today;
-        invoiceHistory.updatedOn = today;
+        invoiceHistory.createdDate = today;
+        invoiceHistory.lastModifiedDate = today;
       }
 
       this.updateForm(invoiceHistory);
@@ -108,10 +108,10 @@ export class InvoiceHistoryUpdateComponent implements OnInit {
       id: invoiceHistory.id,
       status: invoiceHistory.status,
       comment: invoiceHistory.comment,
-      createdOn: invoiceHistory.createdOn ? invoiceHistory.createdOn.format(DATE_TIME_FORMAT) : null,
+      createdDate: invoiceHistory.createdDate ? invoiceHistory.createdDate.format(DATE_TIME_FORMAT) : null,
       createdBy: invoiceHistory.createdBy,
-      updatedOn: invoiceHistory.updatedOn ? invoiceHistory.updatedOn.format(DATE_TIME_FORMAT) : null,
-      updatedBy: invoiceHistory.updatedBy,
+      lastModifiedDate: invoiceHistory.lastModifiedDate ? invoiceHistory.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
+      lastModifiedBy: invoiceHistory.lastModifiedBy,
       previous: invoiceHistory.previous,
       next: invoiceHistory.next,
       invoice: invoiceHistory.invoice
@@ -138,10 +138,14 @@ export class InvoiceHistoryUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       status: this.editForm.get(['status'])!.value,
       comment: this.editForm.get(['comment'])!.value,
-      createdOn: this.editForm.get(['createdOn'])!.value ? moment(this.editForm.get(['createdOn'])!.value, DATE_TIME_FORMAT) : undefined,
+      createdDate: this.editForm.get(['createdDate'])!.value
+        ? moment(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
       createdBy: this.editForm.get(['createdBy'])!.value,
-      updatedOn: this.editForm.get(['updatedOn'])!.value ? moment(this.editForm.get(['updatedOn'])!.value, DATE_TIME_FORMAT) : undefined,
-      updatedBy: this.editForm.get(['updatedBy'])!.value,
+      lastModifiedDate: this.editForm.get(['lastModifiedDate'])!.value
+        ? moment(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      lastModifiedBy: this.editForm.get(['lastModifiedBy'])!.value,
       previous: this.editForm.get(['previous'])!.value,
       next: this.editForm.get(['next'])!.value,
       invoice: this.editForm.get(['invoice'])!.value

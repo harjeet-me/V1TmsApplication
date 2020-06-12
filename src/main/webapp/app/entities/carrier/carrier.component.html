@@ -73,10 +73,10 @@
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.preffredCurrency">Preffred Currency</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.payterms">Payterms</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.timeZone">Time Zone</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.createdOn">Created On</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.createdDate">Created Date</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.createdBy">Created By</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.updatedOn">Updated On</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.updatedBy">Updated By</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.lastModifiedDate">Last Modified Date</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.lastModifiedBy">Last Modified By</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.carrier.operInsurance">Oper Insurance</span></th>
                     <th scope="col"></th>
                 </tr>
@@ -124,10 +124,10 @@
                     <td jhiTranslate="{{ 'tmsV1ApplicationApp.CURRENCY.' + carrier.preffredCurrency }}">{{ carrier.preffredCurrency }}</td>
                     <td>{{ carrier.payterms }}</td>
                     <td>{{ carrier.timeZone | date:'medium' }}</td>
-                    <td>{{ carrier.createdOn | date:'medium' }}</td>
+                    <td>{{ carrier.createdDate | date:'medium' }}</td>
                     <td>{{ carrier.createdBy }}</td>
-                    <td>{{ carrier.updatedOn | date:'medium' }}</td>
-                    <td>{{ carrier.updatedBy }}</td>
+                    <td>{{ carrier.lastModifiedDate | date:'medium' }}</td>
+                    <td>{{ carrier.lastModifiedBy }}</td>
                     <td>
                         <div *ngIf="carrier.operInsurance">
                             <a [routerLink]="['/insurance', carrier.operInsurance?.id, 'view']" >{{ carrier.operInsurance?.id }}</a>

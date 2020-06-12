@@ -15,7 +15,7 @@
             "fieldType": "Double"
         },
         {
-            "fieldName": "createdOn",
+            "fieldName": "createdDate",
             "fieldType": "Instant"
         },
         {
@@ -23,11 +23,11 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "updatedOn",
+            "fieldName": "lastModifiedDate",
             "fieldType": "Instant"
         },
         {
-            "fieldName": "updatedBy",
+            "fieldName": "lastModifiedBy",
             "fieldType": "String"
         }
     ],
@@ -38,13 +38,6 @@
             "otherEntityRelationshipName": "transactionsRecord",
             "relationshipName": "customer",
             "otherEntityField": "company"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "accounts",
-            "otherEntityRelationshipName": "transactionsRecord",
-            "relationshipName": "account",
-            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20200312063600",

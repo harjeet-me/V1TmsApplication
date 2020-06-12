@@ -79,8 +79,8 @@ describe('Service Tests', () => {
             preferredContactTime: currentDate.format(DATE_TIME_FORMAT),
             customerSince: currentDate.format(DATE_FORMAT),
             timeZone: currentDate.format(DATE_TIME_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -99,8 +99,8 @@ describe('Service Tests', () => {
             preferredContactTime: currentDate.format(DATE_TIME_FORMAT),
             customerSince: currentDate.format(DATE_FORMAT),
             timeZone: currentDate.format(DATE_TIME_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -110,8 +110,8 @@ describe('Service Tests', () => {
             preferredContactTime: currentDate,
             customerSince: currentDate,
             timeZone: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -158,10 +158,10 @@ describe('Service Tests', () => {
             preffredCurrency: 'BBBBBB',
             payterms: 'BBBBBB',
             timeZone: currentDate.format(DATE_TIME_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
@@ -171,8 +171,8 @@ describe('Service Tests', () => {
             preferredContactTime: currentDate,
             customerSince: currentDate,
             timeZone: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -219,10 +219,10 @@ describe('Service Tests', () => {
             preffredCurrency: 'BBBBBB',
             payterms: 'BBBBBB',
             timeZone: currentDate.format(DATE_TIME_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
@@ -232,8 +232,8 @@ describe('Service Tests', () => {
             preferredContactTime: currentDate,
             customerSince: currentDate,
             timeZone: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );

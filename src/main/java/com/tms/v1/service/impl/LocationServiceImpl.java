@@ -61,34 +61,6 @@ public class LocationServiceImpl implements LocationService {
         return locationRepository.findAll();
     }
 
-
-    /**
-     *  Get all the locations where Trippick is {@code null}.
-     *  @return the list of entities.
-     */
-    @Transactional(readOnly = true) 
-    public List<Location> findAllWhereTrippickIsNull() {
-        log.debug("Request to get all locations where Trippick is null");
-        return StreamSupport
-            .stream(locationRepository.findAll().spliterator(), false)
-            .filter(location -> location.getTrippick() == null)
-            .collect(Collectors.toList());
-    }
-
-
-    /**
-     *  Get all the locations where Tripdrop is {@code null}.
-     *  @return the list of entities.
-     */
-    @Transactional(readOnly = true) 
-    public List<Location> findAllWhereTripdropIsNull() {
-        log.debug("Request to get all locations where Tripdrop is null");
-        return StreamSupport
-            .stream(locationRepository.findAll().spliterator(), false)
-            .filter(location -> location.getTripdrop() == null)
-            .collect(Collectors.toList());
-    }
-
     /**
      * Get one location by id.
      *

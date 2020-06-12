@@ -36,8 +36,8 @@
         <span jhiTranslate="tmsV1ApplicationApp.customer.home.notFound">No customers found</span>
     </div>
 
-    <!--  <div class="table-responsive" id="entities" *ngIf="customers?.length > 0">  -->
-        <table  class="table table-sm" aria-describedby="page-heading">
+    <div class="table-responsive" id="entities" *ngIf="customers?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
@@ -73,10 +73,10 @@
                     <th scope="col"  jhiSortBy="preffredCurrency"><span jhiTranslate="tmsV1ApplicationApp.customer.preffredCurrency">Preffred Currency</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="payterms"><span jhiTranslate="tmsV1ApplicationApp.customer.payterms">Payterms</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="timeZone"><span jhiTranslate="tmsV1ApplicationApp.customer.timeZone">Time Zone</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="createdOn"><span jhiTranslate="tmsV1ApplicationApp.customer.createdOn">Created On</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdDate"><span jhiTranslate="tmsV1ApplicationApp.customer.createdDate">Created Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="createdBy"><span jhiTranslate="tmsV1ApplicationApp.customer.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="updatedOn"><span jhiTranslate="tmsV1ApplicationApp.customer.updatedOn">Updated On</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="updatedBy"><span jhiTranslate="tmsV1ApplicationApp.customer.updatedBy">Updated By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lastModifiedDate"><span jhiTranslate="tmsV1ApplicationApp.customer.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lastModifiedBy"><span jhiTranslate="tmsV1ApplicationApp.customer.lastModifiedBy">Last Modified By</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -123,10 +123,10 @@
                     <td jhiTranslate="{{ 'tmsV1ApplicationApp.CURRENCY.' + customer.preffredCurrency }}">{{ customer.preffredCurrency }}</td>
                     <td>{{ customer.payterms }}</td>
                     <td>{{ customer.timeZone | date:'medium' }}</td>
-                    <td>{{ customer.createdOn | date:'medium' }}</td>
+                    <td>{{ customer.createdDate | date:'medium' }}</td>
                     <td>{{ customer.createdBy }}</td>
-                    <td>{{ customer.updatedOn | date:'medium' }}</td>
-                    <td>{{ customer.updatedBy }}</td>
+                    <td>{{ customer.lastModifiedDate | date:'medium' }}</td>
+                    <td>{{ customer.lastModifiedBy }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
@@ -153,7 +153,7 @@
                 </tr>
             </tbody>
         </table>
-    <!--  </div> -->
+    </div>
 
     <div *ngIf="customers?.length > 0">
         <div class="row justify-content-center">

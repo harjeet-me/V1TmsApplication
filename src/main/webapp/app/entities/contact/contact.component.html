@@ -48,10 +48,10 @@
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.phoneNumber">Phone Number</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.remarks">Remarks</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.preferredTime">Preferred Time</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.createdOn">Created On</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.createdDate">Created Date</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.createdBy">Created By</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.updatedOn">Updated On</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.updatedBy">Updated By</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.lastModifiedDate">Last Modified Date</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.lastModifiedBy">Last Modified By</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.contact.customer">Customer</span></th>
                     <th scope="col"></th>
                 </tr>
@@ -66,10 +66,10 @@
                     <td>{{ contact.phoneNumber }}</td>
                     <td>{{ contact.remarks }}</td>
                     <td>{{ contact.preferredTime }}</td>
-                    <td>{{ contact.createdOn | date:'medium' }}</td>
+                    <td>{{ contact.createdDate | date:'medium' }}</td>
                     <td>{{ contact.createdBy }}</td>
-                    <td>{{ contact.updatedOn | date:'medium' }}</td>
-                    <td>{{ contact.updatedBy }}</td>
+                    <td>{{ contact.lastModifiedDate | date:'medium' }}</td>
+                    <td>{{ contact.lastModifiedBy }}</td>
                     <td>
                         <div *ngIf="contact.customer">
                             <a [routerLink]="['/customer', contact.customer?.id, 'view']" >{{ contact.customer?.company }}</a>

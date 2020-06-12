@@ -1,17 +1,28 @@
 package com.tms.v1.domain;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 import java.time.Instant;
 import java.time.LocalDate;
 
-import com.tms.v1.domain.enumeration.InvoiceStatus;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.tms.v1.domain.enumeration.PayMode;
 
 /**
  * A Payment.
@@ -20,7 +31,7 @@ import com.tms.v1.domain.enumeration.InvoiceStatus;
 @Table(name = "payment")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "payment")
-public class Payment implements Serializable {
+public class Payment extends AbstractAuditingEntity  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,30 +42,38 @@ public class Payment implements Serializable {
     @Column(name = "invoice_no")
     private String invoiceNo;
 
-    @Column(name = "payment_amt")
-    private Double paymentAmt;
-
-    @Column(name = "invoice_paid_date")
-    private LocalDate invoicePaidDate;
+    @Column(name = "pay_date")
+    private LocalDate payDate;
 
     @Column(name = "pay_ref_no")
     private String payRefNo;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    private InvoiceStatus status;
+    @Column(name = "mode")
+    private PayMode mode;
 
-    @Column(name = "created_on")
-    private Instant createdOn;
+    @Column(name = "ammount")
+    private Double ammount;
 
+    @Column(name = "unused_ammount")
+    private Double unusedAmmount;
+
+    @CreatedDate
+    @Column(name = "created_date")
+    private Instant createdDate;
+    @CreatedBy
     @Column(name = "created_by")
     private String createdBy;
+    @LastModifiedDate
+    @Column(name = "last_modified_date")
+    private Instant lastModifiedDate;
+    @LastModifiedBy
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
 
-    @Column(name = "updated_on")
-    private Instant updatedOn;
-
-    @Column(name = "updated_by")
-    private String updatedBy;
+    @ManyToOne
+    @JsonIgnoreProperties("payments")
+    private Customer customer;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -78,30 +97,17 @@ public class Payment implements Serializable {
         this.invoiceNo = invoiceNo;
     }
 
-    public Double getPaymentAmt() {
-        return paymentAmt;
+    public LocalDate getPayDate() {
+        return payDate;
     }
 
-    public Payment paymentAmt(Double paymentAmt) {
-        this.paymentAmt = paymentAmt;
+    public Payment payDate(LocalDate payDate) {
+        this.payDate = payDate;
         return this;
     }
 
-    public void setPaymentAmt(Double paymentAmt) {
-        this.paymentAmt = paymentAmt;
-    }
-
-    public LocalDate getInvoicePaidDate() {
-        return invoicePaidDate;
-    }
-
-    public Payment invoicePaidDate(LocalDate invoicePaidDate) {
-        this.invoicePaidDate = invoicePaidDate;
-        return this;
-    }
-
-    public void setInvoicePaidDate(LocalDate invoicePaidDate) {
-        this.invoicePaidDate = invoicePaidDate;
+    public void setPayDate(LocalDate payDate) {
+        this.payDate = payDate;
     }
 
     public String getPayRefNo() {
@@ -117,30 +123,56 @@ public class Payment implements Serializable {
         this.payRefNo = payRefNo;
     }
 
-    public InvoiceStatus getStatus() {
-        return status;
+    public PayMode getMode() {
+        return mode;
     }
 
-    public Payment status(InvoiceStatus status) {
-        this.status = status;
+    public Payment mode(PayMode mode) {
+        this.mode = mode;
         return this;
     }
 
-    public void setStatus(InvoiceStatus status) {
-        this.status = status;
+    public void setMode(PayMode mode) {
+        this.mode = mode;
     }
 
-    public Instant getCreatedOn() {
-        return createdOn;
+    public Double getAmmount() {
+        return ammount;
     }
 
-    public Payment createdOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public Payment ammount(Double ammount) {
+        this.ammount = ammount;
         return this;
     }
 
-    public void setCreatedOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public void setAmmount(Double ammount) {
+        this.ammount = ammount;
+    }
+
+    public Double getUnusedAmmount() {
+        return unusedAmmount;
+    }
+
+    public Payment unusedAmmount(Double unusedAmmount) {
+        this.unusedAmmount = unusedAmmount;
+        return this;
+    }
+
+    public void setUnusedAmmount(Double unusedAmmount) {
+        this.unusedAmmount = unusedAmmount;
+    }
+
+    public Instant getCreatedDate() {
+        return createdDate;
+    }
+
+    public Payment createdDate(Instant createdDate) {
+        this.createdDate = createdDate;
+        return this;
+    }
+
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getCreatedBy() {
@@ -156,30 +188,43 @@ public class Payment implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public Instant getUpdatedOn() {
-        return updatedOn;
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
     }
 
-    public Payment updatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public Payment lastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
         return this;
     }
 
-    public void setUpdatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
-    public String getUpdatedBy() {
-        return updatedBy;
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
     }
 
-    public Payment updatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public Payment lastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
         return this;
     }
 
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public Payment customer(Customer customer) {
+        this.customer = customer;
+        return this;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -204,14 +249,15 @@ public class Payment implements Serializable {
         return "Payment{" +
             "id=" + getId() +
             ", invoiceNo='" + getInvoiceNo() + "'" +
-            ", paymentAmt=" + getPaymentAmt() +
-            ", invoicePaidDate='" + getInvoicePaidDate() + "'" +
+            ", payDate='" + getPayDate() + "'" +
             ", payRefNo='" + getPayRefNo() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", createdOn='" + getCreatedOn() + "'" +
+            ", mode='" + getMode() + "'" +
+            ", ammount=" + getAmmount() +
+            ", unusedAmmount=" + getUnusedAmmount() +
+            ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
-            ", updatedOn='" + getUpdatedOn() + "'" +
-            ", updatedBy='" + getUpdatedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

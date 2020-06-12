@@ -50,8 +50,8 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             sentDateTime: currentDate.format(DATE_TIME_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -68,8 +68,8 @@ describe('Service Tests', () => {
           {
             id: 0,
             sentDateTime: currentDate.format(DATE_TIME_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -77,8 +77,8 @@ describe('Service Tests', () => {
         const expected = Object.assign(
           {
             sentDateTime: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -104,10 +104,10 @@ describe('Service Tests', () => {
             attachmentName: 'BBBBBB',
             status: 'BBBBBB',
             sentDateTime: currentDate.format(DATE_TIME_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
@@ -115,8 +115,8 @@ describe('Service Tests', () => {
         const expected = Object.assign(
           {
             sentDateTime: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -142,10 +142,10 @@ describe('Service Tests', () => {
             attachmentName: 'BBBBBB',
             status: 'BBBBBB',
             sentDateTime: currentDate.format(DATE_TIME_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
@@ -153,8 +153,8 @@ describe('Service Tests', () => {
         const expected = Object.assign(
           {
             sentDateTime: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );

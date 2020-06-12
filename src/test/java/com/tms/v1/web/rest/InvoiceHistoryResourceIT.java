@@ -48,17 +48,17 @@ public class InvoiceHistoryResourceIT {
     private static final String DEFAULT_COMMENT = "AAAAAAAAAA";
     private static final String UPDATED_COMMENT = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_CREATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_UPDATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_UPDATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_UPDATED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_UPDATED_BY = "BBBBBBBBBB";
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     @Autowired
     private InvoiceHistoryRepository invoiceHistoryRepository;
@@ -92,10 +92,10 @@ public class InvoiceHistoryResourceIT {
         InvoiceHistory invoiceHistory = new InvoiceHistory()
             .status(DEFAULT_STATUS)
             .comment(DEFAULT_COMMENT)
-            .createdOn(DEFAULT_CREATED_ON)
+            .createdDate(DEFAULT_CREATED_DATE)
             .createdBy(DEFAULT_CREATED_BY)
-            .updatedOn(DEFAULT_UPDATED_ON)
-            .updatedBy(DEFAULT_UPDATED_BY);
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return invoiceHistory;
     }
     /**
@@ -108,10 +108,10 @@ public class InvoiceHistoryResourceIT {
         InvoiceHistory invoiceHistory = new InvoiceHistory()
             .status(UPDATED_STATUS)
             .comment(UPDATED_COMMENT)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return invoiceHistory;
     }
 
@@ -137,10 +137,10 @@ public class InvoiceHistoryResourceIT {
         InvoiceHistory testInvoiceHistory = invoiceHistoryList.get(invoiceHistoryList.size() - 1);
         assertThat(testInvoiceHistory.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testInvoiceHistory.getComment()).isEqualTo(DEFAULT_COMMENT);
-        assertThat(testInvoiceHistory.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
+        assertThat(testInvoiceHistory.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testInvoiceHistory.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testInvoiceHistory.getUpdatedOn()).isEqualTo(DEFAULT_UPDATED_ON);
-        assertThat(testInvoiceHistory.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
+        assertThat(testInvoiceHistory.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testInvoiceHistory.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
 
         // Validate the InvoiceHistory in Elasticsearch
         verify(mockInvoiceHistorySearchRepository, times(1)).save(testInvoiceHistory);
@@ -182,10 +182,10 @@ public class InvoiceHistoryResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(invoiceHistory.getId().intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT)))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
     
     @Test
@@ -201,10 +201,10 @@ public class InvoiceHistoryResourceIT {
             .andExpect(jsonPath("$.id").value(invoiceHistory.getId().intValue()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.comment").value(DEFAULT_COMMENT))
-            .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
-            .andExpect(jsonPath("$.updatedOn").value(DEFAULT_UPDATED_ON.toString()))
-            .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY));
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -232,10 +232,10 @@ public class InvoiceHistoryResourceIT {
         updatedInvoiceHistory
             .status(UPDATED_STATUS)
             .comment(UPDATED_COMMENT)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restInvoiceHistoryMockMvc.perform(put("/api/invoice-histories").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -248,10 +248,10 @@ public class InvoiceHistoryResourceIT {
         InvoiceHistory testInvoiceHistory = invoiceHistoryList.get(invoiceHistoryList.size() - 1);
         assertThat(testInvoiceHistory.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testInvoiceHistory.getComment()).isEqualTo(UPDATED_COMMENT);
-        assertThat(testInvoiceHistory.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
+        assertThat(testInvoiceHistory.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testInvoiceHistory.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testInvoiceHistory.getUpdatedOn()).isEqualTo(UPDATED_UPDATED_ON);
-        assertThat(testInvoiceHistory.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
+        assertThat(testInvoiceHistory.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testInvoiceHistory.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
 
         // Validate the InvoiceHistory in Elasticsearch
         verify(mockInvoiceHistorySearchRepository, times(1)).save(testInvoiceHistory);
@@ -313,9 +313,9 @@ public class InvoiceHistoryResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(invoiceHistory.getId().intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT)))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 }

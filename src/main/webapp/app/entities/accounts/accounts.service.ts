@@ -58,16 +58,16 @@ export class AccountsService {
 
   protected convertDateFromClient(accounts: IAccounts): IAccounts {
     const copy: IAccounts = Object.assign({}, accounts, {
-      createdOn: accounts.createdOn && accounts.createdOn.isValid() ? accounts.createdOn.toJSON() : undefined,
-      updatedOn: accounts.updatedOn && accounts.updatedOn.isValid() ? accounts.updatedOn.toJSON() : undefined
+      createdDate: accounts.createdDate && accounts.createdDate.isValid() ? accounts.createdDate.toJSON() : undefined,
+      lastModifiedDate: accounts.lastModifiedDate && accounts.lastModifiedDate.isValid() ? accounts.lastModifiedDate.toJSON() : undefined
     });
     return copy;
   }
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -75,8 +75,8 @@ export class AccountsService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((accounts: IAccounts) => {
-        accounts.createdOn = accounts.createdOn ? moment(accounts.createdOn) : undefined;
-        accounts.updatedOn = accounts.updatedOn ? moment(accounts.updatedOn) : undefined;
+        accounts.createdDate = accounts.createdDate ? moment(accounts.createdDate) : undefined;
+        accounts.lastModifiedDate = accounts.lastModifiedDate ? moment(accounts.lastModifiedDate) : undefined;
       });
     }
     return res;

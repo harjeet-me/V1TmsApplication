@@ -31,7 +31,22 @@
                         {{ invoiceReport.invoiceReportContentType }}, {{ byteSize(invoiceReport.invoiceReport) }}
                     </div>
                 </dd>
-                
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceReport.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{ invoiceReport.createdDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceReport.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ invoiceReport.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceReport.lastModifiedDate">Last Modified Date</span></dt>
+                <dd>
+                    <span>{{ invoiceReport.lastModifiedDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceReport.lastModifiedBy">Last Modified By</span></dt>
+                <dd>
+                    <span>{{ invoiceReport.lastModifiedBy }}</span>
+                </dd>
                 <dt><span jhiTranslate="tmsV1ApplicationApp.invoiceReport.invoice">Invoice</span></dt>
                 <dd>
                     <span *ngFor="let invoice of invoiceReport.invoices; let last = last">
@@ -39,32 +54,7 @@
                     </span>
                 </dd>
             </dl>
- <div class="alert alert-warning" id="no-result" *ngIf="invoiceReport.invoices?.length === 0">
-        <span jhiTranslate="tmsV1ApplicationApp.invoice.home.notFound">No invoices found</span>
-    </div>
 
-    <div class="table-responsive" id="entities" *ngIf="invoiceReport.invoices?.length > 0">
-        <table class="table table-striped" aria-describedby="page-heading">
-     
-            <tbody>
-                <tr *ngFor="let invoice of invoiceReport.invoices">
-                    <td><a [routerLink]="['/invoice', invoice.id, 'view']">{{ invoice.id }}</a></td>
-                    <td>{{ invoice.orderNo }}</td>
-                    <td>{{ invoice.invoiceNo }}</td>
-                   
-                    <td>{{ invoice.invoiceTotal }}</td>
-                    <td>{{ invoice.invoiceDate | date:'mediumDate' }}</td>
-                    <td>{{ invoice.invoicePaidDate | date:'mediumDate' }}</td>
-                  
-                    <td>{{ invoice.payRefNo }}</td>
-                    <td>{{ invoice.invoiceDueDate | date:'mediumDate' }}</td>
-                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiceStatus.' + invoice.status }}">{{ invoice.status }}</td>
-                   
-                   
-                </tr>
-            </tbody>
-        </table>
-    </div>
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">

@@ -20,10 +20,10 @@
       "number": "Number",
       "description": "Description",
       "size": "Size",
-      "createdOn": "Created On",
+      "createdDate": "Created Date",
       "createdBy": "Created By",
-      "updatedOn": "Updated On",
-      "updatedBy": "Updated By",
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By",
       "trip": "Trip"
     }
   }

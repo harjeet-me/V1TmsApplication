@@ -61,8 +61,8 @@ export class InsuranceService {
     const copy: IInsurance = Object.assign({}, insurance, {
       issueDate: insurance.issueDate && insurance.issueDate.isValid() ? insurance.issueDate.format(DATE_FORMAT) : undefined,
       expiryDate: insurance.expiryDate && insurance.expiryDate.isValid() ? insurance.expiryDate.format(DATE_FORMAT) : undefined,
-      createdOn: insurance.createdOn && insurance.createdOn.isValid() ? insurance.createdOn.toJSON() : undefined,
-      updatedOn: insurance.updatedOn && insurance.updatedOn.isValid() ? insurance.updatedOn.toJSON() : undefined
+      createdDate: insurance.createdDate && insurance.createdDate.isValid() ? insurance.createdDate.toJSON() : undefined,
+      lastModifiedDate: insurance.lastModifiedDate && insurance.lastModifiedDate.isValid() ? insurance.lastModifiedDate.toJSON() : undefined
     });
     return copy;
   }
@@ -71,8 +71,8 @@ export class InsuranceService {
     if (res.body) {
       res.body.issueDate = res.body.issueDate ? moment(res.body.issueDate) : undefined;
       res.body.expiryDate = res.body.expiryDate ? moment(res.body.expiryDate) : undefined;
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -82,8 +82,8 @@ export class InsuranceService {
       res.body.forEach((insurance: IInsurance) => {
         insurance.issueDate = insurance.issueDate ? moment(insurance.issueDate) : undefined;
         insurance.expiryDate = insurance.expiryDate ? moment(insurance.expiryDate) : undefined;
-        insurance.createdOn = insurance.createdOn ? moment(insurance.createdOn) : undefined;
-        insurance.updatedOn = insurance.updatedOn ? moment(insurance.updatedOn) : undefined;
+        insurance.createdDate = insurance.createdDate ? moment(insurance.createdDate) : undefined;
+        insurance.lastModifiedDate = insurance.lastModifiedDate ? moment(insurance.lastModifiedDate) : undefined;
       });
     }
     return res;

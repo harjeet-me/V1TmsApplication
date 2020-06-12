@@ -28,10 +28,10 @@ export class InvoiceItemUpdateComponent implements OnInit {
     price: [],
     discount: [],
     total: [],
-    createdOn: [],
+    createdDate: [],
     createdBy: [],
-    updatedOn: [],
-    updatedBy: [],
+    lastModifiedDate: [],
+    lastModifiedBy: [],
     invoice: []
   });
 
@@ -46,8 +46,8 @@ export class InvoiceItemUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ invoiceItem }) => {
       if (!invoiceItem.id) {
         const today = moment().startOf('day');
-        invoiceItem.createdOn = today;
-        invoiceItem.updatedOn = today;
+        invoiceItem.createdDate = today;
+        invoiceItem.lastModifiedDate = today;
       }
 
       this.updateForm(invoiceItem);
@@ -65,10 +65,10 @@ export class InvoiceItemUpdateComponent implements OnInit {
       price: invoiceItem.price,
       discount: invoiceItem.discount,
       total: invoiceItem.total,
-      createdOn: invoiceItem.createdOn ? invoiceItem.createdOn.format(DATE_TIME_FORMAT) : null,
+      createdDate: invoiceItem.createdDate ? invoiceItem.createdDate.format(DATE_TIME_FORMAT) : null,
       createdBy: invoiceItem.createdBy,
-      updatedOn: invoiceItem.updatedOn ? invoiceItem.updatedOn.format(DATE_TIME_FORMAT) : null,
-      updatedBy: invoiceItem.updatedBy,
+      lastModifiedDate: invoiceItem.lastModifiedDate ? invoiceItem.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
+      lastModifiedBy: invoiceItem.lastModifiedBy,
       invoice: invoiceItem.invoice
     });
   }
@@ -97,10 +97,14 @@ export class InvoiceItemUpdateComponent implements OnInit {
       price: this.editForm.get(['price'])!.value,
       discount: this.editForm.get(['discount'])!.value,
       total: this.editForm.get(['total'])!.value,
-      createdOn: this.editForm.get(['createdOn'])!.value ? moment(this.editForm.get(['createdOn'])!.value, DATE_TIME_FORMAT) : undefined,
+      createdDate: this.editForm.get(['createdDate'])!.value
+        ? moment(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
       createdBy: this.editForm.get(['createdBy'])!.value,
-      updatedOn: this.editForm.get(['updatedOn'])!.value ? moment(this.editForm.get(['updatedOn'])!.value, DATE_TIME_FORMAT) : undefined,
-      updatedBy: this.editForm.get(['updatedBy'])!.value,
+      lastModifiedDate: this.editForm.get(['lastModifiedDate'])!.value
+        ? moment(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      lastModifiedBy: this.editForm.get(['lastModifiedBy'])!.value,
       invoice: this.editForm.get(['invoice'])!.value
     };
   }

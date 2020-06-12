@@ -44,12 +44,11 @@
                     <th scope="col"  jhiSortBy="txType"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txType">Tx Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="description"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.description">Description</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="txAmmount"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txAmmount">Tx Ammount</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="createdOn"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.createdOn">Created On</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdDate"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.createdDate">Created Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="createdBy"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="updatedOn"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.updatedOn">Updated On</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="updatedBy"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.updatedBy">Updated By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lastModifiedDate"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lastModifiedBy"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.lastModifiedBy">Last Modified By</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="customer.company"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.customer">Customer</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="account.id"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.account">Account</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -59,18 +58,13 @@
                     <td jhiTranslate="{{ 'tmsV1ApplicationApp.TransactionType.' + transactionsRecord.txType }}">{{ transactionsRecord.txType }}</td>
                     <td>{{ transactionsRecord.description }}</td>
                     <td>{{ transactionsRecord.txAmmount }}</td>
-                    <td>{{ transactionsRecord.createdOn | date:'medium' }}</td>
+                    <td>{{ transactionsRecord.createdDate | date:'medium' }}</td>
                     <td>{{ transactionsRecord.createdBy }}</td>
-                    <td>{{ transactionsRecord.updatedOn | date:'medium' }}</td>
-                    <td>{{ transactionsRecord.updatedBy }}</td>
+                    <td>{{ transactionsRecord.lastModifiedDate | date:'medium' }}</td>
+                    <td>{{ transactionsRecord.lastModifiedBy }}</td>
                     <td>
                         <div *ngIf="transactionsRecord.customer">
                             <a [routerLink]="['/customer', transactionsRecord.customer?.id, 'view']" >{{ transactionsRecord.customer?.company }}</a>
-                        </div>
-                    </td>
-                    <td>
-                        <div *ngIf="transactionsRecord.account">
-                            <a [routerLink]="['/accounts', transactionsRecord.account?.id, 'view']" >{{ transactionsRecord.account?.id }}</a>
                         </div>
                     </td>
                     <td class="text-right">

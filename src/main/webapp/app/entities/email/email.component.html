@@ -52,10 +52,11 @@
                     <th scope="col"  jhiSortBy="attachmentName"><span jhiTranslate="tmsV1ApplicationApp.email.attachmentName">Attachment Name</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="status"><span jhiTranslate="tmsV1ApplicationApp.email.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="sentDateTime"><span jhiTranslate="tmsV1ApplicationApp.email.sentDateTime">Sent Date Time</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="createdOn"><span jhiTranslate="tmsV1ApplicationApp.email.createdOn">Created On</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdDate"><span jhiTranslate="tmsV1ApplicationApp.email.createdDate">Created Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="createdBy"><span jhiTranslate="tmsV1ApplicationApp.email.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="updatedOn"><span jhiTranslate="tmsV1ApplicationApp.email.updatedOn">Updated On</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="updatedBy"><span jhiTranslate="tmsV1ApplicationApp.email.updatedBy">Updated By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lastModifiedDate"><span jhiTranslate="tmsV1ApplicationApp.email.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lastModifiedBy"><span jhiTranslate="tmsV1ApplicationApp.email.lastModifiedBy">Last Modified By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="customer.company"><span jhiTranslate="tmsV1ApplicationApp.email.customer">Customer</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -76,10 +77,15 @@
                     <td>{{ email.attachmentName }}</td>
                     <td>{{ email.status }}</td>
                     <td>{{ email.sentDateTime | date:'medium' }}</td>
-                    <td>{{ email.createdOn | date:'medium' }}</td>
+                    <td>{{ email.createdDate | date:'medium' }}</td>
                     <td>{{ email.createdBy }}</td>
-                    <td>{{ email.updatedOn | date:'medium' }}</td>
-                    <td>{{ email.updatedBy }}</td>
+                    <td>{{ email.lastModifiedDate | date:'medium' }}</td>
+                    <td>{{ email.lastModifiedBy }}</td>
+                    <td>
+                        <div *ngIf="email.customer">
+                            <a [routerLink]="['/customer', email.customer?.id, 'view']" >{{ email.customer?.company }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

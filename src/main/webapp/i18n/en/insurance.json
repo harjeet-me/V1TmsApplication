@@ -22,10 +22,10 @@
       "expiryDate": "Expiry Date",
       "policyDocument": "Policy Document",
       "coverageStatement": "Coverage Statement",
-      "createdOn": "Created On",
+      "createdDate": "Created Date",
       "createdBy": "Created By",
-      "updatedOn": "Updated On",
-      "updatedBy": "Updated By",
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By",
       "carrier": "Carrier"
     }
   }

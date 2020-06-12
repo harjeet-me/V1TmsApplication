@@ -21,12 +21,11 @@
       "over30": "Over 30",
       "over60": "Over 60",
       "over90": "Over 90",
-      "createdOn": "Created On",
+      "createdDate": "Created Date",
       "createdBy": "Created By",
-      "updatedOn": "Updated On",
-      "updatedBy": "Updated By",
-      "customer": "Customer",
-      "transactionsRecord": "Transactions Record"
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By",
+      "customer": "Customer"
     }
   }
 }

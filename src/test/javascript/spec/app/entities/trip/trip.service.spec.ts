@@ -71,8 +71,8 @@ describe('Service Tests', () => {
             pickup: currentDate.format(DATE_FORMAT),
             drop: currentDate.format(DATE_FORMAT),
             chasisInTime: currentDate.format(DATE_TIME_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -91,8 +91,8 @@ describe('Service Tests', () => {
             pickup: currentDate.format(DATE_FORMAT),
             drop: currentDate.format(DATE_FORMAT),
             chasisInTime: currentDate.format(DATE_TIME_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -102,8 +102,8 @@ describe('Service Tests', () => {
             pickup: currentDate,
             drop: currentDate,
             chasisInTime: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -142,10 +142,10 @@ describe('Service Tests', () => {
             numbersOfContainer: 1,
             comments: 'BBBBBB',
             autoGenerateInvoice: true,
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
@@ -155,8 +155,8 @@ describe('Service Tests', () => {
             pickup: currentDate,
             drop: currentDate,
             chasisInTime: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -195,10 +195,10 @@ describe('Service Tests', () => {
             numbersOfContainer: 1,
             comments: 'BBBBBB',
             autoGenerateInvoice: true,
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
@@ -208,8 +208,8 @@ describe('Service Tests', () => {
             pickup: currentDate,
             drop: currentDate,
             chasisInTime: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );

@@ -79,17 +79,17 @@ public class EmailResourceIT {
     private static final Instant DEFAULT_SENT_DATE_TIME = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_SENT_DATE_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Instant DEFAULT_CREATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_UPDATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_UPDATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_UPDATED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_UPDATED_BY = "BBBBBBBBBB";
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     @Autowired
     private EmailRepository emailRepository;
@@ -133,10 +133,10 @@ public class EmailResourceIT {
             .attachmentName(DEFAULT_ATTACHMENT_NAME)
             .status(DEFAULT_STATUS)
             .sentDateTime(DEFAULT_SENT_DATE_TIME)
-            .createdOn(DEFAULT_CREATED_ON)
+            .createdDate(DEFAULT_CREATED_DATE)
             .createdBy(DEFAULT_CREATED_BY)
-            .updatedOn(DEFAULT_UPDATED_ON)
-            .updatedBy(DEFAULT_UPDATED_BY);
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return email;
     }
     /**
@@ -159,10 +159,10 @@ public class EmailResourceIT {
             .attachmentName(UPDATED_ATTACHMENT_NAME)
             .status(UPDATED_STATUS)
             .sentDateTime(UPDATED_SENT_DATE_TIME)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return email;
     }
 
@@ -198,10 +198,10 @@ public class EmailResourceIT {
         assertThat(testEmail.getAttachmentName()).isEqualTo(DEFAULT_ATTACHMENT_NAME);
         assertThat(testEmail.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testEmail.getSentDateTime()).isEqualTo(DEFAULT_SENT_DATE_TIME);
-        assertThat(testEmail.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
+        assertThat(testEmail.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testEmail.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testEmail.getUpdatedOn()).isEqualTo(DEFAULT_UPDATED_ON);
-        assertThat(testEmail.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
+        assertThat(testEmail.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testEmail.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
 
         // Validate the Email in Elasticsearch
         verify(mockEmailSearchRepository, times(1)).save(testEmail);
@@ -253,10 +253,10 @@ public class EmailResourceIT {
             .andExpect(jsonPath("$.[*].attachmentName").value(hasItem(DEFAULT_ATTACHMENT_NAME)))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].sentDateTime").value(hasItem(DEFAULT_SENT_DATE_TIME.toString())))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
     
     @Test
@@ -282,10 +282,10 @@ public class EmailResourceIT {
             .andExpect(jsonPath("$.attachmentName").value(DEFAULT_ATTACHMENT_NAME))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
             .andExpect(jsonPath("$.sentDateTime").value(DEFAULT_SENT_DATE_TIME.toString()))
-            .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
-            .andExpect(jsonPath("$.updatedOn").value(DEFAULT_UPDATED_ON.toString()))
-            .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY));
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -323,10 +323,10 @@ public class EmailResourceIT {
             .attachmentName(UPDATED_ATTACHMENT_NAME)
             .status(UPDATED_STATUS)
             .sentDateTime(UPDATED_SENT_DATE_TIME)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restEmailMockMvc.perform(put("/api/emails").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -349,10 +349,10 @@ public class EmailResourceIT {
         assertThat(testEmail.getAttachmentName()).isEqualTo(UPDATED_ATTACHMENT_NAME);
         assertThat(testEmail.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testEmail.getSentDateTime()).isEqualTo(UPDATED_SENT_DATE_TIME);
-        assertThat(testEmail.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
+        assertThat(testEmail.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testEmail.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testEmail.getUpdatedOn()).isEqualTo(UPDATED_UPDATED_ON);
-        assertThat(testEmail.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
+        assertThat(testEmail.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testEmail.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
 
         // Validate the Email in Elasticsearch
         verify(mockEmailSearchRepository, times(1)).save(testEmail);
@@ -424,9 +424,9 @@ public class EmailResourceIT {
             .andExpect(jsonPath("$.[*].attachmentName").value(hasItem(DEFAULT_ATTACHMENT_NAME)))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].sentDateTime").value(hasItem(DEFAULT_SENT_DATE_TIME.toString())))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 }

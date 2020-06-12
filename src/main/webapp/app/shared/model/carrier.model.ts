@@ -43,10 +43,10 @@ export interface ICarrier {
   preffredCurrency?: CURRENCY;
   payterms?: string;
   timeZone?: Moment;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
   operInsurance?: IInsurance;
   loadOrders?: ITrip[];
 }
@@ -88,10 +88,10 @@ export class Carrier implements ICarrier {
     public preffredCurrency?: CURRENCY,
     public payterms?: string,
     public timeZone?: Moment,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string,
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
     public operInsurance?: IInsurance,
     public loadOrders?: ITrip[]
   ) {}

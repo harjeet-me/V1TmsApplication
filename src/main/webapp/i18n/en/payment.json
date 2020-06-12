@@ -18,14 +18,16 @@
         "title": "Payment"
       },
       "invoiceNo": "Invoice No",
-      "paymentAmt": "Payment Amt",
-      "invoicePaidDate": "Invoice Paid Date",
+      "payDate": "Pay Date",
       "payRefNo": "Pay Ref No",
-      "status": "Status",
-      "createdOn": "Created On",
+      "mode": "Mode",
+      "ammount": "Ammount",
+      "unusedAmmount": "Unused Ammount",
+      "createdDate": "Created Date",
       "createdBy": "Created By",
-      "updatedOn": "Updated On",
-      "updatedBy": "Updated By"
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By",
+      "customer": "Customer"
     }
   }
 }

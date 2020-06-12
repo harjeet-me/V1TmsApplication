@@ -6,10 +6,10 @@ export interface IContainer {
   number?: string;
   description?: string;
   size?: number;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
   trip?: ITrip;
 }
 
@@ -19,10 +19,10 @@ export class Container implements IContainer {
     public number?: string,
     public description?: string,
     public size?: number,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string,
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
     public trip?: ITrip
   ) {}
 }

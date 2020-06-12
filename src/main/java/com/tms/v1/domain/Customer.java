@@ -1,29 +1,40 @@
 package com.tms.v1.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.tms.v1.domain.enumeration.Designation;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import com.tms.v1.domain.enumeration.PreffredContactType;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
-import com.tms.v1.domain.enumeration.CountryEnum;
-
-import com.tms.v1.domain.enumeration.ToggleStatus;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tms.v1.domain.enumeration.CURRENCY;
+import com.tms.v1.domain.enumeration.CountryEnum;
+import com.tms.v1.domain.enumeration.Designation;
+import com.tms.v1.domain.enumeration.PreffredContactType;
+import com.tms.v1.domain.enumeration.ToggleStatus;
 
 /**
  * A Customer.
@@ -32,7 +43,7 @@ import com.tms.v1.domain.enumeration.CURRENCY;
 @Table(name = "customer")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "customer")
-public class Customer implements Serializable {
+public class Customer extends AbstractAuditingEntity  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -149,17 +160,18 @@ public class Customer implements Serializable {
     @Column(name = "time_zone")
     private ZonedDateTime timeZone;
 
-    @Column(name = "created_on")
-    private Instant createdOn;
-
+    @CreatedDate
+    @Column(name = "created_date")
+    private Instant createdDate;
+    @CreatedBy
     @Column(name = "created_by")
     private String createdBy;
-
-    @Column(name = "updated_on")
-    private Instant updatedOn;
-
-    @Column(name = "updated_by")
-    private String updatedBy;
+    @LastModifiedDate
+    @Column(name = "last_modified_date")
+    private Instant lastModifiedDate;
+    @LastModifiedBy
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
 
     @OneToMany(mappedBy = "customer")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -168,6 +180,14 @@ public class Customer implements Serializable {
     @OneToMany(mappedBy = "customer")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Invoice> invoices = new HashSet<>();
+
+    @OneToMany(mappedBy = "customer")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Payment> payments = new HashSet<>();
+
+    @OneToMany(mappedBy = "customer")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Email> emails = new HashSet<>();
 
     @OneToMany(mappedBy = "customer")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -639,17 +659,17 @@ public class Customer implements Serializable {
         this.timeZone = timeZone;
     }
 
-    public Instant getCreatedOn() {
-        return createdOn;
+    public Instant getCreatedDate() {
+        return createdDate;
     }
 
-    public Customer createdOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public Customer createdDate(Instant createdDate) {
+        this.createdDate = createdDate;
         return this;
     }
 
-    public void setCreatedOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getCreatedBy() {
@@ -665,30 +685,30 @@ public class Customer implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public Instant getUpdatedOn() {
-        return updatedOn;
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
     }
 
-    public Customer updatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public Customer lastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
         return this;
     }
 
-    public void setUpdatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
-    public String getUpdatedBy() {
-        return updatedBy;
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
     }
 
-    public Customer updatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public Customer lastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
         return this;
     }
 
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     public Set<Trip> getLoadOrders() {
@@ -739,6 +759,56 @@ public class Customer implements Serializable {
 
     public void setInvoices(Set<Invoice> invoices) {
         this.invoices = invoices;
+    }
+
+    public Set<Payment> getPayments() {
+        return payments;
+    }
+
+    public Customer payments(Set<Payment> payments) {
+        this.payments = payments;
+        return this;
+    }
+
+    public Customer addPayment(Payment payment) {
+        this.payments.add(payment);
+        payment.setCustomer(this);
+        return this;
+    }
+
+    public Customer removePayment(Payment payment) {
+        this.payments.remove(payment);
+        payment.setCustomer(null);
+        return this;
+    }
+
+    public void setPayments(Set<Payment> payments) {
+        this.payments = payments;
+    }
+
+    public Set<Email> getEmails() {
+        return emails;
+    }
+
+    public Customer emails(Set<Email> emails) {
+        this.emails = emails;
+        return this;
+    }
+
+    public Customer addEmail(Email email) {
+        this.emails.add(email);
+        email.setCustomer(this);
+        return this;
+    }
+
+    public Customer removeEmail(Email email) {
+        this.emails.remove(email);
+        email.setCustomer(null);
+        return this;
+    }
+
+    public void setEmails(Set<Email> emails) {
+        this.emails = emails;
     }
 
     public Set<Contact> getMorecontacts() {
@@ -884,10 +954,10 @@ public class Customer implements Serializable {
             ", preffredCurrency='" + getPreffredCurrency() + "'" +
             ", payterms='" + getPayterms() + "'" +
             ", timeZone='" + getTimeZone() + "'" +
-            ", createdOn='" + getCreatedOn() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
-            ", updatedOn='" + getUpdatedOn() + "'" +
-            ", updatedBy='" + getUpdatedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

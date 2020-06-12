@@ -30,10 +30,10 @@
       "licensePlateNumber": "License Plate Number",
       "licensePlateExpiration": "License Plate Expiration",
       "inspectionStickerExpiration": "Inspection Sticker Expiration",
-      "createdOn": "Created On",
+      "createdDate": "Created Date",
       "createdBy": "Created By",
-      "updatedOn": "Updated On",
-      "updatedBy": "Updated By",
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By",
       "insurance": "Insurance",
       "trip": "Trip"
     }

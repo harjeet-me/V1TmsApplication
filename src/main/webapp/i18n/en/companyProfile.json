@@ -33,10 +33,10 @@
       "companyLogo": "Company Logo",
       "profileStatus": "Profile Status",
       "preffredCurrency": "Preffred Currency",
-      "createdOn": "Created On",
+      "createdDate": "Created Date",
       "createdBy": "Created By",
-      "updatedOn": "Updated On",
-      "updatedBy": "Updated By"
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

@@ -12,12 +12,12 @@ export interface ILocation {
   postalCode?: string;
   latitude?: number;
   longitude?: number;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
-  trippick?: ITrip;
-  tripdrop?: ITrip;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
+  trippicks?: ITrip[];
+  tripdrops?: ITrip[];
 }
 
 export class Location implements ILocation {
@@ -31,11 +31,11 @@ export class Location implements ILocation {
     public postalCode?: string,
     public latitude?: number,
     public longitude?: number,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string,
-    public trippick?: ITrip,
-    public tripdrop?: ITrip
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
+    public trippicks?: ITrip[],
+    public tripdrops?: ITrip[]
   ) {}
 }

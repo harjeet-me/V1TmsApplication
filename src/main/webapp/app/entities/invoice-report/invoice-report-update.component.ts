@@ -1,4 +1,3 @@
-import { ICustomer } from './../../shared/model/customer.model';
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -14,7 +13,6 @@ import { InvoiceReportService } from './invoice-report.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { IInvoice } from 'app/shared/model/invoice.model';
 import { InvoiceService } from 'app/entities/invoice/invoice.service';
-import { CustomerService } from 'app/entities/customer/customer.service';
 
 @Component({
   selector: 'jhi-invoice-report-update',
@@ -25,8 +23,6 @@ export class InvoiceReportUpdateComponent implements OnInit {
   invoices: IInvoice[] = [];
   fromDateDp: any;
   toDateDp: any;
-  customers: ICustomer[] = [];
-  customerName: any;
 
   editForm = this.fb.group({
     id: [],
@@ -36,10 +32,10 @@ export class InvoiceReportUpdateComponent implements OnInit {
     remarks: [],
     invoiceReport: [],
     invoiceReportContentType: [],
-    createdOn: [],
+    createdDate: [],
     createdBy: [],
-    updatedOn: [],
-    updatedBy: [],
+    lastModifiedDate: [],
+    lastModifiedBy: [],
     invoices: []
   });
 
@@ -48,7 +44,6 @@ export class InvoiceReportUpdateComponent implements OnInit {
     protected eventManager: JhiEventManager,
     protected invoiceReportService: InvoiceReportService,
     protected invoiceService: InvoiceService,
-    protected customerService: CustomerService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -57,14 +52,13 @@ export class InvoiceReportUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ invoiceReport }) => {
       if (!invoiceReport.id) {
         const today = moment().startOf('day');
-        invoiceReport.createdOn = today;
-        invoiceReport.updatedOn = today;
+        invoiceReport.createdDate = today;
+        invoiceReport.lastModifiedDate = today;
       }
 
       this.updateForm(invoiceReport);
 
       this.invoiceService.query().subscribe((res: HttpResponse<IInvoice[]>) => (this.invoices = res.body || []));
-      this.customerService.query().subscribe((res: HttpResponse<ICustomer[]>) => (this.customers = res.body || []));
     });
   }
 
@@ -77,10 +71,10 @@ export class InvoiceReportUpdateComponent implements OnInit {
       remarks: invoiceReport.remarks,
       invoiceReport: invoiceReport.invoiceReport,
       invoiceReportContentType: invoiceReport.invoiceReportContentType,
-      createdOn: invoiceReport.createdOn ? invoiceReport.createdOn.format(DATE_TIME_FORMAT) : null,
+      createdDate: invoiceReport.createdDate ? invoiceReport.createdDate.format(DATE_TIME_FORMAT) : null,
       createdBy: invoiceReport.createdBy,
-      updatedOn: invoiceReport.updatedOn ? invoiceReport.updatedOn.format(DATE_TIME_FORMAT) : null,
-      updatedBy: invoiceReport.updatedBy,
+      lastModifiedDate: invoiceReport.lastModifiedDate ? invoiceReport.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
+      lastModifiedBy: invoiceReport.lastModifiedBy,
       invoices: invoiceReport.invoices
     });
   }
@@ -125,10 +119,14 @@ export class InvoiceReportUpdateComponent implements OnInit {
       remarks: this.editForm.get(['remarks'])!.value,
       invoiceReportContentType: this.editForm.get(['invoiceReportContentType'])!.value,
       invoiceReport: this.editForm.get(['invoiceReport'])!.value,
-      createdOn: this.editForm.get(['createdOn'])!.value ? moment(this.editForm.get(['createdOn'])!.value, DATE_TIME_FORMAT) : undefined,
+      createdDate: this.editForm.get(['createdDate'])!.value
+        ? moment(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
       createdBy: this.editForm.get(['createdBy'])!.value,
-      updatedOn: this.editForm.get(['updatedOn'])!.value ? moment(this.editForm.get(['updatedOn'])!.value, DATE_TIME_FORMAT) : undefined,
-      updatedBy: this.editForm.get(['updatedBy'])!.value,
+      lastModifiedDate: this.editForm.get(['lastModifiedDate'])!.value
+        ? moment(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      lastModifiedBy: this.editForm.get(['lastModifiedBy'])!.value,
       invoices: this.editForm.get(['invoices'])!.value
     };
   }
@@ -162,14 +160,5 @@ export class InvoiceReportUpdateComponent implements OnInit {
       }
     }
     return option;
-  }
-  onCustomerChange(): any {
-    let myItem: any;
-    if (this.customerName !== null) {
-      myItem = this.customers.find(item => item.company === this.customerName);
-      this.editForm.patchValue({
-        customer: myItem.id
-      });
-    }
   }
 }

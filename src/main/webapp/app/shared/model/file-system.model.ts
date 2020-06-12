@@ -6,10 +6,10 @@ export interface IFileSystem {
   dataContentType?: string;
   data?: any;
   fileName?: string;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
   email?: IEmail;
 }
 
@@ -19,10 +19,10 @@ export class FileSystem implements IFileSystem {
     public dataContentType?: string,
     public data?: any,
     public fileName?: string,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string,
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
     public email?: IEmail
   ) {}
 }

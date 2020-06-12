@@ -43,10 +43,10 @@
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="data"><span jhiTranslate="tmsV1ApplicationApp.fileSystem.data">Data</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="fileName"><span jhiTranslate="tmsV1ApplicationApp.fileSystem.fileName">File Name</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="createdOn"><span jhiTranslate="tmsV1ApplicationApp.fileSystem.createdOn">Created On</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdDate"><span jhiTranslate="tmsV1ApplicationApp.fileSystem.createdDate">Created Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="createdBy"><span jhiTranslate="tmsV1ApplicationApp.fileSystem.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="updatedOn"><span jhiTranslate="tmsV1ApplicationApp.fileSystem.updatedOn">Updated On</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="updatedBy"><span jhiTranslate="tmsV1ApplicationApp.fileSystem.updatedBy">Updated By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lastModifiedDate"><span jhiTranslate="tmsV1ApplicationApp.fileSystem.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lastModifiedBy"><span jhiTranslate="tmsV1ApplicationApp.fileSystem.lastModifiedBy">Last Modified By</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="email.id"><span jhiTranslate="tmsV1ApplicationApp.fileSystem.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
@@ -59,10 +59,10 @@
                         <span *ngIf="fileSystem.data">{{ fileSystem.dataContentType }}, {{ byteSize(fileSystem.data) }}</span>
                     </td>
                     <td>{{ fileSystem.fileName }}</td>
-                    <td>{{ fileSystem.createdOn | date:'medium' }}</td>
+                    <td>{{ fileSystem.createdDate | date:'medium' }}</td>
                     <td>{{ fileSystem.createdBy }}</td>
-                    <td>{{ fileSystem.updatedOn | date:'medium' }}</td>
-                    <td>{{ fileSystem.updatedBy }}</td>
+                    <td>{{ fileSystem.lastModifiedDate | date:'medium' }}</td>
+                    <td>{{ fileSystem.lastModifiedBy }}</td>
                     <td>
                         <div *ngIf="fileSystem.email">
                             <a [routerLink]="['/email', fileSystem.email?.id, 'view']" >{{ fileSystem.email?.id }}</a>

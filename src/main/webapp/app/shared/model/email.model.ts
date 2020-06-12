@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { IFileSystem } from 'app/shared/model/file-system.model';
+import { ICustomer } from 'app/shared/model/customer.model';
 
 export interface IEmail {
   id?: number;
@@ -15,11 +16,12 @@ export interface IEmail {
   attachmentName?: string;
   status?: string;
   sentDateTime?: Moment;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
   fileSystems?: IFileSystem[];
+  customer?: ICustomer;
 }
 
 export class Email implements IEmail {
@@ -37,11 +39,12 @@ export class Email implements IEmail {
     public attachmentName?: string,
     public status?: string,
     public sentDateTime?: Moment,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string,
-    public fileSystems?: IFileSystem[]
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
+    public fileSystems?: IFileSystem[],
+    public customer?: ICustomer
   ) {
     this.multipart = this.multipart || false;
     this.htmlBody = this.htmlBody || false;

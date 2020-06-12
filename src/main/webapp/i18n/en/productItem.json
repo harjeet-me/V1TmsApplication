@@ -21,10 +21,10 @@
       "description": "Description",
       "defaultQty": "Default Qty",
       "price": "Price",
-      "createdOn": "Created On",
+      "createdDate": "Created Date",
       "createdBy": "Created By",
-      "updatedOn": "Updated On",
-      "updatedBy": "Updated By",
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By",
       "customer": "Customer"
     }
   }

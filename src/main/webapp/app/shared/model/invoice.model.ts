@@ -39,10 +39,10 @@ export interface IInvoice {
   balance?: number;
   advance?: number;
   discount?: number;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
   notification?: IEmail;
   invoiceItems?: IInvoiceItem[];
   invoiceHistories?: IInvoiceHistory[];
@@ -81,10 +81,10 @@ export class Invoice implements IInvoice {
     public balance?: number,
     public advance?: number,
     public discount?: number,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string,
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
     public notification?: IEmail,
     public invoiceItems?: IInvoiceItem[],
     public invoiceHistories?: IInvoiceHistory[],

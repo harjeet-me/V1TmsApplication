@@ -9,10 +9,10 @@ export interface IInsurance {
   policyDocumentContentType?: string;
   policyDocument?: any;
   coverageStatement?: string;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
   carrier?: ICarrier;
 }
 
@@ -25,10 +25,10 @@ export class Insurance implements IInsurance {
     public policyDocumentContentType?: string,
     public policyDocument?: any,
     public coverageStatement?: string,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string,
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
     public carrier?: ICarrier
   ) {}
 }

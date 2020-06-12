@@ -1,17 +1,24 @@
 package com.tms.v1.domain;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A InvoiceReport.
@@ -20,7 +27,7 @@ import java.util.Set;
 @Table(name = "invoice_report")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "invoicereport")
-public class InvoiceReport implements Serializable {
+public class InvoiceReport extends AbstractAuditingEntity  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -47,17 +54,17 @@ public class InvoiceReport implements Serializable {
     @Column(name = "invoice_report_content_type")
     private String invoiceReportContentType;
 
-    @Column(name = "created_on")
-    private Instant createdOn;
+    @Column(name = "created_date")
+    private Instant createdDate;
 
     @Column(name = "created_by")
     private String createdBy;
 
-    @Column(name = "updated_on")
-    private Instant updatedOn;
+    @Column(name = "last_modified_date")
+    private Instant lastModifiedDate;
 
-    @Column(name = "updated_by")
-    private String updatedBy;
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -153,17 +160,17 @@ public class InvoiceReport implements Serializable {
         this.invoiceReportContentType = invoiceReportContentType;
     }
 
-    public Instant getCreatedOn() {
-        return createdOn;
+    public Instant getCreatedDate() {
+        return createdDate;
     }
 
-    public InvoiceReport createdOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public InvoiceReport createdDate(Instant createdDate) {
+        this.createdDate = createdDate;
         return this;
     }
 
-    public void setCreatedOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getCreatedBy() {
@@ -179,30 +186,30 @@ public class InvoiceReport implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public Instant getUpdatedOn() {
-        return updatedOn;
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
     }
 
-    public InvoiceReport updatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public InvoiceReport lastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
         return this;
     }
 
-    public void setUpdatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
-    public String getUpdatedBy() {
-        return updatedBy;
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
     }
 
-    public InvoiceReport updatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public InvoiceReport lastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
         return this;
     }
 
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     public Set<Invoice> getInvoices() {
@@ -257,10 +264,10 @@ public class InvoiceReport implements Serializable {
             ", remarks='" + getRemarks() + "'" +
             ", invoiceReport='" + getInvoiceReport() + "'" +
             ", invoiceReportContentType='" + getInvoiceReportContentType() + "'" +
-            ", createdOn='" + getCreatedOn() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
-            ", updatedOn='" + getUpdatedOn() + "'" +
-            ", updatedBy='" + getUpdatedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

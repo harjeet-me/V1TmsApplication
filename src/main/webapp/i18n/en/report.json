@@ -23,10 +23,10 @@
       "toDate": "To Date",
       "attachment": "Attachment",
       "emailTo": "Email To",
-      "createdOn": "Created On",
+      "createdDate": "Created Date",
       "createdBy": "Created By",
-      "updatedOn": "Updated On",
-      "updatedBy": "Updated By"
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By"
     }
   }
 }

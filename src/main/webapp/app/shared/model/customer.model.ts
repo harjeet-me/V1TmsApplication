@@ -1,6 +1,8 @@
 import { Moment } from 'moment';
 import { ITrip } from 'app/shared/model/trip.model';
 import { IInvoice } from 'app/shared/model/invoice.model';
+import { IPayment } from 'app/shared/model/payment.model';
+import { IEmail } from 'app/shared/model/email.model';
 import { IContact } from 'app/shared/model/contact.model';
 import { ITransactionsRecord } from 'app/shared/model/transactions-record.model';
 import { IProductItem } from 'app/shared/model/product-item.model';
@@ -47,12 +49,14 @@ export interface ICustomer {
   preffredCurrency?: CURRENCY;
   payterms?: string;
   timeZone?: Moment;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
   loadOrders?: ITrip[];
   invoices?: IInvoice[];
+  payments?: IPayment[];
+  emails?: IEmail[];
   morecontacts?: IContact[];
   transactionsRecords?: ITransactionsRecord[];
   charges?: IProductItem[];
@@ -96,12 +100,14 @@ export class Customer implements ICustomer {
     public preffredCurrency?: CURRENCY,
     public payterms?: string,
     public timeZone?: Moment,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string,
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
     public loadOrders?: ITrip[],
     public invoices?: IInvoice[],
+    public payments?: IPayment[],
+    public emails?: IEmail[],
     public morecontacts?: IContact[],
     public transactionsRecords?: ITransactionsRecord[],
     public charges?: IProductItem[],

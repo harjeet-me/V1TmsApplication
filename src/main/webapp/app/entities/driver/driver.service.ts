@@ -62,8 +62,8 @@ export class DriverService {
       dob: driver.dob && driver.dob.isValid() ? driver.dob.format(DATE_FORMAT) : undefined,
       companyJoinedOn: driver.companyJoinedOn && driver.companyJoinedOn.isValid() ? driver.companyJoinedOn.format(DATE_FORMAT) : undefined,
       companyLeftOn: driver.companyLeftOn && driver.companyLeftOn.isValid() ? driver.companyLeftOn.format(DATE_FORMAT) : undefined,
-      createdOn: driver.createdOn && driver.createdOn.isValid() ? driver.createdOn.toJSON() : undefined,
-      updatedOn: driver.updatedOn && driver.updatedOn.isValid() ? driver.updatedOn.toJSON() : undefined
+      createdDate: driver.createdDate && driver.createdDate.isValid() ? driver.createdDate.toJSON() : undefined,
+      lastModifiedDate: driver.lastModifiedDate && driver.lastModifiedDate.isValid() ? driver.lastModifiedDate.toJSON() : undefined
     });
     return copy;
   }
@@ -73,8 +73,8 @@ export class DriverService {
       res.body.dob = res.body.dob ? moment(res.body.dob) : undefined;
       res.body.companyJoinedOn = res.body.companyJoinedOn ? moment(res.body.companyJoinedOn) : undefined;
       res.body.companyLeftOn = res.body.companyLeftOn ? moment(res.body.companyLeftOn) : undefined;
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -85,8 +85,8 @@ export class DriverService {
         driver.dob = driver.dob ? moment(driver.dob) : undefined;
         driver.companyJoinedOn = driver.companyJoinedOn ? moment(driver.companyJoinedOn) : undefined;
         driver.companyLeftOn = driver.companyLeftOn ? moment(driver.companyLeftOn) : undefined;
-        driver.createdOn = driver.createdOn ? moment(driver.createdOn) : undefined;
-        driver.updatedOn = driver.updatedOn ? moment(driver.updatedOn) : undefined;
+        driver.createdDate = driver.createdDate ? moment(driver.createdDate) : undefined;
+        driver.lastModifiedDate = driver.lastModifiedDate ? moment(driver.lastModifiedDate) : undefined;
       });
     }
     return res;

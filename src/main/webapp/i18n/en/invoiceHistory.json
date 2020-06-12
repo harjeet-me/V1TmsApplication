@@ -19,10 +19,10 @@
       },
       "status": "Status",
       "comment": "Comment",
-      "createdOn": "Created On",
+      "createdDate": "Created Date",
       "createdBy": "Created By",
-      "updatedOn": "Updated On",
-      "updatedBy": "Updated By",
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By",
       "previous": "Previous",
       "next": "Next",
       "invoice": "Invoice"

@@ -128,7 +128,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 						companyProfileService.findOne(1L).get()));
 				invoice.setInvoiceItems(null);
 				//invoice.setInvoicePdfContentType("text/html");
-				invoice.setInvoicePdfContentType("text/html");
+				invoice.setInvoicePdfContentType("application/pdf");
 			}
 
 		} catch (Exception e) {
@@ -182,7 +182,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 		if (invoice.getStatus()!=null && invoice.getStatus()==InvoiceStatus.GENERATED) {			
 			TransactionsRecord transactionsRecord = new TransactionsRecord();
 			transactionsRecord.setCustomer(invoice.getCustomer());
-			transactionsRecord.setAccount(invoice.getCustomer().getAccounts());
+		//	transactionsRecord.setAccount(invoice.getCustomer().getAccounts());
 			transactionsRecord.setTxType(TransactionType.INVOICE);
 			transactionsRecord.description("INVOICE CREATED -"+invoice.getInvoiceNo());
 			transactionsRecord.setTxAmmount(invoice.getInvoiceTotal());			

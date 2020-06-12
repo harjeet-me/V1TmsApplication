@@ -1,4 +1,4 @@
-id;customer;from_date;to_date;remarks;invoice_report;invoice_report_content_type;created_on;created_by;updated_on;updated_by
+id;customer;from_date;to_date;remarks;invoice_report;invoice_report_content_type;created_date;created_by;last_modified_date;last_modified_by
 1;53074;2020-03-24;2020-03-24;Toys Oval Refined Soft Chicken;../fake-data/blob/hipster.png;image/png;2020-03-24T17:42:17;invoice;2020-03-24T11:22:12;Synergized protocol AGP
 2;59643;2020-03-24;2020-03-24;Practical enable fault-tolerant;../fake-data/blob/hipster.png;image/png;2020-03-24T00:35:07;Lock Computers connect;2020-03-24T05:25:57;Steel
 3;77178;2020-03-24;2020-03-24;Computer Refined Wooden Shirt;../fake-data/blob/hipster.png;image/png;2020-03-24T08:36:32;scalable;2020-03-24T19:55:26;Indonesia Unbranded

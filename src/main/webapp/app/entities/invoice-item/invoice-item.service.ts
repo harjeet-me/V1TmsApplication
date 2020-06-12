@@ -58,16 +58,17 @@ export class InvoiceItemService {
 
   protected convertDateFromClient(invoiceItem: IInvoiceItem): IInvoiceItem {
     const copy: IInvoiceItem = Object.assign({}, invoiceItem, {
-      createdOn: invoiceItem.createdOn && invoiceItem.createdOn.isValid() ? invoiceItem.createdOn.toJSON() : undefined,
-      updatedOn: invoiceItem.updatedOn && invoiceItem.updatedOn.isValid() ? invoiceItem.updatedOn.toJSON() : undefined
+      createdDate: invoiceItem.createdDate && invoiceItem.createdDate.isValid() ? invoiceItem.createdDate.toJSON() : undefined,
+      lastModifiedDate:
+        invoiceItem.lastModifiedDate && invoiceItem.lastModifiedDate.isValid() ? invoiceItem.lastModifiedDate.toJSON() : undefined
     });
     return copy;
   }
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -75,8 +76,8 @@ export class InvoiceItemService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((invoiceItem: IInvoiceItem) => {
-        invoiceItem.createdOn = invoiceItem.createdOn ? moment(invoiceItem.createdOn) : undefined;
-        invoiceItem.updatedOn = invoiceItem.updatedOn ? moment(invoiceItem.updatedOn) : undefined;
+        invoiceItem.createdDate = invoiceItem.createdDate ? moment(invoiceItem.createdDate) : undefined;
+        invoiceItem.lastModifiedDate = invoiceItem.lastModifiedDate ? moment(invoiceItem.lastModifiedDate) : undefined;
       });
     }
     return res;

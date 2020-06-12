@@ -19,10 +19,10 @@ export interface IEquipment {
   licensePlateNumber?: string;
   licensePlateExpiration?: Moment;
   inspectionStickerExpiration?: Moment;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
   insurance?: IInsurance;
   trips?: ITrip[];
 }
@@ -43,10 +43,10 @@ export class Equipment implements IEquipment {
     public licensePlateNumber?: string,
     public licensePlateExpiration?: Moment,
     public inspectionStickerExpiration?: Moment,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string,
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
     public insurance?: IInsurance,
     public trips?: ITrip[]
   ) {}

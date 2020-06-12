@@ -1,16 +1,23 @@
 package com.tms.v1.domain;
 
+import java.io.Serializable;
+import java.time.Instant;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
-import java.io.Serializable;
-import java.util.Objects;
-import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
 /**
  * A Accounts.
@@ -19,7 +26,7 @@ import java.util.Set;
 @Table(name = "accounts")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "accounts")
-public class Accounts implements Serializable {
+public class Accounts extends AbstractAuditingEntity  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -39,25 +46,22 @@ public class Accounts implements Serializable {
     @Column(name = "over_90")
     private Double over90;
 
-    @Column(name = "created_on")
-    private Instant createdOn;
-
+    @CreatedDate
+    @Column(name = "created_date")
+    private Instant createdDate;
+    @CreatedBy
     @Column(name = "created_by")
     private String createdBy;
-
-    @Column(name = "updated_on")
-    private Instant updatedOn;
-
-    @Column(name = "updated_by")
-    private String updatedBy;
+    @LastModifiedDate
+    @Column(name = "last_modified_date")
+    private Instant lastModifiedDate;
+    @LastModifiedBy
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
 
     @OneToOne
     @JoinColumn(unique = true)
     private Customer customer;
-
-    @OneToMany(mappedBy = "account")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<TransactionsRecord> transactionsRecords = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -120,17 +124,17 @@ public class Accounts implements Serializable {
         this.over90 = over90;
     }
 
-    public Instant getCreatedOn() {
-        return createdOn;
+    public Instant getCreatedDate() {
+        return createdDate;
     }
 
-    public Accounts createdOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public Accounts createdDate(Instant createdDate) {
+        this.createdDate = createdDate;
         return this;
     }
 
-    public void setCreatedOn(Instant createdOn) {
-        this.createdOn = createdOn;
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getCreatedBy() {
@@ -146,30 +150,30 @@ public class Accounts implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public Instant getUpdatedOn() {
-        return updatedOn;
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
     }
 
-    public Accounts updatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public Accounts lastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
         return this;
     }
 
-    public void setUpdatedOn(Instant updatedOn) {
-        this.updatedOn = updatedOn;
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
-    public String getUpdatedBy() {
-        return updatedBy;
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
     }
 
-    public Accounts updatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public Accounts lastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
         return this;
     }
 
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     public Customer getCustomer() {
@@ -183,31 +187,6 @@ public class Accounts implements Serializable {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public Set<TransactionsRecord> getTransactionsRecords() {
-        return transactionsRecords;
-    }
-
-    public Accounts transactionsRecords(Set<TransactionsRecord> transactionsRecords) {
-        this.transactionsRecords = transactionsRecords;
-        return this;
-    }
-
-    public Accounts addTransactionsRecord(TransactionsRecord transactionsRecord) {
-        this.transactionsRecords.add(transactionsRecord);
-        transactionsRecord.setAccount(this);
-        return this;
-    }
-
-    public Accounts removeTransactionsRecord(TransactionsRecord transactionsRecord) {
-        this.transactionsRecords.remove(transactionsRecord);
-        transactionsRecord.setAccount(null);
-        return this;
-    }
-
-    public void setTransactionsRecords(Set<TransactionsRecord> transactionsRecords) {
-        this.transactionsRecords = transactionsRecords;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -235,10 +214,10 @@ public class Accounts implements Serializable {
             ", over30=" + getOver30() +
             ", over60=" + getOver60() +
             ", over90=" + getOver90() +
-            ", createdOn='" + getCreatedOn() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
-            ", updatedOn='" + getUpdatedOn() + "'" +
-            ", updatedBy='" + getUpdatedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

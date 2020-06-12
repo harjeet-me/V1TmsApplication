@@ -57,10 +57,10 @@
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.companyLogo">Company Logo</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.profileStatus">Profile Status</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.preffredCurrency">Preffred Currency</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.createdOn">Created On</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.createdDate">Created Date</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.createdBy">Created By</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.updatedOn">Updated On</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.updatedBy">Updated By</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.lastModifiedDate">Last Modified Date</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.companyProfile.lastModifiedBy">Last Modified By</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -88,10 +88,10 @@
                     </td>
                     <td jhiTranslate="{{ 'tmsV1ApplicationApp.ToggleStatus.' + companyProfile.profileStatus }}">{{ companyProfile.profileStatus }}</td>
                     <td jhiTranslate="{{ 'tmsV1ApplicationApp.CURRENCY.' + companyProfile.preffredCurrency }}">{{ companyProfile.preffredCurrency }}</td>
-                    <td>{{ companyProfile.createdOn | date:'medium' }}</td>
+                    <td>{{ companyProfile.createdDate | date:'medium' }}</td>
                     <td>{{ companyProfile.createdBy }}</td>
-                    <td>{{ companyProfile.updatedOn | date:'medium' }}</td>
-                    <td>{{ companyProfile.updatedBy }}</td>
+                    <td>{{ companyProfile.lastModifiedDate | date:'medium' }}</td>
+                    <td>{{ companyProfile.lastModifiedBy }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

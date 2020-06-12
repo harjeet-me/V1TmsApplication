@@ -1,0 +1,10 @@
+{
+  "tmsV1ApplicationApp": {
+    "PayMode": {
+      "null": "",
+      "CHECK": "CHECK",
+      "CASH": "CASH",
+      "BANK_TRANSFER": "BANK_TRANSFER"
+    }
+  }
+}

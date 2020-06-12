@@ -55,10 +55,10 @@
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.remarks">Remarks</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.contractDoc">Contract Doc</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.status">Status</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.createdOn">Created On</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.createdDate">Created Date</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.createdBy">Created By</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.updatedOn">Updated On</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.updatedBy">Updated By</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.lastModifiedDate">Last Modified Date</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.driver.lastModifiedBy">Last Modified By</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -92,10 +92,10 @@
                         <span *ngIf="driver.contractDoc">{{ driver.contractDocContentType }}, {{ byteSize(driver.contractDoc) }}</span>
                     </td>
                     <td jhiTranslate="{{ 'tmsV1ApplicationApp.ToggleStatus.' + driver.status }}">{{ driver.status }}</td>
-                    <td>{{ driver.createdOn | date:'medium' }}</td>
+                    <td>{{ driver.createdDate | date:'medium' }}</td>
                     <td>{{ driver.createdBy }}</td>
-                    <td>{{ driver.updatedOn | date:'medium' }}</td>
-                    <td>{{ driver.updatedBy }}</td>
+                    <td>{{ driver.lastModifiedDate | date:'medium' }}</td>
+                    <td>{{ driver.lastModifiedBy }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

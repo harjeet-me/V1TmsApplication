@@ -71,8 +71,8 @@ describe('Service Tests', () => {
             invoiceDate: currentDate.format(DATE_FORMAT),
             invoicePaidDate: currentDate.format(DATE_FORMAT),
             invoiceDueDate: currentDate.format(DATE_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -91,8 +91,8 @@ describe('Service Tests', () => {
             invoiceDate: currentDate.format(DATE_FORMAT),
             invoicePaidDate: currentDate.format(DATE_FORMAT),
             invoiceDueDate: currentDate.format(DATE_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -102,8 +102,8 @@ describe('Service Tests', () => {
             invoiceDate: currentDate,
             invoicePaidDate: currentDate,
             invoiceDueDate: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -144,10 +144,10 @@ describe('Service Tests', () => {
             balance: 1,
             advance: 1,
             discount: 1,
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
@@ -157,8 +157,8 @@ describe('Service Tests', () => {
             invoiceDate: currentDate,
             invoicePaidDate: currentDate,
             invoiceDueDate: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -199,10 +199,10 @@ describe('Service Tests', () => {
             balance: 1,
             advance: 1,
             discount: 1,
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
@@ -212,8 +212,8 @@ describe('Service Tests', () => {
             invoiceDate: currentDate,
             invoicePaidDate: currentDate,
             invoiceDueDate: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );

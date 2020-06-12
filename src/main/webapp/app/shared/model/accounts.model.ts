@@ -1,6 +1,5 @@
 import { Moment } from 'moment';
 import { ICustomer } from 'app/shared/model/customer.model';
-import { ITransactionsRecord } from 'app/shared/model/transactions-record.model';
 
 export interface IAccounts {
   id?: number;
@@ -8,12 +7,11 @@ export interface IAccounts {
   over30?: number;
   over60?: number;
   over90?: number;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
   customer?: ICustomer;
-  transactionsRecords?: ITransactionsRecord[];
 }
 
 export class Accounts implements IAccounts {
@@ -23,11 +21,10 @@ export class Accounts implements IAccounts {
     public over30?: number,
     public over60?: number,
     public over90?: number,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string,
-    public customer?: ICustomer,
-    public transactionsRecords?: ITransactionsRecord[]
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
+    public customer?: ICustomer
   ) {}
 }

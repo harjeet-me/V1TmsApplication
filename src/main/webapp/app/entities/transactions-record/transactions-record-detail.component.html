@@ -20,32 +20,26 @@
                 <dd>
                     <span>{{ transactionsRecord.txAmmount }}</span>
                 </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.createdOn">Created On</span></dt>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.createdDate">Created Date</span></dt>
                 <dd>
-                    <span>{{ transactionsRecord.createdOn }}</span>
+                    <span>{{ transactionsRecord.createdDate }}</span>
                 </dd>
                 <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.createdBy">Created By</span></dt>
                 <dd>
                     <span>{{ transactionsRecord.createdBy }}</span>
                 </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.updatedOn">Updated On</span></dt>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.lastModifiedDate">Last Modified Date</span></dt>
                 <dd>
-                    <span>{{ transactionsRecord.updatedOn }}</span>
+                    <span>{{ transactionsRecord.lastModifiedDate }}</span>
                 </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.updatedBy">Updated By</span></dt>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.lastModifiedBy">Last Modified By</span></dt>
                 <dd>
-                    <span>{{ transactionsRecord.updatedBy }}</span>
+                    <span>{{ transactionsRecord.lastModifiedBy }}</span>
                 </dd>
                 <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.customer">Customer</span></dt>
                 <dd>
                     <div *ngIf="transactionsRecord.customer">
                         <a [routerLink]="['/customer', transactionsRecord.customer?.id, 'view']">{{ transactionsRecord.customer?.company }}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.account">Account</span></dt>
-                <dd>
-                    <div *ngIf="transactionsRecord.account">
-                        <a [routerLink]="['/accounts', transactionsRecord.account?.id, 'view']">{{ transactionsRecord.account?.id }}</a>
                     </div>
                 </dd>
             </dl>

@@ -61,8 +61,8 @@ export class CarrierService {
     const copy: ICarrier = Object.assign({}, carrier, {
       customerSince: carrier.customerSince && carrier.customerSince.isValid() ? carrier.customerSince.format(DATE_FORMAT) : undefined,
       timeZone: carrier.timeZone && carrier.timeZone.isValid() ? carrier.timeZone.toJSON() : undefined,
-      createdOn: carrier.createdOn && carrier.createdOn.isValid() ? carrier.createdOn.toJSON() : undefined,
-      updatedOn: carrier.updatedOn && carrier.updatedOn.isValid() ? carrier.updatedOn.toJSON() : undefined
+      createdDate: carrier.createdDate && carrier.createdDate.isValid() ? carrier.createdDate.toJSON() : undefined,
+      lastModifiedDate: carrier.lastModifiedDate && carrier.lastModifiedDate.isValid() ? carrier.lastModifiedDate.toJSON() : undefined
     });
     return copy;
   }
@@ -71,8 +71,8 @@ export class CarrierService {
     if (res.body) {
       res.body.customerSince = res.body.customerSince ? moment(res.body.customerSince) : undefined;
       res.body.timeZone = res.body.timeZone ? moment(res.body.timeZone) : undefined;
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -82,8 +82,8 @@ export class CarrierService {
       res.body.forEach((carrier: ICarrier) => {
         carrier.customerSince = carrier.customerSince ? moment(carrier.customerSince) : undefined;
         carrier.timeZone = carrier.timeZone ? moment(carrier.timeZone) : undefined;
-        carrier.createdOn = carrier.createdOn ? moment(carrier.createdOn) : undefined;
-        carrier.updatedOn = carrier.updatedOn ? moment(carrier.updatedOn) : undefined;
+        carrier.createdDate = carrier.createdDate ? moment(carrier.createdDate) : undefined;
+        carrier.lastModifiedDate = carrier.lastModifiedDate ? moment(carrier.lastModifiedDate) : undefined;
       });
     }
     return res;

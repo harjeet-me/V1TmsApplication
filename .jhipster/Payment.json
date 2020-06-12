@@ -6,11 +6,7 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "paymentAmt",
-            "fieldType": "Double"
-        },
-        {
-            "fieldName": "invoicePaidDate",
+            "fieldName": "payDate",
             "fieldType": "LocalDate"
         },
         {
@@ -18,12 +14,20 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "status",
-            "fieldType": "InvoiceStatus",
-            "fieldValues": "DRAFT,GENERATED,SENT,PAID,OVERDRAFT,VOIDED,PARTIALLY_PAID"
+            "fieldName": "mode",
+            "fieldType": "PayMode",
+            "fieldValues": "CHECK,CASH,BANK_TRANSFER"
         },
         {
-            "fieldName": "createdOn",
+            "fieldName": "ammount",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "unusedAmmount",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "createdDate",
             "fieldType": "Instant"
         },
         {
@@ -31,15 +35,23 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "updatedOn",
+            "fieldName": "lastModifiedDate",
             "fieldType": "Instant"
         },
         {
-            "fieldName": "updatedBy",
+            "fieldName": "lastModifiedBy",
             "fieldType": "String"
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "customer",
+            "otherEntityRelationshipName": "payment",
+            "relationshipName": "customer",
+            "otherEntityField": "company"
+        }
+    ],
     "changelogDate": "20200511170300",
     "entityTableName": "payment",
     "dto": "no",

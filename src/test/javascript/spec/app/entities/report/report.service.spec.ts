@@ -47,8 +47,8 @@ describe('Service Tests', () => {
           {
             fromDate: currentDate.format(DATE_FORMAT),
             toDate: currentDate.format(DATE_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -66,8 +66,8 @@ describe('Service Tests', () => {
             id: 0,
             fromDate: currentDate.format(DATE_FORMAT),
             toDate: currentDate.format(DATE_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -76,8 +76,8 @@ describe('Service Tests', () => {
           {
             fromDate: currentDate,
             toDate: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -98,10 +98,10 @@ describe('Service Tests', () => {
             toDate: currentDate.format(DATE_FORMAT),
             attachment: 'BBBBBB',
             emailTo: 'BBBBBB',
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
@@ -110,8 +110,8 @@ describe('Service Tests', () => {
           {
             fromDate: currentDate,
             toDate: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -132,10 +132,10 @@ describe('Service Tests', () => {
             toDate: currentDate.format(DATE_FORMAT),
             attachment: 'BBBBBB',
             emailTo: 'BBBBBB',
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
@@ -144,8 +144,8 @@ describe('Service Tests', () => {
           {
             fromDate: currentDate,
             toDate: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );

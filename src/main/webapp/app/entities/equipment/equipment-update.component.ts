@@ -38,10 +38,10 @@ export class EquipmentUpdateComponent implements OnInit {
     licensePlateNumber: [],
     licensePlateExpiration: [],
     inspectionStickerExpiration: [],
-    createdOn: [],
+    createdDate: [],
     createdBy: [],
-    updatedOn: [],
-    updatedBy: [],
+    lastModifiedDate: [],
+    lastModifiedBy: [],
     insurance: []
   });
 
@@ -56,8 +56,8 @@ export class EquipmentUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ equipment }) => {
       if (!equipment.id) {
         const today = moment().startOf('day');
-        equipment.createdOn = today;
-        equipment.updatedOn = today;
+        equipment.createdDate = today;
+        equipment.lastModifiedDate = today;
       }
 
       this.updateForm(equipment);
@@ -102,10 +102,10 @@ export class EquipmentUpdateComponent implements OnInit {
       licensePlateNumber: equipment.licensePlateNumber,
       licensePlateExpiration: equipment.licensePlateExpiration,
       inspectionStickerExpiration: equipment.inspectionStickerExpiration,
-      createdOn: equipment.createdOn ? equipment.createdOn.format(DATE_TIME_FORMAT) : null,
+      createdDate: equipment.createdDate ? equipment.createdDate.format(DATE_TIME_FORMAT) : null,
       createdBy: equipment.createdBy,
-      updatedOn: equipment.updatedOn ? equipment.updatedOn.format(DATE_TIME_FORMAT) : null,
-      updatedBy: equipment.updatedBy,
+      lastModifiedDate: equipment.lastModifiedDate ? equipment.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
+      lastModifiedBy: equipment.lastModifiedBy,
       insurance: equipment.insurance
     });
   }
@@ -141,10 +141,14 @@ export class EquipmentUpdateComponent implements OnInit {
       licensePlateNumber: this.editForm.get(['licensePlateNumber'])!.value,
       licensePlateExpiration: this.editForm.get(['licensePlateExpiration'])!.value,
       inspectionStickerExpiration: this.editForm.get(['inspectionStickerExpiration'])!.value,
-      createdOn: this.editForm.get(['createdOn'])!.value ? moment(this.editForm.get(['createdOn'])!.value, DATE_TIME_FORMAT) : undefined,
+      createdDate: this.editForm.get(['createdDate'])!.value
+        ? moment(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
       createdBy: this.editForm.get(['createdBy'])!.value,
-      updatedOn: this.editForm.get(['updatedOn'])!.value ? moment(this.editForm.get(['updatedOn'])!.value, DATE_TIME_FORMAT) : undefined,
-      updatedBy: this.editForm.get(['updatedBy'])!.value,
+      lastModifiedDate: this.editForm.get(['lastModifiedDate'])!.value
+        ? moment(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      lastModifiedBy: this.editForm.get(['lastModifiedBy'])!.value,
       insurance: this.editForm.get(['insurance'])!.value
     };
   }

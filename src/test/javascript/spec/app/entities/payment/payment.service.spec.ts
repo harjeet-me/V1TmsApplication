@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import { DATE_FORMAT, DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { PaymentService } from 'app/entities/payment/payment.service';
 import { IPayment, Payment } from 'app/shared/model/payment.model';
-import { InvoiceStatus } from 'app/shared/model/enumerations/invoice-status.model';
+import { PayMode } from 'app/shared/model/enumerations/pay-mode.model';
 
 describe('Service Tests', () => {
   describe('Payment Service', () => {
@@ -25,27 +25,16 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Payment(
-        0,
-        'AAAAAAA',
-        0,
-        currentDate,
-        'AAAAAAA',
-        InvoiceStatus.DRAFT,
-        currentDate,
-        'AAAAAAA',
-        currentDate,
-        'AAAAAAA'
-      );
+      elemDefault = new Payment(0, 'AAAAAAA', currentDate, 'AAAAAAA', PayMode.CHECK, 0, 0, currentDate, 'AAAAAAA', currentDate, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            invoicePaidDate: currentDate.format(DATE_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            payDate: currentDate.format(DATE_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
@@ -61,18 +50,18 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            invoicePaidDate: currentDate.format(DATE_FORMAT),
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedOn: currentDate.format(DATE_TIME_FORMAT)
+            payDate: currentDate.format(DATE_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            invoicePaidDate: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            payDate: currentDate,
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -88,23 +77,24 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             invoiceNo: 'BBBBBB',
-            paymentAmt: 1,
-            invoicePaidDate: currentDate.format(DATE_FORMAT),
+            payDate: currentDate.format(DATE_FORMAT),
             payRefNo: 'BBBBBB',
-            status: 'BBBBBB',
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            mode: 'BBBBBB',
+            ammount: 1,
+            unusedAmmount: 1,
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            invoicePaidDate: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            payDate: currentDate,
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );
@@ -120,23 +110,24 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             invoiceNo: 'BBBBBB',
-            paymentAmt: 1,
-            invoicePaidDate: currentDate.format(DATE_FORMAT),
+            payDate: currentDate.format(DATE_FORMAT),
             payRefNo: 'BBBBBB',
-            status: 'BBBBBB',
-            createdOn: currentDate.format(DATE_TIME_FORMAT),
+            mode: 'BBBBBB',
+            ammount: 1,
+            unusedAmmount: 1,
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
-            updatedOn: currentDate.format(DATE_TIME_FORMAT),
-            updatedBy: 'BBBBBB'
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB'
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            invoicePaidDate: currentDate,
-            createdOn: currentDate,
-            updatedOn: currentDate
+            payDate: currentDate,
+            createdDate: currentDate,
+            lastModifiedDate: currentDate
           },
           returnedFromService
         );

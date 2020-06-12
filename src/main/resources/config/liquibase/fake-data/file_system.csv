@@ -1,4 +1,4 @@
-id;data;data_content_type;file_name;created_on;created_by;updated_on;updated_by
+id;data;data_content_type;file_name;created_date;created_by;last_modified_date;last_modified_by
 1;../fake-data/blob/hipster.png;image/png;generate;2020-03-11T09:53:52;Focused;2020-03-11T23:44:00;productivity
 2;../fake-data/blob/hipster.png;image/png;networks;2020-03-12T06:21:30;invoice robust;2020-03-12T01:54:17;Alabama withdrawal
 3;../fake-data/blob/hipster.png;image/png;THX Minnesota;2020-03-11T19:13:05;Cotton optimize B2C;2020-03-11T23:07:53;payment Representative

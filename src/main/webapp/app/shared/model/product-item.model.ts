@@ -7,10 +7,10 @@ export interface IProductItem {
   description?: string;
   defaultQty?: number;
   price?: number;
-  createdOn?: Moment;
+  createdDate?: Moment;
   createdBy?: string;
-  updatedOn?: Moment;
-  updatedBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
   customers?: ICustomer[];
 }
 
@@ -21,10 +21,10 @@ export class ProductItem implements IProductItem {
     public description?: string,
     public defaultQty?: number,
     public price?: number,
-    public createdOn?: Moment,
+    public createdDate?: Moment,
     public createdBy?: string,
-    public updatedOn?: Moment,
-    public updatedBy?: string,
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
     public customers?: ICustomer[]
   ) {}
 }

@@ -105,7 +105,7 @@
             "fieldType": "Boolean"
         },
         {
-            "fieldName": "createdOn",
+            "fieldName": "createdDate",
             "fieldType": "Instant"
         },
         {
@@ -113,31 +113,15 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "updatedOn",
+            "fieldName": "lastModifiedDate",
             "fieldType": "Instant"
         },
         {
-            "fieldName": "updatedBy",
+            "fieldName": "lastModifiedBy",
             "fieldType": "String"
         }
     ],
     "relationships": [
-        {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "location",
-            "otherEntityRelationshipName": "trippick",
-            "relationshipName": "pickupLocation",
-            "otherEntityField": "address",
-            "ownerSide": true
-        },
-        {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "location",
-            "otherEntityRelationshipName": "tripdrop",
-            "relationshipName": "dropLocation",
-            "otherEntityField": "address",
-            "ownerSide": true
-        },
         {
             "relationshipType": "one-to-many",
             "otherEntityName": "invoice",
@@ -149,6 +133,20 @@
             "otherEntityName": "container",
             "otherEntityRelationshipName": "trip",
             "relationshipName": "container"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "location",
+            "otherEntityRelationshipName": "trippick",
+            "relationshipName": "pickupLocation",
+            "otherEntityField": "address"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "location",
+            "otherEntityRelationshipName": "tripdrop",
+            "relationshipName": "dropLocation",
+            "otherEntityField": "address"
         },
         {
             "relationshipType": "many-to-one",

@@ -10,7 +10,6 @@ import { createRequestOption, SearchWithPagination } from 'app/shared/util/reque
 import { IInvoice } from 'app/shared/model/invoice.model';
 
 type EntityResponseType = HttpResponse<IInvoice>;
-
 type EntityArrayResponseType = HttpResponse<IInvoice[]>;
 
 @Injectable({ providedIn: 'root' })
@@ -40,12 +39,6 @@ export class InvoiceService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  findMaxId(): Observable<EntityResponseType> {
-    return this.http
-      .get<IInvoice>(`${this.resourceUrl}/getEntityMaxId`, { observe: 'response' })
-      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
-  }
-
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
@@ -70,8 +63,8 @@ export class InvoiceService {
       invoicePaidDate:
         invoice.invoicePaidDate && invoice.invoicePaidDate.isValid() ? invoice.invoicePaidDate.format(DATE_FORMAT) : undefined,
       invoiceDueDate: invoice.invoiceDueDate && invoice.invoiceDueDate.isValid() ? invoice.invoiceDueDate.format(DATE_FORMAT) : undefined,
-      createdOn: invoice.createdOn && invoice.createdOn.isValid() ? invoice.createdOn.toJSON() : undefined,
-      updatedOn: invoice.updatedOn && invoice.updatedOn.isValid() ? invoice.updatedOn.toJSON() : undefined
+      createdDate: invoice.createdDate && invoice.createdDate.isValid() ? invoice.createdDate.toJSON() : undefined,
+      lastModifiedDate: invoice.lastModifiedDate && invoice.lastModifiedDate.isValid() ? invoice.lastModifiedDate.toJSON() : undefined
     });
     return copy;
   }
@@ -81,8 +74,8 @@ export class InvoiceService {
       res.body.invoiceDate = res.body.invoiceDate ? moment(res.body.invoiceDate) : undefined;
       res.body.invoicePaidDate = res.body.invoicePaidDate ? moment(res.body.invoicePaidDate) : undefined;
       res.body.invoiceDueDate = res.body.invoiceDueDate ? moment(res.body.invoiceDueDate) : undefined;
-      res.body.createdOn = res.body.createdOn ? moment(res.body.createdOn) : undefined;
-      res.body.updatedOn = res.body.updatedOn ? moment(res.body.updatedOn) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -93,8 +86,8 @@ export class InvoiceService {
         invoice.invoiceDate = invoice.invoiceDate ? moment(invoice.invoiceDate) : undefined;
         invoice.invoicePaidDate = invoice.invoicePaidDate ? moment(invoice.invoicePaidDate) : undefined;
         invoice.invoiceDueDate = invoice.invoiceDueDate ? moment(invoice.invoiceDueDate) : undefined;
-        invoice.createdOn = invoice.createdOn ? moment(invoice.createdOn) : undefined;
-        invoice.updatedOn = invoice.updatedOn ? moment(invoice.updatedOn) : undefined;
+        invoice.createdDate = invoice.createdDate ? moment(invoice.createdDate) : undefined;
+        invoice.lastModifiedDate = invoice.lastModifiedDate ? moment(invoice.lastModifiedDate) : undefined;
       });
     }
     return res;

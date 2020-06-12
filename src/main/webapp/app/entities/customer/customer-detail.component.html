@@ -1,5 +1,51 @@
+<style>
+
+dl {
+  display: grid;
+  grid-template-columns: max-content auto;
+}
+
+dt {
+  grid-column-start: 1;
+}
+
+dd {
+  grid-column-start: 2;
+}
+
+dt { float: left; width: 100px; }
+dd { margin-left: 100px; }
+</style>
+
 <div class="row justify-content-center">
-    <div class="col-8">
+
+ <div class="col-8">
+ <!-- Nav tabs -->
+<ul class="nav nav-tabs">
+ <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="customer/{{ customer?.id }}/view">Profile</a>
+    
+    
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="customer/{{ customer?.id }}/invoice">Invoice</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="customer/{{ customer?.id }}/email">Notifications</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="customer/{{ customer?.id }}/payment">Payments</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="customer/{{ customer?.id }}/sendEmail">Create New Email</a>
+  </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+
+   <div  class="tab-pane container active" id="home">
+   <div class="col-6">
         <div *ngIf="customer">
             <h2><span jhiTranslate="tmsV1ApplicationApp.customer.detail.title">Customer</span> {{ customer.id }}</h2>
 
@@ -144,21 +190,21 @@
                 <dd>
                     <span>{{ customer.timeZone }}</span>
                 </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.createdOn">Created On</span></dt>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.createdDate">Created Date</span></dt>
                 <dd>
-                    <span>{{ customer.createdOn }}</span>
+                    <span>{{ customer.createdDate }}</span>
                 </dd>
                 <dt><span jhiTranslate="tmsV1ApplicationApp.customer.createdBy">Created By</span></dt>
                 <dd>
                     <span>{{ customer.createdBy }}</span>
                 </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.updatedOn">Updated On</span></dt>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.lastModifiedDate">Last Modified Date</span></dt>
                 <dd>
-                    <span>{{ customer.updatedOn }}</span>
+                    <span>{{ customer.lastModifiedDate }}</span>
                 </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.updatedBy">Updated By</span></dt>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.customer.lastModifiedBy">Last Modified By</span></dt>
                 <dd>
-                    <span>{{ customer.updatedBy }}</span>
+                    <span>{{ customer.lastModifiedBy }}</span>
                 </dd>
                 <dt><span jhiTranslate="tmsV1ApplicationApp.customer.charge">Charge</span></dt>
                 <dd>
@@ -181,4 +227,12 @@
             </button>
         </div>
     </div>
+   </div>
+  <div class="tab-pane container active" id="home">Customer Home</div>
+  <div class="tab-pane container fade" id="menu1">Customer Data</div>
+  <div class="tab-pane container fade" id="menu2">...</div>
+</div>
+ </div>
+
+    
 </div>

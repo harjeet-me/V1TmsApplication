@@ -93,17 +93,17 @@ public class DriverResourceIT {
     private static final ToggleStatus DEFAULT_STATUS = ToggleStatus.ACTIVE;
     private static final ToggleStatus UPDATED_STATUS = ToggleStatus.INACTIVE;
 
-    private static final Instant DEFAULT_CREATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_UPDATED_ON = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_UPDATED_ON = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_UPDATED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_UPDATED_BY = "BBBBBBBBBB";
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     @Autowired
     private DriverRepository driverRepository;
@@ -152,10 +152,10 @@ public class DriverResourceIT {
             .contractDoc(DEFAULT_CONTRACT_DOC)
             .contractDocContentType(DEFAULT_CONTRACT_DOC_CONTENT_TYPE)
             .status(DEFAULT_STATUS)
-            .createdOn(DEFAULT_CREATED_ON)
+            .createdDate(DEFAULT_CREATED_DATE)
             .createdBy(DEFAULT_CREATED_BY)
-            .updatedOn(DEFAULT_UPDATED_ON)
-            .updatedBy(DEFAULT_UPDATED_BY);
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return driver;
     }
     /**
@@ -183,10 +183,10 @@ public class DriverResourceIT {
             .contractDoc(UPDATED_CONTRACT_DOC)
             .contractDocContentType(UPDATED_CONTRACT_DOC_CONTENT_TYPE)
             .status(UPDATED_STATUS)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return driver;
     }
 
@@ -227,10 +227,10 @@ public class DriverResourceIT {
         assertThat(testDriver.getContractDoc()).isEqualTo(DEFAULT_CONTRACT_DOC);
         assertThat(testDriver.getContractDocContentType()).isEqualTo(DEFAULT_CONTRACT_DOC_CONTENT_TYPE);
         assertThat(testDriver.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testDriver.getCreatedOn()).isEqualTo(DEFAULT_CREATED_ON);
+        assertThat(testDriver.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testDriver.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testDriver.getUpdatedOn()).isEqualTo(DEFAULT_UPDATED_ON);
-        assertThat(testDriver.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
+        assertThat(testDriver.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testDriver.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
 
         // Validate the Driver in Elasticsearch
         verify(mockDriverSearchRepository, times(1)).save(testDriver);
@@ -287,10 +287,10 @@ public class DriverResourceIT {
             .andExpect(jsonPath("$.[*].contractDocContentType").value(hasItem(DEFAULT_CONTRACT_DOC_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].contractDoc").value(hasItem(Base64Utils.encodeToString(DEFAULT_CONTRACT_DOC))))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
     
     @Test
@@ -321,10 +321,10 @@ public class DriverResourceIT {
             .andExpect(jsonPath("$.contractDocContentType").value(DEFAULT_CONTRACT_DOC_CONTENT_TYPE))
             .andExpect(jsonPath("$.contractDoc").value(Base64Utils.encodeToString(DEFAULT_CONTRACT_DOC)))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
-            .andExpect(jsonPath("$.createdOn").value(DEFAULT_CREATED_ON.toString()))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
-            .andExpect(jsonPath("$.updatedOn").value(DEFAULT_UPDATED_ON.toString()))
-            .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY));
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
 
     @Test
@@ -367,10 +367,10 @@ public class DriverResourceIT {
             .contractDoc(UPDATED_CONTRACT_DOC)
             .contractDocContentType(UPDATED_CONTRACT_DOC_CONTENT_TYPE)
             .status(UPDATED_STATUS)
-            .createdOn(UPDATED_CREATED_ON)
+            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
-            .updatedOn(UPDATED_UPDATED_ON)
-            .updatedBy(UPDATED_UPDATED_BY);
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restDriverMockMvc.perform(put("/api/drivers").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -398,10 +398,10 @@ public class DriverResourceIT {
         assertThat(testDriver.getContractDoc()).isEqualTo(UPDATED_CONTRACT_DOC);
         assertThat(testDriver.getContractDocContentType()).isEqualTo(UPDATED_CONTRACT_DOC_CONTENT_TYPE);
         assertThat(testDriver.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testDriver.getCreatedOn()).isEqualTo(UPDATED_CREATED_ON);
+        assertThat(testDriver.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testDriver.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testDriver.getUpdatedOn()).isEqualTo(UPDATED_UPDATED_ON);
-        assertThat(testDriver.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
+        assertThat(testDriver.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testDriver.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
 
         // Validate the Driver in Elasticsearch
         verify(mockDriverSearchRepository, times(1)).save(testDriver);
@@ -478,9 +478,9 @@ public class DriverResourceIT {
             .andExpect(jsonPath("$.[*].contractDocContentType").value(hasItem(DEFAULT_CONTRACT_DOC_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].contractDoc").value(hasItem(Base64Utils.encodeToString(DEFAULT_CONTRACT_DOC))))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
-            .andExpect(jsonPath("$.[*].createdOn").value(hasItem(DEFAULT_CREATED_ON.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].updatedOn").value(hasItem(DEFAULT_UPDATED_ON.toString())))
-            .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY)));
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 }

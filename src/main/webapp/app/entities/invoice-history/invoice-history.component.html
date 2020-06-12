@@ -43,10 +43,10 @@
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.status">Status</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.comment">Comment</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.createdOn">Created On</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.createdDate">Created Date</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.createdBy">Created By</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.updatedOn">Updated On</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.updatedBy">Updated By</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.lastModifiedDate">Last Modified Date</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.lastModifiedBy">Last Modified By</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.previous">Previous</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.next">Next</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.invoiceHistory.invoice">Invoice</span></th>
@@ -58,10 +58,10 @@
                     <td><a [routerLink]="['/invoice-history', invoiceHistory.id, 'view']">{{ invoiceHistory.id }}</a></td>
                     <td jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiceStatus.' + invoiceHistory.status }}">{{ invoiceHistory.status }}</td>
                     <td>{{ invoiceHistory.comment }}</td>
-                    <td>{{ invoiceHistory.createdOn | date:'medium' }}</td>
+                    <td>{{ invoiceHistory.createdDate | date:'medium' }}</td>
                     <td>{{ invoiceHistory.createdBy }}</td>
-                    <td>{{ invoiceHistory.updatedOn | date:'medium' }}</td>
-                    <td>{{ invoiceHistory.updatedBy }}</td>
+                    <td>{{ invoiceHistory.lastModifiedDate | date:'medium' }}</td>
+                    <td>{{ invoiceHistory.lastModifiedBy }}</td>
                     <td>
                         <div *ngIf="invoiceHistory.previous">
                             <a [routerLink]="['/invoice-history', invoiceHistory.previous?.id, 'view']" >{{ invoiceHistory.previous?.status }}</a>
