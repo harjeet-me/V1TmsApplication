@@ -1,5 +1,9 @@
 package com.tms.v1.web.rest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tms.v1.domain.DataList;
+import com.tms.v1.domain.DataObject;
 import com.tms.v1.domain.Invoice;
 import com.tms.v1.service.InvoiceService;
 import com.tms.v1.web.rest.errors.BadRequestAlertException;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
@@ -110,7 +115,20 @@ public class InvoiceResource {
     public ResponseEntity<Invoice> getInvoice(@PathVariable Long id) {
         log.debug("REST request to get Invoice : {}", id);
         Optional<Invoice> invoice = invoiceService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(invoice);
+		/*
+		 * Invoice object =invoice.get();
+		 * 
+		 * DataList dataList= new DataList(); DataObject dataObject = new DataObject();
+		 * dataObject.setName("EMAIL"); dataObject.setValue("132323232");
+		 * 
+		 * DataObject dataObject1 = new DataObject(); dataObject.setName("EMAIL");
+		 * dataObject.setValue("132323232");
+		 * dataList.setDataObjects(Arrays.asList(dataObject,dataObject1)); ObjectMapper
+		 * Obj = new ObjectMapper(); try { String jsonStr =
+		 * Obj.writeValueAsString(dataList); object.setPayterm(jsonStr); } catch
+		 * (JsonProcessingException e) { throw new IllegalStateException(e); }
+		 */
+        return ResponseUtil.wrapOrNotFound(invoice); 
     }
 
     /**

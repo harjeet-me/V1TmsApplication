@@ -272,7 +272,12 @@
 				<fa-icon icon="pencil-alt"></fa-icon>
 				&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
 			</button>
-			<a href="email/1/edit">  Send</a>
+			<button type="button"  
+				class="btn btn-warning">
+				<fa-icon icon="fa-envelope"></fa-icon>
+				<a  href="email/{{invoice.notification?.id}}/edit">  Send</a>
+			</button>
+			
 			
 			
 		</div>

@@ -48,7 +48,7 @@ public class EmailServiceImpl implements EmailService {
     public Email save(Email email) {
         log.debug("Request to save Email : {}", email);
         
-        if( email.getAttachment()!=null) {
+        if( email.getAttachment()!=null && email.getStatus()!=null && email.getStatus().equals("SEND_READY")) {
         	mailService.sendInvoiceMailFRomEmail(email);
         	email.setStatus("SENT");
         }
