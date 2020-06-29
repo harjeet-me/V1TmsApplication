@@ -111,7 +111,7 @@ export class EmailUpdateComponent implements OnInit {
     window.history.back();
   }
   sendState(): void {
-    this.editForm.patchValue({ status: 'SENT' });
+    this.editForm.patchValue({ status: 'SEND_READY' });
     this.save();
   }
 

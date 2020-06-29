@@ -1,21 +1,23 @@
 package com.tms.v1.service.impl;
 
-import com.tms.v1.service.PaymentService;
-import com.tms.v1.domain.Payment;
-import com.tms.v1.repository.PaymentRepository;
-import com.tms.v1.repository.search.PaymentSearchRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.tms.v1.domain.Payment;
+import com.tms.v1.repository.PaymentRepository;
+import com.tms.v1.repository.search.PaymentSearchRepository;
+import com.tms.v1.service.PaymentService;
 
 /**
  * Service Implementation for managing {@link Payment}.
@@ -27,7 +29,10 @@ public class PaymentServiceImpl implements PaymentService {
     private final Logger log = LoggerFactory.getLogger(PaymentServiceImpl.class);
 
     private final PaymentRepository paymentRepository;
-
+    
+    @Autowired
+     PaymentFacade paymentFacade;
+    
     private final PaymentSearchRepository paymentSearchRepository;
 
     public PaymentServiceImpl(PaymentRepository paymentRepository, PaymentSearchRepository paymentSearchRepository) {
@@ -44,6 +49,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public Payment save(Payment payment) {
         log.debug("Request to save Payment : {}", payment);
+         payment =    paymentFacade.payInvoice(payment);
         Payment result = paymentRepository.save(payment);
         paymentSearchRepository.save(result);
         return result;
@@ -100,4 +106,9 @@ public class PaymentServiceImpl implements PaymentService {
             .stream(paymentSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
     }
+
+	@Override
+	public Set<Payment> findByCustomerId(Long id) {
+		return paymentRepository.findByCustomerId(id);
+	}
 }

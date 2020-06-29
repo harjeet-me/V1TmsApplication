@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -44,7 +45,7 @@ public class TransactionsRecordServiceImpl implements TransactionsRecordService 
     public TransactionsRecord save(TransactionsRecord transactionsRecord) {
         log.debug("Request to save TransactionsRecord : {}", transactionsRecord);
         TransactionsRecord result = transactionsRecordRepository.save(transactionsRecord);
-        transactionsRecordSearchRepository.save(result);
+      //  transactionsRecordSearchRepository.save(result);
         return result;
     }
 
@@ -98,4 +99,9 @@ public class TransactionsRecordServiceImpl implements TransactionsRecordService 
     public Page<TransactionsRecord> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of TransactionsRecords for query {}", query);
         return transactionsRecordSearchRepository.search(queryStringQuery(query), pageable);    }
+
+	@Override
+	public List<TransactionsRecord> findByDescription(String description) {
+		return transactionsRecordRepository.findByDescription(description);
+	}
 }

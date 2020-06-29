@@ -22,4 +22,5 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
 	public List<Invoice> findByCustomer_IdAndInvoiceDateBetween(Long customerId,LocalDate invoiceDateStart , LocalDate invoiceDateEnd);
 	@Query("SELECT coalesce(max(inv.id), 0) FROM Invoice inv")
 	Optional<Long> getMaxId();
+	public Set<Invoice> findByCustomerId(Long customerId);
 }

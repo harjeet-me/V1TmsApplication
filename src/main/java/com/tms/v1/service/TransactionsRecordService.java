@@ -5,6 +5,7 @@ import com.tms.v1.domain.TransactionsRecord;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -52,4 +53,7 @@ public interface TransactionsRecordService {
      * @return the list of entities.
      */
     Page<TransactionsRecord> search(String query, Pageable pageable);
+    
+    
+    public List<TransactionsRecord> findByDescription(String description);
 }

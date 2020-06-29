@@ -5,6 +5,7 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,10 +15,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tms.v1.domain.Customer;
+import com.tms.v1.domain.Email;
 import com.tms.v1.domain.Invoice;
 import com.tms.v1.repository.InvoiceItemRepository;
 import com.tms.v1.repository.InvoiceRepository;
 import com.tms.v1.repository.search.InvoiceSearchRepository;
+import com.tms.v1.service.EmailService;
 import com.tms.v1.service.InvoiceService;
 import com.tms.v1.service.mapper.InvoiceUtil;
 
@@ -35,6 +39,9 @@ public class InvoiceServiceImpl implements InvoiceService {
 	
 	@Autowired
 	InvoiceItemRepository invoiceItemRepository;
+	
+	@Autowired
+	EmailService emailService;
 
 	private final InvoiceRepository invoiceRepository;
 
@@ -55,7 +62,12 @@ public class InvoiceServiceImpl implements InvoiceService {
 	public Invoice save(Invoice invoice) { 
 		log.debug("Request to save Invoice : {}", invoice);
 		Invoice result = invoiceUtil.save(invoice);
-		invoiceSearchRepository.save(result);
+		/*
+		 * Email email = result.getNotification(); Customer customer= new Customer();
+		 * customer.setId(invoice.getCustomer().getId()); email.setCustomer(customer);
+		 * emailService.save(email);
+		 */		//invoiceSearchRepository.save(result);
+		
 		return result;
 	}
 
@@ -122,6 +134,11 @@ public class InvoiceServiceImpl implements InvoiceService {
 	public List<Invoice> findByCustomer_IdAndInvoiceDateBetween(Long customerId, LocalDate invoiceDateStart,
 			LocalDate invoiceDateEnd) {
 		return invoiceRepository.findByCustomer_IdAndInvoiceDateBetween(customerId, invoiceDateStart, invoiceDateEnd);
+	}
+	
+	@Override
+	public Set<Invoice> findByCustomerId(Long customerId) {
+		return invoiceRepository.findByCustomerId(customerId);
 	}
 
 	@Override

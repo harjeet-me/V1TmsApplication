@@ -64,4 +64,7 @@ public interface InvoiceService {
 	List<Invoice> findByCustomer_IdAndInvoiceDateBetween(Long customerId,LocalDate invoiceDateStart , LocalDate invoiceDateEnd);
 
 	Optional<Long> getMaxInvoiceId();
+
+
+	Set<Invoice> findByCustomerId(Long id);
 }

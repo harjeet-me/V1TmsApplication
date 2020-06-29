@@ -1,3 +1,4 @@
+import { TripWizardComponent } from './trip-wizard/trip-wizard.component';
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
@@ -64,6 +65,19 @@ export const tripRoute: Routes = [
   {
     path: 'new',
     component: TripUpdateComponent,
+    resolve: {
+      trip: TripResolve
+    },
+    data: {
+      authorities: [Authority.USER],
+      pageTitle: 'tmsV1ApplicationApp.trip.home.title'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+
+  {
+    path: 'step1',
+    component: TripWizardComponent,
     resolve: {
       trip: TripResolve
     },

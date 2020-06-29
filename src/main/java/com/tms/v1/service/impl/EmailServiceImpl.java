@@ -1,10 +1,11 @@
 package com.tms.v1.service.impl;
 
-import com.tms.v1.service.EmailService;
-import com.tms.v1.service.MailService;
-import com.tms.v1.domain.Email;
-import com.tms.v1.repository.EmailRepository;
-import com.tms.v1.repository.search.EmailSearchRepository;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+
+import java.time.Instant;
+import java.util.Optional;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import com.tms.v1.domain.Email;
+import com.tms.v1.repository.EmailRepository;
+import com.tms.v1.repository.search.EmailSearchRepository;
+import com.tms.v1.service.EmailService;
+import com.tms.v1.service.MailService;
 
 /**
  * Service Implementation for managing {@link Email}.
@@ -50,6 +53,7 @@ public class EmailServiceImpl implements EmailService {
         
         if( email.getAttachment()!=null && email.getStatus()!=null && email.getStatus().equals("SEND_READY")) {
         	mailService.sendInvoiceMailFRomEmail(email);
+        	email.setSentDateTime(Instant.now());
         	email.setStatus("SENT");
         }
         
@@ -108,4 +112,9 @@ public class EmailServiceImpl implements EmailService {
     public Page<Email> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Emails for query {}", query);
         return emailSearchRepository.search(queryStringQuery(query), pageable);    }
+    
+    @Override
+	public Set<Email> findByCustomerId(Long customerId) {
+		return emailRepository.findByCustomerId(customerId);
+	}
 }

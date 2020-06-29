@@ -61,6 +61,8 @@ public class InvoiceUtil {
 	
 	@Autowired
 	TransactionsRecordService recordService;
+	
+	
 	@Autowired
 	private  InvoiceRepository invoiceRepository;
 
@@ -160,7 +162,9 @@ public class InvoiceUtil {
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Exception Occured Generating Invoice ", e);
+			
 		}
 		
 		
@@ -216,17 +220,38 @@ public class InvoiceUtil {
 		  if(invoice.getNotification()!=null ) {
 			 // already exist email for invoice  
 			 email.setId(invoice.getNotification().getId());
+			 email.setCustomer(null);
 		  }
+		  
+			/*
+			 * Customer cust= new Customer(); cust.setId(invoice.getCustomer().getId());
+			 * email.setCustomer(cust);
+			 */
 		  emailService.save(email);
-		  invoice.setNotification(email); }
+		  invoice.setNotification(email);
+		 
+		 
+		 // customer.getEmails().add(email);
+		 // customerService.save(customer);
+		  
+		  
+		  }
 		 
 		
-		if (invoice.getStatus()!=null && invoice.getStatus()==InvoiceStatus.GENERATED) {			
+		if (invoice.getStatus()!=null && invoice.getStatus()==InvoiceStatus.GENERATED) {
+			
+		 List<TransactionsRecord>  records=  recordService.findByDescription(this.getTxDescription(invoice));
+		 
+			
 			TransactionsRecord transactionsRecord = new TransactionsRecord();
-			transactionsRecord.setCustomer(invoice.getCustomer());
+			
+			if(records!=null&& records.size()>0) {
+				 transactionsRecord.setId(records.get(0).getId());
+			 }
+		     transactionsRecord.setCustomer(invoice.getCustomer());
 		//	transactionsRecord.setAccount(invoice.getCustomer().getAccounts());
 			transactionsRecord.setTxType(TransactionType.INVOICE);
-			transactionsRecord.description("INVOICE CREATED -"+invoice.getInvoiceNo());
+			transactionsRecord.description(this.getTxDescription(invoice));
 			transactionsRecord.setTxAmmount(invoice.getInvoiceTotal());			
 			recordService.save(transactionsRecord);			
 		
@@ -235,6 +260,10 @@ public class InvoiceUtil {
 		Invoice result = invoiceRepository.save(invoice);
 		
 		return result;
+	}
+	
+	private String getTxDescription(Invoice invoice) {
+		return "INVOICE CREATED -"+invoice.getId();
 	}
 
 }

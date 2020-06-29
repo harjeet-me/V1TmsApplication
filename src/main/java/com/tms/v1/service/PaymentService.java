@@ -4,6 +4,7 @@ import com.tms.v1.domain.Payment;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service Interface for managing {@link Payment}.
@@ -48,4 +49,6 @@ public interface PaymentService {
      * @return the list of entities.
      */
     List<Payment> search(String query);
+
+	Set<Payment> findByCustomerId(Long id);
 }

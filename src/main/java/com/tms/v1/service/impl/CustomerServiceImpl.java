@@ -1,23 +1,32 @@
 package com.tms.v1.service.impl;
 
-import com.tms.v1.service.CustomerService;
-import com.tms.v1.domain.Customer;
-import com.tms.v1.repository.CustomerRepository;
-import com.tms.v1.repository.search.CustomerSearchRepository;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import org.jfree.util.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import com.tms.v1.domain.Customer;
+import com.tms.v1.domain.Email;
+import com.tms.v1.domain.Invoice;
+import com.tms.v1.domain.Payment;
+import com.tms.v1.repository.CustomerRepository;
+import com.tms.v1.repository.search.CustomerSearchRepository;
+import com.tms.v1.service.CustomerService;
+import com.tms.v1.service.EmailService;
+import com.tms.v1.service.InvoiceService;
+import com.tms.v1.service.PaymentService;
 
 /**
  * Service Implementation for managing {@link Customer}.
@@ -31,6 +40,14 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
 
     private final CustomerSearchRepository customerSearchRepository;
+    
+    @Autowired
+    InvoiceService invoiceService;
+    @Autowired
+    EmailService emailService;
+    @Autowired
+    PaymentService paymentService;
+    
 
     public CustomerServiceImpl(CustomerRepository customerRepository, CustomerSearchRepository customerSearchRepository) {
         this.customerRepository = customerRepository;
@@ -97,7 +114,20 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional(readOnly = true)
     public Optional<Customer> findOne(Long id) {
         log.debug("Request to get Customer : {}", id);
-        return customerRepository.findOneWithEagerRelationships(id);
+         
+        Customer customer=   customerRepository.findOneWithEagerRelationships(id).get();
+        
+       Set<Invoice> invoices =invoiceService.findByCustomerId(id);
+       customer.setInvoices(invoices);
+      
+	   Set<Email> emails =emailService.findByCustomerId(id); 
+	   customer.setEmails(emails);
+       Set<Payment> payments =paymentService.findByCustomerId(id);
+       customer.setPayments(payments);
+       Log.debug("invoices >>>>>>>>>>>>>>>>>>"+invoices); 
+       
+       
+        return Optional.of(customer);
     }
 
     /**

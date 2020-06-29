@@ -1,9 +1,11 @@
-<div class="row justify-content-center">
-
- <div class="col-8">
- 
-   <div  class="tab-pane container active" id="home">
-   <div class="col-6">
+<div class="container">
+      
+  
+<ngb-tabset [destroyOnHide]="false">
+  
+  <ngb-tab title="Customer Profile">
+    <ng-template ngbTabContent>
+      <div class="col-12">
         <div *ngIf="customer">
             <h2><span jhiTranslate="tmsV1ApplicationApp.customer.detail.title">Customer</span> {{ customer.id }}</h2>
 
@@ -184,6 +186,120 @@
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
         </div>
+    </div>   </ng-template>
+  </ngb-tab>
+   
+  <ngb-tab>
+    <ng-template ngbTabTitle>Invoice List</ng-template>
+    <ng-template ngbTabContent>
+      <div class="col-6">
+        <div *ngIf="customer">
+    
+    <div class="alert alert-warning" id="no-result" *ngIf="customer.invoices?.length === 0">
+        <span jhiTranslate="tmsV1ApplicationApp.invoice.home.notFound">No invoices found</span>
     </div>
-   </div>
 
+    <div >
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr  >
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span> </th>
+                    <th scope="col"  ><span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceNo">Invoice No</span> </th>
+                          <th scope="col"  ><span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceTotal">Invoice Total</span> </th>
+                    <th scope="col"  > <span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceDate">Invoice Date</span> </th>
+                      <th scope="col"  ><span jhiTranslate="tmsV1ApplicationApp.invoice.invoiceDueDate">Invoice Due Date</span> </th>
+                    <th scope="col"  ><span jhiTranslate="tmsV1ApplicationApp.invoice.status">Status</span> </th>
+                    <th scope="col"  ><span jhiTranslate="tmsV1ApplicationApp.invoice.invoicePdf">Invoice Pdf</span> </th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let invoice of customer.invoices ; let last = last">
+                    <td><a [routerLink]="['/invoice', invoice.id, 'view']">{{ invoice.id }}</a></td>
+                    <td>{{ invoice.invoiceNo }}</td>
+                                       <td>{{ invoice.invoiceTotal }}</td>
+                    <td>{{ invoice.invoiceDate | date:'mediumDate' }}</td>
+                                       <td>{{ invoice.invoiceDueDate | date:'mediumDate' }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.InvoiceStatus.' + invoice.status }}">{{ invoice.status }}</td>
+                    <td>
+                        <a *ngIf="invoice.invoicePdf" (click)="openFile(invoice.invoicePdfContentType, invoice.invoicePdf)" jhiTranslate="entity.action.open">open</a>
+                        <span *ngIf="invoice.invoicePdf">{{ invoice.invoicePdfContentType }}, {{ byteSize(invoice.invoicePdf) }}</span>
+                    </td>
+                                    
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+               </div>
+               </div>
+    </ng-template>
+  </ngb-tab>
+   
+  <ngb-tab>
+    <ng-template ngbTabTitle>Notification</ng-template>
+    <ng-template ngbTabContent>
+       <div class="alert alert-warning" id="no-result" *ngIf="customer?.emails?.length === 0">
+        <span jhiTranslate="tmsV1ApplicationApp.email.home.notFound">No emails found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="customer?.emails?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr >
+                    <th scope="col"  ><span jhiTranslate="global.field.id">ID</span> </th>
+                    <th scope="col"  ><span jhiTranslate="tmsV1ApplicationApp.email.userto">Userto</span> </th>
+                    <th scope="col"  ><span jhiTranslate="tmsV1ApplicationApp.email.subject">Subject</span> </th>
+                    <th scope="col"  ><span jhiTranslate="tmsV1ApplicationApp.email.message">Message</span> </th>
+                    <th scope="col"  ><span jhiTranslate="tmsV1ApplicationApp.email.status">Status</span> </th>
+                    <th scope="col"  ><span jhiTranslate="tmsV1ApplicationApp.email.sentDateTime">Sent Date Time</span> </th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let email of customer?.emails ">
+                    <td><a [routerLink]="['/email', email.id, 'view']">{{ email.id }}</a></td>
+                    <td>{{ email.userto }}</td>
+                    <td>{{ email.subject }}</td>
+                    <td>{{ email.status }}</td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </ng-template>
+  </ngb-tab>
+   
+  <ngb-tab title="Default Charges" >
+    <ng-template ngbTabContent>
+    <div class="col-12">
+        <div *ngIf="customer">
+    
+    <dl>
+     <dt><span jhiTranslate="tmsV1ApplicationApp.customer.charge">Charge</span></dt>
+                <dd>
+                    <span *ngFor="let charge of customer?.charges; let last = last">
+                        <a [routerLink]="['/product-item', charge?.id, 'view']">{{ charge.itemName }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+                
+             
+             
+            </dl>
+               </div>
+               </div>
+    </ng-template>
+  </ngb-tab>
+   
+</ngb-tabset>
+</div>
+
+<div class="row justify-content-center">
+
+ <div class="col-8">
+
+</div>
+
+    
+</div>

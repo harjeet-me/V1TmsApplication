@@ -1,60 +1,94 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-payment-heading" jhiTranslate="tmsV1ApplicationApp.payment.home.createOrEditLabel">Create or edit a Payment</h2>
+	<div class="col-8">
+		<form name="editForm" role="form" novalidate (ngSubmit)="save()"
+			[formGroup]="editForm">
+			<h2 id="jhi-payment-heading"
+				jhiTranslate="tmsV1ApplicationApp.payment.home.createOrEditLabel">Create
+				or edit a Payment</h2>
 
-            <div>
-                <jhi-alert-error></jhi-alert-error>
+			<div>
+				<jhi-alert-error></jhi-alert-error>
 
-                <div class="form-group" [hidden]="!editForm.get('id')!.value">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
-                </div>
+				<div class="form-group" [hidden]="!editForm.get('id')!.value">
+					<label for="id" jhiTranslate="global.field.id">ID</label> <input
+						type="text" class="form-control" id="id" name="id"
+						formControlName="id" readonly />
+				</div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.payment.invoiceNo" for="field_invoiceNo">Invoice No</label>
-                    <input type="text" class="form-control" name="invoiceNo" id="field_invoiceNo"
-                           formControlName="invoiceNo"/>
-                </div>
+				<div class="form-group">
+					<label class="form-control-label"
+						jhiTranslate="tmsV1ApplicationApp.payment.customer"
+						for="field_customer">Customer</label> <select class="form-control"
+						id="field_customer" name="customer" formControlName="customer">
+						<option [ngValue]="null"></option>
+						<option
+							[ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption"
+							*ngFor="let customerOption of customers; trackBy: trackById">{{
+							customerOption.company }}</option>
+					</select>
+				</div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.payment.payDate" for="field_payDate">Pay Date</label>
-                    <div class="input-group">
-                        <input id="field_payDate" type="text" class="form-control" name="payDate" ngbDatepicker #payDateDp="ngbDatepicker" formControlName="payDate"/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="payDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
+				<div class="form-group">
+					<label class="form-control-label"
+						jhiTranslate="tmsV1ApplicationApp.payment.invoiceNo"
+						for="field_invoiceNo">Invoice No</label> <input type="text"
+						class="form-control" name="invoiceNo" id="field_invoiceNo"
+						formControlName="invoiceNo" />
+				</div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.payment.payRefNo" for="field_payRefNo">Pay Ref No</label>
-                    <input type="text" class="form-control" name="payRefNo" id="field_payRefNo"
-                           formControlName="payRefNo"/>
-                </div>
+				<div class="form-group">
+					<label class="form-control-label"
+						jhiTranslate="tmsV1ApplicationApp.payment.payDate"
+						for="field_payDate">Pay Date</label>
+					<div class="input-group">
+						<input id="field_payDate" type="text" class="form-control"
+							name="payDate" ngbDatepicker #payDateDp="ngbDatepicker"
+							formControlName="payDate" /> <span class="input-group-append">
+							<button type="button" class="btn btn-secondary"
+								(click)="payDateDp.toggle()">
+								<fa-icon icon="calendar-alt"></fa-icon>
+							</button>
+						</span>
+					</div>
+				</div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.payment.mode" for="field_mode">Mode</label>
-                    <select class="form-control" name="mode" formControlName="mode" id="field_mode">
-                        <option value="CHECK">{{ 'tmsV1ApplicationApp.PayMode.CHECK' | translate }}</option>
-                        <option value="CASH">{{ 'tmsV1ApplicationApp.PayMode.CASH' | translate }}</option>
-                        <option value="BANK_TRANSFER">{{ 'tmsV1ApplicationApp.PayMode.BANK_TRANSFER' | translate }}</option>
-                    </select>
-                </div>
+				<div class="form-group">
+					<label class="form-control-label"
+						jhiTranslate="tmsV1ApplicationApp.payment.payRefNo"
+						for="field_payRefNo">Pay Ref No</label> <input type="text"
+						class="form-control" name="payRefNo" id="field_payRefNo"
+						formControlName="payRefNo" />
+				</div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.payment.ammount" for="field_ammount">Ammount</label>
-                    <input type="number" class="form-control" name="ammount" id="field_ammount"
-                           formControlName="ammount"/>
-                </div>
+				<div class="form-group">
+					<label class="form-control-label"
+						jhiTranslate="tmsV1ApplicationApp.payment.mode" for="field_mode">Mode</label>
+					<select class="form-control" name="mode" formControlName="mode"
+						id="field_mode">
+						<option value="CHECK">{{
+							'tmsV1ApplicationApp.PayMode.CHECK' | translate }}</option>
+						<option value="CASH">{{
+							'tmsV1ApplicationApp.PayMode.CASH' | translate }}</option>
+						<option value="BANK_TRANSFER">{{
+							'tmsV1ApplicationApp.PayMode.BANK_TRANSFER' | translate }}</option>
+					</select>
+				</div>
 
+				<div class="form-group">
+					<label class="form-control-label"
+						jhiTranslate="tmsV1ApplicationApp.payment.ammount"
+						for="field_ammount">Ammount</label> <input type="number"
+						class="form-control" name="ammount" id="field_ammount"
+						formControlName="ammount" />
+				</div>
+				<!-- 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.payment.unusedAmmount" for="field_unusedAmmount">Unused Ammount</label>
                     <input type="number" class="form-control" name="unusedAmmount" id="field_unusedAmmount"
                            formControlName="unusedAmmount"/>
                 </div>
 
-                <div class="form-group">
+               <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.payment.createdDate" for="field_createdDate">Created Date</label>
                     <div class="d-flex">
                         <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" formControlName="createdDate" placeholder="YYYY-MM-DD HH:mm"/>
@@ -80,24 +114,22 @@
                            formControlName="lastModifiedBy"/>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.payment.customer" for="field_customer">Customer</label>
-                    <select class="form-control" id="field_customer" name="customer" formControlName="customer">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption" *ngFor="let customerOption of customers; trackBy: trackById">{{ customerOption.company }}</option>
-                    </select>
-                </div>
+               
             </div>
+ -->
+				<div>
+					<button type="button" id="cancel-save" class="btn btn-secondary"
+						(click)="previousState()">
+						<fa-icon icon="ban"></fa-icon>
+						&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+					</button>
 
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
-
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
-            </div>
-        </form>
-    </div>
+					<button type="submit" id="save-entity"
+						[disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+						<fa-icon icon="save"></fa-icon>
+						&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+					</button>
+				</div>
+		</form>
+	</div>
 </div>
