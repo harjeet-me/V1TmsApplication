@@ -117,14 +117,15 @@ public class CustomerServiceImpl implements CustomerService {
          
         Customer customer=   customerRepository.findOneWithEagerRelationships(id).get();
         
-       Set<Invoice> invoices =invoiceService.findByCustomerId(id);
-       customer.setInvoices(invoices);
-      
-	   Set<Email> emails =emailService.findByCustomerId(id); 
-	   customer.setEmails(emails);
-       Set<Payment> payments =paymentService.findByCustomerId(id);
-       customer.setPayments(payments);
-       Log.debug("invoices >>>>>>>>>>>>>>>>>>"+invoices); 
+		/*
+		 * Set<Invoice> invoices =invoiceService.findByCustomerId(id);
+		 * customer.setInvoices(invoices);
+		 * 
+		 * Set<Email> emails =emailService.findByCustomerId(id);
+		 * customer.setEmails(emails); Set<Payment> payments
+		 * =paymentService.findByCustomerId(id); customer.setPayments(payments);
+		 * Log.debug("invoices >>>>>>>>>>>>>>>>>>"+invoices);
+		 */
        
        
         return Optional.of(customer);

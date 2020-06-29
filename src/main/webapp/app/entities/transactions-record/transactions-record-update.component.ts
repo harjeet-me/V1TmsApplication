@@ -23,6 +23,7 @@ export class TransactionsRecordUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     txType: [],
+    txRef: [],
     description: [],
     txAmmount: [],
     createdDate: [],
@@ -57,6 +58,7 @@ export class TransactionsRecordUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: transactionsRecord.id,
       txType: transactionsRecord.txType,
+      txRef: transactionsRecord.txRef,
       description: transactionsRecord.description,
       txAmmount: transactionsRecord.txAmmount,
       createdDate: transactionsRecord.createdDate ? transactionsRecord.createdDate.format(DATE_TIME_FORMAT) : null,
@@ -86,6 +88,7 @@ export class TransactionsRecordUpdateComponent implements OnInit {
       ...new TransactionsRecord(),
       id: this.editForm.get(['id'])!.value,
       txType: this.editForm.get(['txType'])!.value,
+      txRef: this.editForm.get(['txRef'])!.value,
       description: this.editForm.get(['description'])!.value,
       txAmmount: this.editForm.get(['txAmmount'])!.value,
       createdDate: this.editForm.get(['createdDate'])!.value

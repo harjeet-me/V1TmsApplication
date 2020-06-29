@@ -5,6 +5,7 @@ import { TransactionType } from 'app/shared/model/enumerations/transaction-type.
 export interface ITransactionsRecord {
   id?: number;
   txType?: TransactionType;
+  txRef?: string;
   description?: string;
   txAmmount?: number;
   createdDate?: Moment;
@@ -18,6 +19,7 @@ export class TransactionsRecord implements ITransactionsRecord {
   constructor(
     public id?: number,
     public txType?: TransactionType,
+    public txRef?: string,
     public description?: string,
     public txAmmount?: number,
     public createdDate?: Moment,

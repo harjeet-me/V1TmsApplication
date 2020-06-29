@@ -226,7 +226,8 @@ entity InvoiceItem {
   }
   
    entity TransactionsRecord{
-     txType TransactionType,        
+     txType TransactionType,
+     txRef String,	 
      description String,
      txAmmount Double,
      createdDate Instant ,
@@ -309,7 +310,7 @@ entity Driver {
 	lastName String,
 	email String,
 	phoneNumber Long,
-	licenceNumber Long,
+	licenceNumber String,
     dob LocalDate ,
     companyJoinedOn LocalDate ,
     companyLeftOn LocalDate 

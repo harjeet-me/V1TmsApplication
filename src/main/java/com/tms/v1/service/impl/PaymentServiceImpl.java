@@ -49,9 +49,9 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public Payment save(Payment payment) {
         log.debug("Request to save Payment : {}", payment);
-         payment =    paymentFacade.payInvoice(payment);
         Payment result = paymentRepository.save(payment);
-        paymentSearchRepository.save(result);
+          paymentFacade.payInvoice(result);
+          paymentSearchRepository.save(result);
         return result;
     }
 

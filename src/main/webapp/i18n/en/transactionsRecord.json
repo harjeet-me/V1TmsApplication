@@ -18,6 +18,7 @@
         "title": "Transactions Record"
       },
       "txType": "Tx Type",
+      "txRef": "Tx Ref",
       "description": "Description",
       "txAmmount": "Tx Ammount",
       "createdDate": "Created Date",

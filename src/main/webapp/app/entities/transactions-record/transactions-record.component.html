@@ -42,6 +42,7 @@
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="txType"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txType">Tx Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="txRef"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txRef">Tx Ref</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="description"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.description">Description</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="txAmmount"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.txAmmount">Tx Ammount</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="createdDate"><span jhiTranslate="tmsV1ApplicationApp.transactionsRecord.createdDate">Created Date</span> <fa-icon icon="sort"></fa-icon></th>
@@ -56,6 +57,7 @@
                 <tr *ngFor="let transactionsRecord of transactionsRecords ;trackBy: trackId">
                     <td><a [routerLink]="['/transactions-record', transactionsRecord.id, 'view']">{{ transactionsRecord.id }}</a></td>
                     <td jhiTranslate="{{ 'tmsV1ApplicationApp.TransactionType.' + transactionsRecord.txType }}">{{ transactionsRecord.txType }}</td>
+                    <td>{{ transactionsRecord.txRef }}</td>
                     <td>{{ transactionsRecord.description }}</td>
                     <td>{{ transactionsRecord.txAmmount }}</td>
                     <td>{{ transactionsRecord.createdDate | date:'medium' }}</td>

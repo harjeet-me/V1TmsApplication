@@ -25,7 +25,17 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new TransactionsRecord(0, TransactionType.CREDIT, 'AAAAAAA', 0, currentDate, 'AAAAAAA', currentDate, 'AAAAAAA');
+      elemDefault = new TransactionsRecord(
+        0,
+        TransactionType.CREDIT,
+        'AAAAAAA',
+        'AAAAAAA',
+        0,
+        currentDate,
+        'AAAAAAA',
+        currentDate,
+        'AAAAAAA'
+      );
     });
 
     describe('Service methods', () => {
@@ -74,6 +84,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             txType: 'BBBBBB',
+            txRef: 'BBBBBB',
             description: 'BBBBBB',
             txAmmount: 1,
             createdDate: currentDate.format(DATE_TIME_FORMAT),
@@ -103,6 +114,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             txType: 'BBBBBB',
+            txRef: 'BBBBBB',
             description: 'BBBBBB',
             txAmmount: 1,
             createdDate: currentDate.format(DATE_TIME_FORMAT),

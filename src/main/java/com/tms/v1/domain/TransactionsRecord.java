@@ -41,6 +41,9 @@ public class TransactionsRecord extends AbstractAuditingEntity  implements Seria
     @Enumerated(EnumType.STRING)
     @Column(name = "tx_type")
     private TransactionType txType;
+    
+    @Column(name = "tx_ref")
+    private String txRef;
 
     @Column(name = "description")
     private String description;
@@ -87,7 +90,20 @@ public class TransactionsRecord extends AbstractAuditingEntity  implements Seria
         this.txType = txType;
     }
 
-    public String getDescription() {
+    public String getTxRef() {
+		return txRef;
+	}
+    
+    public TransactionsRecord txRef(String txRef) {
+        this.txRef = txRef;
+        return this;
+    }
+
+	public void setTxRef(String txRef) {
+		this.txRef = txRef;
+	}
+
+	public String getDescription() {
         return description;
     }
 
@@ -200,6 +216,7 @@ public class TransactionsRecord extends AbstractAuditingEntity  implements Seria
         return "TransactionsRecord{" +
             "id=" + getId() +
             ", txType='" + getTxType() + "'" +
+            ", txRef='" + getTxRef() + "'" +
             ", description='" + getDescription() + "'" +
             ", txAmmount=" + getTxAmmount() +
             ", createdDate='" + getCreatedDate() + "'" +

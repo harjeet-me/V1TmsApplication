@@ -240,7 +240,7 @@ public class InvoiceUtil {
 		
 		if (invoice.getStatus()!=null && invoice.getStatus()==InvoiceStatus.GENERATED) {
 			
-		 List<TransactionsRecord>  records=  recordService.findByDescription(this.getTxDescription(invoice));
+		 List<TransactionsRecord>  records=  recordService.findByTxTypeAndTxRef(TransactionType.INVOICE, invoice.getId().toString());
 		 
 			
 			TransactionsRecord transactionsRecord = new TransactionsRecord();
@@ -249,6 +249,7 @@ public class InvoiceUtil {
 				 transactionsRecord.setId(records.get(0).getId());
 			 }
 		     transactionsRecord.setCustomer(invoice.getCustomer());
+		     transactionsRecord.setTxRef(invoice.getId().toString());
 		//	transactionsRecord.setAccount(invoice.getCustomer().getAccounts());
 			transactionsRecord.setTxType(TransactionType.INVOICE);
 			transactionsRecord.description(this.getTxDescription(invoice));

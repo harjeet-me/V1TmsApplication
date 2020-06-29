@@ -23,7 +23,7 @@
         },
         {
             "fieldName": "licenceNumber",
-            "fieldType": "Long"
+            "fieldType": "String"
         },
         {
             "fieldName": "dob",

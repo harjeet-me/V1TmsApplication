@@ -7,6 +7,10 @@
             "fieldValues": "CREDIT,INVOICE,PAYMENT,REFUND,ADJUSTMENT"
         },
         {
+            "fieldName": "txRef",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "description",
             "fieldType": "String"
         },

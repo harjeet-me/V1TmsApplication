@@ -19,6 +19,9 @@
             <column name="tx_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="tx_ref" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -66,6 +69,7 @@
                   tableName="transactions_record">
             <column name="id" type="numeric"/>
             <column name="tx_type" type="string"/>
+            <column name="tx_ref" type="string"/>
             <column name="description" type="string"/>
             <column name="tx_ammount" type="numeric"/>
             <column name="created_date" type="datetime"/>

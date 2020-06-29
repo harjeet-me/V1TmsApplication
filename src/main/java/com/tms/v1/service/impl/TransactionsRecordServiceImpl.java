@@ -1,21 +1,22 @@
 package com.tms.v1.service.impl;
 
-import com.tms.v1.service.TransactionsRecordService;
-import com.tms.v1.domain.TransactionsRecord;
-import com.tms.v1.repository.TransactionsRecordRepository;
-import com.tms.v1.repository.search.TransactionsRecordSearchRepository;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import com.tms.v1.domain.TransactionsRecord;
+import com.tms.v1.domain.enumeration.TransactionType;
+import com.tms.v1.repository.TransactionsRecordRepository;
+import com.tms.v1.repository.search.TransactionsRecordSearchRepository;
+import com.tms.v1.service.TransactionsRecordService;
 
 /**
  * Service Implementation for managing {@link TransactionsRecord}.
@@ -104,4 +105,11 @@ public class TransactionsRecordServiceImpl implements TransactionsRecordService 
 	public List<TransactionsRecord> findByDescription(String description) {
 		return transactionsRecordRepository.findByDescription(description);
 	}
+
+	@Override
+	public List<TransactionsRecord> findByTxTypeAndTxRef(TransactionType txType, String txRef) {
+		return transactionsRecordRepository.findByTxTypeAndTxRef(txType, txRef);
+	}
+	
+	
 }

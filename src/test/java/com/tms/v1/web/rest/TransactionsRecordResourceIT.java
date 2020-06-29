@@ -47,6 +47,9 @@ public class TransactionsRecordResourceIT {
     private static final TransactionType DEFAULT_TX_TYPE = TransactionType.CREDIT;
     private static final TransactionType UPDATED_TX_TYPE = TransactionType.INVOICE;
 
+    private static final String DEFAULT_TX_REF = "AAAAAAAAAA";
+    private static final String UPDATED_TX_REF = "BBBBBBBBBB";
+
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
@@ -96,6 +99,7 @@ public class TransactionsRecordResourceIT {
     public static TransactionsRecord createEntity(EntityManager em) {
         TransactionsRecord transactionsRecord = new TransactionsRecord()
             .txType(DEFAULT_TX_TYPE)
+            .txRef(DEFAULT_TX_REF)
             .description(DEFAULT_DESCRIPTION)
             .txAmmount(DEFAULT_TX_AMMOUNT)
             .createdDate(DEFAULT_CREATED_DATE)
@@ -113,6 +117,7 @@ public class TransactionsRecordResourceIT {
     public static TransactionsRecord createUpdatedEntity(EntityManager em) {
         TransactionsRecord transactionsRecord = new TransactionsRecord()
             .txType(UPDATED_TX_TYPE)
+            .txRef(UPDATED_TX_REF)
             .description(UPDATED_DESCRIPTION)
             .txAmmount(UPDATED_TX_AMMOUNT)
             .createdDate(UPDATED_CREATED_DATE)
@@ -143,6 +148,7 @@ public class TransactionsRecordResourceIT {
         assertThat(transactionsRecordList).hasSize(databaseSizeBeforeCreate + 1);
         TransactionsRecord testTransactionsRecord = transactionsRecordList.get(transactionsRecordList.size() - 1);
         assertThat(testTransactionsRecord.getTxType()).isEqualTo(DEFAULT_TX_TYPE);
+        assertThat(testTransactionsRecord.getTxRef()).isEqualTo(DEFAULT_TX_REF);
         assertThat(testTransactionsRecord.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testTransactionsRecord.getTxAmmount()).isEqualTo(DEFAULT_TX_AMMOUNT);
         assertThat(testTransactionsRecord.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
@@ -189,6 +195,7 @@ public class TransactionsRecordResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(transactionsRecord.getId().intValue())))
             .andExpect(jsonPath("$.[*].txType").value(hasItem(DEFAULT_TX_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].txRef").value(hasItem(DEFAULT_TX_REF)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].txAmmount").value(hasItem(DEFAULT_TX_AMMOUNT.doubleValue())))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
@@ -209,6 +216,7 @@ public class TransactionsRecordResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(transactionsRecord.getId().intValue()))
             .andExpect(jsonPath("$.txType").value(DEFAULT_TX_TYPE.toString()))
+            .andExpect(jsonPath("$.txRef").value(DEFAULT_TX_REF))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.txAmmount").value(DEFAULT_TX_AMMOUNT.doubleValue()))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
@@ -241,6 +249,7 @@ public class TransactionsRecordResourceIT {
         em.detach(updatedTransactionsRecord);
         updatedTransactionsRecord
             .txType(UPDATED_TX_TYPE)
+            .txRef(UPDATED_TX_REF)
             .description(UPDATED_DESCRIPTION)
             .txAmmount(UPDATED_TX_AMMOUNT)
             .createdDate(UPDATED_CREATED_DATE)
@@ -258,6 +267,7 @@ public class TransactionsRecordResourceIT {
         assertThat(transactionsRecordList).hasSize(databaseSizeBeforeUpdate);
         TransactionsRecord testTransactionsRecord = transactionsRecordList.get(transactionsRecordList.size() - 1);
         assertThat(testTransactionsRecord.getTxType()).isEqualTo(UPDATED_TX_TYPE);
+        assertThat(testTransactionsRecord.getTxRef()).isEqualTo(UPDATED_TX_REF);
         assertThat(testTransactionsRecord.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testTransactionsRecord.getTxAmmount()).isEqualTo(UPDATED_TX_AMMOUNT);
         assertThat(testTransactionsRecord.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
@@ -324,6 +334,7 @@ public class TransactionsRecordResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(transactionsRecord.getId().intValue())))
             .andExpect(jsonPath("$.[*].txType").value(hasItem(DEFAULT_TX_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].txRef").value(hasItem(DEFAULT_TX_REF)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].txAmmount").value(hasItem(DEFAULT_TX_AMMOUNT.doubleValue())))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))

@@ -1,6 +1,7 @@
 package com.tms.v1.service;
 
 import com.tms.v1.domain.TransactionsRecord;
+import com.tms.v1.domain.enumeration.TransactionType;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -56,4 +57,7 @@ public interface TransactionsRecordService {
     
     
     public List<TransactionsRecord> findByDescription(String description);
+    
+
+	List<TransactionsRecord> findByTxTypeAndTxRef(TransactionType txType, String txRef);
 }
