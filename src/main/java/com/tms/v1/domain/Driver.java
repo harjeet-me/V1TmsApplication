@@ -57,7 +57,7 @@ public class Driver extends AbstractAuditingEntity  implements Serializable {
     private Long phoneNumber;
 
     @Column(name = "licence_number")
-    private Long licenceNumber;
+    private String licenceNumber;
 
     @Column(name = "dob")
     private LocalDate dob;
@@ -187,16 +187,16 @@ public class Driver extends AbstractAuditingEntity  implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public Long getLicenceNumber() {
+    public String getLicenceNumber() {
         return licenceNumber;
     }
 
-    public Driver licenceNumber(Long licenceNumber) {
+    public Driver licenceNumber(String licenceNumber) {
         this.licenceNumber = licenceNumber;
         return this;
     }
 
-    public void setLicenceNumber(Long licenceNumber) {
+    public void setLicenceNumber(String licenceNumber) {
         this.licenceNumber = licenceNumber;
     }
 

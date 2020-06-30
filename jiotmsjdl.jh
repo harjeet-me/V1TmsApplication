@@ -310,7 +310,7 @@ entity Driver {
 	lastName String,
 	email String,
 	phoneNumber Long,
-	licenceNumber String,
+	licenceNumber String ,
     dob LocalDate ,
     companyJoinedOn LocalDate ,
     companyLeftOn LocalDate 

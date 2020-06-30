@@ -9,7 +9,7 @@ export interface IDriver {
   lastName?: string;
   email?: string;
   phoneNumber?: number;
-  licenceNumber?: number;
+  licenceNumber?: string;
   dob?: Moment;
   companyJoinedOn?: Moment;
   companyLeftOn?: Moment;
@@ -36,7 +36,7 @@ export class Driver implements IDriver {
     public lastName?: string,
     public email?: string,
     public phoneNumber?: number,
-    public licenceNumber?: number,
+    public licenceNumber?: string,
     public dob?: Moment,
     public companyJoinedOn?: Moment,
     public companyLeftOn?: Moment,

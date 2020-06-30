@@ -164,7 +164,7 @@ public class Invoice extends AbstractAuditingEntity  implements Serializable {
     private Set<InvoiceHistory> invoiceHistories = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties("invoices")
+    @JsonIgnoreProperties(value="invoices" ,allowSetters = true)
     private Trip trip;
 
     @ManyToOne

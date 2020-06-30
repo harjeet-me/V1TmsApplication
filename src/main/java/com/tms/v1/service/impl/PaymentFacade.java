@@ -53,7 +53,7 @@ public class PaymentFacade {
 				recordService.save(transactionsRecord);			
 			
 			}else {
-				throw new IllegalStateException("payment amount shoulb greater than 0");
+				throw new IllegalStateException("payment amount should be greater than 0");
 			}
 		
 		

@@ -31,7 +31,7 @@
             <column name="phone_number" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="licence_number" type="bigint">
+            <column name="licence_number" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="dob" type="date">
@@ -109,7 +109,7 @@
             <column name="last_name" type="string"/>
             <column name="email" type="string"/>
             <column name="phone_number" type="numeric"/>
-            <column name="licence_number" type="numeric"/>
+            <column name="licence_number" type="string"/>
             <column name="dob" type="date"/>
             <column name="company_joined_on" type="date"/>
             <column name="company_left_on" type="date"/>

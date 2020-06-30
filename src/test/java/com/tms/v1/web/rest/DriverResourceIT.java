@@ -60,8 +60,8 @@ public class DriverResourceIT {
     private static final Long DEFAULT_PHONE_NUMBER = 1L;
     private static final Long UPDATED_PHONE_NUMBER = 2L;
 
-    private static final Long DEFAULT_LICENCE_NUMBER = 1L;
-    private static final Long UPDATED_LICENCE_NUMBER = 2L;
+    private static final String DEFAULT_LICENCE_NUMBER = "AAAAAAAAAA";
+    private static final String UPDATED_LICENCE_NUMBER = "BBBBBBBBBB";
 
     private static final LocalDate DEFAULT_DOB = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DOB = LocalDate.now(ZoneId.systemDefault());
@@ -275,7 +275,7 @@ public class DriverResourceIT {
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER.intValue())))
-            .andExpect(jsonPath("$.[*].licenceNumber").value(hasItem(DEFAULT_LICENCE_NUMBER.intValue())))
+            .andExpect(jsonPath("$.[*].licenceNumber").value(hasItem(DEFAULT_LICENCE_NUMBER)))
             .andExpect(jsonPath("$.[*].dob").value(hasItem(DEFAULT_DOB.toString())))
             .andExpect(jsonPath("$.[*].companyJoinedOn").value(hasItem(DEFAULT_COMPANY_JOINED_ON.toString())))
             .andExpect(jsonPath("$.[*].companyLeftOn").value(hasItem(DEFAULT_COMPANY_LEFT_ON.toString())))
@@ -309,7 +309,7 @@ public class DriverResourceIT {
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
             .andExpect(jsonPath("$.phoneNumber").value(DEFAULT_PHONE_NUMBER.intValue()))
-            .andExpect(jsonPath("$.licenceNumber").value(DEFAULT_LICENCE_NUMBER.intValue()))
+            .andExpect(jsonPath("$.licenceNumber").value(DEFAULT_LICENCE_NUMBER))
             .andExpect(jsonPath("$.dob").value(DEFAULT_DOB.toString()))
             .andExpect(jsonPath("$.companyJoinedOn").value(DEFAULT_COMPANY_JOINED_ON.toString()))
             .andExpect(jsonPath("$.companyLeftOn").value(DEFAULT_COMPANY_LEFT_ON.toString()))
@@ -466,7 +466,7 @@ public class DriverResourceIT {
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER.intValue())))
-            .andExpect(jsonPath("$.[*].licenceNumber").value(hasItem(DEFAULT_LICENCE_NUMBER.intValue())))
+            .andExpect(jsonPath("$.[*].licenceNumber").value(hasItem(DEFAULT_LICENCE_NUMBER)))
             .andExpect(jsonPath("$.[*].dob").value(hasItem(DEFAULT_DOB.toString())))
             .andExpect(jsonPath("$.[*].companyJoinedOn").value(hasItem(DEFAULT_COMPANY_JOINED_ON.toString())))
             .andExpect(jsonPath("$.[*].companyLeftOn").value(hasItem(DEFAULT_COMPANY_LEFT_ON.toString())))
