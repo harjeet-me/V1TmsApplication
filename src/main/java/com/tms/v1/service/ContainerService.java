@@ -4,6 +4,7 @@ import com.tms.v1.domain.Container;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service Interface for managing {@link Container}.
@@ -48,4 +49,6 @@ public interface ContainerService {
      * @return the list of entities.
      */
     List<Container> search(String query);
+
+	Set<Container> findByTripId(Long tripId);
 }

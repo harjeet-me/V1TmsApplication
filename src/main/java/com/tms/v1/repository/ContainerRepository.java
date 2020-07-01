@@ -2,6 +2,9 @@ package com.tms.v1.repository;
 
 import com.tms.v1.domain.Container;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -11,4 +14,6 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface ContainerRepository extends JpaRepository<Container, Long> {
+
+	Set<Container> findByTripId(Long tripId);
 }

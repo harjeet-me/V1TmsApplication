@@ -1,3 +1,5 @@
+import { ContainerService } from './../container/container.service';
+import { Container } from './../../shared/model/container.model';
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -26,9 +28,16 @@ type SelectableEntity = ILocation | ICustomer | IDriver | IEquipment | ICarrier;
 
 @Component({
   selector: 'jhi-trip-update',
-  templateUrl: './trip-update.component.html'
+  templateUrl: './trip-updatenew.component.html'
 })
 export class TripUpdateComponent implements OnInit {
+  j = 1;
+  newDynamic: any = new Container();
+  dynamicArray: Array<Container> = [];
+  indexSize = 1;
+  grantTotal = 0;
+  advanceTotal = 0;
+
   isSaving = false;
   locations: ILocation[] = [];
   customers: ICustomer[] = [];
@@ -84,6 +93,7 @@ export class TripUpdateComponent implements OnInit {
     protected tripService: TripService,
     protected locationService: LocationService,
     protected customerService: CustomerService,
+    protected containerService: ContainerService,
     protected driverService: DriverService,
     protected equipmentService: EquipmentService,
     protected carrierService: CarrierService,
@@ -98,6 +108,13 @@ export class TripUpdateComponent implements OnInit {
         trip.chasisInTime = today;
         trip.createdDate = today;
         trip.lastModifiedDate = today;
+      }
+
+      if (trip.containers !== undefined) {
+        this.dynamicArray = trip.containers;
+      } else {
+        this.newDynamic = { id: null, description: 'Load Move ', size: 207 };
+        this.dynamicArray.push(this.newDynamic);
       }
 
       this.updateForm(trip);
@@ -231,7 +248,8 @@ export class TripUpdateComponent implements OnInit {
       customer: this.editForm.get(['customer'])!.value,
       driver: this.editForm.get(['driver'])!.value,
       equipment: this.editForm.get(['equipment'])!.value,
-      carrier: this.editForm.get(['carrier'])!.value
+      carrier: this.editForm.get(['carrier'])!.value,
+      containers: this.dynamicArray
     };
   }
 
@@ -254,4 +272,31 @@ export class TripUpdateComponent implements OnInit {
   trackById(index: number, item: SelectableEntity): any {
     return item.id;
   }
+
+  addRow(index: number): any {
+    this.indexSize = index + 1;
+    // this.newDynamic = { id : 2 , itemName: this.dynamicArray.length + 1, description: 'SFO TO DEL', price: '20', total: '40' };
+
+    this.dynamicArray.push({ number: '', description: '', size: 0 });
+    //  this.calculateTotal();
+    return true;
+  }
+
+  deleteRow(index: number): any {
+    if (this.dynamicArray.length === 1) {
+      // this.calculateTotal();
+      return false;
+    } else {
+      const id = this.dynamicArray[index].id;
+      if (id !== undefined) {
+        this.containerService.delete(id).subscribe(() => {});
+      }
+
+      this.dynamicArray.splice(index, 1);
+      //  this.calculateTotal();
+      return true;
+    }
+  }
+
+  calculateTotal(): any {}
 }

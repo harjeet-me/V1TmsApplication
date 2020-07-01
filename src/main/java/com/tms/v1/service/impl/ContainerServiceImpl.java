@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -100,4 +101,11 @@ public class ContainerServiceImpl implements ContainerService {
             .stream(containerSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Set<Container> findByTripId(Long tripId ){
+    	return  containerRepository.findByTripId(tripId);
+    }
+    
 }

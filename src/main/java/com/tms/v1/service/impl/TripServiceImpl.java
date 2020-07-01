@@ -1,5 +1,6 @@
 package com.tms.v1.service.impl;
 
+import com.tms.v1.service.ContainerService;
 import com.tms.v1.service.CustomerService;
 import com.tms.v1.service.InvoiceService;
 import com.tms.v1.service.TripService;
@@ -7,6 +8,7 @@ import com.tms.v1.service.TripService;
 import liquibase.pro.packaged.in;
 import liquibase.pro.packaged.it;
 
+import com.tms.v1.domain.Container;
 import com.tms.v1.domain.Customer;
 import com.tms.v1.domain.Invoice;
 import com.tms.v1.domain.InvoiceItem;
@@ -48,6 +50,9 @@ public class TripServiceImpl implements TripService {
     public InvoiceService invoiceService;
     @Autowired
     public CustomerService customerService;
+    
+    @Autowired
+    public ContainerService containerService;
 
     private final TripSearchRepository tripSearchRepository;
 
@@ -65,9 +70,16 @@ public class TripServiceImpl implements TripService {
     @Override
     public Trip save(Trip trip) {
         log.debug("Request to save Trip : {}", trip);
+        Set<Container> containers= trip.getContainers();
         
         Trip result = tripRepository.save(trip);
         tripSearchRepository.save(result);
+        
+        
+        for (Container container : containers) {
+        	container.setTrip(result);
+        	containerService.save(container);
+		}
         
         if(trip.getStatus()!=null && trip.getStatus()==StatusEnum.COMPLETED) {
         	Invoice invoiceDraft= new Invoice();        	
@@ -141,7 +153,10 @@ public class TripServiceImpl implements TripService {
     @Transactional(readOnly = true)
     public Optional<Trip> findOne(Long id) {
         log.debug("Request to get Trip : {}", id);
-        return tripRepository.findById(id);
+        Optional<Trip> inOptional= tripRepository.findById(id);
+        inOptional.get().setContainers(  containerService.findByTripId(id));
+        
+        return inOptional;
     }
 
     /**
