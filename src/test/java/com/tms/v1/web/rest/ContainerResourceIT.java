@@ -32,6 +32,8 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.tms.v1.domain.enumeration.TripType;
+import com.tms.v1.domain.enumeration.SizeEnum;
 /**
  * Integration tests for the {@link ContainerResource} REST controller.
  */
@@ -44,11 +46,17 @@ public class ContainerResourceIT {
     private static final String DEFAULT_NUMBER = "AAAAAAAAAA";
     private static final String UPDATED_NUMBER = "BBBBBBBBBB";
 
-    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+    private static final TripType DEFAULT_TRIP_TYPE = TripType.PICKUP;
+    private static final TripType UPDATED_TRIP_TYPE = TripType.RETURN;
 
-    private static final Integer DEFAULT_SIZE = 1;
-    private static final Integer UPDATED_SIZE = 2;
+    private static final Instant DEFAULT_PICKUP = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_PICKUP = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final Instant DEFAULT_DROP = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DROP = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final SizeEnum DEFAULT_CONTAINER_SIZE = SizeEnum.C53;
+    private static final SizeEnum UPDATED_CONTAINER_SIZE = SizeEnum.C43;
 
     private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -93,8 +101,10 @@ public class ContainerResourceIT {
     public static Container createEntity(EntityManager em) {
         Container container = new Container()
             .number(DEFAULT_NUMBER)
-            .description(DEFAULT_DESCRIPTION)
-            .size(DEFAULT_SIZE)
+            .tripType(DEFAULT_TRIP_TYPE)
+            .pickup(DEFAULT_PICKUP)
+            .drop(DEFAULT_DROP)
+            .containerSize(DEFAULT_CONTAINER_SIZE)
             .createdDate(DEFAULT_CREATED_DATE)
             .createdBy(DEFAULT_CREATED_BY)
             .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
@@ -110,8 +120,10 @@ public class ContainerResourceIT {
     public static Container createUpdatedEntity(EntityManager em) {
         Container container = new Container()
             .number(UPDATED_NUMBER)
-            .description(UPDATED_DESCRIPTION)
-            .size(UPDATED_SIZE)
+            .tripType(UPDATED_TRIP_TYPE)
+            .pickup(UPDATED_PICKUP)
+            .drop(UPDATED_DROP)
+            .containerSize(UPDATED_CONTAINER_SIZE)
             .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
             .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
@@ -140,8 +152,10 @@ public class ContainerResourceIT {
         assertThat(containerList).hasSize(databaseSizeBeforeCreate + 1);
         Container testContainer = containerList.get(containerList.size() - 1);
         assertThat(testContainer.getNumber()).isEqualTo(DEFAULT_NUMBER);
-        assertThat(testContainer.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testContainer.getSize()).isEqualTo(DEFAULT_SIZE);
+        assertThat(testContainer.getTripType()).isEqualTo(DEFAULT_TRIP_TYPE);
+        assertThat(testContainer.getPickup()).isEqualTo(DEFAULT_PICKUP);
+        assertThat(testContainer.getDrop()).isEqualTo(DEFAULT_DROP);
+        assertThat(testContainer.getContainerSize()).isEqualTo(DEFAULT_CONTAINER_SIZE);
         assertThat(testContainer.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testContainer.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testContainer.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
@@ -186,8 +200,10 @@ public class ContainerResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(container.getId().intValue())))
             .andExpect(jsonPath("$.[*].number").value(hasItem(DEFAULT_NUMBER)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].size").value(hasItem(DEFAULT_SIZE)))
+            .andExpect(jsonPath("$.[*].tripType").value(hasItem(DEFAULT_TRIP_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].pickup").value(hasItem(DEFAULT_PICKUP.toString())))
+            .andExpect(jsonPath("$.[*].drop").value(hasItem(DEFAULT_DROP.toString())))
+            .andExpect(jsonPath("$.[*].containerSize").value(hasItem(DEFAULT_CONTAINER_SIZE.toString())))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
@@ -206,8 +222,10 @@ public class ContainerResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(container.getId().intValue()))
             .andExpect(jsonPath("$.number").value(DEFAULT_NUMBER))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
-            .andExpect(jsonPath("$.size").value(DEFAULT_SIZE))
+            .andExpect(jsonPath("$.tripType").value(DEFAULT_TRIP_TYPE.toString()))
+            .andExpect(jsonPath("$.pickup").value(DEFAULT_PICKUP.toString()))
+            .andExpect(jsonPath("$.drop").value(DEFAULT_DROP.toString()))
+            .andExpect(jsonPath("$.containerSize").value(DEFAULT_CONTAINER_SIZE.toString()))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()))
@@ -238,8 +256,10 @@ public class ContainerResourceIT {
         em.detach(updatedContainer);
         updatedContainer
             .number(UPDATED_NUMBER)
-            .description(UPDATED_DESCRIPTION)
-            .size(UPDATED_SIZE)
+            .tripType(UPDATED_TRIP_TYPE)
+            .pickup(UPDATED_PICKUP)
+            .drop(UPDATED_DROP)
+            .containerSize(UPDATED_CONTAINER_SIZE)
             .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY)
             .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
@@ -255,8 +275,10 @@ public class ContainerResourceIT {
         assertThat(containerList).hasSize(databaseSizeBeforeUpdate);
         Container testContainer = containerList.get(containerList.size() - 1);
         assertThat(testContainer.getNumber()).isEqualTo(UPDATED_NUMBER);
-        assertThat(testContainer.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testContainer.getSize()).isEqualTo(UPDATED_SIZE);
+        assertThat(testContainer.getTripType()).isEqualTo(UPDATED_TRIP_TYPE);
+        assertThat(testContainer.getPickup()).isEqualTo(UPDATED_PICKUP);
+        assertThat(testContainer.getDrop()).isEqualTo(UPDATED_DROP);
+        assertThat(testContainer.getContainerSize()).isEqualTo(UPDATED_CONTAINER_SIZE);
         assertThat(testContainer.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testContainer.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testContainer.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
@@ -321,8 +343,10 @@ public class ContainerResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(container.getId().intValue())))
             .andExpect(jsonPath("$.[*].number").value(hasItem(DEFAULT_NUMBER)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].size").value(hasItem(DEFAULT_SIZE)))
+            .andExpect(jsonPath("$.[*].tripType").value(hasItem(DEFAULT_TRIP_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].pickup").value(hasItem(DEFAULT_PICKUP.toString())))
+            .andExpect(jsonPath("$.[*].drop").value(hasItem(DEFAULT_DROP.toString())))
+            .andExpect(jsonPath("$.[*].containerSize").value(hasItem(DEFAULT_CONTAINER_SIZE.toString())))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))

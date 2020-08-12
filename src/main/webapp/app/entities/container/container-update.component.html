@@ -18,15 +18,34 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.container.description" for="field_description">Description</label>
-                    <input type="text" class="form-control" name="description" id="field_description"
-                           formControlName="description"/>
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.container.tripType" for="field_tripType">Trip Type</label>
+                    <select class="form-control" name="tripType" formControlName="tripType" id="field_tripType">
+                        <option value="PICKUP">{{ 'tmsV1ApplicationApp.TripType.PICKUP' | translate }}</option>
+                        <option value="RETURN">{{ 'tmsV1ApplicationApp.TripType.RETURN' | translate }}</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.container.size" for="field_size">Size</label>
-                    <input type="number" class="form-control" name="size" id="field_size"
-                           formControlName="size"/>
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.container.pickup" for="field_pickup">Pickup</label>
+                    <div class="d-flex">
+                        <input id="field_pickup" type="datetime-local" class="form-control" name="pickup" formControlName="pickup" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.container.drop" for="field_drop">Drop</label>
+                    <div class="d-flex">
+                        <input id="field_drop" type="datetime-local" class="form-control" name="drop" formControlName="drop" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.container.containerSize" for="field_containerSize">Container Size</label>
+                    <select class="form-control" name="containerSize" formControlName="containerSize" id="field_containerSize">
+                        <option value="C53">{{ 'tmsV1ApplicationApp.SizeEnum.C53' | translate }}</option>
+                        <option value="C43">{{ 'tmsV1ApplicationApp.SizeEnum.C43' | translate }}</option>
+                        <option value="C20">{{ 'tmsV1ApplicationApp.SizeEnum.C20' | translate }}</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -53,6 +72,22 @@
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.container.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
                     <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
                            formControlName="lastModifiedBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.container.pickupLocation" for="field_pickupLocation">Pickup Location</label>
+                    <select class="form-control" id="field_pickupLocation" name="pickupLocation" formControlName="pickupLocation">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="locationOption.id === editForm.get('pickupLocation')!.value?.id ? editForm.get('pickupLocation')!.value : locationOption" *ngFor="let locationOption of locations; trackBy: trackById">{{ locationOption.address }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.container.dropLocation" for="field_dropLocation">Drop Location</label>
+                    <select class="form-control" id="field_dropLocation" name="dropLocation" formControlName="dropLocation">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="locationOption.id === editForm.get('dropLocation')!.value?.id ? editForm.get('dropLocation')!.value : locationOption" *ngFor="let locationOption of locations; trackBy: trackById">{{ locationOption.address }}</option>
+                    </select>
                 </div>
 
                 <div class="form-group">

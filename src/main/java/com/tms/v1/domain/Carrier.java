@@ -1,37 +1,28 @@
 package com.tms.v1.domain;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
+
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
+import java.util.Objects;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import com.tms.v1.domain.enumeration.Designation;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
+import com.tms.v1.domain.enumeration.PreffredContactType;
+
+import com.tms.v1.domain.enumeration.CountryEnum;
+
+import com.tms.v1.domain.enumeration.ToggleStatus;
 
 import com.tms.v1.domain.enumeration.CURRENCY;
-import com.tms.v1.domain.enumeration.CountryEnum;
-import com.tms.v1.domain.enumeration.Designation;
-import com.tms.v1.domain.enumeration.PreffredContactType;
-import com.tms.v1.domain.enumeration.ToggleStatus;
 
 /**
  * A Carrier.
@@ -40,7 +31,7 @@ import com.tms.v1.domain.enumeration.ToggleStatus;
 @Table(name = "carrier")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "carrier")
-public class Carrier extends AbstractAuditingEntity  implements Serializable {
+public class Carrier implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -157,16 +148,15 @@ public class Carrier extends AbstractAuditingEntity  implements Serializable {
     @Column(name = "time_zone")
     private ZonedDateTime timeZone;
 
-    @CreatedDate
     @Column(name = "created_date")
     private Instant createdDate;
-    @CreatedBy
+
     @Column(name = "created_by")
     private String createdBy;
-    @LastModifiedDate
+
     @Column(name = "last_modified_date")
     private Instant lastModifiedDate;
-    @LastModifiedBy
+
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
 

@@ -1,28 +1,17 @@
 package com.tms.v1.domain;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
+
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
+import java.util.Objects;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import com.tms.v1.domain.enumeration.ToggleStatus;
 
@@ -33,7 +22,7 @@ import com.tms.v1.domain.enumeration.ToggleStatus;
 @Table(name = "driver")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "driver")
-public class Driver extends AbstractAuditingEntity  implements Serializable {
+public class Driver implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -96,16 +85,15 @@ public class Driver extends AbstractAuditingEntity  implements Serializable {
     @Column(name = "status")
     private ToggleStatus status;
 
-    @CreatedDate
     @Column(name = "created_date")
     private Instant createdDate;
-    @CreatedBy
+
     @Column(name = "created_by")
     private String createdBy;
-    @LastModifiedDate
+
     @Column(name = "last_modified_date")
     private Instant lastModifiedDate;
-    @LastModifiedBy
+
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
 
@@ -446,7 +434,7 @@ public class Driver extends AbstractAuditingEntity  implements Serializable {
             ", lastName='" + getLastName() + "'" +
             ", email='" + getEmail() + "'" +
             ", phoneNumber=" + getPhoneNumber() +
-            ", licenceNumber=" + getLicenceNumber() +
+            ", licenceNumber='" + getLicenceNumber() + "'" +
             ", dob='" + getDob() + "'" +
             ", companyJoinedOn='" + getCompanyJoinedOn() + "'" +
             ", companyLeftOn='" + getCompanyLeftOn() + "'" +

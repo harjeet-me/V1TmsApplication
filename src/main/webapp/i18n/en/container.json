@@ -18,12 +18,16 @@
         "title": "Container"
       },
       "number": "Number",
-      "description": "Description",
-      "size": "Size",
+      "tripType": "Trip Type",
+      "pickup": "Pickup",
+      "drop": "Drop",
+      "containerSize": "Container Size",
       "createdDate": "Created Date",
       "createdBy": "Created By",
       "lastModifiedDate": "Last Modified Date",
       "lastModifiedBy": "Last Modified By",
+      "pickupLocation": "Pickup Location",
+      "dropLocation": "Drop Location",
       "trip": "Trip"
     }
   }

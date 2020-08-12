@@ -1,24 +1,19 @@
 package com.tms.v1.domain;
 
-import java.io.Serializable;
-import java.time.Instant;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.persistence.*;
+
+import org.springframework.data.elasticsearch.annotations.FieldType;
+import java.io.Serializable;
+import java.util.Objects;
+import java.time.Instant;
+
+import com.tms.v1.domain.enumeration.TripType;
+
+import com.tms.v1.domain.enumeration.SizeEnum;
 
 /**
  * A Container.
@@ -27,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "container")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "container")
-public class Container extends AbstractAuditingEntity  implements Serializable {
+public class Container implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -38,27 +33,42 @@ public class Container extends AbstractAuditingEntity  implements Serializable {
     @Column(name = "number")
     private String number;
 
-    @Column(name = "description")
-    private String description;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "trip_type")
+    private TripType tripType;
 
-    @Column(name = "size")
-    private Integer size;
+    @Column(name = "pickup")
+    private Instant pickup;
 
-    @CreatedDate
+    @Column(name = "jhi_drop")
+    private Instant drop;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "container_size")
+    private SizeEnum containerSize;
+
     @Column(name = "created_date")
     private Instant createdDate;
-    @CreatedBy
+
     @Column(name = "created_by")
     private String createdBy;
-    @LastModifiedDate
+
     @Column(name = "last_modified_date")
     private Instant lastModifiedDate;
-    @LastModifiedBy
+
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
 
     @ManyToOne
-    @JsonIgnoreProperties("containers")
+    @JsonIgnoreProperties("contpicks")
+    private Location pickupLocation;
+
+    @ManyToOne
+    @JsonIgnoreProperties("contdrops")
+    private Location dropLocation;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value= {"containers"}, allowSetters = true)
     private Trip trip;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -83,30 +93,56 @@ public class Container extends AbstractAuditingEntity  implements Serializable {
         this.number = number;
     }
 
-    public String getDescription() {
-        return description;
+    public TripType getTripType() {
+        return tripType;
     }
 
-    public Container description(String description) {
-        this.description = description;
+    public Container tripType(TripType tripType) {
+        this.tripType = tripType;
         return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTripType(TripType tripType) {
+        this.tripType = tripType;
     }
 
-    public Integer getSize() {
-        return size;
+    public Instant getPickup() {
+        return pickup;
     }
 
-    public Container size(Integer size) {
-        this.size = size;
+    public Container pickup(Instant pickup) {
+        this.pickup = pickup;
         return this;
     }
 
-    public void setSize(Integer size) {
-        this.size = size;
+    public void setPickup(Instant pickup) {
+        this.pickup = pickup;
+    }
+
+    public Instant getDrop() {
+        return drop;
+    }
+
+    public Container drop(Instant drop) {
+        this.drop = drop;
+        return this;
+    }
+
+    public void setDrop(Instant drop) {
+        this.drop = drop;
+    }
+
+    public SizeEnum getContainerSize() {
+        return containerSize;
+    }
+
+    public Container containerSize(SizeEnum containerSize) {
+        this.containerSize = containerSize;
+        return this;
+    }
+
+    public void setContainerSize(SizeEnum containerSize) {
+        this.containerSize = containerSize;
     }
 
     public Instant getCreatedDate() {
@@ -161,6 +197,32 @@ public class Container extends AbstractAuditingEntity  implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
+    public Location getPickupLocation() {
+        return pickupLocation;
+    }
+
+    public Container pickupLocation(Location location) {
+        this.pickupLocation = location;
+        return this;
+    }
+
+    public void setPickupLocation(Location location) {
+        this.pickupLocation = location;
+    }
+
+    public Location getDropLocation() {
+        return dropLocation;
+    }
+
+    public Container dropLocation(Location location) {
+        this.dropLocation = location;
+        return this;
+    }
+
+    public void setDropLocation(Location location) {
+        this.dropLocation = location;
+    }
+
     public Trip getTrip() {
         return trip;
     }
@@ -196,8 +258,10 @@ public class Container extends AbstractAuditingEntity  implements Serializable {
         return "Container{" +
             "id=" + getId() +
             ", number='" + getNumber() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", size=" + getSize() +
+            ", tripType='" + getTripType() + "'" +
+            ", pickup='" + getPickup() + "'" +
+            ", drop='" + getDrop() + "'" +
+            ", containerSize='" + getContainerSize() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", lastModifiedDate='" + getLastModifiedDate() + "'" +

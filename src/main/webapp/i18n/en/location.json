@@ -30,7 +30,9 @@
       "lastModifiedDate": "Last Modified Date",
       "lastModifiedBy": "Last Modified By",
       "trippick": "Trippick",
-      "tripdrop": "Tripdrop"
+      "tripdrop": "Tripdrop",
+      "contpick": "Contpick",
+      "contdrop": "Contdrop"
     }
   }
 }

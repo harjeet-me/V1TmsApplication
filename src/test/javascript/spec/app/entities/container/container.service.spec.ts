@@ -4,6 +4,8 @@ import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { ContainerService } from 'app/entities/container/container.service';
 import { IContainer, Container } from 'app/shared/model/container.model';
+import { TripType } from 'app/shared/model/enumerations/trip-type.model';
+import { SizeEnum } from 'app/shared/model/enumerations/size-enum.model';
 
 describe('Service Tests', () => {
   describe('Container Service', () => {
@@ -24,13 +26,26 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Container(0, 'AAAAAAA', 'AAAAAAA', 0, currentDate, 'AAAAAAA', currentDate, 'AAAAAAA');
+      elemDefault = new Container(
+        0,
+        'AAAAAAA',
+        TripType.PICKUP,
+        currentDate,
+        currentDate,
+        SizeEnum.C53,
+        currentDate,
+        'AAAAAAA',
+        currentDate,
+        'AAAAAAA'
+      );
     });
 
     describe('Service methods', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
+            pickup: currentDate.format(DATE_TIME_FORMAT),
+            drop: currentDate.format(DATE_TIME_FORMAT),
             createdDate: currentDate.format(DATE_TIME_FORMAT),
             lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
@@ -48,6 +63,8 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
+            pickup: currentDate.format(DATE_TIME_FORMAT),
+            drop: currentDate.format(DATE_TIME_FORMAT),
             createdDate: currentDate.format(DATE_TIME_FORMAT),
             lastModifiedDate: currentDate.format(DATE_TIME_FORMAT)
           },
@@ -56,6 +73,8 @@ describe('Service Tests', () => {
 
         const expected = Object.assign(
           {
+            pickup: currentDate,
+            drop: currentDate,
             createdDate: currentDate,
             lastModifiedDate: currentDate
           },
@@ -73,8 +92,10 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             number: 'BBBBBB',
-            description: 'BBBBBB',
-            size: 1,
+            tripType: 'BBBBBB',
+            pickup: currentDate.format(DATE_TIME_FORMAT),
+            drop: currentDate.format(DATE_TIME_FORMAT),
+            containerSize: 'BBBBBB',
             createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
             lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
@@ -85,6 +106,8 @@ describe('Service Tests', () => {
 
         const expected = Object.assign(
           {
+            pickup: currentDate,
+            drop: currentDate,
             createdDate: currentDate,
             lastModifiedDate: currentDate
           },
@@ -102,8 +125,10 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             number: 'BBBBBB',
-            description: 'BBBBBB',
-            size: 1,
+            tripType: 'BBBBBB',
+            pickup: currentDate.format(DATE_TIME_FORMAT),
+            drop: currentDate.format(DATE_TIME_FORMAT),
+            containerSize: 'BBBBBB',
             createdDate: currentDate.format(DATE_TIME_FORMAT),
             createdBy: 'BBBBBB',
             lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
@@ -114,6 +139,8 @@ describe('Service Tests', () => {
 
         const expected = Object.assign(
           {
+            pickup: currentDate,
+            drop: currentDate,
             createdDate: currentDate,
             lastModifiedDate: currentDate
           },

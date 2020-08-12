@@ -6,12 +6,22 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "description",
-            "fieldType": "String"
+            "fieldName": "tripType",
+            "fieldType": "TripType",
+            "fieldValues": "PICKUP,RETURN"
         },
         {
-            "fieldName": "size",
-            "fieldType": "Integer"
+            "fieldName": "pickup",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "drop",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "containerSize",
+            "fieldType": "SizeEnum",
+            "fieldValues": "C53,C43,C20"
         },
         {
             "fieldName": "createdDate",
@@ -31,6 +41,20 @@
         }
     ],
     "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "location",
+            "otherEntityRelationshipName": "contpick",
+            "relationshipName": "pickupLocation",
+            "otherEntityField": "address"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "location",
+            "otherEntityRelationshipName": "contdrop",
+            "relationshipName": "dropLocation",
+            "otherEntityField": "address"
+        },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "trip",

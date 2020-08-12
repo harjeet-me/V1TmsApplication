@@ -240,9 +240,11 @@ entity InvoiceItem {
     
 entity Container {
     number String ,
-      description String,
-     size Integer ,
-     createdDate Instant ,
+    tripType TripType ,
+    pickup Instant,
+	drop Instant,
+    containerSize  SizeEnum ,    
+    createdDate Instant ,
     createdBy String ,
     lastModifiedDate Instant ,
     lastModifiedBy String
@@ -424,7 +426,7 @@ enum EquipmentEnum {
     TRAILER, CONTAINER, CHASIS
 }
 enum SizeEnum {
-   C53 , C43 , C20 
+   C53 , C43 , C43, C20 
 }
 
 enum LoadType {
@@ -530,15 +532,23 @@ INV_STMT_OF_CUSTOMER , TRIP_STMT_OF_CUSTOMER
 relationship OneToMany {
     
     Trip  to  Invoice {trip } 
-      Location { trippick }  to  Trip {pickupLocation (address)}
-        Location { tripdrop }  to  Trip {dropLocation (address)} 
-    Customer{loadOrder(orderNuber)} to Trip {customer(email)}
+    Location { trippick }  to  Trip {pickupLocation (address)}
+    Location { tripdrop }  to  Trip {dropLocation (address)} 
+    
+	Location { contpick }  to  Container {pickupLocation (address)}
+    Location { contdrop }  to  Container {dropLocation (address)} 
+
+	Customer{loadOrder(orderNumber)} to Trip {customer(email)}
+	
+	
     Customer{invoice} to Invoice {customer(company)}
     Customer{payment} to Payment {customer(company)}
     Customer{email} to Email {customer(company)}
     Driver{trip} to  Trip {driver(firstName)}
+	
     Equipment {trip} to  Trip {equipment}
     Carrier { loadOrder} to  Trip {carrier(company)}  
+	      
     Customer{morecontact (email )  } to  Contact  {customer (company)  } 
     Invoice { invoiceItem  }  to  InvoiceItem { invoice  }
     Customer  to TransactionsRecord {customer (company)}

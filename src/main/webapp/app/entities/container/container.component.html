@@ -42,12 +42,16 @@
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.container.number">Number</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.container.description">Description</span></th>
-                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.container.size">Size</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.container.tripType">Trip Type</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.container.pickup">Pickup</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.container.drop">Drop</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.container.containerSize">Container Size</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.container.createdDate">Created Date</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.container.createdBy">Created By</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.container.lastModifiedDate">Last Modified Date</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.container.lastModifiedBy">Last Modified By</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.container.pickupLocation">Pickup Location</span></th>
+                    <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.container.dropLocation">Drop Location</span></th>
                     <th scope="col" ><span jhiTranslate="tmsV1ApplicationApp.container.trip">Trip</span></th>
                     <th scope="col"></th>
                 </tr>
@@ -56,12 +60,24 @@
                 <tr *ngFor="let container of containers ;trackBy: trackId">
                     <td><a [routerLink]="['/container', container.id, 'view']">{{ container.id }}</a></td>
                     <td>{{ container.number }}</td>
-                    <td>{{ container.description }}</td>
-                    <td>{{ container.size }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.TripType.' + container.tripType }}">{{ container.tripType }}</td>
+                    <td>{{ container.pickup | date:'medium' }}</td>
+                    <td>{{ container.drop | date:'medium' }}</td>
+                    <td jhiTranslate="{{ 'tmsV1ApplicationApp.SizeEnum.' + container.containerSize }}">{{ container.containerSize }}</td>
                     <td>{{ container.createdDate | date:'medium' }}</td>
                     <td>{{ container.createdBy }}</td>
                     <td>{{ container.lastModifiedDate | date:'medium' }}</td>
                     <td>{{ container.lastModifiedBy }}</td>
+                    <td>
+                        <div *ngIf="container.pickupLocation">
+                            <a [routerLink]="['/location', container.pickupLocation?.id, 'view']" >{{ container.pickupLocation?.address }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="container.dropLocation">
+                            <a [routerLink]="['/location', container.dropLocation?.id, 'view']" >{{ container.dropLocation?.address }}</a>
+                        </div>
+                    </td>
                     <td>
                         <div *ngIf="container.trip">
                             <a [routerLink]="['/trip', container.trip?.id, 'view']" >{{ container.trip?.id }}</a>

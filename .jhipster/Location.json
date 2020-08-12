@@ -63,6 +63,18 @@
             "otherEntityName": "trip",
             "otherEntityRelationshipName": "dropLocation",
             "relationshipName": "tripdrop"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "container",
+            "otherEntityRelationshipName": "pickupLocation",
+            "relationshipName": "contpick"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "container",
+            "otherEntityRelationshipName": "dropLocation",
+            "relationshipName": "contdrop"
         }
     ],
     "changelogDate": "20200312064300",

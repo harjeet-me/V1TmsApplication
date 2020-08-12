@@ -8,6 +8,18 @@
     -->
     <changeSet id="20200312063700-2" author="jhipster">
         
+        <addForeignKeyConstraint baseColumnNames="pickup_location_id"
+                                 baseTableName="container"
+                                 constraintName="fk_container_pickup_location_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="location"/>
+
+        <addForeignKeyConstraint baseColumnNames="drop_location_id"
+                                 baseTableName="container"
+                                 constraintName="fk_container_drop_location_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="location"/>
+
         <addForeignKeyConstraint baseColumnNames="trip_id"
                                  baseTableName="container"
                                  constraintName="fk_container_trip_id"

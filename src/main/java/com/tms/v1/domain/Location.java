@@ -1,26 +1,20 @@
 package com.tms.v1.domain;
 
-import java.io.Serializable;
-import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
+
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+import java.io.Serializable;
+import java.util.Objects;
+import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.tms.v1.domain.enumeration.CountryEnum;
 
@@ -31,7 +25,7 @@ import com.tms.v1.domain.enumeration.CountryEnum;
 @Table(name = "location")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "location")
-public class Location extends AbstractAuditingEntity  implements Serializable {
+public class Location extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -84,6 +78,14 @@ public class Location extends AbstractAuditingEntity  implements Serializable {
     @OneToMany(mappedBy = "dropLocation")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Trip> tripdrops = new HashSet<>();
+
+    @OneToMany(mappedBy = "pickupLocation")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Container> contpicks = new HashSet<>();
+
+    @OneToMany(mappedBy = "dropLocation")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Container> contdrops = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -298,6 +300,56 @@ public class Location extends AbstractAuditingEntity  implements Serializable {
 
     public void setTripdrops(Set<Trip> trips) {
         this.tripdrops = trips;
+    }
+
+    public Set<Container> getContpicks() {
+        return contpicks;
+    }
+
+    public Location contpicks(Set<Container> containers) {
+        this.contpicks = containers;
+        return this;
+    }
+
+    public Location addContpick(Container container) {
+        this.contpicks.add(container);
+        container.setPickupLocation(this);
+        return this;
+    }
+
+    public Location removeContpick(Container container) {
+        this.contpicks.remove(container);
+        container.setPickupLocation(null);
+        return this;
+    }
+
+    public void setContpicks(Set<Container> containers) {
+        this.contpicks = containers;
+    }
+
+    public Set<Container> getContdrops() {
+        return contdrops;
+    }
+
+    public Location contdrops(Set<Container> containers) {
+        this.contdrops = containers;
+        return this;
+    }
+
+    public Location addContdrop(Container container) {
+        this.contdrops.add(container);
+        container.setDropLocation(this);
+        return this;
+    }
+
+    public Location removeContdrop(Container container) {
+        this.contdrops.remove(container);
+        container.setDropLocation(null);
+        return this;
+    }
+
+    public void setContdrops(Set<Container> containers) {
+        this.contdrops = containers;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

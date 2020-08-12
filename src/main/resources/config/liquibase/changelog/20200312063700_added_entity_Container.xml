@@ -19,10 +19,16 @@
             <column name="number" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="description" type="varchar(255)">
+            <column name="trip_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="size" type="integer">
+            <column name="pickup" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="jhi_drop" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="container_size" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="created_date" type="datetime">
@@ -37,11 +43,19 @@
             <column name="last_modified_by" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="pickup_location_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="drop_location_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <column name="trip_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+        <dropDefaultValue tableName="container" columnName="pickup" columnDataType="datetime"/>
+        <dropDefaultValue tableName="container" columnName="jhi_drop" columnDataType="datetime"/>
         <dropDefaultValue tableName="container" columnName="created_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="container" columnName="last_modified_date" columnDataType="datetime"/>
     </changeSet>
@@ -66,8 +80,10 @@
                   tableName="container">
             <column name="id" type="numeric"/>
             <column name="number" type="string"/>
-            <column name="description" type="string"/>
-            <column name="size" type="numeric"/>
+            <column name="trip_type" type="string"/>
+            <column name="pickup" type="datetime"/>
+            <column name="jhi_drop" type="datetime"/>
+            <column name="container_size" type="string"/>
             <column name="created_date" type="datetime"/>
             <column name="created_by" type="string"/>
             <column name="last_modified_date" type="datetime"/>

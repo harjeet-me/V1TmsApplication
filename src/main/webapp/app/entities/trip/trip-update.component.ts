@@ -113,7 +113,13 @@ export class TripUpdateComponent implements OnInit {
       if (trip.containers !== undefined) {
         this.dynamicArray = trip.containers;
       } else {
-        this.newDynamic = { id: null, description: 'Load Move ', size: 207 };
+        this.newDynamic = {
+          id: null,
+          pickup: moment()
+            .startOf('day')
+            .format(DATE_TIME_FORMAT),
+          size: 207
+        };
         this.dynamicArray.push(this.newDynamic);
       }
 
@@ -276,8 +282,8 @@ export class TripUpdateComponent implements OnInit {
   addRow(index: number): any {
     this.indexSize = index + 1;
     // this.newDynamic = { id : 2 , itemName: this.dynamicArray.length + 1, description: 'SFO TO DEL', price: '20', total: '40' };
-
-    this.dynamicArray.push({ number: '', description: '', size: 0 });
+    // const today = moment().format(DATE_TIME_FORMAT) ;
+    // this.dynamicArray.push({ number: '', pickup:  moment().format(DATE_TIME_FORMAT) ,drop: new moment().format(DATE_TIME_FORMAT)  , lastModifiedBy: '' });
     //  this.calculateTotal();
     return true;
   }

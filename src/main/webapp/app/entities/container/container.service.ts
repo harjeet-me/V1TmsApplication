@@ -58,6 +58,8 @@ export class ContainerService {
 
   protected convertDateFromClient(container: IContainer): IContainer {
     const copy: IContainer = Object.assign({}, container, {
+      pickup: container.pickup && container.pickup.isValid() ? container.pickup.toJSON() : undefined,
+      drop: container.drop && container.drop.isValid() ? container.drop.toJSON() : undefined,
       createdDate: container.createdDate && container.createdDate.isValid() ? container.createdDate.toJSON() : undefined,
       lastModifiedDate: container.lastModifiedDate && container.lastModifiedDate.isValid() ? container.lastModifiedDate.toJSON() : undefined
     });
@@ -66,6 +68,8 @@ export class ContainerService {
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
+      res.body.pickup = res.body.pickup ? moment(res.body.pickup) : undefined;
+      res.body.drop = res.body.drop ? moment(res.body.drop) : undefined;
       res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
       res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
@@ -75,6 +79,8 @@ export class ContainerService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((container: IContainer) => {
+        container.pickup = container.pickup ? moment(container.pickup) : undefined;
+        container.drop = container.drop ? moment(container.drop) : undefined;
         container.createdDate = container.createdDate ? moment(container.createdDate) : undefined;
         container.lastModifiedDate = container.lastModifiedDate ? moment(container.lastModifiedDate) : undefined;
       });

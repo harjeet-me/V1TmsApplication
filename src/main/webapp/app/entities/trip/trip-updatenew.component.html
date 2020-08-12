@@ -1,11 +1,11 @@
 <div class="row justify-content-center">
-    <div class="col-8">
+    <div class="col-10">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-trip-heading" jhiTranslate="tmsV1ApplicationApp.trip.home.createOrEditLabel">Create or edit a Trip</h2>
 
             <div>
             
-           <jhi-trip-wizard> </jhi-trip-wizard>
+        <!--    <jhi-trip-wizard> </jhi-trip-wizard> -->
                 <jhi-alert-error></jhi-alert-error>
 
                 <div class="form-group" [hidden]="!editForm.get('id')!.value">
@@ -32,6 +32,9 @@
                         <option value="RETURN">{{ 'tmsV1ApplicationApp.TripType.RETURN' | translate }}</option>
                     </select>
                 </div>
+                
+                <br/>
+<hr>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.shipmentNumber" for="field_shipmentNumber">Shipment Number</label>
@@ -44,7 +47,44 @@
                     <input type="text" class="form-control" name="orderNumber" id="field_orderNumber"
                            formControlName="orderNumber"/>
                 </div>
+<br/>
+<hr>
 
+    <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.customer" for="field_customer">Customer</label>
+                    <select class="form-control" id="field_customer" name="customer" formControlName="customer">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption" *ngFor="let customerOption of customers; trackBy: trackById">{{ customerOption.email }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.driver" for="field_driver">Driver</label>
+                    <select class="form-control" id="field_driver" name="driver" formControlName="driver">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="driverOption.id === editForm.get('driver')!.value?.id ? editForm.get('driver')!.value : driverOption" *ngFor="let driverOption of drivers; trackBy: trackById">{{ driverOption.firstName }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.equipment" for="field_equipment">Equipment</label>
+                    <select class="form-control" id="field_equipment" name="equipment" formControlName="equipment">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="equipmentOption.id === editForm.get('equipment')!.value?.id ? editForm.get('equipment')!.value : equipmentOption" *ngFor="let equipmentOption of equipment; trackBy: trackById">{{ equipmentOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.carrier" for="field_carrier">Carrier</label>
+                    <select class="form-control" id="field_carrier" name="carrier" formControlName="carrier">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="carrierOption.id === editForm.get('carrier')!.value?.id ? editForm.get('carrier')!.value : carrierOption" *ngFor="let carrierOption of carriers; trackBy: trackById">{{ carrierOption.company }}</option>
+                    </select>
+                </div>
+            </div>
+            
+            <br/>
+             <hr>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.bol" for="field_bol">Bol</label>
                     <input type="text" class="form-control" name="bol" id="field_bol"
@@ -70,7 +110,8 @@
                         </span>
                     </div>
                 </div>
-
+<br/>
+<hr>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.currentLocation" for="field_currentLocation">Current Location</label>
                     <input type="text" class="form-control" name="currentLocation" id="field_currentLocation"
@@ -101,7 +142,8 @@
                         <input id="field_chasisInTime" type="datetime-local" class="form-control" name="chasisInTime" formControlName="chasisInTime" placeholder="YYYY-MM-DD HH:mm"/>
                     </div>
                 </div>
-
+<br/>
+<hr>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.orderDocument" for="field_orderDocument">Order Document</label>
                     <div>
@@ -139,7 +181,8 @@
                     <input type="hidden" class="form-control" name="podContentType" id="field_podContentType"
                            formControlName="podContentType" />
                 </div>
-
+<br/>
+<hr>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.hazmat" for="field_hazmat">Hazmat</label>
                     <input type="checkbox" class="form-control" name="hazmat" id="field_hazmat"
@@ -157,7 +200,8 @@
                     <input type="checkbox" class="form-control" name="liftgate" id="field_liftgate"
                            formControlName="liftgate"/>
                 </div>
-
+<br/>
+<hr>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.recievedBy" for="field_recievedBy">Recieved By</label>
                     <input type="text" class="form-control" name="recievedBy" id="field_recievedBy"
@@ -184,7 +228,8 @@
                         <option value="POWERONLY">{{ 'tmsV1ApplicationApp.LoadType.POWERONLY' | translate }}</option>
                     </select>
                 </div>
-
+<br/>
+<hr>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.containerSize" for="field_containerSize">Container Size</label>
                     <select class="form-control" name="containerSize" formControlName="containerSize" id="field_containerSize">
@@ -205,14 +250,15 @@
                     <input type="text" class="form-control" name="comments" id="field_comments"
                            formControlName="comments"/>
                 </div>
-
+<br/>
+<hr>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.autoGenerateInvoice" for="field_autoGenerateInvoice">Auto Generate Invoice</label>
                     <input type="checkbox" class="form-control" name="autoGenerateInvoice" id="field_autoGenerateInvoice"
                            formControlName="autoGenerateInvoice"/>
                 </div>
 
-                <div class="form-group">
+               <!--  <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.createdDate" for="field_createdDate">Created Date</label>
                     <div class="d-flex">
                         <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" formControlName="createdDate" placeholder="YYYY-MM-DD HH:mm"/>
@@ -236,7 +282,7 @@
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
                     <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
                            formControlName="lastModifiedBy"/>
-                </div>
+                </div> -->
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.pickupLocation" for="field_pickupLocation">Pickup Location</label>
@@ -254,47 +300,18 @@
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.customer" for="field_customer">Customer</label>
-                    <select class="form-control" id="field_customer" name="customer" formControlName="customer">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption" *ngFor="let customerOption of customers; trackBy: trackById">{{ customerOption.email }}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.driver" for="field_driver">Driver</label>
-                    <select class="form-control" id="field_driver" name="driver" formControlName="driver">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="driverOption.id === editForm.get('driver')!.value?.id ? editForm.get('driver')!.value : driverOption" *ngFor="let driverOption of drivers; trackBy: trackById">{{ driverOption.firstName }}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.equipment" for="field_equipment">Equipment</label>
-                    <select class="form-control" id="field_equipment" name="equipment" formControlName="equipment">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="equipmentOption.id === editForm.get('equipment')!.value?.id ? editForm.get('equipment')!.value : equipmentOption" *ngFor="let equipmentOption of equipment; trackBy: trackById">{{ equipmentOption.id }}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="tmsV1ApplicationApp.trip.carrier" for="field_carrier">Carrier</label>
-                    <select class="form-control" id="field_carrier" name="carrier" formControlName="carrier">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="carrierOption.id === editForm.get('carrier')!.value?.id ? editForm.get('carrier')!.value : carrierOption" *ngFor="let carrierOption of carriers; trackBy: trackById">{{ carrierOption.company }}</option>
-                    </select>
-                </div>
-            </div>
+            
             
             <div class="form-group" style="width: 100%">
 				<table class="table bordered-table">
-					<thead class="thead-dark">
-						<tr class="row">
+					<thead  class="thead-dark">
+						<tr  class="row">
 							<th >Action</th>
-							<th class="col-sm-4">NUMBER</th>
-							<th class="col-sm-4">DESCRIPTION</th>
-							<th class="col-sm-2">SIZE</th>
+							<th class="col-sm-2">CONTAINER#</th>
+							<th class="col-sm-2">From</th>
+							<th class="col-sm-2">To</th>
+							<th class="col-sm-2">Pickup Date</th>
+							<th class="col-sm-2">Drop Date</th>
 							
 						</tr>
 					</thead>
@@ -304,25 +321,26 @@
 							<td (click)="deleteRow(j)"><fa-icon icon="trash-alt"></fa-icon></td>
 							
 								
-								<td  class="col-sm-4"><textarea class="form-control"
-									cols="100" rows="2" [ngModelOptions]="{standalone: true}"
-									[(ngModel)]="dynamicArray[j].number"> </textarea></td>
+								<td  class="col-sm-2"> <input type="text"  [ngModelOptions]="{standalone: true}"
+									[(ngModel)]="dynamicArray[j].number"> </td>
+								
+						
+							<td   class="col-sm-2"> <input type="text" 
+								[ngModelOptions]="{standalone: true}"
+								[(ngModel)]="dynamicArray[j].pickup" (change)="calculateTotal()"
+								 />   </td>
 								
 								
-							<td  class="col-sm-4"><textarea class="form-control"
-									cols="100" rows="2" [ngModelOptions]="{standalone: true}"
-									[(ngModel)]="dynamicArray[j].description"> </textarea></td>
+							<td  class="col-sm-2"> <input type="text" [ngModelOptions]="{standalone: true}"
+								placeholder="YYYY-MM-DD HH:mm"	[(ngModel)]="dynamicArray[j].pickup"></td>
 									
+							<td  class="col-sm-2"> <input type="text" [ngModelOptions]="{standalone: true}"
+								placeholder="YYYY-MM-DD HH:mm"	[(ngModel)]="dynamicArray[j].pickup"></td>
+										
+							<td  class="col-sm-2"> <input type="text" [ngModelOptions]="{standalone: true}"
+								placeholder="YYYY-MM-DD HH:mm"	[(ngModel)]="dynamicArray[j].drop"></td>
 									
-									
-
-							<td   class="col-sm-2"> <input type="number" min="1"
-							  class="form-control"	[ngModelOptions]="{standalone: true}"
-								[(ngModel)]="dynamicArray[j].size" (change)="calculateTotal()"
-								type="number" />   </td>
-							
-							
-					
+								
 						</tr>
 
 						<tr>

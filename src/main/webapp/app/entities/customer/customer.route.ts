@@ -74,43 +74,7 @@ export const customerRoute: Routes = [
     canActivate: [UserRouteAccessService]
   },
   {
-    path: ':id/email',
-    component: CustomerDetailComponent,
-    resolve: {
-      customer: CustomerResolve
-    },
-    data: {
-      authorities: [Authority.USER],
-      pageTitle: 'tmsV1ApplicationApp.customer.home.title'
-    },
-    canActivate: [UserRouteAccessService]
-  },
-  {
-    path: ':id/payment',
-    component: CustomerDetailComponent,
-    resolve: {
-      customer: CustomerResolve
-    },
-    data: {
-      authorities: [Authority.USER],
-      pageTitle: 'tmsV1ApplicationApp.customer.home.title'
-    },
-    canActivate: [UserRouteAccessService]
-  },
-  {
     path: ':id/edit',
-    component: CustomerUpdateComponent,
-    resolve: {
-      customer: CustomerResolve
-    },
-    data: {
-      authorities: [Authority.USER],
-      pageTitle: 'tmsV1ApplicationApp.customer.home.title'
-    },
-    canActivate: [UserRouteAccessService]
-  },
-  {
-    path: ':id/sendEmail',
     component: CustomerUpdateComponent,
     resolve: {
       customer: CustomerResolve

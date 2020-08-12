@@ -12,13 +12,21 @@
                 <dd>
                     <span>{{ container.number }}</span>
                 </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.container.description">Description</span></dt>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.container.tripType">Trip Type</span></dt>
                 <dd>
-                    <span>{{ container.description }}</span>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.TripType.' + container.tripType }}">{{ container.tripType }}</span>
                 </dd>
-                <dt><span jhiTranslate="tmsV1ApplicationApp.container.size">Size</span></dt>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.container.pickup">Pickup</span></dt>
                 <dd>
-                    <span>{{ container.size }}</span>
+                    <span>{{ container.pickup }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.container.drop">Drop</span></dt>
+                <dd>
+                    <span>{{ container.drop }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.container.containerSize">Container Size</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'tmsV1ApplicationApp.SizeEnum.' + container.containerSize }}">{{ container.containerSize }}</span>
                 </dd>
                 <dt><span jhiTranslate="tmsV1ApplicationApp.container.createdDate">Created Date</span></dt>
                 <dd>
@@ -35,6 +43,18 @@
                 <dt><span jhiTranslate="tmsV1ApplicationApp.container.lastModifiedBy">Last Modified By</span></dt>
                 <dd>
                     <span>{{ container.lastModifiedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.container.pickupLocation">Pickup Location</span></dt>
+                <dd>
+                    <div *ngIf="container.pickupLocation">
+                        <a [routerLink]="['/location', container.pickupLocation?.id, 'view']">{{ container.pickupLocation?.address }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="tmsV1ApplicationApp.container.dropLocation">Drop Location</span></dt>
+                <dd>
+                    <div *ngIf="container.dropLocation">
+                        <a [routerLink]="['/location', container.dropLocation?.id, 'view']">{{ container.dropLocation?.address }}</a>
+                    </div>
                 </dd>
                 <dt><span jhiTranslate="tmsV1ApplicationApp.container.trip">Trip</span></dt>
                 <dd>

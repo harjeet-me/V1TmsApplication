@@ -9,8 +9,12 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IContainer, Container } from 'app/shared/model/container.model';
 import { ContainerService } from './container.service';
+import { ILocation } from 'app/shared/model/location.model';
+import { LocationService } from 'app/entities/location/location.service';
 import { ITrip } from 'app/shared/model/trip.model';
 import { TripService } from 'app/entities/trip/trip.service';
+
+type SelectableEntity = ILocation | ITrip;
 
 @Component({
   selector: 'jhi-container-update',
@@ -18,22 +22,28 @@ import { TripService } from 'app/entities/trip/trip.service';
 })
 export class ContainerUpdateComponent implements OnInit {
   isSaving = false;
+  locations: ILocation[] = [];
   trips: ITrip[] = [];
 
   editForm = this.fb.group({
     id: [],
     number: [],
-    description: [],
-    size: [],
+    tripType: [],
+    pickup: [],
+    drop: [],
+    containerSize: [],
     createdDate: [],
     createdBy: [],
     lastModifiedDate: [],
     lastModifiedBy: [],
+    pickupLocation: [],
+    dropLocation: [],
     trip: []
   });
 
   constructor(
     protected containerService: ContainerService,
+    protected locationService: LocationService,
     protected tripService: TripService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -43,11 +53,15 @@ export class ContainerUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ container }) => {
       if (!container.id) {
         const today = moment().startOf('day');
+        container.pickup = today;
+        container.drop = today;
         container.createdDate = today;
         container.lastModifiedDate = today;
       }
 
       this.updateForm(container);
+
+      this.locationService.query().subscribe((res: HttpResponse<ILocation[]>) => (this.locations = res.body || []));
 
       this.tripService.query().subscribe((res: HttpResponse<ITrip[]>) => (this.trips = res.body || []));
     });
@@ -57,12 +71,16 @@ export class ContainerUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: container.id,
       number: container.number,
-      description: container.description,
-      size: container.size,
+      tripType: container.tripType,
+      pickup: container.pickup ? container.pickup.format(DATE_TIME_FORMAT) : null,
+      drop: container.drop ? container.drop.format(DATE_TIME_FORMAT) : null,
+      containerSize: container.containerSize,
       createdDate: container.createdDate ? container.createdDate.format(DATE_TIME_FORMAT) : null,
       createdBy: container.createdBy,
       lastModifiedDate: container.lastModifiedDate ? container.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
       lastModifiedBy: container.lastModifiedBy,
+      pickupLocation: container.pickupLocation,
+      dropLocation: container.dropLocation,
       trip: container.trip
     });
   }
@@ -86,8 +104,10 @@ export class ContainerUpdateComponent implements OnInit {
       ...new Container(),
       id: this.editForm.get(['id'])!.value,
       number: this.editForm.get(['number'])!.value,
-      description: this.editForm.get(['description'])!.value,
-      size: this.editForm.get(['size'])!.value,
+      tripType: this.editForm.get(['tripType'])!.value,
+      pickup: this.editForm.get(['pickup'])!.value ? moment(this.editForm.get(['pickup'])!.value, DATE_TIME_FORMAT) : undefined,
+      drop: this.editForm.get(['drop'])!.value ? moment(this.editForm.get(['drop'])!.value, DATE_TIME_FORMAT) : undefined,
+      containerSize: this.editForm.get(['containerSize'])!.value,
       createdDate: this.editForm.get(['createdDate'])!.value
         ? moment(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)
         : undefined,
@@ -96,6 +116,8 @@ export class ContainerUpdateComponent implements OnInit {
         ? moment(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
         : undefined,
       lastModifiedBy: this.editForm.get(['lastModifiedBy'])!.value,
+      pickupLocation: this.editForm.get(['pickupLocation'])!.value,
+      dropLocation: this.editForm.get(['dropLocation'])!.value,
       trip: this.editForm.get(['trip'])!.value
     };
   }
@@ -116,7 +138,7 @@ export class ContainerUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: ITrip): any {
+  trackById(index: number, item: SelectableEntity): any {
     return item.id;
   }
 }

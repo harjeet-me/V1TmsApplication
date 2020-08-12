@@ -86,6 +86,11 @@ public class CacheConfiguration {
             createCache(cm, com.tms.v1.domain.Customer.class.getName() + ".emails");
             createCache(cm, com.tms.v1.domain.Location.class.getName() + ".trippicks");
             createCache(cm, com.tms.v1.domain.Location.class.getName() + ".tripdrops");
+            createCache(cm, com.tms.v1.domain.Driver.class.getName() + ".containers");
+            createCache(cm, com.tms.v1.domain.Customer.class.getName() + ".containers");
+            createCache(cm, com.tms.v1.domain.Carrier.class.getName() + ".containers");
+            createCache(cm, com.tms.v1.domain.Location.class.getName() + ".contpicks");
+            createCache(cm, com.tms.v1.domain.Location.class.getName() + ".contdrops");
             // jhipster-needle-ehcache-add-entry
         };
     }

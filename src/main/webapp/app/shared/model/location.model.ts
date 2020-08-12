@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { ITrip } from 'app/shared/model/trip.model';
+import { IContainer } from 'app/shared/model/container.model';
 import { CountryEnum } from 'app/shared/model/enumerations/country-enum.model';
 
 export interface ILocation {
@@ -18,6 +19,8 @@ export interface ILocation {
   lastModifiedBy?: string;
   trippicks?: ITrip[];
   tripdrops?: ITrip[];
+  contpicks?: IContainer[];
+  contdrops?: IContainer[];
 }
 
 export class Location implements ILocation {
@@ -36,6 +39,8 @@ export class Location implements ILocation {
     public lastModifiedDate?: Moment,
     public lastModifiedBy?: string,
     public trippicks?: ITrip[],
-    public tripdrops?: ITrip[]
+    public tripdrops?: ITrip[],
+    public contpicks?: IContainer[],
+    public contdrops?: IContainer[]
   ) {}
 }
